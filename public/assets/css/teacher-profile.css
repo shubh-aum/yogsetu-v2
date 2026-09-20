@@ -596,7 +596,7 @@
   background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:8px 8px 8px 16px;
 }
 .tp-ask-box input{
-  flex:1;border:none;background:none;font:inherit;font-size:14px;color:var(--ink);
+  flex:1;min-width:0;border:none;background:none;font:inherit;font-size:14px;color:var(--ink);
 }
 .tp-ask-box input:focus{outline:none;}
 .tp-ask-box .btn{flex-shrink:0;}

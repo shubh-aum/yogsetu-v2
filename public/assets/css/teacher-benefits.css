@@ -46,13 +46,7 @@
 
 .tb-hero-kicker{margin-bottom:clamp(14px,2vh,20px);}
 
-/* Checked the actual source frame (1920x1120): the left ~45% is plain black
-   background, the woman/hand sits roughly 50-85% across. object-position
-   only does anything once the viewport is narrow enough to force horizontal
-   cropping — desktop shows the full frame uncropped regardless of this
-   value. Bias toward her side so cropping (when it happens) doesn't slice
-   through her instead of the empty space. */
-.tb-hero-card .hero-media{object-position:74% center;}
+.tb-hero-card .hero-media{object-position:center;}
 
 /* ---- "Popular teachers this week" — small square thumbnail rail ---- */
 .tb-hero-rail{margin-top:clamp(22px,3.4vh,30px);}
