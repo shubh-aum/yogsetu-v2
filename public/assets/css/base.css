@@ -221,6 +221,13 @@
   .site-header-fixed .profile-btn:hover{background:#EBE5D3;border-color:rgba(26,26,24,.3);color:var(--pine);}
   .site-header-fixed .profile-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
 
+  /* The base .burger styling (near-white lines, faint white background) is
+     built for the dark hero-card overlay. Nested inside the light/white
+     site-header-fixed bar it becomes invisible, so give it its own look here:
+     saffron lines on a light chip, matching .profile-btn's treatment. */
+  .site-header-fixed .burger{background:#F0EFEA;border-color:rgba(26,26,24,.16);}
+  .site-header-fixed .burger span{background:var(--marigold-deep);}
+
   @media (max-width:900px){
     .site-header-fixed .nav-links{display:none;}
   }
