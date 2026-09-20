@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/requirement-detail.css">
 </head>
 <body class="inner-page">
 
@@ -21,10 +22,11 @@
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="teachers.html">Browse teachers</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
     <a href="requirements.html" class="active">Job board</a>
     <a href="teacher-benefits.html">For teachers</a>
-    <a href="about.html">About</a>
+    <a href="teachers.html">Browse teachers</a>
   </nav>
   <div class="header-actions">
     <a href="login.html" class="hdr-link">Log in</a>
@@ -36,49 +38,226 @@
 </header>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="teachers.html">Browse teachers</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
     <a href="requirements.html">Job board</a>
     <a href="teacher-benefits.html">For teachers</a>
-    <a href="about.html">About</a>
+    <a href="teachers.html">Browse teachers</a>
   <a href="login.html">Log in</a>
   <a href="signup.html">Sign up</a>
 </nav>
 
 <main>
 
-<div class="req-detail">
-  <div class="breadcrumb"><a href="requirements.html">Job board</a><span class="sep">/</span><span>Requirement #1</span></div>
-  <div class="req-detail-card">
-    <span class="status-pill open" style="margin-bottom:14px;display:inline-flex;">Open</span>
-    <h1>Looking for a Hatha yoga teacher for morning sessions</h1>
-    <div class="req-meta">
-      <span>&#128205; Lucknow (in-studio)</span>
-      <span>&#128337; Mornings, 3x per week</span>
-      <span>&#8377;600 &ndash; 900 / session</span>
-      <span>Posted 2 days ago</span>
-    </div>
-    <div class="prose">
-      <h3>What the client is looking for</h3>
-      <p>Family of 3 (including one senior) looking for a patient Hatha teacher for home sessions, 3 mornings a week. Prefer someone experienced with beginners and joint mobility.</p>
-      <h3>Style needed</h3>
-    </div>
-    <div class="req-tags" style="margin-bottom:24px;"><span>Hatha</span><span>Beginners</span></div>
+<!-- ============ 1. HERO — dark, icon popping out in 3D ============ -->
+<section class="rd-hero" id="rdHero">
+  <div class="rd-hero-bg" aria-hidden="true"></div>
 
-    <div class="alert info">
-      <span>&#8505;&#65039;</span>
-      <span>Client contact details stay private until they approve your connection. Applying sends the client your teacher profile and a short note.</span>
+  <div class="rd-hero-inner">
+    <div>
+      <div class="rd-breadcrumb"><a href="requirements.html">Job board</a><span aria-hidden="true">/</span><span>Requirement #1</span></div>
+
+      <div class="rd-tags mono">
+        <span>Hatha</span><span class="sep" aria-hidden="true">|</span>
+        <span>Beginners</span><span class="sep" aria-hidden="true">|</span>
+        <span>Verified client</span>
+      </div>
+
+      <h1 class="rd-title">Looking for a Hatha yoga teacher for morning sessions</h1>
+
+      <div class="rd-meta">
+        <span class="rd-status"><span class="status-pill open">Open</span></span>
+        <span>&#128205; Lucknow (in-studio)</span>
+        <span>&#128337; Mornings, 3x per week</span>
+        <span>Posted 2 days ago</span>
+      </div>
+
+      <p class="rd-desc">Family of 3 (including one senior) looking for a patient Hatha teacher for home sessions, 3 mornings a week. Prefer someone experienced with beginners and joint mobility.</p>
+
+      <div class="rd-cta">
+        <a href="signup.html?role=teacher" class="btn btn-primary" id="rdApplyBtn">
+          Apply to this requirement
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="#" class="btn btn-secondary">Save for later</a>
+      </div>
     </div>
 
-    <a href="signup.html?role=teacher" class="btn btn-primary">Apply to this requirement</a>
+    <div class="rd-hero-figure">
+      <div class="rd-hero-icon rd-icon--hatha">
+        <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg>
+      </div>
+      <div class="rd-float-badge">
+        <svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        <div><strong>Verified client</strong><span>OTP checked</span></div>
+      </div>
+      <div class="rd-float-price">
+        <strong>&#8377;600&ndash;900</strong>
+        <span>per session</span>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="req-side-box">
-    <h4>About the client</h4>
-    <p style="font-size:13.5px;color:var(--ink-soft);">Client in Lucknow &middot; posts requirements on YogSetu. Full contact details are shared only after a connection is approved.</p>
+<!-- ============ 2. STAT BANNER ============ -->
+<section class="rd-stats-band">
+  <div class="glass-panel is-in rd-stats" id="rdStatPanel">
+    <div class="glass-lead">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+      Verified &middot; reviewed before it went live
+    </div>
+    <div class="glass-stats">
+      <div class="glass-stat" style="--i:0">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M9 9h.01M9 15h6M9 12h6"/></svg></span>
+        <span class="n">&#10003;</span><span class="k mono">OTP verified</span>
+      </div>
+      <div class="glass-stat" style="--i:1">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a4 4 0 014-4h6a4 4 0 014 4v2"/></svg></span>
+        <span class="n"><span class="count" data-target="3">0</span></span><span class="k mono">Teachers applied</span>
+      </div>
+      <div class="glass-stat" style="--i:2">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <span class="n"><span class="count" data-target="24" data-suffix="h">0</span></span><span class="k mono">Usual response time</span>
+      </div>
+      <div class="glass-stat" style="--i:3">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+        <span class="n"><span class="count" data-target="96" data-suffix="%">0</span></span><span class="k mono">Reply rate</span>
+      </div>
+    </div>
   </div>
-</div>
+</section>
+
+<!-- ============ 3. WHAT THEY'RE LOOKING FOR ============ -->
+<section class="rd-section" aria-labelledby="rd-looking-title">
+  <h2 id="rd-looking-title">What they're looking for</h2>
+  <ul class="rd-checklist">
+    <li>
+      <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+      A patient teaching style suited to a beginner in the family
+    </li>
+    <li>
+      <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+      Experience with joint mobility and senior-friendly modifications
+    </li>
+    <li>
+      <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+      Comfortable teaching in a home / in-studio setting in Lucknow
+    </li>
+    <li>
+      <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+      Able to commit to a consistent 3x/week morning schedule
+    </li>
+  </ul>
+</section>
+
+<!-- ============ 4. SCHEDULE NEEDED — dark meter ============ -->
+<section class="rd-schedule">
+  <div class="rd-section" aria-labelledby="rd-schedule-title">
+    <h2 id="rd-schedule-title">Schedule needed</h2>
+    <p class="sub">Set by the client, shown in local time.</p>
+
+    <div class="rd-meter-row" aria-label="Weekly schedule needed">
+      <div class="rd-meter-day">
+        <span class="rd-meter-label">Mon</span>
+        <span class="rd-meter-slot is-needed" title="7:00 AM"></span>
+        <span class="rd-meter-time">7:00 AM</span>
+      </div>
+      <div class="rd-meter-day">
+        <span class="rd-meter-label">Tue</span>
+        <span class="rd-meter-slot" title="No session"></span>
+        <span class="rd-meter-time">&mdash;</span>
+      </div>
+      <div class="rd-meter-day">
+        <span class="rd-meter-label">Wed</span>
+        <span class="rd-meter-slot is-needed" title="7:00 AM"></span>
+        <span class="rd-meter-time">7:00 AM</span>
+      </div>
+      <div class="rd-meter-day">
+        <span class="rd-meter-label">Thu</span>
+        <span class="rd-meter-slot" title="No session"></span>
+        <span class="rd-meter-time">&mdash;</span>
+      </div>
+      <div class="rd-meter-day">
+        <span class="rd-meter-label">Fri</span>
+        <span class="rd-meter-slot is-needed" title="7:00 AM"></span>
+        <span class="rd-meter-time">7:00 AM</span>
+      </div>
+      <div class="rd-meter-day">
+        <span class="rd-meter-label">Sat</span>
+        <span class="rd-meter-slot" title="No session"></span>
+        <span class="rd-meter-time">&mdash;</span>
+      </div>
+      <div class="rd-meter-day">
+        <span class="rd-meter-label">Sun</span>
+        <span class="rd-meter-slot" title="No session"></span>
+        <span class="rd-meter-time">&mdash;</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ABOUT THE CLIENT ============ -->
+<section class="rd-section" aria-labelledby="rd-client-title">
+  <h2 id="rd-client-title">About the client</h2>
+  <ul class="rd-client-list">
+    <li>
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M9 9h.01M9 15h6M9 12h6"/></svg></span>
+      <div><h4>Identity verified by OTP</h4><p>Confirmed before this requirement could be posted.</p></div>
+    </li>
+    <li>
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/><path d="M8.2 11l2 2 4-4.2"/></svg></span>
+      <div><h4>Requirement reviewed</h4><p>Checked by the YogSetu team for genuine intent before it went live.</p></div>
+    </li>
+    <li>
+      <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+      <div><h4>Based in Lucknow</h4><p>Full contact details are shared only after they approve your connection.</p></div>
+    </li>
+  </ul>
+</section>
+
+<!-- ============ 6. SIMILAR REQUIREMENTS ============ -->
+<section class="rd-section" aria-labelledby="rd-similar-title">
+  <h2 id="rd-similar-title">Similar requirements</h2>
+  <div class="rd-similar-rail">
+    <a class="rd-similar-card" href="requirement-detail.html?id=2">
+      <span class="tag">Ashtanga</span>
+      <h4>Online Ashtanga teacher for daily 6 AM practice</h4>
+      <span class="meta">&#128205; Online &middot; Daily</span>
+      <span class="price">&#8377;500&ndash;700<span style="font-size:11px;font-weight:400;color:var(--ink-faint);"> /session</span></span>
+    </a>
+    <a class="rd-similar-card" href="requirement-detail.html?id=3">
+      <span class="tag">Prenatal</span>
+      <h4>Prenatal yoga, second trimester, twice a week</h4>
+      <span class="meta">&#128205; Delhi &middot; 2x/week</span>
+      <span class="price">&#8377;800&ndash;1200<span style="font-size:11px;font-weight:400;color:var(--ink-faint);"> /session</span></span>
+    </a>
+    <a class="rd-similar-card" href="requirement-detail.html?id=4">
+      <span class="tag">Corporate</span>
+      <h4>Corporate wellness sessions for a 20-person team</h4>
+      <span class="meta">&#128205; Gurugram &middot; Weekly</span>
+      <span class="price">Package pricing</span>
+    </a>
+    <a class="rd-similar-card" href="requirement-detail.html?id=5">
+      <span class="tag">Therapeutic</span>
+      <h4>Yoga therapy for chronic lower back pain</h4>
+      <span class="meta">&#128205; Bengaluru &middot; 2x/week</span>
+      <span class="price">&#8377;900&ndash;1400<span style="font-size:11px;font-weight:400;color:var(--ink-faint);"> /session</span></span>
+    </a>
+  </div>
+</section>
 
 </main>
+
+<div class="rd-sticky-cta" id="rdStickyCta" aria-hidden="true">
+  <a href="requirements.html" class="btn btn-secondary" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg>
+    All requirements
+  </a>
+  <a href="signup.html?role=teacher" class="btn btn-primary" tabindex="-1">
+    Apply to this requirement
+    <span class="arrow" aria-hidden="true">&rarr;</span>
+  </a>
+</div>
 
 <footer class="site-footer">
   <div class="footer-inner">
@@ -131,5 +310,73 @@
 </footer>
 
 <script src="assets/js/site.js"></script>
+<script>
+(function(){
+  var panel = document.getElementById('rdStatPanel');
+  if (!panel) return;
+
+  function countUp(el, target, suffix, decimals){
+    var duration = 1200;
+    var start = null;
+    function step(ts){
+      if (start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var value = target * eased;
+      el.textContent = (decimals ? value.toFixed(decimals) : Math.round(value)) + (suffix || '');
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function runCounters(){
+    panel.querySelectorAll('.count').forEach(function(el){
+      var target = parseFloat(el.getAttribute('data-target')) || 0;
+      var suffix = el.getAttribute('data-suffix') || '';
+      countUp(el, target, suffix, 0);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (!entry.isIntersecting) return;
+        panel.classList.add('is-in');
+        runCounters();
+        io.unobserve(panel);
+      });
+    }, { threshold: 0.4 });
+    io.observe(panel);
+  } else {
+    panel.classList.add('is-in');
+    runCounters();
+  }
+})();
+</script>
+<script>
+(function(){
+  var sticky = document.getElementById('rdStickyCta');
+  var origin = document.getElementById('rdApplyBtn');
+  if (!sticky || !origin) return;
+
+  var links = sticky.querySelectorAll('a');
+
+  function setShown(on){
+    if (sticky.classList.contains('show') === on) return;
+    sticky.classList.toggle('show', on);
+    sticky.setAttribute('aria-hidden', on ? 'false' : 'true');
+    Array.prototype.forEach.call(links, function(a){
+      if (on) { a.removeAttribute('tabindex'); } else { a.setAttribute('tabindex', '-1'); }
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      setShown(!entries[0].isIntersecting);
+    }, { threshold: 0, rootMargin: '-10px 0px 0px 0px' });
+    io.observe(origin);
+  }
+})();
+</script>
 </body>
 </html>

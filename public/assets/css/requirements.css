@@ -1,0 +1,43 @@
+/* ============================================================
+   YogSetu — REQUIREMENTS.CSS
+   Page-scoped additions for requirements.html. Reuses teachers.css's
+   .category-row/.tcard--editorial grid pattern directly, swapping the
+   teacher-photo "shot" slot for a colored icon band (.req-band) since
+   requirement postings don't have a person photo to show.
+   ============================================================ */
+
+.req-card--editorial{
+  width:100%;flex:0 0 100%;scroll-snap-align:start;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  background:var(--paper);border:1px solid rgba(26,26,24,.16);border-radius:22px;
+  overflow:hidden;padding:0;margin-bottom:0;
+}
+.req-card--editorial .req-band{
+  order:1;min-height:260px;height:100%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  color:#FFFDF7;
+}
+.req-card--editorial .req-band svg{
+  width:52px;height:52px;stroke:currentColor;fill:none;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;opacity:.9;
+}
+.req-card--editorial .req-band span{
+  font-family:'Fraunces',serif;font-size:19px;font-weight:500;letter-spacing:-.01em;
+}
+.req-card--editorial .info{order:2;padding:clamp(20px,2.6vw,32px);display:flex;flex-direction:column;justify-content:center;}
+.category-row.is-right .req-card--editorial .req-band{order:2;}
+.category-row.is-right .req-card--editorial .info{order:1;}
+
+.req-band--hatha{background:linear-gradient(150deg,#D97757,#A65032);}
+.req-band--ashtanga{background:linear-gradient(150deg,#3A3935,#1A1A18);}
+.req-band--prenatal{background:linear-gradient(150deg,#8C887D,#55534C);}
+.req-band--corporate{background:linear-gradient(150deg,#55534C,#1A1A18);}
+.req-band--therapeutic{background:linear-gradient(150deg,#A65032,#3A3935);}
+
+.req-card--editorial .req-card-top h3 a{font-size:clamp(19px,1.8vw,23px);}
+
+@media (max-width:720px){
+  .req-card--editorial{grid-template-columns:1fr;}
+  .req-card--editorial .req-band{min-height:0;aspect-ratio:21/9;order:1!important;}
+  .req-card--editorial .info{order:2!important;}
+}

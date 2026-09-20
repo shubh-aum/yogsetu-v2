@@ -16,27 +16,82 @@
   .site-header-fixed .hdr-link{font-size:14px;font-weight:500;color:var(--ink-soft);}
   .site-header-fixed .hdr-link:hover{color:var(--pine);}
   @media (max-width:900px){ .site-header-fixed .header-actions{display:none;} }
+
+  /* ---- "Book Slot as per Availability" sticky image, just above The
+     Standard section — same sticky-pin-then-reveal pattern used on
+     teacher-benefits.html, scoped with isolation:isolate so this sticky
+     element's stacking can never leak into sections after it (that's what
+     broke last time before the fix). ---- */
+  .idx-reveal-scope{isolation:isolate;position:relative;}
+  .idx-book-visual{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--paper);}
+  /* contain (not cover) — bookclass.png is portrait-ish, so cropping it into a
+     landscape 100vh box was cutting through her head. Contain shows the whole
+     graphic; anchoring right keeps the phone mockup prominent and leaves the
+     image's own built-in empty space on the left for the headline. */
+  .idx-book-visual-img{width:100%;height:100%;object-fit:contain;object-position:right center;display:block;}
+  .idx-book-visual-copy{
+    position:absolute;inset:0;z-index:1;
+    display:flex;align-items:center;
+    padding-left:clamp(24px,6vw,88px);
+    pointer-events:none;
+  }
+  .idx-book-visual-copy h2{
+    font-family:'Fraunces',serif;font-weight:500;
+    font-size:clamp(30px,5vw,62px);line-height:1.1;letter-spacing:-.02em;
+    color:var(--ink);max-width:10ch;
+  }
+  .idx-book-visual-copy h2 em{font-style:italic;color:var(--marigold-deep);}
+
+  .idx-scroll-reveal{
+    position:relative;z-index:1;
+    border-radius:32px 32px 0 0;
+    box-shadow:0 -50px 90px -30px rgba(0,0,0,.35);
+  }
+
+  /* Below 900px the sticky pin isn't worth the layout fights it causes with a
+     stacked copy+image column, so it's dropped in favour of a normal flowing
+     block — image sized to its own aspect ratio via contain, so nothing gets
+     cropped or squeezed. */
+  @media (max-width:900px){
+    .idx-book-visual{
+      position:relative;top:auto;height:auto;
+      display:flex;flex-direction:column;
+    }
+    .idx-book-visual-copy{
+      position:relative;inset:auto;flex:0 0 auto;justify-content:center;
+      padding:clamp(28px,6vh,48px) 20px clamp(16px,3vh,24px);pointer-events:auto;
+    }
+    .idx-book-visual-copy h2{max-width:none;text-align:center;margin:0 auto;}
+    .idx-book-visual-img{
+      width:100%;height:auto;max-height:60vh;
+      object-fit:contain;object-position:center;
+    }
+  }
 </style>
 </head>
 <body>
 
-<header class="site-header-fixed" id="siteHeaderFixed">
-  <a href="#" class="logo" aria-label="YogSetu home">
+<header class="site-header-fixed is-visible force-visible" id="siteHeaderFixed">
+  <a href="index.html" class="logo" aria-label="YogSetu home">
     <span class="mark" aria-hidden="true"></span>
     <span>
       <span class="word">Yog<em>Setu</em></span>
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="teachers.html" class="active">Browse teachers</a>
-    <a href="#how">How it works</a>
-    <a href="#styles">Styles</a>
+    <a href="index.html" class="active">Homepage</a>
+    <a href="about.html">About</a>
+    <a href="requirements.html">Job board</a>
     <a href="teacher-benefits.html">For teachers</a>
+    <a href="teachers.html">Browse teachers</a>
   </nav>
   <div class="header-actions">
     <a href="login.html" class="hdr-link">Log in</a>
     <a href="signup.html" class="btn btn-primary btn-small">Sign up</a>
   </div>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
 </header>
 
 <div class="page">
@@ -82,33 +137,15 @@
         <path d="M0 424 C 320 348, 660 500, 1010 440 C 1230 402, 1350 420, 1440 410 L1440 480 L0 480 Z" fill="#D97757" opacity=".16"/>
       </svg>
 
-      <header class="nav">
-        <a href="#" class="logo" aria-label="YogSetu home">
-          <span class="mark" aria-hidden="true"></span>
-          <span>
-            <span class="word">Yog<em>Setu</em></span>
-            <span class="tag">Verified teachers</span>
-          </span>
-        </a>
-
-        <nav class="nav-links" aria-label="Main">
-          <a href="teachers.html" class="active">Browse teachers</a>
-          <a href="#how">How it works</a>
-          <a href="#styles">Styles</a>
-          <a href="teacher-benefits.html">For teachers</a>
-        </nav>
-
-        <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-          <span></span><span></span><span></span>
-        </button>
-      </header>
-
       <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-        <a href="teachers.html">Browse teachers</a>
-        <a href="#how">How it works</a>
-        <a href="#styles">Styles</a>
-        <a href="teacher-benefits.html">For teachers</a>
-      </nav>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
+    <a href="requirements.html">Job board</a>
+    <a href="teacher-benefits.html">For teachers</a>
+    <a href="teachers.html">Browse teachers</a>
+  <a href="login.html">Log in</a>
+  <a href="signup.html">Sign up</a>
+</nav>
 
       <div class="hero-body">
 
@@ -801,7 +838,16 @@
 })();
 </script>
 
-<section class="verified" id="verification" aria-labelledby="verified-title">
+<div class="idx-reveal-scope">
+
+<section class="idx-book-visual">
+  <img src="assets/images/bookclass.png" alt="Student booking a live yoga class through the YogSetu app" class="idx-book-visual-img">
+  <div class="idx-book-visual-copy">
+    <h2>Book Slot <em>as per Availability</em></h2>
+  </div>
+</section>
+
+<section class="verified idx-scroll-reveal" id="verification" aria-labelledby="verified-title">
   <div class="verified-inner">
 
     <div class="sec-head">
@@ -955,6 +1001,9 @@
   });
 })();
 </script>
+
+</div>
+<!-- /.idx-reveal-scope -->
 
 <section class="voices" id="voices" aria-labelledby="voices-title">
   <div class="voices-inner">
@@ -1283,12 +1332,33 @@
 })();
 </script>
 
+<section class="global-presence" id="globalPresence" aria-labelledby="global-presence-title">
+  <div class="global-presence-inner">
+
+    <div class="sec-head">
+      <div class="sec-kicker mono">
+        <span class="num">10</span>
+        <span class="rule" aria-hidden="true"></span>
+        <span>Reach</span>
+      </div>
+      <h2 id="global-presence-title">A genuinely <em>global</em> presence</h2>
+    </div>
+
+    <div class="global-presence-frame">
+      <video class="global-presence-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
+        <source src="assets/images/global%20presence.mp4" type="video/mp4">
+      </video>
+    </div>
+
+  </div>
+</section>
+
 <section class="faq" id="faq" aria-labelledby="faq-title">
   <div class="faq-inner">
 
     <div class="sec-head">
       <div class="sec-kicker mono">
-        <span class="num">10</span>
+        <span class="num">11</span>
         <span class="rule" aria-hidden="true"></span>
         <span>FAQ</span>
       </div>

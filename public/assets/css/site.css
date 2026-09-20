@@ -118,13 +118,13 @@ main{display:block;padding-top:70px;background:var(--sand);}
   color:var(--ink-soft);border:1px solid transparent;
 }
 .pagination a:hover{border-color:var(--line);color:var(--pine);}
-.pagination .is-active{background:var(--pine);color:#FCFAF4;}
+.pagination .is-active{background:var(--pine);color:#F6F5F1;}
 
 /* ============================================================
    TEACHER PROFILE
    ============================================================ */
 .profile-head{display:grid;grid-template-columns:220px minmax(0,1fr) 300px;gap:32px;max-width:1240px;margin:0 auto;padding:40px clamp(20px,4vw,64px) 20px;align-items:start;}
-.profile-photo{width:100%;aspect-ratio:1;border-radius:20px;overflow:hidden;background:#EDE6D6;border:1px solid var(--line);}
+.profile-photo{width:100%;aspect-ratio:1;border-radius:20px;overflow:hidden;background:#EDECE7;border:1px solid var(--line);}
 .profile-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
 .profile-main .badges{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
 .pill-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:11.5px;font-weight:600;letter-spacing:.02em;}
@@ -173,7 +173,7 @@ main{display:block;padding-top:70px;background:var(--sand);}
 .req-card h3{font-family:'Fraunces',serif;font-size:20px;font-weight:500;color:var(--ink);letter-spacing:-.01em;}
 .req-card h3 a{color:inherit;}
 .req-card h3 a:hover{color:var(--marigold-deep);}
-.req-budget{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--pine);background:#F4F0E4;padding:5px 12px;border-radius:999px;white-space:nowrap;}
+.req-budget{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--pine);background:#F0EFEA;padding:5px 12px;border-radius:999px;white-space:nowrap;}
 .req-meta{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--ink-soft);margin-bottom:12px;}
 .req-meta span{display:flex;align-items:center;gap:6px;}
 .req-card p.desc{font-size:14.5px;line-height:1.6;color:var(--ink-soft);margin-bottom:14px;}
@@ -221,12 +221,12 @@ main{display:block;padding-top:70px;background:var(--sand);}
   transition:border-color .18s ease,background .18s ease;
 }
 .role-toggle input{position:absolute;opacity:0;pointer-events:none;}
-.role-toggle .ico{width:30px;height:30px;border-radius:50%;background:#F4F0E4;display:flex;align-items:center;justify-content:center;color:var(--pine);}
+.role-toggle .ico{width:30px;height:30px;border-radius:50%;background:#F0EFEA;display:flex;align-items:center;justify-content:center;color:var(--pine);}
 .role-toggle .lbl{font-weight:600;font-size:14px;color:var(--ink);}
 .role-toggle .sub{font-size:11.5px;color:var(--ink-faint);}
 .role-toggle input:checked + .card,
 .role-toggle label:has(input:checked){border-color:var(--marigold);background:rgba(217,119,87,.06);}
-.role-toggle label:has(input:checked) .ico{background:var(--marigold);color:#FCFAF4;}
+.role-toggle label:has(input:checked) .ico{background:var(--marigold);color:#F6F5F1;}
 
 .auth-head{text-align:center;margin-bottom:26px;}
 .auth-head h1{font-family:'Fraunces',serif;font-size:clamp(24px,3vw,30px);font-weight:500;color:var(--ink);letter-spacing:-.02em;}
@@ -238,7 +238,7 @@ main{display:block;padding-top:70px;background:var(--sand);}
 .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--line);}
 
 .alert{padding:14px 16px;border-radius:12px;font-size:13.5px;margin-bottom:18px;display:flex;gap:10px;align-items:flex-start;}
-.alert.info{background:#F4F0E4;color:var(--pine);border:1px solid var(--line);}
+.alert.info{background:#F0EFEA;color:var(--pine);border:1px solid var(--line);}
 .alert.warn{background:rgba(217,119,87,.1);color:var(--marigold-deep);border:1px solid rgba(217,119,87,.35);}
 
 /* ============================================================
@@ -261,7 +261,7 @@ main{display:block;padding-top:70px;background:var(--sand);}
 
 .team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:28px 0;}
 .team-card{text-align:center;}
-.team-card .photo{width:100%;aspect-ratio:1;border-radius:16px;background:#EDE6D6;overflow:hidden;margin-bottom:10px;border:1px solid var(--line);}
+.team-card .photo{width:100%;aspect-ratio:1;border-radius:16px;background:#EDECE7;overflow:hidden;margin-bottom:10px;border:1px solid var(--line);}
 .team-card .photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
 .team-card h4{font-size:14.5px;font-weight:600;color:var(--ink);}
 .team-card .role{font-size:12px;color:var(--ink-faint);}

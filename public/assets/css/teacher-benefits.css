@@ -1,0 +1,247 @@
+/* ============================================================
+   YogSetu — TEACHER-BENEFITS.CSS
+   Page-scoped styles for teacher-benefits.html. Reuses shared
+   base.css/site.css components wherever they already fit
+   (.section/.diptych, .how/.walk-path, .req-card, .faq chat-thread,
+   .final CTA) and adds tb- prefixed classes only where there's no
+   existing equivalent (jobs grid layout, teacher-voices cards).
+   ============================================================ */
+
+/* Hero: video background, content pinned to the left half (Netflix-style
+   reference — tags/title/meta/CTA on the left, a small thumbnail rail
+   underneath the buttons). */
+.tb-hero-card .hero-body{
+  justify-content:center;
+  align-items:flex-start;
+  text-align:left;
+  gap:clamp(24px,4vh,36px);
+}
+.tb-hero-card .hero-head{
+  margin:0;
+  max-width:520px;
+  text-align:left;
+}
+.tb-hero-card .closing{align-items:flex-start;}
+
+/* Left-to-right scrim so the text stays legible without hiding the whole
+   video — strongest at the left edge, fading out toward the right. */
+.tb-hero-card .hero-scrim{
+  background:
+    linear-gradient(100deg, rgba(23,22,20,.78) 0%, rgba(23,22,20,.45) 42%, rgba(23,22,20,.08) 72%),
+    linear-gradient(180deg, rgba(23,22,20,.25) 0%, rgba(23,22,20,.1) 35%, rgba(23,22,20,.4) 100%);
+}
+
+/* Give the headline its own solid backdrop so it stays legible over any
+   part of the video, and reads as a highlighted caption rather than text
+   laid directly over the footage. */
+.tb-hero-card .hero-head h1{
+  display:inline-block;
+  background:rgba(23,22,20,.6);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.14);
+  padding:clamp(14px,2vw,22px) clamp(18px,2.6vw,30px);
+  border-radius:18px;
+  box-shadow:0 20px 40px -20px rgba(0,0,0,.5);
+}
+
+.tb-hero-kicker{margin-bottom:clamp(14px,2vh,20px);}
+
+/* ---- "Popular teachers this week" — small square thumbnail rail ---- */
+.tb-hero-rail{margin-top:clamp(22px,3.4vh,30px);}
+.tb-hero-rail-label{
+  display:block;
+  font-size:10px;letter-spacing:.14em;
+  color:rgba(241,237,224,.55);
+  margin-bottom:10px;
+}
+.tb-hero-rail-track{display:flex;gap:10px;flex-wrap:wrap;}
+.tb-hero-thumb{flex:0 0 auto;width:60px;text-align:center;}
+.tb-hero-thumb-photo{
+  position:relative;
+  display:block;width:60px;height:60px;
+  border-radius:10px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.08);
+  transition:transform .18s ease,border-color .18s ease;
+}
+.tb-hero-thumb-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.tb-hero-thumb:hover .tb-hero-thumb-photo{transform:translateY(-3px);border-color:var(--marigold);}
+.tb-hero-thumb-photo .fallback{display:none;}
+.tb-hero-thumb-photo.missing img{display:none;}
+.tb-hero-thumb-photo.missing .fallback{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;height:100%;
+  font-family:'Fraunces',serif;font-size:14px;color:#F1EDE0;
+}
+.tb-hero-thumb-name{
+  display:block;margin-top:6px;
+  font-size:10.5px;color:rgba(241,237,224,.62);
+}
+
+@media (max-width:900px){
+  .tb-hero-card .hero-head{max-width:none;}
+}
+@media (max-width:640px){
+  .tb-hero-card .hero-body{align-items:center;text-align:center;}
+  .tb-hero-card .hero-head{text-align:center;}
+  .tb-hero-card .closing{align-items:center;}
+  .tb-hero-card .hero-head h1{
+    padding:14px 18px;
+    border-radius:14px;
+  }
+  .tb-hero-rail-track{justify-content:center;}
+}
+
+/* ---- live demand — icon-led horizontal scroller ---- */
+.tb-jobs-scroll-wrap{position:relative;}
+.tb-jobs-grid{
+  display:flex;gap:16px;
+  overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+  padding:4px 2px 8px;
+}
+.tb-jobs-grid::-webkit-scrollbar{display:none;}
+.tb-jobs-grid .req-card{
+  flex:0 0 clamp(260px,30vw,320px);scroll-snap-align:start;
+  display:flex;flex-direction:column;
+  transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.tb-jobs-grid .req-card:hover{border-color:rgba(217,119,87,.4);box-shadow:0 22px 40px -28px rgba(26,26,24,.35);transform:translateY(-3px);}
+.tb-jobs-grid .req-card .desc{flex:1;}
+.tb-jobs-foot{display:flex;justify-content:center;margin-top:clamp(24px,3.4vh,32px);}
+
+.tb-jobs-arrow{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:42px;height:42px;border-radius:50%;flex-shrink:0;
+  background:rgba(255,255,255,.95);border:1px solid rgba(26,26,24,.14);
+  box-shadow:0 12px 26px -12px rgba(26,26,24,.45);
+  display:flex;align-items:center;justify-content:center;color:var(--pine);
+  transition:background .18s ease;
+}
+.tb-jobs-prev{left:-18px;}
+.tb-jobs-next{right:-18px;}
+.tb-jobs-arrow:hover{background:#fff;}
+.tb-jobs-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
+@media (max-width:900px){
+  .tb-jobs-prev{left:4px;}
+  .tb-jobs-next{right:4px;}
+}
+
+.tb-icon-card{overflow:hidden;padding-top:0;}
+.tb-icon-band{
+  display:flex;align-items:center;gap:10px;
+  margin:0 -22px 18px;padding:14px 22px;
+  color:#FFFDF7;font-size:12.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;
+}
+.tb-icon-band svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.tb-icon-hatha{background:linear-gradient(135deg,#D97757,#A65032);}
+.tb-icon-prenatal{background:linear-gradient(135deg,#8C887D,#55534C);}
+.tb-icon-ashtanga{background:linear-gradient(135deg,#3A3935,#1A1A18);}
+
+/* ---- global hiring video section (reuses .global-presence, centers the heading) ---- */
+.tb-hiring-video .sec-head{text-align:center;margin-bottom:clamp(28px,4vh,42px);}
+.tb-hiring-video .sec-kicker{justify-content:center;}
+.tb-hiring-video .sec-head h2{margin:0 auto;max-width:32ch;}
+.tb-hiring-video .sec-head h2 em{font-style:italic;color:var(--marigold-deep);}
+.tb-hiring-video .sec-head .sub{margin:10px auto 0;max-width:52ch;color:var(--ink-soft);font-size:14.5px;}
+
+/* ---- teacher voices: now reuses base.css's .voices/.tablet/.review-* tablet-mockup
+   component directly (same one the homepage uses for student voices) — no
+   page-scoped overrides needed. ---- */
+
+/* ---- full-screen sticky image, scoped to just this pair (see
+   .tb-reveal-scope below). Pinned for a full viewport height while The
+   Standard scrolls up over it; isolation:isolate on the wrapper keeps this
+   sticky element's stacking from ever affecting sections outside the pair —
+   position:sticky is a "positioned" element, and positioned descendants
+   always paint above static siblings in the same stacking context
+   regardless of DOM order, which is what let this bleed into every later
+   section last time. Isolating the pair fixes that at the root cause. ---- */
+.tb-reveal-scope{
+  isolation:isolate;
+  position:relative;
+}
+.tb-final-visual{
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:hidden;
+  z-index:0;
+}
+.tb-final-visual-img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:78% center;
+  display:block;
+}
+
+/* The image is plain white/empty on its left third — real headline text
+   (not baked into the graphic this time) sits there. */
+.tb-final-visual-copy{
+  position:absolute;
+  inset:0;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  padding-left:clamp(24px,6vw,88px);
+  pointer-events:none;
+}
+.tb-final-visual-copy h2{
+  font-family:'Fraunces',serif;
+  font-weight:500;
+  font-size:clamp(32px,5.4vw,68px);
+  line-height:1.08;
+  letter-spacing:-.02em;
+  color:var(--ink);
+  max-width:9ch;
+}
+.tb-final-visual-copy h2 em{
+  font-style:italic;
+  color:var(--marigold-deep);
+}
+
+/* Structural "rises up to cover the sticky image" effect — rounded top
+   corners + shadow only. Each section keeps its own background (sand for
+   the light Final CTA, pine-deep for the dark Standard section) so the
+   white→black transition still reads cleanly as the black section visibly
+   rising over the white image, not a color swap. */
+.tb-scroll-reveal{
+  position:relative;
+  z-index:1;
+  border-radius:32px 32px 0 0;
+  box-shadow:0 -50px 90px -30px rgba(0,0,0,.35);
+}
+.tb-final-reveal{background:var(--sand);}
+
+/* Below 900px the baked-in empty space on the image's left stops being
+   usable as a text slot (object-fit:contain was shrinking the whole image,
+   dead space included, down to a tiny corner). Instead, stack real text on
+   top of a normal-flow block, then let the image fill the rest of the
+   section cropped tight on the subject — no more wasted blank space. */
+@media (max-width:900px){
+  .tb-final-visual{
+    display:flex;
+    flex-direction:column;
+  }
+  .tb-final-visual-copy{
+    position:relative;
+    inset:auto;
+    flex:0 0 auto;
+    justify-content:center;
+    padding:clamp(28px,6vh,48px) 20px clamp(16px,3vh,24px);
+    pointer-events:auto;
+  }
+  .tb-final-visual-copy h2{
+    max-width:none;
+    text-align:center;
+    margin:0 auto;
+  }
+  .tb-final-visual-img{
+    flex:1;
+    min-height:0;
+    object-fit:cover;
+    object-position:72% center;
+  }
+}
+@media (max-width:640px){
+  .tb-final-visual{height:80vh;}
+}

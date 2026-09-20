@@ -1,0 +1,218 @@
+/* ============================================================
+   YogSetu — ABOUT.CSS
+   Page-scoped styles for about.html only. Palette restricted to
+   black, white (and near-white family), and saffron/marigold —
+   no pine/sage tones used anywhere on this page. Reuses the site's
+   Fraunces/Inter/IBM Plex Mono type system for consistency.
+   ============================================================ */
+
+:root{
+  --ab-ink:#121110;
+  --ab-ink-soft:#4a4844;
+  --ab-white:#FFFFFF;
+  --ab-off:#FAFAF8;
+  --ab-band:#FBEDE4;
+  --ab-line:#E7E2DC;
+  --ab-saffron:#D97757;
+  --ab-saffron-deep:#A65032;
+}
+
+.ab-main{background:var(--ab-white);color:var(--ab-ink);}
+
+/* ---- 1. HERO — giant stacked title + portrait ---- */
+.ab-hero{
+  max-width:1240px;margin:0 auto;
+  padding:clamp(48px,8vh,88px) clamp(20px,4vw,64px) clamp(40px,6vh,64px);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,.85fr);
+  gap:clamp(28px,5vw,64px);
+  align-items:center;
+}
+.ab-hero-kicker{
+  display:flex;align-items:center;gap:10px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ab-saffron-deep);font-weight:600;
+  margin-bottom:clamp(14px,2vh,20px);
+}
+.ab-hero-kicker .rule{width:32px;height:1px;background:var(--ab-saffron);}
+.ab-hero-giant{
+  font-family:'Fraunces',serif;font-weight:600;
+  font-size:clamp(58px,10vw,132px);
+  line-height:.9;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  color:var(--ab-ink);
+}
+.ab-hero-giant .accent{color:var(--ab-saffron);}
+.ab-hero-sub{
+  margin-top:clamp(18px,2.6vh,26px);
+  font-size:15px;font-weight:600;letter-spacing:.01em;
+  color:var(--ab-ink);
+}
+.ab-hero-desc{
+  margin-top:10px;
+  font-size:15px;line-height:1.7;
+  color:var(--ab-ink-soft);
+  max-width:44ch;
+}
+.ab-hero-photo{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  aspect-ratio:4/5;
+  box-shadow:0 40px 70px -36px rgba(0,0,0,.4);
+}
+.ab-hero-photo img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;}
+.ab-hero-photo::after{
+  content:'';position:absolute;inset:0;
+  border:1px solid rgba(0,0,0,.08);border-radius:inherit;
+  pointer-events:none;
+}
+@media (max-width:860px){
+  .ab-hero{grid-template-columns:1fr;text-align:left;}
+  .ab-hero-photo{max-width:340px;order:-1;}
+}
+
+/* ---- 2. MEET THE FOUNDER — saffron band, cutout photo breaking the top ---- */
+.ab-founder{
+  position:relative;
+  background:var(--ab-band);
+  margin-top:clamp(20px,3vh,32px);
+  padding:clamp(90px,14vw,150px) clamp(20px,4vw,64px) clamp(48px,7vh,72px);
+}
+.ab-founder-inner{
+  max-width:1120px;margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,.7fr) minmax(0,1fr);
+  gap:clamp(20px,4vw,56px);
+  align-items:flex-end;
+}
+.ab-founder-photo{
+  position:relative;
+  order:2;
+  margin-top:clamp(-120px,-14vw,-170px);
+  display:flex;justify-content:center;
+}
+.ab-founder-photo img{
+  width:100%;max-width:420px;
+  display:block;
+  filter:drop-shadow(0 30px 40px rgba(0,0,0,.28));
+}
+.ab-founder-copy{order:1;text-align:left;padding-bottom:clamp(8px,1.4vh,16px);}
+.ab-founder-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ab-saffron-deep);font-weight:600;margin-bottom:12px;
+}
+.ab-founder-heading{
+  font-family:'Fraunces',serif;font-weight:600;
+  font-size:clamp(30px,4.4vw,50px);
+  line-height:1.04;letter-spacing:-.02em;
+  color:var(--ab-ink);
+  margin-bottom:16px;
+}
+.ab-founder-heading em{font-style:italic;color:var(--ab-saffron-deep);}
+.ab-founder-bio{
+  font-size:15px;line-height:1.75;color:var(--ab-ink-soft);
+  max-width:46ch;margin-bottom:22px;
+}
+.ab-founder-name{
+  font-family:'Fraunces',serif;font-size:19px;font-weight:600;color:var(--ab-ink);
+}
+.ab-founder-title{
+  display:block;margin-top:2px;
+  font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ab-saffron-deep);font-weight:600;
+}
+@media (max-width:820px){
+  .ab-founder-inner{grid-template-columns:1fr;text-align:center;}
+  .ab-founder-photo{order:1;margin-top:clamp(-90px,-24vw,-120px);}
+  .ab-founder-copy{order:2;text-align:center;}
+  .ab-founder-bio{margin-left:auto;margin-right:auto;}
+}
+
+/* ---- 3. STATS BAND ---- */
+.ab-stats-wrap{background:var(--ab-white);padding:clamp(48px,7vh,72px) clamp(20px,4vw,64px);}
+.ab-stats{
+  max-width:1120px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,28px);
+}
+.ab-stat{text-align:left;border-left:2px solid var(--ab-saffron);padding-left:16px;}
+.ab-stat .n{
+  display:block;font-family:'Fraunces',serif;font-weight:600;font-size:clamp(28px,3.4vw,38px);
+  color:var(--ab-ink);letter-spacing:-.02em;line-height:1;
+}
+.ab-stat .k{
+  display:block;margin-top:8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ab-ink-soft);font-weight:600;
+}
+@media (max-width:760px){
+  .ab-stats{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:26px;}
+}
+
+/* ---- 4. WHAT WE STAND FOR — split section ---- */
+.ab-principles{
+  max-width:1120px;margin:0 auto;
+  padding:clamp(48px,7vh,80px) clamp(20px,4vw,64px);
+  display:grid;
+  grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  gap:clamp(28px,5vw,64px);
+}
+.ab-principles-head h2{
+  font-family:'Fraunces',serif;font-weight:600;font-size:clamp(30px,3.6vw,44px);
+  letter-spacing:-.02em;line-height:1.06;color:var(--ab-ink);margin-bottom:16px;
+}
+.ab-principles-head p{font-size:15px;line-height:1.75;color:var(--ab-ink-soft);max-width:40ch;margin-bottom:22px;}
+.ab-principles-photo{border-radius:16px;overflow:hidden;aspect-ratio:16/11;}
+.ab-principles-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+
+.ab-principles-list{display:flex;flex-direction:column;}
+.ab-principle{
+  padding:clamp(20px,2.8vh,26px) 0;
+  border-bottom:1px solid var(--ab-line);
+  display:flex;gap:18px;align-items:flex-start;
+}
+.ab-principle:first-child{padding-top:0;}
+.ab-principle:last-child{border-bottom:none;}
+.ab-principle .num{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--ab-saffron);
+  flex-shrink:0;padding-top:4px;
+}
+.ab-principle h3{
+  font-family:'Fraunces',serif;font-weight:600;font-size:19px;letter-spacing:-.01em;
+  color:var(--ab-ink);margin-bottom:6px;
+}
+.ab-principle p{font-size:14px;line-height:1.65;color:var(--ab-ink-soft);}
+@media (max-width:860px){
+  .ab-principles{grid-template-columns:1fr;}
+}
+
+/* ---- 5. CLOSING CTA — full-bleed image, dark scrim ---- */
+.ab-closing{
+  position:relative;
+  overflow:hidden;
+  margin-top:clamp(20px,3vh,32px);
+  min-height:clamp(420px,56vh,560px);
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+}
+.ab-closing-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;}
+.ab-closing-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(18,17,16,.78) 0%,rgba(18,17,16,.55) 45%,rgba(18,17,16,.85) 100%);
+}
+.ab-closing-inner{position:relative;z-index:1;max-width:640px;padding:0 20px;}
+.ab-closing-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ab-saffron);font-weight:600;margin-bottom:18px;
+}
+.ab-closing-kicker .dot{width:5px;height:5px;border-radius:50%;background:var(--ab-saffron);}
+.ab-closing h2{
+  font-family:'Fraunces',serif;font-weight:500;font-size:clamp(28px,4vw,46px);
+  line-height:1.12;letter-spacing:-.02em;color:#FFFDF8;margin-bottom:14px;
+}
+.ab-closing p{font-size:15px;line-height:1.65;color:rgba(255,253,248,.78);margin-bottom:28px;max-width:48ch;margin-left:auto;margin-right:auto;}
+.ab-closing .btn-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.ab-closing .btn-primary{background:var(--ab-saffron);color:#1A1200;box-shadow:none;}
+.ab-closing .btn-primary:hover{background:var(--ab-saffron-deep);}
+.ab-closing .btn-secondary{background:rgba(255,255,255,.1);color:#FFFDF8;border:1px solid rgba(255,255,255,.3);}
+.ab-closing .btn-secondary:hover{background:rgba(255,255,255,.18);}

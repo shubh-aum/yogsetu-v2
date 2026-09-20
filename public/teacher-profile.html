@@ -10,6 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/teachers.css">
+<link rel="stylesheet" href="assets/css/teacher-profile.css">
 </head>
 <body class="inner-page">
 
@@ -21,10 +23,11 @@
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="teachers.html" class="active">Browse teachers</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
     <a href="requirements.html">Job board</a>
     <a href="teacher-benefits.html">For teachers</a>
-    <a href="about.html">About</a>
+    <a href="teachers.html" class="active">Browse teachers</a>
   </nav>
   <div class="header-actions">
     <a href="login.html" class="hdr-link">Log in</a>
@@ -36,111 +39,578 @@
 </header>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="teachers.html">Browse teachers</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
     <a href="requirements.html">Job board</a>
     <a href="teacher-benefits.html">For teachers</a>
-    <a href="about.html">About</a>
+    <a href="teachers.html">Browse teachers</a>
   <a href="login.html">Log in</a>
   <a href="signup.html">Sign up</a>
 </nav>
 
 <main>
 
-<div class="profile-head">
-  <div class="profile-photo">
-    <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Amrita-Gupta.jpg" alt="Amrita Gupta" onerror="this.parentElement.style.background='#EDE6D6'; this.remove();">
-  </div>
-  <div class="profile-main">
-    <div class="badges">
-      <span class="pill-badge verified"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Verified &middot; Cert. No. YS-04821</span>
-      <span class="pill-badge rating">&#9733; 4.8 (94 reviews)</span>
-    </div>
-    <h1>Amrita Gupta</h1>
-    <p class="role-line">Prenatal & Therapeutic teacher &middot; Delhi &middot; 7 yrs experience &middot; In-studio only</p>
-    <div class="tags"><span>Prenatal</span><span>Therapeutic</span><span>English, Hindi</span></div>
-  </div>
-  <aside class="profile-side">
-    <div class="price">&#8377;899<span> / session</span></div>
-    <p style="font-size:12.5px;color:var(--ink-soft);margin-top:6px;">Package pricing available &mdash; ask in your request.</p>
-    <a href="signup.html?role=client" class="btn btn-primary">Send connection request</a>
-    <p class="note">Your first connection on YogSetu is free. Contact details are shared only once Amrita approves.</p>
-  </aside>
-</div>
+<!-- ============ 1. HERO — dark, photo popping out in 3D ============ -->
+<section class="tp-hero" id="tpHero">
+  <div class="tp-hero-bg" aria-hidden="true"></div>
 
-<div class="profile-body">
-  <div data-tab-group>
-    <div class="profile-tabs">
-      <button class="active" data-tab-target="about">About</button>
-      <button data-tab-target="certs">Certifications</button>
-      <button data-tab-target="slots">Availability</button>
-      <button data-tab-target="reviews">Reviews (94)</button>
-    </div>
-
-    <div data-tab-panel="about">
-      <div class="prose">
-        <p>Amrita Gupta has been teaching prenatal & therapeutic for 7 yrs across Delhi and online. Classes are kept small and are built around where each student actually is &mdash; not a fixed studio sequence.</p>
-        <p>Credentials are verified directly with the issuing body as part of YogSetu's onboarding &mdash; not just uploaded and taken on trust.</p>
+  <div class="tp-hero-inner">
+    <div class="tp-hero-content">
+      <div class="tp-hero-tags mono">
+        <span>Prenatal</span><span class="sep" aria-hidden="true">|</span>
+        <span>Therapeutic</span><span class="sep" aria-hidden="true">|</span>
+        <span>Verified teacher</span>
       </div>
-      <h4 style="font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-faint);margin:22px 0 10px;">Specialises in</h4>
-      <div class="tags"><span>Prenatal</span><span>Therapeutic</span></div>
-    </div>
+      <h1 class="tp-hero-title">Amrita Gupta</h1>
+      <div class="tp-hero-meta">
+        <span><strong>7 yrs</strong> experience</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>Delhi, India</span>
+        <span class="dot" aria-hidden="true"></span>
+        <span>&#9733; 4.8 (94 reviews)</span>
+      </div>
+      <p class="tp-hero-desc">Prenatal &amp; therapeutic yoga teacher with 7 years of experience across Delhi and online. Classes are kept small and built around where your body actually is &mdash; not a fixed studio sequence. Credentials verified directly with the issuing body.</p>
 
-    <div data-tab-panel="certs" hidden>
-      <div class="cert-list">
-        <div class="cert-item">
-          <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-          <div><h4>200-Hour Yoga Teacher Training</h4><p>Yoga Alliance &middot; Verified with issuer</p></div>
+      <div class="tp-hero-cta">
+        <a href="signup.html?role=client" class="btn btn-primary">
+          Send connection request
+          <span class="arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        <a href="#about" id="tpViewCertsLink" class="btn btn-secondary tp-hero-btn-light">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>
+          View certifications
+        </a>
+        <span class="tp-hero-price">&#8377;899<span>/session</span></span>
+      </div>
+      <p class="tp-hero-note">Your first connection on YogSetu is free &mdash; contact details are shared only once Amrita approves.</p>
+
+      <div class="tp-hero-rail">
+        <div class="tp-hero-rail-head">
+          <span class="mono">More prenatal &amp; therapeutic teachers</span>
+          <div class="tp-hero-rail-nav">
+            <button type="button" class="tp-hero-rail-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button type="button" class="tp-hero-rail-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+          </div>
         </div>
-        <div class="cert-item">
-          <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-          <div><h4>Prenatal Yoga Certification</h4><p>YTTAI &middot; Verified with issuer</p></div>
-        </div>
-        <div class="cert-item">
-          <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-          <div><h4>Yoga Therapy Foundations</h4><p>PYC &middot; Verified with issuer</p></div>
+        <div class="tp-hero-rail-track" id="tpHeroRail">
+          <a class="tp-hero-thumb" href="teacher-profile.html?t=shachi-khemuka">
+            <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Shachi-Khemuka.jpg" alt="" loading="lazy" onerror="this.closest('.tp-hero-thumb').classList.add('missing')">
+            <span class="fallback" aria-hidden="true">SK</span>
+            <span class="nm">Shachi</span>
+          </a>
+          <a class="tp-hero-thumb" href="teacher-profile.html?t=shweta-shukla">
+            <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Shweta-Shukla.jpg" alt="" loading="lazy" onerror="this.closest('.tp-hero-thumb').classList.add('missing')">
+            <span class="fallback" aria-hidden="true">SS</span>
+            <span class="nm">Shweta</span>
+          </a>
+          <a class="tp-hero-thumb" href="teacher-profile.html?t=shamli-joshi">
+            <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Shamli-Joshi.jpg" alt="" loading="lazy" onerror="this.closest('.tp-hero-thumb').classList.add('missing')">
+            <span class="fallback" aria-hidden="true">SJ</span>
+            <span class="nm">Shamli</span>
+          </a>
+          <a class="tp-hero-thumb" href="teacher-profile.html?t=shikhar-mehrotra">
+            <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Shikhar-Mehrotra.jpg" alt="" loading="lazy" onerror="this.closest('.tp-hero-thumb').classList.add('missing')">
+            <span class="fallback" aria-hidden="true">SM</span>
+            <span class="nm">Shikhar</span>
+          </a>
         </div>
       </div>
-      <p style="margin-top:16px;font-size:12.5px;color:var(--ink-faint);">Re-checked annually. Badge expires and is re-verified every 12 months.</p>
     </div>
 
-    <div data-tab-panel="slots" hidden>
-      <p style="font-size:13.5px;color:var(--ink-soft);margin-bottom:4px;">Free slots this week &mdash; set by Amrita, shown in your local time.</p>
-      <div class="slots-grid">
-        <div class="slot-day"><span class="d">Mon</span><span class="t">7:00 AM</span><span class="t taken">6:00 PM</span></div>
-        <div class="slot-day"><span class="d">Tue</span><span class="t">7:00 AM</span><span class="t">6:00 PM</span></div>
-        <div class="slot-day"><span class="d">Wed</span><span class="t taken">7:00 AM</span><span class="t">6:00 PM</span></div>
-        <div class="slot-day"><span class="d">Thu</span><span class="t">7:00 AM</span><span class="t">6:00 PM</span></div>
-        <div class="slot-day"><span class="d">Fri</span><span class="t">7:00 AM</span><span class="t taken">6:00 PM</span></div>
-        <div class="slot-day"><span class="d">Sat</span><span class="t">9:00 AM</span><span class="t">&mdash;</span></div>
-        <div class="slot-day"><span class="d">Sun</span><span class="t">&mdash;</span><span class="t">&mdash;</span></div>
+    <div class="tp-hero-figure" id="tpHeroFigure">
+      <div class="tp-hero-photo">
+        <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Amrita-Gupta.jpg" alt="Amrita Gupta" onerror="this.closest('.tp-hero-photo').classList.add('missing')">
+      </div>
+      <div class="tp-hero-float-badge">
+        <svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>
+        <div><strong>Verified</strong><span>Cert. No. YS-04821</span></div>
+      </div>
+      <div class="tp-hero-float-rating">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <strong>4.8</strong><span>94 reviews</span>
       </div>
     </div>
+  </div>
+</section>
 
-    <div data-tab-panel="reviews" hidden>
-      <div class="review-item" style="border-bottom:1px solid var(--line-soft);padding:14px 0;">
-        <div class="review-top"><span class="nm">Priya</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
-        <p class="review-quote">Calm, patient, and actually explains the &ldquo;why&rdquo; behind each pose. Highly recommend for beginners.</p>
+<!-- ============ 2. WHY HIRE — stat-proof banner ============ -->
+<section class="tp-section tp-why-band" id="why" aria-labelledby="why-title">
+  <div class="sec-head">
+    <div class="sec-kicker mono"><span class="num">01</span><span class="rule" aria-hidden="true"></span><span>Why Amrita</span></div>
+    <h2 id="why-title">The numbers, not just the pitch</h2>
+    <p class="sub">Every figure below comes from YogSetu's own records &mdash; not self-reported.</p>
+  </div>
+
+  <div class="glass-panel tp-stat-panel" id="tpStatPanel">
+    <div class="glass-lead">
+      <span class="badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+      Credential-verified &middot; trusted by <strong>94 students</strong> so far
+    </div>
+    <div class="glass-stats">
+      <div class="glass-stat tp-tilt" style="--i:0">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg></span>
+        <span class="n"><span class="count" data-target="4.8" data-decimals="1">0</span></span><span class="k mono">Average rating</span>
       </div>
-      <div class="review-item" style="border-bottom:1px solid var(--line-soft);padding:14px 0;">
-        <div class="review-top"><span class="nm">Meera</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
-        <p class="review-quote">Booked a prenatal trial class and stayed for the full term. Genuinely knows the subject.</p>
+      <div class="glass-stat tp-tilt" style="--i:1">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/></svg></span>
+        <span class="n"><span class="count" data-target="340" data-suffix="+">0</span></span><span class="k mono">Classes taught</span>
+      </div>
+      <div class="glass-stat tp-tilt" style="--i:2">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+        <span class="n"><span class="count" data-target="96" data-suffix="%">0</span></span><span class="k mono">Request acceptance</span>
+      </div>
+      <div class="glass-stat tp-tilt" style="--i:3">
+        <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <span class="n"><span class="count" data-target="24" data-suffix="h">0</span></span><span class="k mono">Avg. response time</span>
       </div>
     </div>
   </div>
 
-  <aside>
-    <div class="req-side-box">
-      <h4>Verification</h4>
-      <p style="font-size:13.5px;color:var(--ink-soft);line-height:1.6;">Documents checked &middot; Issuer confirmed &middot; Renewed annually. Backed by YogKulam's 13+ year credentialing infrastructure.</p>
+  <p class="proof-note">Figures reflect connections made through YogSetu, updated as Amrita completes more sessions.</p>
+</section>
+
+<!-- ============ 3. ABOUT — graphical editorial ============ -->
+<section class="tp-about-dark" id="about" aria-labelledby="about-title">
+  <div class="tp-about-inner">
+
+    <div class="sec-kicker mono tp-about-kicker">
+      <span class="num">02</span><span class="rule" aria-hidden="true"></span><span>About</span>
     </div>
-    <div class="req-side-box">
-      <h4>Response time</h4>
-      <p style="font-size:13.5px;color:var(--ink-soft);">Usually responds to connection requests within 24 hours.</p>
+
+    <h2 id="about-title" class="tp-about-giant">
+      About
+      <span class="tp-about-spark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 2l1.8 6.6L20 10.5l-6.2 1.9L12 19l-1.8-6.6L4 10.5l6.2-1.9z"/></svg>
+      </span>
+      Amrita
+    </h2>
+
+    <div class="tp-about-divider" aria-hidden="true"></div>
+
+    <div class="tp-about-split">
+      <div class="tp-about-photo tp-tilt">
+        <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Amrita-Gupta.jpg" alt="Amrita Gupta" loading="lazy" onerror="this.closest('.tp-about-photo').classList.add('missing')">
+      </div>
+      <div class="tp-about-copy">
+        <p>Certified prenatal &amp; therapeutic specialist, trained through Yoga Alliance and YTTAI, with 7 years and 340+ classes taught across Delhi and online.</p>
+        <p>My goal with every student is the same: leave the session feeling like it was actually built for where you are that day &mdash; not adapted from someone else's plan.</p>
+        <div class="tags tp-about-tags"><span>Prenatal</span><span>Therapeutic</span><span>English</span><span>Hindi</span></div>
+      </div>
     </div>
-  </aside>
-</div>
+
+    <button type="button" class="tp-about-more-btn" id="tpAboutMoreBtn" aria-expanded="false" aria-controls="tpAboutMore">
+      <span class="tp-about-more-label">See certifications &amp; pricing</span>
+      <span class="tp-about-more-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+      </span>
+    </button>
+
+    <div class="tp-about-more" id="tpAboutMore">
+      <div class="tp-about-more-clip">
+        <div class="tp-about-more-panel">
+
+          <div class="tp-about-more-block">
+            <div class="tp-about-more-head">
+              <span class="tp-about-more-kicker mono">03 &middot; Certifications</span>
+              <h3>Verified with the issuing body</h3>
+            </div>
+            <div class="cert-list">
+              <div class="cert-item tp-tilt">
+                <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+                <div><h4>200-Hour Yoga Teacher Training</h4><p>Yoga Alliance &middot; Verified with issuer</p></div>
+              </div>
+              <div class="cert-item tp-tilt">
+                <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+                <div><h4>Prenatal Yoga Certification</h4><p>YTTAI &middot; Verified with issuer</p></div>
+              </div>
+              <div class="cert-item tp-tilt">
+                <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+                <div><h4>Yoga Therapy Foundations</h4><p>PYC &middot; Verified with issuer</p></div>
+              </div>
+            </div>
+            <p style="margin-top:16px;font-size:12.5px;color:var(--ink-faint);">Re-checked annually. Badge expires and is re-verified every 12 months.</p>
+          </div>
+
+          <div class="tp-about-more-block">
+            <div class="tp-about-more-head">
+              <span class="tp-about-more-kicker mono">04 &middot; Formats &amp; pricing</span>
+              <h3>Pick what fits your week</h3>
+            </div>
+            <div class="tp-format-grid">
+              <div class="tp-format-card tp-tilt">
+                <span class="tp-format-tag">1:1 &middot; Online</span>
+                <h3>Private session</h3>
+                <div class="price">&#8377;799<span> / session</span></div>
+                <p>One-on-one over video call, scheduled around your trimester and energy that week.</p>
+                <a href="signup.html?role=client" class="btn btn-secondary">Ask about this</a>
+              </div>
+              <div class="tp-format-card is-popular tp-tilt">
+                <span class="tp-format-tag">1:1 &middot; In-studio</span>
+                <h3>Private session</h3>
+                <div class="price">&#8377;899<span> / session</span></div>
+                <p>In-person at Amrita's Delhi studio &mdash; most booked format, includes props and mat.</p>
+                <a href="signup.html?role=client" class="btn btn-primary">Send connection request</a>
+              </div>
+              <div class="tp-format-card tp-tilt">
+                <span class="tp-format-tag">Package</span>
+                <h3>8-session pack</h3>
+                <div class="price">&#8377;6,400<span> / 8 sessions</span></div>
+                <p>Save &#8377;792 versus booking one at a time &mdash; mix of online and in-studio, your choice.</p>
+                <a href="signup.html?role=client" class="btn btn-secondary">Ask about this</a>
+              </div>
+            </div>
+            <div class="tp-trial-banner">
+              <p><strong>First session, no risk.</strong> Your first connection on YogSetu is free &mdash; no platform fee to say hello and ask questions before booking.</p>
+              <a href="signup.html?role=client" class="btn btn-secondary">Start a conversation</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 4. AVAILABILITY — dark availability meter ============ -->
+<section class="tp-avail-dark" aria-labelledby="avail-title">
+  <div class="tp-section">
+    <div class="sec-head">
+      <div class="sec-kicker mono"><span class="num">03</span><span class="rule" aria-hidden="true"></span><span>Availability</span></div>
+      <h2 id="avail-title">Free slots this week</h2>
+      <p class="sub">Set by Amrita, shown in your local time &middot; usually responds within 24h &middot; 96% acceptance rate.</p>
+    </div>
+
+    <div class="tp-meter-row" aria-label="Weekly availability meter">
+      <div class="tp-meter-day">
+        <span class="tp-meter-label">Mon</span>
+        <div class="tp-meter-bar">
+          <span class="tp-meter-seg is-taken" title="7:00 AM — booked"></span>
+          <span class="tp-meter-seg is-taken" title="6:00 PM — booked"></span>
+        </div>
+        <span class="tp-meter-count">0 open</span>
+      </div>
+      <div class="tp-meter-day">
+        <span class="tp-meter-label">Tue</span>
+        <div class="tp-meter-bar">
+          <span class="tp-meter-seg is-open" title="7:00 AM — open"></span>
+          <span class="tp-meter-seg is-open" title="6:00 PM — open"></span>
+        </div>
+        <span class="tp-meter-count">2 open</span>
+      </div>
+      <div class="tp-meter-day">
+        <span class="tp-meter-label">Wed</span>
+        <div class="tp-meter-bar">
+          <span class="tp-meter-seg is-taken" title="7:00 AM — booked"></span>
+          <span class="tp-meter-seg is-open" title="6:00 PM — open"></span>
+        </div>
+        <span class="tp-meter-count">1 open</span>
+      </div>
+      <div class="tp-meter-day">
+        <span class="tp-meter-label">Thu</span>
+        <div class="tp-meter-bar">
+          <span class="tp-meter-seg is-open" title="7:00 AM — open"></span>
+          <span class="tp-meter-seg is-open" title="6:00 PM — open"></span>
+        </div>
+        <span class="tp-meter-count">2 open</span>
+      </div>
+      <div class="tp-meter-day">
+        <span class="tp-meter-label">Fri</span>
+        <div class="tp-meter-bar">
+          <span class="tp-meter-seg is-open" title="7:00 AM — open"></span>
+          <span class="tp-meter-seg is-taken" title="6:00 PM — booked"></span>
+        </div>
+        <span class="tp-meter-count">1 open</span>
+      </div>
+      <div class="tp-meter-day">
+        <span class="tp-meter-label">Sat</span>
+        <div class="tp-meter-bar">
+          <span class="tp-meter-seg is-open" title="9:00 AM — open"></span>
+          <span class="tp-meter-seg is-empty" title="No evening slot"></span>
+        </div>
+        <span class="tp-meter-count">1 open</span>
+      </div>
+      <div class="tp-meter-day">
+        <span class="tp-meter-label">Sun</span>
+        <div class="tp-meter-bar">
+          <span class="tp-meter-seg is-empty" title="No slots"></span>
+          <span class="tp-meter-seg is-empty" title="No slots"></span>
+        </div>
+        <span class="tp-meter-count">&mdash;</span>
+      </div>
+    </div>
+
+    <div class="tp-avail-legend tp-avail-legend-dark">
+      <span><i class="is-open" aria-hidden="true"></i>Open</span>
+      <span><i class="is-taken" aria-hidden="true"></i>Booked</span>
+      <span><i class="is-empty" aria-hidden="true"></i>No slot</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. SOCIAL PROOF STRIP ============ -->
+<section class="tp-proof">
+  <div class="tp-section" style="padding-top:clamp(32px,5vh,52px);padding-bottom:clamp(32px,5vh,52px);">
+    <div class="tp-proof-inner">
+      <div class="tp-proof-clients">
+        <span class="client-avatars">
+          <span class="client-avatar" style="background:#D97757">N</span>
+          <span class="client-avatar" style="background:#3A3935">P</span>
+          <span class="client-avatar" style="background:#8C887D">K</span>
+        </span>
+        <span class="client-count">16 students connected this month</span>
+      </div>
+      <div class="tp-proof-quote">
+        <span class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>&ldquo;Made me feel safe through my whole pregnancy journey &mdash; she adjusts every pose to how I'm actually feeling that day.&rdquo;</p>
+        <span>&mdash; Kavita S., verified client</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. REVIEWS ============ -->
+<section class="tp-section" id="reviews" aria-labelledby="reviews-title">
+  <div class="sec-head">
+    <div class="sec-kicker mono"><span class="num">04</span><span class="rule" aria-hidden="true"></span><span>Reviews</span></div>
+    <h2 id="reviews-title">What students say</h2>
+  </div>
+
+  <div class="tp-rating-summary">
+    <div class="tp-rating-big">
+      <span class="n">4.8</span>
+      <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <span class="count">94 reviews</span>
+    </div>
+    <div class="tp-rating-bars">
+      <div class="tp-rating-bar"><span>5 stars</span><span class="track"><span class="fill" style="width:82%;"></span></span><span>82%</span></div>
+      <div class="tp-rating-bar"><span>4 stars</span><span class="track"><span class="fill" style="width:13%;"></span></span><span>13%</span></div>
+      <div class="tp-rating-bar"><span>3 stars</span><span class="track"><span class="fill" style="width:3%;"></span></span><span>3%</span></div>
+      <div class="tp-rating-bar"><span>2 stars</span><span class="track"><span class="fill" style="width:1%;"></span></span><span>1%</span></div>
+      <div class="tp-rating-bar"><span>1 star</span><span class="track"><span class="fill" style="width:1%;"></span></span><span>1%</span></div>
+    </div>
+  </div>
+
+  <div class="tp-laptop-stage">
+    <span class="tp-laptop-glow" aria-hidden="true"></span>
+    <div class="tp-laptop">
+      <div class="tp-laptop-screen">
+        <span class="tp-laptop-cam" aria-hidden="true"></span>
+        <div class="tp-laptop-display">
+          <div class="tp-lap-feed" id="tpLapFeed">
+            <div class="tp-lap-track" id="tpLapTrack">
+
+              <div class="tp-lap-item">
+                <span class="tp-lap-avatar" style="background:var(--marigold)">P</span>
+                <div class="tp-lap-body">
+                  <div class="tp-lap-top"><span class="nm">Priya</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+                  <p>Calm, patient, and actually explains the &ldquo;why&rdquo; behind each pose. Highly recommend for beginners.</p>
+                </div>
+              </div>
+              <div class="tp-lap-item">
+                <span class="tp-lap-avatar" style="background:var(--pine)">M</span>
+                <div class="tp-lap-body">
+                  <div class="tp-lap-top"><span class="nm">Meera</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+                  <p>Booked a prenatal trial class and stayed for the full term. Genuinely knows the subject.</p>
+                </div>
+              </div>
+              <div class="tp-lap-item">
+                <span class="tp-lap-avatar" style="background:var(--sage)">K</span>
+                <div class="tp-lap-body">
+                  <div class="tp-lap-top"><span class="nm">Kavita S.</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+                  <p>Made me feel safe through my whole pregnancy journey. Would recommend to anyone in their third trimester especially.</p>
+                </div>
+              </div>
+              <div class="tp-lap-item">
+                <span class="tp-lap-avatar" style="background:var(--marigold-deep)">A</span>
+                <div class="tp-lap-body">
+                  <div class="tp-lap-top"><span class="nm">Ananya</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+                  <p>Switched from a studio class to 1:1 with Amrita and the difference in how sessions are paced is huge.</p>
+                </div>
+              </div>
+
+              <div class="tp-lap-item" aria-hidden="true">
+                <span class="tp-lap-avatar" style="background:var(--marigold)">P</span>
+                <div class="tp-lap-body">
+                  <div class="tp-lap-top"><span class="nm">Priya</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+                  <p>Calm, patient, and actually explains the &ldquo;why&rdquo; behind each pose. Highly recommend for beginners.</p>
+                </div>
+              </div>
+              <div class="tp-lap-item" aria-hidden="true">
+                <span class="tp-lap-avatar" style="background:var(--pine)">M</span>
+                <div class="tp-lap-body">
+                  <div class="tp-lap-top"><span class="nm">Meera</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+                  <p>Booked a prenatal trial class and stayed for the full term. Genuinely knows the subject.</p>
+                </div>
+              </div>
+              <div class="tp-lap-item" aria-hidden="true">
+                <span class="tp-lap-avatar" style="background:var(--sage)">K</span>
+                <div class="tp-lap-body">
+                  <div class="tp-lap-top"><span class="nm">Kavita S.</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+                  <p>Made me feel safe through my whole pregnancy journey. Would recommend to anyone in their third trimester especially.</p>
+                </div>
+              </div>
+              <div class="tp-lap-item" aria-hidden="true">
+                <span class="tp-lap-avatar" style="background:var(--marigold-deep)">A</span>
+                <div class="tp-lap-body">
+                  <div class="tp-lap-top"><span class="nm">Ananya</span><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>
+                  <p>Switched from a studio class to 1:1 with Amrita and the difference in how sessions are paced is huge.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tp-laptop-base" aria-hidden="true"></div>
+    </div>
+  </div>
+
+  <div class="tp-comments-block">
+    <h3>Comments</h3>
+    <p class="sub">Public comments from anyone who's visited this page &mdash; not verified like reviews, just a place to say hello.</p>
+
+    <form class="tp-comment-form" id="tpCommentForm">
+      <input type="text" id="tpCommentName" placeholder="Your name" maxlength="40" required aria-label="Your name">
+      <textarea id="tpCommentText" placeholder="Leave a comment&hellip;" maxlength="240" rows="2" required aria-label="Your comment"></textarea>
+      <button type="submit" class="btn btn-primary">Post comment</button>
+    </form>
+
+    <div class="tp-feed" id="tpCommentFeed">
+      <div class="tp-feed-item">
+        <span class="tp-feed-avatar" style="background:var(--marigold)">N</span>
+        <div class="tp-feed-body">
+          <div class="tp-feed-top"><span class="tp-feed-name">Neha R.</span><span class="tp-feed-time">2h ago</span></div>
+          <p>Just booked my first session after reading through this page &mdash; excited!</p>
+        </div>
+      </div>
+      <div class="tp-feed-item">
+        <span class="tp-feed-avatar" style="background:var(--pine)">P</span>
+        <div class="tp-feed-body">
+          <div class="tp-feed-top"><span class="tp-feed-name">Priya D.</span><span class="tp-feed-time">1d ago</span></div>
+          <p>Does she teach postpartum too, or only during pregnancy?</p>
+        </div>
+      </div>
+      <div class="tp-feed-item">
+        <span class="tp-feed-avatar" style="background:var(--sage)">K</span>
+        <div class="tp-feed-body">
+          <div class="tp-feed-top"><span class="tp-feed-name">Kavita S.</span><span class="tp-feed-time">3d ago</span></div>
+          <p>Been coming here every week for two months &mdash; genuinely the calmest hour of my week.</p>
+        </div>
+      </div>
+      <div class="tp-feed-item">
+        <span class="tp-feed-avatar" style="background:var(--marigold-deep)">A</span>
+        <div class="tp-feed-body">
+          <div class="tp-feed-top"><span class="tp-feed-name">Ananya</span><span class="tp-feed-time">1w ago</span></div>
+          <p>Recommended her to two friends already. Worth every rupee.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. Q&A ============ -->
+<section class="tp-section" id="qa" aria-labelledby="qa-title">
+  <div class="sec-head">
+    <div class="sec-kicker mono"><span class="num">05</span><span class="rule" aria-hidden="true"></span><span>Questions</span></div>
+    <h2 id="qa-title">Ask before you connect</h2>
+    <p class="sub">Questions here are visible to other visitors too &mdash; so you're not the only one who gets the answer.</p>
+  </div>
+
+  <form class="tp-ask-box" action="signup.html?role=client" method="get">
+    <input type="text" name="q" placeholder="Ask Amrita a quick question&hellip;" aria-label="Ask a question">
+    <button type="submit" class="btn btn-primary">Ask</button>
+  </form>
+
+  <div class="tp-qa-thread chat-thread">
+    <div class="chat-row q is-in"><div class="bubble q-bubble">Do you bring props, or do we need our own mat and blocks?</div></div>
+    <div class="chat-row a is-in">
+      <span class="chat-avatar" aria-hidden="true">AG</span>
+      <div class="bubble a-bubble is-typed"><p class="a-text">I provide mats, blocks and a bolster for in-studio sessions &mdash; you don't need to bring anything. For online sessions, a mat and one or two firm cushions work fine.</p></div>
+    </div>
+
+    <div class="chat-row q is-in"><div class="bubble q-bubble">Can I switch between online and in-studio week to week?</div></div>
+    <div class="chat-row a is-in">
+      <span class="chat-avatar" aria-hidden="true">AG</span>
+      <div class="bubble a-bubble is-typed"><p class="a-text">Yes &mdash; the 8-session pack works across both formats, so you can mix based on your week. Just mention your preference for each session when you book.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. RELATED TEACHERS ============ -->
+<section class="tp-section tp-related" id="related" aria-labelledby="related-title">
+  <div class="sec-head">
+    <div class="sec-kicker mono"><span class="num">06</span><span class="rule" aria-hidden="true"></span><span>More like this</span></div>
+    <h2 id="related-title">Other prenatal &amp; therapeutic teachers</h2>
+  </div>
+  <div class="rail">
+    <article class="tcard tp-tilt" data-tid="shachi-khemuka">
+      <a href="teacher-profile.html?t=shachi-khemuka" class="shot">
+        <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Shachi-Khemuka.jpg" alt="Shachi Khemuka" loading="lazy" onerror="this.closest('.shot').classList.add('missing')">
+        <span class="fallback" aria-hidden="true">SK</span>
+        <span class="rating"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg>5.0 <span class="count">(62)</span></span>
+        <span class="vbadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Verified</span>
+      </a>
+      <div class="info">
+        <h3><a href="teacher-profile.html?t=shachi-khemuka">Shachi Khemuka</a></h3>
+        <p class="meta">Hatha &amp; Yoga Therapy &middot; Bengaluru</p>
+        <div class="tags"><span>Hatha</span><span>Therapeutic</span></div>
+      </div>
+    </article>
+    <article class="tcard tp-tilt" data-tid="shweta-shukla">
+      <a href="teacher-profile.html?t=shweta-shukla" class="shot">
+        <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Shweta-Shukla.jpg" alt="Shweta Shukla" loading="lazy" onerror="this.closest('.shot').classList.add('missing')">
+        <span class="fallback" aria-hidden="true">SS</span>
+        <span class="rating"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg>4.8 <span class="count">(110)</span></span>
+        <span class="vbadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Verified</span>
+      </a>
+      <div class="info">
+        <h3><a href="teacher-profile.html?t=shweta-shukla">Shweta Shukla</a></h3>
+        <p class="meta">Yoga for Seniors &middot; Jaipur</p>
+        <div class="tags"><span>Seniors</span><span>Gentle</span></div>
+      </div>
+    </article>
+    <article class="tcard tp-tilt" data-tid="shamli-joshi">
+      <a href="teacher-profile.html?t=shamli-joshi" class="shot">
+        <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Shamli-Joshi.jpg" alt="Shamli Joshi" loading="lazy" onerror="this.closest('.shot').classList.add('missing')">
+        <span class="fallback" aria-hidden="true">SJ</span>
+        <span class="rating"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg>4.7 <span class="count">(71)</span></span>
+        <span class="vbadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Verified</span>
+      </a>
+      <div class="info">
+        <h3><a href="teacher-profile.html?t=shamli-joshi">Shamli Joshi</a></h3>
+        <p class="meta">Vinyasa &amp; Meditation &middot; Pune</p>
+        <div class="tags"><span>Vinyasa</span><span>Meditation</span></div>
+      </div>
+    </article>
+    <article class="tcard tp-tilt" data-tid="shikhar-mehrotra">
+      <a href="teacher-profile.html?t=shikhar-mehrotra" class="shot">
+        <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Shikhar-Mehrotra.jpg" alt="Shikhar Mehrotra" loading="lazy" onerror="this.closest('.shot').classList.add('missing')">
+        <span class="fallback" aria-hidden="true">SM</span>
+        <span class="rating"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg>4.9 <span class="count">(128)</span></span>
+        <span class="vbadge"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>Verified</span>
+      </a>
+      <div class="info">
+        <h3><a href="teacher-profile.html?t=shikhar-mehrotra">Shikhar Mehrotra</a></h3>
+        <p class="meta">Hatha &amp; Ashtanga &middot; Lucknow</p>
+        <div class="tags"><span>Hatha</span><span>Ashtanga</span></div>
+      </div>
+    </article>
+  </div>
+</section>
 
 </main>
+
+<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+  <a href="#reviews" class="btn btn-secondary" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg>
+    Reviews
+  </a>
+  <a href="signup.html?role=client" class="btn btn-primary" tabindex="-1">
+    Send connection request
+    <span class="arrow" aria-hidden="true">&rarr;</span>
+  </a>
+</div>
 
 <footer class="site-footer">
   <div class="footer-inner">
@@ -193,5 +663,276 @@
 </footer>
 
 <script src="assets/js/site.js"></script>
+<script>
+(function(){
+  var sticky = document.getElementById('stickyCta');
+  var origin = document.querySelector('.tp-hero-cta .btn-primary');
+  if (!sticky || !origin) return;
+
+  var links = sticky.querySelectorAll('a');
+
+  function setShown(on){
+    if (sticky.classList.contains('show') === on) return;
+    sticky.classList.toggle('show', on);
+    sticky.setAttribute('aria-hidden', on ? 'false' : 'true');
+    Array.prototype.forEach.call(links, function(a){
+      if (on) { a.removeAttribute('tabindex'); } else { a.setAttribute('tabindex','-1'); }
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      setShown(!entries[0].isIntersecting);
+    }, { threshold: 0, rootMargin: '-10px 0px 0px 0px' });
+    io.observe(origin);
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* -- 3D tilt on the hero photo, following the pointer -- */
+  var hero = document.getElementById('tpHero');
+  var figure = document.getElementById('tpHeroFigure');
+  if (hero && figure && !reduceMotion && window.matchMedia('(min-width:901px)').matches) {
+    hero.addEventListener('pointermove', function(e){
+      var r = hero.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      figure.style.transform = 'rotateY(' + (px * 10) + 'deg) rotateX(' + (py * -8) + 'deg)';
+    });
+    hero.addEventListener('pointerleave', function(){
+      figure.style.transform = '';
+    });
+  }
+
+  /* -- related-teachers rail inside the hero -- */
+  var track = document.getElementById('tpHeroRail');
+  var prev = document.querySelector('.tp-hero-rail-prev');
+  var next = document.querySelector('.tp-hero-rail-next');
+  if (track && prev && next) {
+    var scrollBy = function(dir){
+      var thumb = track.querySelector('.tp-hero-thumb');
+      var step = thumb ? thumb.getBoundingClientRect().width + 10 : 120;
+      track.scrollBy({ left: dir * step * 2, behavior: 'smooth' });
+    };
+    prev.addEventListener('click', function(){ scrollBy(-1); });
+    next.addEventListener('click', function(){ scrollBy(1); });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var stage = document.querySelector('.tp-laptop-stage');
+  var laptop = document.querySelector('.tp-laptop');
+  var feed = document.getElementById('tpLapFeed');
+  var track = document.getElementById('tpLapTrack');
+  if (!feed || !track) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function pause(){ track.classList.add('is-paused'); }
+  function resume(){ track.classList.remove('is-paused'); }
+  feed.addEventListener('mouseenter', pause);
+  feed.addEventListener('mouseleave', resume);
+
+  /* -- subtle interactive tilt on the laptop lid, following the pointer -- */
+  if (stage && laptop && !reduceMotion && window.matchMedia('(min-width:769px)').matches) {
+    stage.addEventListener('pointermove', function(e){
+      var r = stage.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      laptop.style.transform = 'rotateY(' + (px * 6) + 'deg) rotateX(' + (py * -3) + 'deg)';
+    });
+    stage.addEventListener('pointerleave', function(){
+      laptop.style.transform = '';
+    });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var panel = document.getElementById('tpStatPanel');
+  if (!panel) return;
+
+  function countUp(el, target, suffix, decimals){
+    var duration = 1200;
+    var start = null;
+    function step(ts){
+      if (start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var value = target * eased;
+      el.textContent = (decimals ? value.toFixed(decimals) : Math.round(value)) + (suffix || '');
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function runCounters(){
+    panel.querySelectorAll('.count').forEach(function(el){
+      var target = parseFloat(el.getAttribute('data-target')) || 0;
+      var suffix = el.getAttribute('data-suffix') || '';
+      var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+      countUp(el, target, suffix, decimals);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (!entry.isIntersecting) return;
+        panel.classList.add('is-in');
+        runCounters();
+        io.unobserve(panel);
+      });
+    }, { threshold: 0.4 });
+    io.observe(panel);
+  } else {
+    panel.classList.add('is-in');
+    runCounters();
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var form = document.getElementById('tpCommentForm');
+  var feed = document.getElementById('tpCommentFeed');
+  var nameInput = document.getElementById('tpCommentName');
+  var textInput = document.getElementById('tpCommentText');
+  if (!form || !feed) return;
+
+  var storageKey = 'yogsetu:comments:amrita-gupta';
+  var avatarColors = ['var(--marigold)', 'var(--pine)', 'var(--sage)', 'var(--marigold-deep)'];
+
+  function loadStored(){
+    try {
+      var raw = window.localStorage.getItem(storageKey);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveStored(list){
+    try {
+      window.localStorage.setItem(storageKey, JSON.stringify(list));
+    } catch (e) { /* storage unavailable — comment still shows for this view */ }
+  }
+
+  function buildItem(name, text, opts){
+    opts = opts || {};
+    var item = document.createElement('div');
+    item.className = 'tp-feed-item' + (opts.isNew ? ' is-new' : '');
+
+    var avatar = document.createElement('span');
+    avatar.className = 'tp-feed-avatar';
+    avatar.style.background = opts.color || avatarColors[Math.floor(Math.random() * avatarColors.length)];
+    avatar.textContent = name.trim().charAt(0).toUpperCase() || '?';
+
+    var body = document.createElement('div');
+    body.className = 'tp-feed-body';
+
+    var top = document.createElement('div');
+    top.className = 'tp-feed-top';
+
+    var nm = document.createElement('span');
+    nm.className = 'tp-feed-name';
+    nm.textContent = name;
+
+    var time = document.createElement('span');
+    time.className = 'tp-feed-time';
+    time.textContent = opts.time || 'Just now';
+
+    top.appendChild(nm);
+    top.appendChild(time);
+
+    var p = document.createElement('p');
+    p.textContent = text;
+
+    body.appendChild(top);
+    body.appendChild(p);
+
+    item.appendChild(avatar);
+    item.appendChild(body);
+    return item;
+  }
+
+  loadStored().forEach(function(c){
+    feed.insertBefore(buildItem(c.name, c.text, { color: c.color, time: c.time }), feed.firstChild);
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = nameInput.value.trim();
+    var text = textInput.value.trim();
+    if (!name || !text) return;
+
+    var color = avatarColors[Math.floor(Math.random() * avatarColors.length)];
+    var item = buildItem(name, text, { color: color, time: 'Just now', isNew: true });
+    feed.insertBefore(item, feed.firstChild);
+
+    var stored = loadStored();
+    stored.push({ name: name, text: text, color: color, time: 'Just now' });
+    saveStored(stored);
+
+    form.reset();
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || !window.matchMedia('(min-width:769px)').matches || !('PointerEvent' in window)) return;
+
+  var maxTilt = 7;
+  var lift = 4;
+
+  document.querySelectorAll('.tp-tilt').forEach(function(el){
+    el.addEventListener('pointermove', function(e){
+      var r = el.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform =
+        'perspective(900px) rotateX(' + (py * -maxTilt) + 'deg) rotateY(' + (px * maxTilt) + 'deg) translateY(-' + lift + 'px)';
+    });
+    el.addEventListener('pointerleave', function(){
+      el.style.transform = '';
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('tpAboutMoreBtn');
+  var drawer = document.getElementById('tpAboutMore');
+  var label = btn ? btn.querySelector('.tp-about-more-label') : null;
+  var certsLink = document.getElementById('tpViewCertsLink');
+  if (!btn || !drawer) return;
+
+  function setOpen(open){
+    drawer.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (label) label.textContent = open ? 'Show less' : 'See certifications & pricing';
+  }
+
+  btn.addEventListener('click', function(){
+    setOpen(!drawer.classList.contains('is-open'));
+  });
+
+  if (certsLink) {
+    certsLink.addEventListener('click', function(){
+      setOpen(true);
+    });
+  }
+})();
+</script>
 </body>
 </html>

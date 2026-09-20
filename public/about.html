@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/about.css">
 </head>
 <body class="inner-page">
 
@@ -21,10 +22,11 @@
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="teachers.html">Browse teachers</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html" class="active">About</a>
     <a href="requirements.html">Job board</a>
     <a href="teacher-benefits.html">For teachers</a>
-    <a href="about.html" class="active">About</a>
+    <a href="teachers.html">Browse teachers</a>
   </nav>
   <div class="header-actions">
     <a href="login.html" class="hdr-link">Log in</a>
@@ -36,69 +38,95 @@
 </header>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="teachers.html">Browse teachers</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
     <a href="requirements.html">Job board</a>
     <a href="teacher-benefits.html">For teachers</a>
-    <a href="about.html">About</a>
+    <a href="teachers.html">Browse teachers</a>
   <a href="login.html">Log in</a>
   <a href="signup.html">Sign up</a>
 </nav>
 
-<main>
-<section class="page-hero">
-  <div class="ph-inner">
-    <div class="kicker mono"><span class="rule" aria-hidden="true"></span><span>About YogSetu</span></div>
-    <h1 class="ph-title">A directory built on <em>proof</em>, not profiles</h1>
-    <p class="ph-lede">YogSetu is a YogKulam initiative &mdash; connecting students with yoga teachers whose credentials have actually been checked.</p>
-    
+<main class="ab-main">
+
+<!-- ============ 1. HERO ============ -->
+<section class="ab-hero">
+  <div>
+    <div class="ab-hero-kicker"><span class="rule" aria-hidden="true"></span>About YogSetu</div>
+    <h1 class="ab-hero-giant">About<br><span class="accent">Us</span></h1>
+    <p class="ab-hero-sub">A YogKulam initiative &mdash; proof, not profiles.</p>
+    <p class="ab-hero-desc">Most people find a yoga teacher through a random agency, a contact's recommendation, or an Instagram reel &mdash; with no way to check whether the training claimed is real. YogSetu exists to fix that one problem: proof, before you commit to a teacher.</p>
+  </div>
+  <div class="ab-hero-photo">
+    <img src="https://storage.googleapis.com/yogkulam/landing-page/founder/DSC_8145.jpg" alt="Founder of YogKulam at his desk">
   </div>
 </section>
 
-<div class="content-section narrow prose">
-  <h2>Why we built this</h2>
-  <p>Most people find a yoga teacher through a random agency, a contact's recommendation, or an Instagram reel &mdash; with no way to check whether the training claimed is real. YogSetu exists to fix that one problem: proof, before you commit to a teacher.</p>
-  <p>Every teacher on YogSetu is verified directly with the body that issued their certification &mdash; not just asked to upload a photo of a certificate. That badge expires every year and has to be re-earned, so a listing always reflects a currently-valid credential.</p>
-
-  <h2>Backed by YogKulam</h2>
-  <p>YogSetu is built and credentialed by <a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a>, a yoga teacher training institute running for over a decade, with 40,000+ certified teachers and 60,000+ students trained. The verification infrastructure behind YogSetu is the same one YogKulam uses to certify its own teachers.</p>
-
-  <div class="stat-row">
-    <div class="stat"><span class="n">40,000+</span><span class="k">Teachers trained by YogKulam</span></div>
-    <div class="stat"><span class="n">60,000+</span><span class="k">Students certified</span></div>
-    <div class="stat"><span class="n">12+ yrs</span><span class="k">Running yoga education</span></div>
-    <div class="stat"><span class="n">4 bodies</span><span class="k">Yoga Alliance &middot; AYUSH &middot; YTTAI &middot; PYC</span></div>
+<!-- ============ 2. MEET THE FOUNDER ============ -->
+<section class="ab-founder" aria-labelledby="ab-founder-title">
+  <div class="ab-founder-inner">
+    <div class="ab-founder-copy">
+      <div class="ab-founder-eyebrow">Meet the founder</div>
+      <h2 class="ab-founder-heading" id="ab-founder-title">Built by someone who <em>teaches</em>, not just manages.</h2>
+      <p class="ab-founder-bio">YogKulam has trained and certified yoga teachers for over 12 years &mdash; 40,000+ teachers, 60,000+ students. YogSetu was built to put that same verification discipline behind every listing: no credential goes live until it's been checked with the body that actually issued it.</p>
+      <span class="ab-founder-name">Founder &amp; Principal</span>
+      <span class="ab-founder-title">YogKulam</span>
+    </div>
+    <div class="ab-founder-photo">
+      <img src="https://storage.googleapis.com/yogkulam/landing-page/founder/DSC_8252.png" alt="Founder of YogKulam in meditation, students practising behind him">
+    </div>
   </div>
+</section>
 
-  <h2>How we think about trust</h2>
-  <p>No in-platform payment collection, no lock-in, no algorithmic ranking based on who pays the most. Teachers keep their pricing, students keep the direct relationship, and YogSetu's only job is to make sure the credential in front of you is real.</p>
-</div>
+<!-- ============ 3. STATS ============ -->
+<section class="ab-stats-wrap">
+  <div class="ab-stats">
+    <div class="ab-stat"><span class="n">40,000+</span><span class="k">Teachers trained by YogKulam</span></div>
+    <div class="ab-stat"><span class="n">60,000+</span><span class="k">Students certified</span></div>
+    <div class="ab-stat"><span class="n">12+ yrs</span><span class="k">Running yoga education</span></div>
+    <div class="ab-stat"><span class="n">4 bodies</span><span class="k">Yoga Alliance &middot; AYUSH &middot; YTTAI &middot; PYC</span></div>
+  </div>
+</section>
 
-<div class="feature-grid content-section" style="padding-top:0;">
-  <div class="feature-card">
-    <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-    <h3>Verify, don't trust</h3>
-    <p>Every credential is checked with the issuing body directly, and re-checked every year.</p>
+<!-- ============ 4. WHAT WE STAND FOR ============ -->
+<section class="ab-principles">
+  <div class="ab-principles-head">
+    <h2>What we stand for</h2>
+    <p>No in-platform payment collection, no lock-in, no algorithmic ranking based on who pays the most. YogSetu's only job is to make sure the credential in front of you is real.</p>
+    <div class="ab-principles-photo">
+      <img src="https://yogkulam.com/assets/frontend/img/Landing%20Page/banner%20pic%202.png" alt="YogKulam founder and students practising yoga together">
+    </div>
   </div>
-  <div class="feature-card">
-    <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
-    <h3>Direct relationships</h3>
-    <p>Once a connection is approved, you talk to your teacher directly &mdash; no middleman inbox.</p>
+  <div class="ab-principles-list">
+    <div class="ab-principle">
+      <span class="num">01</span>
+      <div><h3>Verify, don't trust</h3><p>Every credential is checked with the issuing body directly, and re-checked every year.</p></div>
+    </div>
+    <div class="ab-principle">
+      <span class="num">02</span>
+      <div><h3>Direct relationships</h3><p>Once a connection is approved, you talk to your teacher directly &mdash; no middleman inbox.</p></div>
+    </div>
+    <div class="ab-principle">
+      <span class="num">03</span>
+      <div><h3>Built on real training</h3><p>The same credentialing infrastructure YogKulam has used for over a decade to certify its own teachers.</p></div>
+    </div>
   </div>
-  <div class="feature-card">
-    <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg></span>
-    <h3>Built on real training</h3>
-    <p>The same credentialing infrastructure YogKulam has used for over a decade to certify its own teachers.</p>
-  </div>
-</div>
+</section>
 
-<div class="cta-band">
-  <h2>Whichever side you're on, start here</h2>
-  <p>Students get a verified teacher in 24 hours. Teachers get a free, verified profile and a stream of real requirements.</p>
-  <div class="btn-row">
-    <a href="teachers.html" class="btn btn-primary">Browse teachers</a>
-    <a href="teacher-benefits.html" class="btn btn-secondary" style="border:1.5px solid var(--line);">For teachers</a>
+<!-- ============ 5. CLOSING CTA ============ -->
+<section class="ab-closing">
+  <img class="ab-closing-img" src="https://yogkulam.com/assets/frontend/img/Landing%20Page/banner%20pic%202.png" alt="">
+  <div class="ab-closing-scrim" aria-hidden="true"></div>
+  <div class="ab-closing-inner">
+    <div class="ab-closing-kicker"><span class="dot" aria-hidden="true"></span>Free to join &middot; Verification included</div>
+    <h2>Whichever side you're on, start here.</h2>
+    <p>Students get a verified teacher in 24 hours. Teachers get a free, verified profile and a stream of real requirements.</p>
+    <div class="btn-row">
+      <a href="teachers.html" class="btn btn-primary">Browse teachers</a>
+      <a href="teacher-benefits.html" class="btn btn-secondary">For teachers</a>
+    </div>
   </div>
-</div>
+</section>
 
 </main>
 
