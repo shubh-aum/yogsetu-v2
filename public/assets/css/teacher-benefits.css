@@ -46,12 +46,13 @@
 
 .tb-hero-kicker{margin-bottom:clamp(14px,2vh,20px);}
 
-/* The base .hero-card is a very tall box (clamp up to 820px). On a narrow
-   phone that forces object-fit:cover to zoom way in on a landscape video,
-   cropping off most of its width — the subject ends up sliced at the edge.
-   Shortening the card on phones reduces that zoom and keeps more of the
-   frame in view. */
-.tb-hero-card .hero-media{object-position:62% center;}
+/* Checked the actual source frame (1920x1120): the left ~45% is plain black
+   background, the woman/hand sits roughly 50-85% across. object-position
+   only does anything once the viewport is narrow enough to force horizontal
+   cropping — desktop shows the full frame uncropped regardless of this
+   value. Bias toward her side so cropping (when it happens) doesn't slice
+   through her instead of the empty space. */
+.tb-hero-card .hero-media{object-position:74% center;}
 
 /* ---- "Popular teachers this week" — small square thumbnail rail ---- */
 .tb-hero-rail{margin-top:clamp(22px,3.4vh,30px);}
@@ -89,15 +90,37 @@
   .tb-hero-card .hero-head{max-width:none;}
 }
 @media (max-width:640px){
-  .tb-hero-card{min-height:clamp(560px,74vh,680px);}
-  .tb-hero-card .hero-media{object-position:70% center;}
-  .tb-hero-card .hero-body{align-items:center;text-align:center;}
-  .tb-hero-card .hero-head{text-align:center;}
-  .tb-hero-card .closing{align-items:center;}
-  .tb-hero-card .hero-head h1{
-    padding:14px 18px;
-    border-radius:14px;
+  /* Even with the crop bias above, cramming this much stacked text over a
+     full-bleed video on a narrow phone means either the subject gets
+     sliced or the headline badge lands right on her face — tried both,
+     both looked broken. Pin the video to a shorter strip at the top
+     instead (tall enough to show her clearly, nothing overlapping) and let
+     the text flow on a solid background below it — the same "image up
+     top, real content below" shape already used for the sticky
+     bookclass/manage-timings sections elsewhere on the site. */
+  .tb-hero-card{min-height:auto;}
+  .tb-hero-card .hero-media-fallback,
+  .tb-hero-card .hero-media,
+  .tb-hero-card .hero-scrim{
+    position:absolute;top:0;left:0;right:0;bottom:auto;
+    height:46vh;
   }
+  .tb-hero-card .hero-scrim{
+    background:linear-gradient(180deg, rgba(23,22,20,0) 55%, rgba(23,22,20,.95) 100%);
+  }
+  .tb-hero-card .hero-body{
+    position:relative;
+    margin-top:46vh;
+    background:var(--pine-deep);
+    align-items:center;text-align:center;
+  }
+  .tb-hero-card .hero-head{text-align:center;}
+  .tb-hero-card .hero-head h1{
+    background:none;
+    -webkit-backdrop-filter:none;backdrop-filter:none;
+    border:none;box-shadow:none;padding:0;
+  }
+  .tb-hero-card .closing{align-items:center;}
   .tb-hero-rail-track{justify-content:center;}
 }
 
