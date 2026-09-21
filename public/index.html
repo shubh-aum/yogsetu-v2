@@ -30,9 +30,9 @@
      squiggles, showing through) instead of the photo reaching the screen
      edges. Cancel that out, and .page's own padding with it, so the card
      spans the true viewport width; square off the corners to match. */
-  .idx-hero-wrap-full{max-width:none;margin:-16px -16px 0;}
+  .idx-hero-wrap-full{max-width:none;margin:-16px;}
   .idx-hero-wrap-full .hero-card{border-radius:0;}
-  @media (max-width:640px){ .idx-hero-wrap-full{margin:-10px -10px 0;} }
+  @media (max-width:640px){ .idx-hero-wrap-full{margin:-10px;} }
 
   /* Shorter card + object-fit:contain (not cover) — cover was forced to
      upscale the photo ~1.15x just to fill a full-bleed-width card, cropping
@@ -178,7 +178,7 @@
   @media (max-width:900px){
     .idx-banner2-inner{grid-template-columns:1fr;min-height:auto;}
     .idx-banner2-photo{order:-1;min-height:320px;}
-    .idx-banner2-photo img{object-position:64% center;}
+    .idx-banner2-photo img{object-position:right center;}
     .idx-banner2-content{align-items:center;text-align:center;}
     .idx-banner2-content .sec-kicker{justify-content:center;}
     .idx-banner2-content h2{margin-left:auto;margin-right:auto;}
