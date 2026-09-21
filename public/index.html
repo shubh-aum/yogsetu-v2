@@ -158,6 +158,7 @@
     font-size:clamp(28px,3.2vw,42px);line-height:1.15;letter-spacing:-.02em;
     color:var(--ink);margin:0 0 clamp(24px,3.4vh,34px);max-width:14ch;
   }
+  .idx-banner2-content h2.idx-why-title-accent{color:var(--marigold-deep);font-style:italic;}
   .idx-banner2-photo{position:relative;min-height:280px;overflow:hidden;}
   .idx-banner2-photo img{
     position:absolute;inset:0;width:100%;height:100%;
@@ -315,7 +316,6 @@
           <h1>
             Get a Verified Yoga Teacher
             <span class="dim">in 24 Hours.</span>
-            <span class="accent">Book a Free Demo Class.</span>
           </h1>
           <p class="idx-hero-tagline">Discover &middot; Connect &middot; Practice with YogSetu</p>
         </div>
@@ -362,7 +362,7 @@
   <div class="idx-banner2-inner">
     <div class="idx-banner2-content">
       <div class="sec-kicker mono"><span class="num">01</span><span class="rule" aria-hidden="true"></span><span>Why YogSetu</span></div>
-      <h2 id="why-title">Everything checked, before you book.</h2>
+      <h2 id="why-title" class="idx-why-title-accent">Book a Free Demo Class.</h2>
       <div class="idx-why-facts">
         <div class="idx-why-fact">
           <div class="label">Verification</div>
@@ -799,220 +799,6 @@
   </div>
 
 </section>
-
-<section class="styles" id="styles" aria-labelledby="styles-title">
-  <div class="styles-inner">
-
-    <div class="sec-head">
-      <div class="sec-kicker mono">
-        <span class="num">05</span>
-        <span class="rule" aria-hidden="true"></span>
-        <span>Find your style</span>
-      </div>
-      <h2 id="styles-title">What kind of yoga are <em>you</em> looking for?</h2>
-      <p class="sub">Each style has a different goal. Pick one and see only the teachers who actually trained in it.</p>
-    </div>
-
-    <div class="style-grid" id="styleGrid">
-      <div class="pick-card" data-style="Hatha Yoga">
-        <button type="button" class="pick-inner" aria-pressed="false">
-          <span class="pick-face pick-front">
-            <img src="assets/images/hatha.png" alt="" loading="lazy" onerror="this.closest('.pick-card').classList.add('photo-missing')">
-            <span class="pick-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.3"/><path d="M12 8v6M12 14l-4 6M12 14l4 6M6 10.5h12"/></svg></span>
-            <span class="pick-index mono">01</span>
-            <span class="pick-corner" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <span class="pick-title">Hatha Yoga</span>
-            <span class="pick-desc">Traditional posture work. The best place to begin.</span>
-            <span class="pick-tap"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Tap to pick</span>
-          </span>
-          <span class="pick-face pick-back">
-            <span class="pick-index mono">01</span>
-            <span class="check-circle"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <h4>Picked!</h4>
-            <span class="style-name mono">Hatha Yoga</span>
-            <span class="undo"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Tap to undo</span>
-          </span>
-        </button>
-      </div>
-      <div class="pick-card" data-style="Ashtanga / Power">
-        <button type="button" class="pick-inner" aria-pressed="false">
-          <span class="pick-face pick-front">
-            <img src="assets/images/astanga.png" alt="" loading="lazy" onerror="this.closest('.pick-card').classList.add('photo-missing')">
-            <span class="pick-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 17c3-7 5-10 8-10s5 3 8 10"/><path d="M8 20l3-4M16 20l-3-4"/><circle cx="12" cy="4.5" r="1.8"/></svg></span>
-            <span class="pick-index mono">02</span>
-            <span class="pick-corner" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <span class="pick-title">Ashtanga / Power</span>
-            <span class="pick-desc">Flowing sequences tied to breath. Strength and focus.</span>
-            <span class="pick-tap"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Tap to pick</span>
-          </span>
-          <span class="pick-face pick-back">
-            <span class="pick-index mono">02</span>
-            <span class="check-circle"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <h4>Picked!</h4>
-            <span class="style-name mono">Ashtanga / Power</span>
-            <span class="undo"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Tap to undo</span>
-          </span>
-        </button>
-      </div>
-      <div class="pick-card" data-style="Prenatal Yoga">
-        <button type="button" class="pick-inner" aria-pressed="false">
-          <span class="pick-face pick-front">
-            <img src="assets/images/prenatal.png" alt="" loading="lazy" onerror="this.closest('.pick-card').classList.add('photo-missing')">
-            <span class="pick-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2"/><path d="M12 8v4"/><path d="M9 15.5a4 4 0 118 0 4 4 0 01-8 0z"/><path d="M6 20h4"/></svg></span>
-            <span class="pick-index mono">03</span>
-            <span class="pick-corner" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <span class="pick-title">Prenatal Yoga</span>
-            <span class="pick-desc">Safe, pregnancy-focused practice for mother and baby.</span>
-            <span class="pick-tap"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Tap to pick</span>
-          </span>
-          <span class="pick-face pick-back">
-            <span class="pick-index mono">03</span>
-            <span class="check-circle"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <h4>Picked!</h4>
-            <span class="style-name mono">Prenatal Yoga</span>
-            <span class="undo"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Tap to undo</span>
-          </span>
-        </button>
-      </div>
-      <div class="pick-card" data-style="Therapeutic Yoga">
-        <button type="button" class="pick-inner" aria-pressed="false">
-          <span class="pick-face pick-front">
-            <img src="assets/images/therapy.png" alt="" loading="lazy" onerror="this.closest('.pick-card').classList.add('photo-missing')">
-            <span class="pick-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.2-7-9a4 4 0 017-2.6A4 4 0 0119 11c0 4.8-7 9-7 9z"/><path d="M9 12h2l1-2 1.5 3.5L15 12h1"/></svg></span>
-            <span class="pick-index mono">04</span>
-            <span class="pick-corner" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <span class="pick-title">Therapeutic Yoga</span>
-            <span class="pick-desc">Targeted relief for back pain, injury and chronic stress.</span>
-            <span class="pick-tap"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Tap to pick</span>
-          </span>
-          <span class="pick-face pick-back">
-            <span class="pick-index mono">04</span>
-            <span class="check-circle"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <h4>Picked!</h4>
-            <span class="style-name mono">Therapeutic Yoga</span>
-            <span class="undo"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Tap to undo</span>
-          </span>
-        </button>
-      </div>
-      <div class="pick-card" data-style="Meditation">
-        <button type="button" class="pick-inner" aria-pressed="false">
-          <span class="pick-face pick-front">
-            <img src="assets/images/meditation.png" alt="" loading="lazy" onerror="this.closest('.pick-card').classList.add('photo-missing')">
-            <span class="pick-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="2.2"/><path d="M12 8.5v4.5"/><path d="M5 19c2.5-3 4.6-4.5 7-4.5S16.5 16 19 19z"/><path d="M7.5 19h9"/></svg></span>
-            <span class="pick-index mono">05</span>
-            <span class="pick-corner" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <span class="pick-title">Meditation</span>
-            <span class="pick-desc">Stillness, breathwork and mind training for clarity.</span>
-            <span class="pick-tap"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Tap to pick</span>
-          </span>
-          <span class="pick-face pick-back">
-            <span class="pick-index mono">05</span>
-            <span class="check-circle"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <h4>Picked!</h4>
-            <span class="style-name mono">Meditation</span>
-            <span class="undo"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Tap to undo</span>
-          </span>
-        </button>
-      </div>
-      <div class="pick-card" data-style="Yoga of Education">
-        <button type="button" class="pick-inner" aria-pressed="false">
-          <span class="pick-face pick-front">
-            <img src="assets/images/education.png" alt="" loading="lazy" onerror="this.closest('.pick-card').classList.add('photo-missing')">
-            <span class="pick-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8.5L12 4.5l9 4-9 4-9-4z"/><path d="M7 11v4.5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V11"/></svg></span>
-            <span class="pick-index mono">06</span>
-            <span class="pick-corner" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <span class="pick-title">Yoga of Education</span>
-            <span class="pick-desc">Child-safe sequences and mindful tools for schools.</span>
-            <span class="pick-tap"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Tap to pick</span>
-          </span>
-          <span class="pick-face pick-back">
-            <span class="pick-index mono">06</span>
-            <span class="check-circle"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <h4>Picked!</h4>
-            <span class="style-name mono">Yoga of Education</span>
-            <span class="undo"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Tap to undo</span>
-          </span>
-        </button>
-      </div>
-      <div class="pick-card" data-style="Corporate Wellness">
-        <button type="button" class="pick-inner" aria-pressed="false">
-          <span class="pick-face pick-front">
-            <img src="assets/images/corporate.png" alt="" loading="lazy" onerror="this.closest('.pick-card').classList.add('photo-missing')">
-            <span class="pick-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M9 8V6a2 2 0 012-2h2a2 2 0 012 2v2"/><path d="M3 13h18"/></svg></span>
-            <span class="pick-index mono">07</span>
-            <span class="pick-corner" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <span class="pick-title">Corporate Wellness</span>
-            <span class="pick-desc">Desk-friendly programmes for teams and workplaces.</span>
-            <span class="pick-tap"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Tap to pick</span>
-          </span>
-          <span class="pick-face pick-back">
-            <span class="pick-index mono">07</span>
-            <span class="check-circle"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <h4>Picked!</h4>
-            <span class="style-name mono">Corporate Wellness</span>
-            <span class="undo"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Tap to undo</span>
-          </span>
-        </button>
-      </div>
-      <div class="pick-card" data-style="Yoga for Seniors">
-        <button type="button" class="pick-inner" aria-pressed="false">
-          <span class="pick-face pick-front">
-            <img src="assets/images/seniors.png" alt="" loading="lazy" onerror="this.closest('.pick-card').classList.add('photo-missing')">
-            <span class="pick-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.2"/><path d="M12 8v5l-2.5 7"/><path d="M12 13l3 7"/><path d="M17 9v11"/></svg></span>
-            <span class="pick-index mono">08</span>
-            <span class="pick-corner" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <span class="pick-title">Yoga for Seniors</span>
-            <span class="pick-desc">Gentle, low-impact movement for balance and joints.</span>
-            <span class="pick-tap"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>Tap to pick</span>
-          </span>
-          <span class="pick-face pick-back">
-            <span class="pick-index mono">08</span>
-            <span class="check-circle"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            <h4>Picked!</h4>
-            <span class="style-name mono">Yoga for Seniors</span>
-            <span class="undo"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>Tap to undo</span>
-          </span>
-        </button>
-      </div>
-
-    </div>
-
-    <div class="styles-more">
-      <p class="note" id="styleNote">Pick as many as you like — we'll match teachers who teach all of them.</p>
-      <a href="#book" class="btn btn-secondary btn-other">
-        <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3.2-6.9"/><path d="M21 4v5h-5"/></svg>
-        Don't see your style? Tell us what you need
-      </a>
-    </div>
-
-  </div>
-</section>
-
-<script>
-(function(){
-  var grid = document.getElementById('styleGrid');
-  var note = document.getElementById('styleNote');
-  if(!grid) return;
-  var defaultNote = note ? note.textContent : '';
-  grid.addEventListener('click', function(e){
-    var btn = e.target.closest('.pick-inner');
-    if(!btn) return;
-    var card = btn.closest('.pick-card');
-    card.classList.toggle('is-flipped');
-    var flipped = card.classList.contains('is-flipped');
-    btn.setAttribute('aria-pressed', flipped ? 'true' : 'false');
-    var picked = grid.querySelectorAll('.pick-card.is-flipped');
-    if(!note) return;
-    if(picked.length === 0){
-      note.textContent = defaultNote;
-    } else if(picked.length === 1){
-      note.innerHTML = 'Great choice — <strong>' + picked[0].getAttribute('data-style') + '</strong> it is.';
-    } else {
-      note.innerHTML = '<strong>' + picked.length + ' styles</strong> picked — we\'ll match teachers who cover all of them.';
-    }
-  });
-})();
-</script>
 
 <div class="idx-reveal-scope">
 
