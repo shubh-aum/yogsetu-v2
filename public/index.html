@@ -17,6 +17,176 @@
   .site-header-fixed .hdr-link:hover{color:var(--pine);}
   @media (max-width:900px){ .site-header-fixed .header-actions{display:none;} }
 
+  /* ---- Hero v2: static banner photo (assets/images/banner.png), mirrored
+     so the subject sits on the right (her original portrait faces left —
+     the empty background is on her side, not ours — flipping puts the
+     empty space, and the text, on the left). Layout takes inspiration from
+     a reference ad the client shared: huge bold headline top-left, a short
+     colored caps line under it, one solid CTA pill, nothing floating on
+     top of the photo. Scoped to .idx-hero-banner — doesn't touch the
+     shared hero/trust classes other pages reuse from base.css. ---- */
+  /* Full-bleed: on a wide monitor, .hero-wrap's normal 1560px cap left big
+     white margins on both sides (the page behind it, with its decorative
+     squiggles, showing through) instead of the photo reaching the screen
+     edges. Cancel that out, and .page's own padding with it, so the card
+     spans the true viewport width; square off the corners to match. */
+  .idx-hero-wrap-full{max-width:none;margin:-16px -16px 0;}
+  .idx-hero-wrap-full .hero-card{border-radius:0;}
+  @media (max-width:640px){ .idx-hero-wrap-full{margin:-10px -10px 0;} }
+
+  /* Shorter card + object-fit:contain (not cover) — cover was forced to
+     upscale the photo ~1.15x just to fill a full-bleed-width card, cropping
+     in tight on her and losing the mat/body context, which read as "too
+     zoomed in, dull". Contain shows her at a smaller, truer scale with
+     nothing cropped out; anchoring left (mirrored to the right after the
+     transform below) puts the resulting slack space on the text side. */
+  .idx-hero-banner{min-height:clamp(480px,70vh,680px);}
+  /* Same fix as the mobile strip below: the source photo has almost no
+     headroom above her hair, so a full-bleed image under the fixed header
+     let the header itself cover part of it. Start the image (and its
+     scrim) below the header; the fallback gradient stays full-bleed so the
+     header still sits on a matching dark background, not a hard edge. */
+  .idx-hero-banner .hero-media,
+  .idx-hero-banner .hero-scrim{top:72px;}
+  .idx-hero-banner .hero-media{
+    object-fit:contain;object-position:left center;
+    opacity:1;transform:scaleX(-1);
+  }
+  .idx-hero-banner .hero-scrim{
+    background:
+      linear-gradient(280deg, rgba(23,22,20,.2) 0%, rgba(23,22,20,0) 40%, rgba(23,22,20,.4) 78%, rgba(23,22,20,.7) 100%),
+      linear-gradient(180deg, rgba(23,22,20,.3) 0%, rgba(23,22,20,0) 28%, rgba(23,22,20,.55) 100%);
+  }
+  /* Pulling the card up flush to the viewport top (full-bleed) means the
+     fixed header now floats directly over the photo with nothing pushing
+     the headline down — add clearance here instead, so the image still
+     reaches the very top edge but the text doesn't start until below the
+     header. */
+  .idx-hero-banner .hero-body{align-items:flex-start;text-align:left;padding-top:clamp(90px,15vh,130px);gap:clamp(18px,2.6vh,26px);}
+  .idx-hero-banner .hero-head{margin:0;max-width:600px;text-align:left;display:flex;flex-direction:column;gap:14px;}
+  .idx-hero-banner .eyebrow{
+    background:none;border:none;backdrop-filter:none;padding:0;margin:0;
+    color:var(--marigold);font-weight:700;letter-spacing:.1em;
+  }
+  .idx-hero-banner .eyebrow .dot{display:none;}
+  .idx-hero-banner .idx-hero-tagline{
+    font-size:15px;color:rgba(241,237,224,.8);letter-spacing:.02em;margin:0;
+  }
+  .idx-hero-banner .closing{align-items:flex-start;gap:clamp(18px,2.6vh,24px);}
+  .idx-hero-banner .idx-hero-features{display:flex;align-items:stretch;gap:22px;}
+  .idx-hero-feature{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding-right:22px;border-right:1px solid rgba(255,255,255,.18);}
+  .idx-hero-feature:last-child{border-right:none;padding-right:0;}
+  .idx-hero-feature .ico{
+    width:38px;height:38px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);
+  }
+  .idx-hero-feature .ico svg{width:17px;height:17px;stroke:var(--marigold);}
+  .idx-hero-feature span:last-child{font-size:12.5px;font-weight:500;color:rgba(241,237,224,.85);white-space:nowrap;}
+  .idx-hero-banner .cta-shell{margin:0;background:none;box-shadow:none;padding:0;}
+  .idx-hero-banner .cta-shell .btn-primary{background:var(--marigold-deep);box-shadow:0 3px 0 0 #7A3924;}
+  .idx-hero-banner .cta-shell .btn-primary:hover{background:var(--marigold);box-shadow:0 5px 0 0 #7A3924;}
+  .idx-hero-banner .trust{
+    margin:0;
+    background:none;border:none;backdrop-filter:none;padding:0;
+    color:rgba(241,237,224,.7);font-size:13.5px;
+  }
+  @media (max-width:900px){
+    /* Same "photo strip on top, content on solid background below" shape
+       used for the teacher-benefits.html hero fix — an overlay layout this
+       text-heavy doesn't hold up once the card gets this narrow. */
+    .idx-hero-banner{min-height:auto;}
+    /* The source photo has very little headroom above her hair, so running
+       the strip full-bleed under the fixed header let the header itself
+       cover part of it. Start the strip below the header instead — the
+       fallback gradient still fills top:0 so the header sits on a matching
+       dark background, not a hard color break. */
+    .idx-hero-banner .hero-media-fallback{position:absolute;top:0;left:0;right:0;bottom:auto;height:calc(64px + 44vh);}
+    .idx-hero-banner .hero-media,
+    .idx-hero-banner .hero-scrim{
+      position:absolute;top:64px;left:0;right:0;bottom:auto;
+      height:44vh;
+    }
+    .idx-hero-banner .hero-scrim{
+      background:linear-gradient(180deg, rgba(23,22,20,0) 55%, rgba(23,22,20,.95) 100%);
+    }
+    .idx-hero-banner .hero-media{object-fit:cover;object-position:8% top;transform:none;}
+    .idx-hero-banner .hero-body{
+      position:relative;margin-top:calc(64px + 44vh);padding-top:clamp(24px,4vh,44px);
+      background:var(--pine-deep);
+      align-items:center;text-align:center;
+    }
+    .idx-hero-banner .hero-head{text-align:center;margin:0 auto;align-items:center;}
+    .idx-hero-banner .closing{align-items:center;}
+    .idx-hero-banner .idx-hero-features{justify-content:center;}
+    .idx-hero-feature{align-items:center;}
+    .idx-hero-banner .cta-shell{margin:0 auto;}
+    .idx-hero-banner .trust{margin:0 auto;}
+  }
+  @media (max-width:480px){
+    .idx-hero-banner .idx-hero-features{gap:14px;}
+    .idx-hero-feature{padding-right:14px;}
+    .idx-hero-feature span:last-child{white-space:normal;text-align:center;max-width:15ch;}
+  }
+
+  /* ---- "01 Why YogSetu" — banner 2: a light, photo-plus-facts band
+     directly below the dark hero (assets/images/banner2.png), mirroring
+     the reference's "dark hero, then a light section with a photo on one
+     side" structure. Text column left, photo column right — unlike the
+     hero, the text isn't overlaid on the photo, so the photo can just be
+     a plain cover-fit column. */
+  .idx-banner2{background:var(--paper);}
+  .idx-banner2-inner{
+    max-width:1560px;margin:0 auto;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    align-items:stretch;
+    min-height:clamp(420px,58vh,560px);
+  }
+  .idx-banner2-content{
+    display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(32px,5vh,56px) clamp(20px,4vw,64px);
+  }
+  .idx-banner2-content .sec-kicker{justify-content:flex-start;color:var(--sage);margin-bottom:12px;}
+  .idx-banner2-content h2{
+    font-family:'Fraunces',serif;font-weight:500;
+    font-size:clamp(28px,3.2vw,42px);line-height:1.15;letter-spacing:-.02em;
+    color:var(--ink);margin:0 0 clamp(24px,3.4vh,34px);max-width:14ch;
+  }
+  .idx-banner2-photo{position:relative;min-height:280px;overflow:hidden;}
+  .idx-banner2-photo img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:68% center;display:block;
+  }
+  .idx-why-facts{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:clamp(12px,1.6vw,18px);
+  }
+  .idx-why-fact{
+    background:var(--sand);border:1px solid var(--line);border-radius:14px;
+    padding:clamp(14px,1.6vw,18px);
+    text-align:left;
+  }
+  .idx-why-fact .label{
+    font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--ink-faint);margin-bottom:8px;
+  }
+  .idx-why-fact .value{
+    display:flex;align-items:center;gap:8px;
+    font-size:15px;font-weight:600;color:var(--ink);line-height:1.25;
+  }
+  .idx-why-fact .value svg{width:17px;height:17px;flex-shrink:0;stroke:var(--marigold-deep);}
+  @media (max-width:900px){
+    .idx-banner2-inner{grid-template-columns:1fr;min-height:auto;}
+    .idx-banner2-photo{order:-1;min-height:320px;}
+    .idx-banner2-photo img{object-position:64% center;}
+    .idx-banner2-content{align-items:center;text-align:center;}
+    .idx-banner2-content .sec-kicker{justify-content:center;}
+    .idx-banner2-content h2{margin-left:auto;margin-right:auto;}
+  }
+  @media (max-width:420px){
+    .idx-why-facts{grid-template-columns:1fr;}
+  }
+
   /* ---- "Book Slot as per Availability" sticky image, just above The
      Standard section — same sticky-pin-then-reveal pattern used on
      teacher-benefits.html, scoped with isolation:isolate so this sticky
@@ -115,27 +285,12 @@
     <path d="M180 240 C 0 360, 0 500, 180 680"/>
   </svg>
 
-  <div class="hero-wrap">
-    <div class="hero-card">
+  <div class="hero-wrap idx-hero-wrap-full">
+    <div class="hero-card idx-hero-banner">
 
-      <!-- Background video. Keep vid-web.webm / vid-web.mp4 / vid-poster.jpg in the SAME folder as this HTML file. -->
       <div class="hero-media-fallback"></div>
-      <video class="hero-media" id="heroVideo"
-             autoplay muted loop playsinline
-             preload="auto"
-             poster="assets/images/vid-poster.jpg"
-             aria-hidden="true" tabindex="-1">
-        <source src="assets/videos/vid-web.webm" type="video/webm">
-        <source src="assets/videos/vid-web.mp4" type="video/mp4">
-        <source src="assets/videos/vid.mp4" type="video/mp4">
-      </video>
+      <img class="hero-media" src="assets/images/banner.png" alt="A YogSetu-verified yoga teacher, mat in hand" aria-hidden="true">
       <div class="hero-scrim"></div>
-
-      <svg class="swoosh" viewBox="0 0 1440 480" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 300 C 300 150, 640 470, 1000 330 C 1200 254, 1330 300, 1440 268 L1440 480 L0 480 Z" fill="#1A1A18" opacity=".62"/>
-        <path d="M0 372 C 280 250, 620 500, 990 386 C 1210 318, 1340 356, 1440 336 L1440 480 L0 480 Z" fill="#171614" opacity=".85"/>
-        <path d="M0 424 C 320 348, 660 500, 1010 440 C 1230 402, 1350 420, 1440 410 L1440 480 L0 480 Z" fill="#D97757" opacity=".16"/>
-      </svg>
 
       <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
     <a href="index.html">Homepage</a>
@@ -156,45 +311,30 @@
             <span class="dim">in 24 Hours.</span>
             <span class="accent">Book a Free Demo Class.</span>
           </h1>
-        </div>
-
-        <div class="play-zone">
-          <button class="play-btn" id="playToggle" aria-label="Pause background video">
-            <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3l14 9-14 9V3z"/></svg>
-            <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h4v16H7zM13 4h4v16h-4z"/></svg>
-          </button>
+          <p class="idx-hero-tagline">Discover &middot; Connect &middot; Practice with YogSetu</p>
         </div>
 
         <div class="closing">
-          <div class="facts">
-            <div class="fact">
-              <div class="label">Verification</div>
-              <div class="value">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-                Credentials checked
-              </div>
+          <div class="idx-hero-features">
+            <div class="idx-hero-feature">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
+              <span>Verified credentials</span>
             </div>
-            <div class="fact">
-              <div class="label">Styles</div>
-              <div class="value">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M7 21c1.5-4 3-6 5-6s3.5 2 5 6"/></svg>
-                Hatha to Ashtanga
-              </div>
+            <div class="idx-hero-feature">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M7 21c1.5-4 3-6 5-6s3.5 2 5 6"/></svg></span>
+              <span>Every style</span>
             </div>
-            <div class="fact">
-              <div class="label">Mode</div>
-              <div class="value">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/></svg>
-                Online or in-studio
-              </div>
+            <div class="idx-hero-feature">
+              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+              <span>Free trial class</span>
             </div>
-            <div class="fact">
-              <div class="label">Trial class</div>
-              <div class="value">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-                Booked in 24 hrs
-              </div>
-            </div>
+          </div>
+
+          <div class="cta-shell">
+            <a href="teachers.html" class="btn btn-primary">
+              Browse verified teachers
+              <span class="arrow" aria-hidden="true">→</span>
+            </a>
           </div>
 
           <div class="trust">
@@ -205,24 +345,54 @@
             <span class="divider" aria-hidden="true"></span>
             <span><span class="stars" aria-hidden="true">★★★★★</span> 4.9/5 across 6,200 trial classes</span>
           </div>
-
-          <div class="cta-shell">
-            <a href="#six-months" class="btn btn-secondary">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 11h18"/></svg>
-              Give 6 months
-            </a>
-            <a href="teachers.html" class="btn btn-primary">
-              Browse teachers
-              <span class="chip">Free</span>
-              <span class="arrow" aria-hidden="true">→</span>
-            </a>
-          </div>
         </div>
 
       </div>
     </div>
   </div>
 </div>
+
+<section class="idx-banner2" id="why" aria-labelledby="why-title">
+  <div class="idx-banner2-inner">
+    <div class="idx-banner2-content">
+      <div class="sec-kicker mono"><span class="num">01</span><span class="rule" aria-hidden="true"></span><span>Why YogSetu</span></div>
+      <h2 id="why-title">Everything checked, before you book.</h2>
+      <div class="idx-why-facts">
+        <div class="idx-why-fact">
+          <div class="label">Verification</div>
+          <div class="value">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+            Credentials checked
+          </div>
+        </div>
+        <div class="idx-why-fact">
+          <div class="label">Styles</div>
+          <div class="value">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M7 21c1.5-4 3-6 5-6s3.5 2 5 6"/></svg>
+            Hatha to Ashtanga
+          </div>
+        </div>
+        <div class="idx-why-fact">
+          <div class="label">Mode</div>
+          <div class="value">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/></svg>
+            Online or in-studio
+          </div>
+        </div>
+        <div class="idx-why-fact">
+          <div class="label">Trial class</div>
+          <div class="value">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            Booked in 24 hrs
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="idx-banner2-photo">
+      <img src="assets/images/banner2.png" alt="A YogSetu-verified teacher in warrior pose" loading="lazy">
+    </div>
+  </div>
+</section>
 
 <section class="section" id="problem" aria-labelledby="problem-title">
 
@@ -1768,41 +1938,6 @@
     });
   });
 
-  var video = document.getElementById('heroVideo');
-  var playToggle = document.getElementById('playToggle');
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function markPaused(paused){
-    playToggle.classList.toggle('is-paused', paused);
-    playToggle.setAttribute('aria-label', paused ? 'Play background video' : 'Pause background video');
-  }
-
-  video.addEventListener('loadeddata', function(){ video.classList.add('ready'); });
-  if (video.readyState >= 2) { video.classList.add('ready'); }
-
-  if (reduceMotion) {
-    video.removeAttribute('autoplay');
-    video.pause();
-    markPaused(true);
-  } else {
-    var attempt = video.play();
-    if (attempt && attempt.catch) {
-      attempt.catch(function(){ markPaused(true); });
-    }
-  }
-
-  playToggle.addEventListener('click', function(){
-    if (video.paused) {
-      video.play();
-      markPaused(false);
-    } else {
-      video.pause();
-      markPaused(true);
-    }
-  });
-
-  video.addEventListener('play', function(){ markPaused(false); });
-  video.addEventListener('pause', function(){ markPaused(true); });
 </script>
 
 <script>
