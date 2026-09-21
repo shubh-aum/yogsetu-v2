@@ -30,6 +30,12 @@
      squiggles, showing through) instead of the photo reaching the screen
      edges. Cancel that out, and .page's own padding with it, so the card
      spans the true viewport width; square off the corners to match. */
+  /* .page has min-height:100vh (meant for the old, viewport-filling hero).
+     The new banner hero is capped at 680px tall, so on a large/tall
+     monitor (27"+) that min-height forced .page to keep going well past
+     the hero, leaving a big blank gap — with the decorative margin-art
+     squiggles visible in it — before the next section. Not needed now. */
+  .idx-page-compact{min-height:0;}
   .idx-hero-wrap-full{max-width:none;margin:-16px;}
   .idx-hero-wrap-full .hero-card{border-radius:0;}
   @media (max-width:640px){ .idx-hero-wrap-full{margin:-10px;} }
@@ -264,7 +270,7 @@
   </button>
 </header>
 
-<div class="page">
+<div class="page idx-page-compact">
 
   <svg class="margin-art left" viewBox="0 0 180 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <path d="M180 60 C 60 180, 60 380, 180 500"/>
