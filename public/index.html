@@ -200,7 +200,14 @@
      element's stacking can never leak into sections after it (that's what
      broke last time before the fix). ---- */
   .idx-reveal-scope{isolation:isolate;position:relative;}
-  .idx-book-visual{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--paper);}
+  /* object-fit:contain scales by height here (100vh doesn't grow with a
+     wider viewport), so past a certain point the image just stays the same
+     rendered width, anchored to the right — on a 25"+ monitor that left
+     acres of empty gap between it and the text on the left. Cap the box's
+     own width so image and text stay close together regardless of how
+     wide the actual screen is; the paper background matches the page so
+     the extra side margins on an ultra-wide screen are invisible. */
+  .idx-book-visual{position:sticky;top:0;height:100vh;max-width:1680px;margin:0 auto;overflow:hidden;background:var(--paper);}
   /* contain (not cover) — bookclass.png is portrait-ish, so cropping it into a
      landscape 100vh box was cutting through her head. Contain shows the whole
      graphic; anchoring right keeps the phone mockup prominent and leaves the
@@ -239,9 +246,13 @@
       padding:clamp(28px,6vh,48px) 20px clamp(16px,3vh,24px);pointer-events:auto;
     }
     .idx-book-visual-copy h2{max-width:none;text-align:center;margin:0 auto;}
+    /* contain+center just shows the image's own built-in empty left half
+       as-is, which reads as "off-center" since the woman/phone only occupy
+       the right side of the source graphic. Crop instead, anchored right,
+       so the subject actually sits centered in the visible frame. */
     .idx-book-visual-img{
-      width:100%;height:auto;max-height:60vh;
-      object-fit:contain;object-position:center;
+      width:100%;height:380px;
+      object-fit:cover;object-position:right center;
     }
   }
 </style>
