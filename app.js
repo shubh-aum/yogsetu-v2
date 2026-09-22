@@ -7,6 +7,7 @@ const session = require('express-session');
 
 const authRouter = require('./routes/auth');
 const teachersRouter = require('./routes/teachers');
+const clientsRouter = require('./routes/clients');
 const requirementsRouter = require('./routes/requirements');
 const connectionsRouter = require('./routes/connections');
 const dashboardRouter = require('./routes/dashboard');
@@ -29,6 +30,7 @@ app.use(session({
 // JSON API — mounted before static so /api/* never falls through to a file lookup
 app.use('/api/auth', authRouter);
 app.use('/api/teachers', teachersRouter);
+app.use('/api/clients', clientsRouter);
 app.use('/api/requirements', requirementsRouter);
 app.use('/api/connections', connectionsRouter);
 app.use('/api', dashboardRouter);
@@ -36,7 +38,9 @@ app.use('/api/lookups', lookupsRouter);
 app.use('/api/admin', adminRouter);
 
 // Static site (index.html, dashboards, requirement pages, css, js, assets)
-app.use(express.static(path.join(__dirname, 'public')));
+// extensions:['html'] lets /teacher-dashboard resolve to teacher-dashboard.html
+// (the .html URL keeps working too — this only adds the fallback).
+app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
 
 // 404 for anything not matched by static files or the API
 app.use((req, res) => {

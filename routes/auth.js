@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 const db = require('../config/db');
+const { logAudit } = require('../utils/audit');
 
 async function findCityId(cityName) {
   if (!cityName) return null;
@@ -14,6 +15,29 @@ async function findStyleId(styleName) {
   const [rows] = await db.query('SELECT id FROM yoga_styles WHERE name = ? LIMIT 1', [styleName.trim()]);
   return rows.length ? rows[0].id : null;
 }
+
+// POST /api/auth/otp/send — stub until a real SMS provider is wired in.
+// Doesn't actually send anything; /otp/verify accepts any 6-digit code.
+router.post('/otp/send', (req, res) => {
+  const phone = (req.body.phone || '').trim();
+  if (!/^\d{10}$/.test(phone)) {
+    return res.status(400).json({ error: 'Enter a valid 10-digit mobile number.' });
+  }
+  res.json({ sent: true, phone });
+});
+
+// POST /api/auth/otp/verify — stub: any 6-digit code is accepted.
+router.post('/otp/verify', (req, res) => {
+  const phone = (req.body.phone || '').trim();
+  const code = (req.body.code || '').trim();
+  if (!/^\d{10}$/.test(phone)) {
+    return res.status(400).json({ error: 'Enter a valid 10-digit mobile number.' });
+  }
+  if (!/^\d{6}$/.test(code)) {
+    return res.status(400).json({ error: 'Enter the 6-digit code.' });
+  }
+  res.json({ verified: true, phone });
+});
 
 // POST /api/auth/signup — client or teacher account creation
 router.post('/signup', async (req, res, next) => {
@@ -51,6 +75,11 @@ router.post('/signup', async (req, res, next) => {
       await conn.query(
         'INSERT INTO clients (user_id, full_name, city_id, looking_for) VALUES (?, ?, ?, ?)',
         [userId, name.trim(), cityId, need ? need.trim() : null]
+      );
+      await conn.query(
+        `INSERT INTO wallet_transactions (user_id, credit_type, delta_amount, reason) VALUES
+          (?, 'free_requirement_posting', 1, 'Signup bonus'), (?, 'free_connection', 1, 'Signup bonus')`,
+        [userId, userId]
       );
     } else {
       await conn.query(
@@ -94,7 +123,8 @@ router.post('/login', async (req, res, next) => {
     if (!user || !(await bcrypt.compare(password, user.password_hash))) {
       return res.status(401).json({ error: 'Invalid email or password.' });
     }
-    if (role && user.role !== role) {
+    const roleMatches = !role || user.role === role || (role === 'admin' && user.role === 'subadmin');
+    if (!roleMatches) {
       return res.status(401).json({ error: `This account is not registered as a ${role}.` });
     }
     if (user.status === 'blocked') {
@@ -102,6 +132,7 @@ router.post('/login', async (req, res, next) => {
     }
 
     req.session.user = { id: user.id, email: user.email, role: user.role };
+    logAudit(user.id, 'Logged in', 'user', user.id);
     res.json({ user: req.session.user });
   } catch (err) {
     next(err);

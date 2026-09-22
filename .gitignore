@@ -7,3 +7,4 @@ server.err.log
 server.pid
 .DS_Store
 Thumbs.db
+uploads/

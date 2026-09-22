@@ -200,7 +200,7 @@
             <span id="otpTimerWrap">in <span id="otpTimer">30</span>s</span>
           </span>
         </div>
-        <p class="otp-demo-note">Design preview &mdash; no SMS is sent. Demo code: <strong id="demoOtpCode">000000</strong></p>
+        <p class="otp-demo-note">SMS verification is in test mode &mdash; <strong id="demoOtpCode">any 6-digit code</strong> is accepted for now.</p>
       </div>
 
       <div class="field"><label for="s-pass">Password</label><input type="password" id="s-pass" required></div>
@@ -208,7 +208,7 @@
       <div data-role-only="teacher" hidden>
         <div class="field-row">
           <div class="field"><label for="s-style">Primary yoga style</label>
-            <select id="s-style"><option>Hatha</option><option>Ashtanga / Power</option><option>Vinyasa</option><option>Prenatal</option><option>Therapeutic</option><option>Meditation</option><option>Yoga for Seniors</option><option>Corporate Wellness</option></select>
+            <select id="s-style"><option>Hatha Yoga</option><option>Ashtanga / Power</option><option>Prenatal Yoga</option><option>Therapeutic Yoga</option><option>Meditation</option><option>Yoga of Education</option><option>Corporate Wellness</option><option>Yoga for Seniors</option></select>
           </div>
           <div class="field"><label for="s-city">City</label><input type="text" id="s-city" placeholder="e.g. Lucknow"></div>
         </div>
@@ -221,8 +221,8 @@
 
       <label class="checkbox-row"><input type="checkbox" required><span>I agree to the <a href="terms.html" style="color:var(--marigold-deep);">Terms &amp; Conditions</a> and <a href="privacy.html" style="color:var(--marigold-deep);">Privacy Policy</a>.</span></label>
 
-      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Create account</button>
-      <p data-form-note hidden style="margin-top:14px;text-align:center;color:var(--pine);font-weight:600;font-size:14px;">This is a design preview &mdash; account creation goes live once the backend is connected.</p>
+      <button type="submit" id="signupSubmitBtn" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Create account</button>
+      <p data-form-note hidden style="margin-top:14px;text-align:center;font-weight:600;font-size:14px;"></p>
     </form>
 
         <div class="auth-divider">or</div>
@@ -303,12 +303,11 @@
 
   const checkIcon = '<svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none" stroke-width="2.6"><path d="M4 12.5l5 5L20 6"/></svg>';
 
-  let currentCode = null;
   let phoneVerified = false;
   let timerId = null;
+  let otpSending = false;
 
   function validPhone(){ return /^\d{10}$/.test(phoneInput.value.trim()); }
-  function genCode(){ return String(Math.floor(100000 + Math.random() * 900000)); }
 
   function resetVerified(){
     if(!phoneVerified) return;
@@ -341,16 +340,31 @@
     }, 1000);
   }
 
-  function sendOtp(){
-    currentCode = genCode();
-    demoCodeEl.textContent = currentCode;
-    phoneDisplay.textContent = '+91 ' + phoneInput.value.trim();
-    otpPanel.hidden = false;
-    otpPanel.classList.remove('has-error');
-    errorEl.hidden = true;
-    otpBoxes.forEach(function(b){ b.value = ''; b.classList.remove('filled'); });
-    otpBoxes[0].focus();
-    startTimer();
+  async function sendOtp(){
+    if(otpSending) return;
+    otpSending = true;
+    try{
+      const resp = await fetch('/api/auth/otp/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phoneInput.value.trim() })
+      });
+      const data = await resp.json().catch(function(){ return {}; });
+      if(!resp.ok){
+        phoneInput.classList.add('field-error');
+        setTimeout(function(){ phoneInput.classList.remove('field-error'); }, 500);
+        return;
+      }
+      phoneDisplay.textContent = '+91 ' + phoneInput.value.trim();
+      otpPanel.hidden = false;
+      otpPanel.classList.remove('has-error');
+      errorEl.hidden = true;
+      otpBoxes.forEach(function(b){ b.value = ''; b.classList.remove('filled'); });
+      otpBoxes[0].focus();
+      startTimer();
+    } finally {
+      otpSending = false;
+    }
   }
 
   sendBtn.addEventListener('click', function(){
@@ -399,11 +413,21 @@
     sendBtn.innerHTML = checkIcon + ' Verified';
   }
 
-  verifyBtn.addEventListener('click', function(){
+  verifyBtn.addEventListener('click', async function(){
     const entered = otpBoxes.map(function(b){ return b.value; }).join('');
-    if(entered.length === 6 && entered === currentCode){
-      markVerified();
-      return;
+    if(entered.length === 6){
+      try{
+        const resp = await fetch('/api/auth/otp/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: phoneInput.value.trim(), code: entered })
+        });
+        const data = await resp.json().catch(function(){ return {}; });
+        if(resp.ok && data.verified){
+          markVerified();
+          return;
+        }
+      }catch(e){}
     }
     otpPanel.classList.add('has-error');
     errorEl.textContent = "That code doesn't match. Try again.";
@@ -433,6 +457,65 @@
       otpPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
       setTimeout(function(){ otpPanel.classList.remove('has-error'); }, 420);
     }, true);
+
+    const noteEl = document.querySelector('[data-form-note]');
+    const submitBtn = document.getElementById('signupSubmitBtn');
+
+    function showNote(msg, isError){
+      noteEl.textContent = msg;
+      noteEl.style.color = isError ? '#B4472F' : 'var(--pine)';
+      noteEl.hidden = false;
+    }
+
+    form.addEventListener('submit', async function(e){
+      if(!phoneVerified) return; // the capture-phase guard above handles this case
+      e.preventDefault();
+
+      const role = (form.querySelector('input[name="role"]:checked') || {}).value;
+      if(!role){
+        showNote('Choose whether you\'re a client or a teacher.', true);
+        return;
+      }
+
+      const payload = {
+        role: role,
+        name: document.getElementById('s-name').value.trim(),
+        email: document.getElementById('s-email').value.trim(),
+        phone: phoneInput.value.trim(),
+        password: document.getElementById('s-pass').value
+      };
+      if(role === 'teacher'){
+        payload.style = document.getElementById('s-style').value;
+        payload.city = document.getElementById('s-city').value.trim();
+      } else {
+        payload.need = document.getElementById('s-need').value.trim();
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating account…';
+      noteEl.hidden = true;
+
+      try{
+        const resp = await fetch('/api/auth/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await resp.json().catch(function(){ return {}; });
+        if(!resp.ok){
+          showNote(data.error || 'Something went wrong. Please try again.', true);
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Create account';
+          return;
+        }
+        showNote('Account created — redirecting…', false);
+        window.location.href = role === 'teacher' ? 'teacher-dashboard' : 'client-dashboard';
+      } catch(err){
+        showNote('Could not reach the server. Please try again.', true);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Create account';
+      }
+    });
   }
 })();
 </script>

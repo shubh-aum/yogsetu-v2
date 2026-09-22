@@ -226,6 +226,10 @@
   .rating-breakdown .rb-item .rb-lbl{ font-size:12px; color:var(--ink-faint,#8C887D); }
   .rating-note{ font-size:12.5px; color:var(--ink-soft,#55524A); margin:14px 0 0; padding-top:14px; border-top:1px solid var(--line-soft,#EFE8D8); }
 
+  .empty-note{ color:var(--ink-faint,#8C887D); font-size:13.5px; padding:8px 0; }
+  .tag-item.pending{ opacity:.7; }
+  .doc-item .status-pill.rejected{ background:#FBE3E0; color:#B3261E; }
+
   @media (max-width:720px){
     .dash-page-wrap{ padding-top:104px; }
     .dash-intro h1{ font-size:24px; }
@@ -253,11 +257,11 @@
   <div class="header-actions">
     <div class="profile-menu" id="profileMenu">
       <button class="profile-trigger" id="profileTrigger" aria-haspopup="true" aria-expanded="false">
-        <span class="avatar-chip" id="headerAvatarChip">SM</span>
+        <span class="avatar-chip" id="headerAvatarChip">&hellip;</span>
         <svg class="chev" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="profile-dropdown" id="profileDropdown" hidden>
-        <div class="profile-dropdown-head"><span class="nm">Shikhar Mehrotra</span><span class="rl">Teacher</span></div>
+        <div class="profile-dropdown-head"><span class="nm" id="headerName">&nbsp;</span><span class="rl">Teacher</span></div>
         <button class="profile-dropdown-item" data-section="overview"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg>Overview</button>
         <button class="profile-dropdown-item" data-section="profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg>My Profile</button>
         <button class="profile-dropdown-item" data-section="ratings"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg>Ratings</button>
@@ -265,7 +269,7 @@
         <button class="profile-dropdown-item" data-section="requests"><svg viewBox="0 0 24 24"><path d="M21 12h-6l-2 3h-2l-2-3H3"/><path d="M5.5 5h13l2.5 7v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-7z"/></svg>Connection Requests</button>
         <button class="profile-dropdown-item" data-section="jobs"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 11h6M9 15h6"/></svg>Job Applied</button>
         <div class="profile-dropdown-divider"></div>
-        <a href="login.html" class="profile-dropdown-item logout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>Logout</a>
+        <a href="login.html" id="logoutLink" class="profile-dropdown-item logout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>Logout</a>
       </div>
     </div>
   </div>
@@ -297,53 +301,29 @@
     <button class="dash-tab" data-section="profile" aria-selected="false">My Profile</button>
     <button class="dash-tab" data-section="ratings" aria-selected="false">Ratings</button>
     <button class="dash-tab" data-section="wallet" aria-selected="false">My Wallet</button>
-    <button class="dash-tab" data-section="requests" aria-selected="false">Connection Requests <span class="count">2</span></button>
-    <button class="dash-tab" data-section="jobs" aria-selected="false">Job Applied <span class="count">3</span></button>
+    <button class="dash-tab" data-section="requests" aria-selected="false">Connection Requests <span class="count" id="tabRequestsCount">0</span></button>
+    <button class="dash-tab" data-section="jobs" aria-selected="false">Job Applied <span class="count" id="tabJobsCount">0</span></button>
   </div>
 
   <div class="dash-content">
 
 <section class="dash-section" data-section-panel="overview">
   <div class="dstat-row">
-    <div class="dstat"><div class="top"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg></span><span class="delta">+18%</span></div><span class="n">312</span><span class="k">Profile views (30 days)</span></div>
-    <div class="dstat"><div class="top"><span class="ico"><svg viewBox="0 0 24 24"><path d="M21 12h-6l-2 3h-2l-2-3H3"/><path d="M5.5 5h13l2.5 7v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-7z"/></svg></span></div><span class="n">2</span><span class="k">Pending connection requests</span></div>
-    <div class="dstat"><div class="top"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg></span></div><span class="n">4.9</span><span class="k">Blended rating (student + team)</span></div>
-    <div class="dstat"><div class="top"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></span></div><span class="n" id="ovPct">66%</span><span class="k">Profile completion</span></div>
+    <div class="dstat"><div class="top"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span></div><span class="n" id="ovVerification">&ndash;</span><span class="k">Verification status</span></div>
+    <div class="dstat"><div class="top"><span class="ico"><svg viewBox="0 0 24 24"><path d="M21 12h-6l-2 3h-2l-2-3H3"/><path d="M5.5 5h13l2.5 7v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-7z"/></svg></span></div><span class="n" id="ovPending">&ndash;</span><span class="k">Pending connection requests</span></div>
+    <div class="dstat"><div class="top"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg></span></div><span class="n" id="ovRating">&ndash;</span><span class="k">Student rating</span></div>
+    <div class="dstat"><div class="top"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></span></div><span class="n" id="ovPct">&ndash;</span><span class="k">Profile completion</span></div>
   </div>
 
   <div class="two-col">
     <div class="dcard">
       <div class="dcard-head"><h2>Pending connection requests</h2><button class="btn-xs ghost" data-section-jump="requests">View all</button></div>
-      <div class="list-row">
-        <span class="avatar">RK</span>
-        <div class="body">
-          <div class="top-line"><h4>Client in Lucknow</h4><span class="status-pill pending">Pending</span><span class="time">2 hours ago</span></div>
-          <p>Interested in morning Hatha sessions for a family of 3, one senior.</p>
-        </div>
-      </div>
-      <div class="list-row">
-        <span class="avatar">PT</span>
-        <div class="body">
-          <div class="top-line"><h4>Client in Kanpur</h4><span class="status-pill pending">Pending</span><span class="time">1 day ago</span></div>
-          <p>Found you via Browse Teachers. Wants a trial Hatha class this weekend.</p>
-        </div>
-      </div>
+      <div id="ovRequestsList"><p class="empty-note">Loading&hellip;</p></div>
     </div>
 
     <div class="dcard">
       <div class="dcard-head"><h2>Recent job applications</h2><button class="btn-xs ghost" data-section-jump="jobs">View all</button></div>
-      <div class="list-row">
-        <div class="body">
-          <div class="top-line"><h4>Online Ashtanga teacher for daily 6 AM practice</h4><span class="status-pill approved">Selected</span></div>
-          <p>Applied 5 days ago</p>
-        </div>
-      </div>
-      <div class="list-row">
-        <div class="body">
-          <div class="top-line"><h4>Hatha yoga for seniors, twice weekly, Gomti Nagar</h4><span class="status-pill pending">Pending</span></div>
-          <p>Applied 2 days ago</p>
-        </div>
-      </div>
+      <div id="ovJobsList"><p class="empty-note">Loading&hellip;</p></div>
     </div>
   </div>
 </section>
@@ -377,9 +357,9 @@
       <div class="wizard-panel" data-wizard-step="1">
         <div class="two-col">
           <div>
-            <div class="field"><label>Full name</label><input type="text" value="Shikhar Mehrotra" required></div>
-            <div class="field"><label>Phone</label><input type="tel" value="+91 98123 45678"></div>
-            <div class="field"><label>Email</label><input type="email" value="shikhar.mehrotra@example.com"></div>
+            <div class="field"><label>Full name</label><input type="text" id="wFullName" required></div>
+            <div class="field"><label>Phone</label><input type="tel" id="wPhone" disabled></div>
+            <div class="field"><label>Email</label><input type="email" id="wEmail" disabled></div>
           </div>
           <div>
             <div class="field"><label>Profile photo</label>
@@ -394,38 +374,29 @@
 
       <div class="wizard-panel" data-wizard-step="2" hidden>
         <div class="two-col">
-          <div class="field"><label>Years of experience</label><input type="number" min="0" max="50" value="9"></div>
+          <div class="field"><label>Years of experience</label><input type="number" min="0" max="50" id="wExperience"></div>
           <div class="field"><label>Mode of teaching</label>
-            <select><option>Hybrid (Online &amp; in-studio)</option><option>Online only</option><option>Offline / in-studio only</option></select>
+            <select id="wMode"><option value="hybrid">Hybrid (Online &amp; in-studio)</option><option value="online">Online only</option><option value="offline">Offline / in-studio only</option></select>
           </div>
         </div>
         <div class="field"><label>Expertise (add or remove as needed)</label>
-          <div class="tags" id="expertiseTags"><span>Hatha</span><span>Ashtanga</span><span>Beginners</span><span class="tag-add" style="cursor:pointer;border-style:dashed;">+ Add</span></div>
+          <div class="tags" id="expertiseTags"><span class="tag-add" style="cursor:pointer;border-style:dashed;">+ Add</span></div>
         </div>
-        <div class="field"><label>Qualifications</label><textarea>B.A. in Yoga Philosophy &middot; 200-Hour Yoga Teacher Training (Yoga Alliance) &middot; Diploma in Yoga Therapy</textarea></div>
+        <div class="field"><label>Qualifications</label><textarea id="wQualifications"></textarea></div>
       </div>
 
       <div class="wizard-panel" data-wizard-step="3" hidden>
-        <div class="field"><label>Certifications (add or remove as needed)</label>
-          <div class="tags" id="certTags"><span>RYT-200 (Yoga Alliance)</span><span>Ashtanga Advanced (PYC)</span><span class="tag-add" style="cursor:pointer;border-style:dashed;">+ Add</span></div>
-        </div>
-        <div class="field"><label>Upload certification documents (you can select multiple)</label>
-          <div class="upload-zone" id="certZone">
+        <div class="field">
+          <label>Add a certification</label>
+          <div class="two-col">
+            <select id="certTypeSelect"></select>
+            <input type="text" id="certIssuingBody" placeholder="Issuing body (e.g. Yoga Alliance)">
+          </div>
+          <div class="upload-zone" id="certZone" style="margin-top:10px;">
             <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg>
-            <p>Drag certificates here or <span class="browse">browse</span> &mdash; PDF, JPG or PNG</p>
+            <p>Drag a certificate here or <span class="browse">browse</span> &mdash; PDF, JPG or PNG</p>
           </div>
-          <div class="doc-list" id="certDocList">
-            <div class="doc-item">
-              <span class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span>
-              <div class="meta"><h5>200-Hour Yoga Teacher Training.pdf</h5><span class="sub">Yoga Alliance &middot; Verified 14 Mar 2026 &middot; Renews 14 Mar 2027</span></div>
-              <span class="status-pill approved">Verified</span>
-            </div>
-            <div class="doc-item">
-              <span class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span>
-              <div class="meta"><h5>Ashtanga Advanced Certification.pdf</h5><span class="sub">PYC &middot; Verified 2 Jun 2026</span></div>
-              <span class="status-pill approved">Verified</span>
-            </div>
-          </div>
+          <div class="doc-list" id="certDocList"></div>
         </div>
         <div class="field"><label>Upload identity &mdash; Aadhaar</label>
           <div class="upload-row">
@@ -444,20 +415,10 @@
 
       <div class="wizard-panel" data-wizard-step="4" hidden>
         <div class="two-col">
-          <div class="field"><label>Country</label><select><option>India</option><option>Other</option></select></div>
-          <div class="field"><label>State</label>
-            <select>
-              <option>Uttar Pradesh</option><option>Delhi</option><option>Maharashtra</option><option>Karnataka</option>
-              <option>West Bengal</option><option>Punjab</option><option>Rajasthan</option><option>Gujarat</option>
-              <option>Tamil Nadu</option><option>Other</option>
-            </select>
-          </div>
+          <div class="field"><label>City</label><input type="text" id="wCity" placeholder="e.g. Lucknow"></div>
+          <div class="field"><label>Pin code</label><input type="text" maxlength="6" id="wPincode"></div>
         </div>
-        <div class="two-col">
-          <div class="field"><label>City</label><input type="text" value="Lucknow"></div>
-          <div class="field"><label>Pin code</label><input type="text" maxlength="6" value="226010"></div>
-        </div>
-        <div class="field"><label>Bio</label><textarea>Been teaching Hatha and Ashtanga for 9 years across Lucknow and online. Classes are kept small and built around where each student actually is.</textarea></div>
+        <div class="field"><label>Bio</label><textarea id="wBio"></textarea></div>
       </div>
 
       <div class="wizard-panel" data-wizard-step="5" hidden>
@@ -465,32 +426,28 @@
           <label>Weekly availability</label>
           <p style="font-size:12.5px;color:var(--ink-soft);margin:-4px 0 10px;">Toggle the slots you're free to teach &mdash; this drives the calendar shown on your public profile.</p>
           <div class="dtable-wrap">
-            <table class="dtable">
+            <table class="dtable" id="availabilityTable">
               <thead><tr><th></th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th><th>Sun</th></tr></thead>
-              <tbody>
-                <tr><td class="name">7:00 AM</td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td></tr>
-                <tr><td class="name">9:00 AM</td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td></tr>
-                <tr><td class="name">6:00 PM</td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox" checked><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td></tr>
-                <tr><td class="name">8:00 PM</td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td><td><label class="tswitch" style="justify-content:center;"><input type="checkbox"><span class="track"></span></label></td></tr>
-              </tbody>
+              <tbody id="availabilityBody"></tbody>
             </table>
           </div>
-          <p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;">7 of 12 available slots currently have a class booked.</p>
+          <p style="font-size:12.5px;color:var(--ink-soft);margin-top:10px;" id="availabilityNote"></p>
         </div>
         <div class="field"><label>Locations available for online classes</label>
-          <div class="tags" id="locationTags"><span>Lucknow (in-person)</span><span>Remote / Pan-India</span><span class="tag-add" style="cursor:pointer;border-style:dashed;">+ Add</span></div>
+          <div class="tags" id="locationTags"><span class="tag-add" style="cursor:pointer;border-style:dashed;">+ Add</span></div>
         </div>
       </div>
 
       <div class="wizard-panel" data-wizard-step="6" hidden>
         <div class="two-col">
-          <div class="field"><label>Per-session price (&#8377;)</label><input type="number" value="799"></div>
-          <div class="field"><label>Trial class price (&#8377;, optional)</label><input type="number" value="0" placeholder="0 = free trial"></div>
+          <div class="field"><label>Per-session price (&#8377;)</label><input type="number" id="wPerSession"></div>
+          <div class="field"><label>Trial class price (&#8377;, optional)</label><input type="number" id="wTrialPrice" placeholder="0 = free trial"></div>
         </div>
         <div class="dcard-head" style="margin-top:6px;"><h2 style="font-size:15px;">Package pricing (optional)</h2></div>
-        <div id="packageRows">
-          <div class="field-row"><input type="text" value="5 sessions for &#8377;3,500" style="padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);"><button type="button" class="btn-xs ghost" data-remove-package>Remove</button></div>
-          <div class="field-row" style="margin-top:8px;"><input type="text" value="10 sessions for &#8377;6,500" style="padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);"><button type="button" class="btn-xs ghost" data-remove-package>Remove</button></div>
+        <div id="packageRows"></div>
+        <div class="field-row" style="margin-top:8px;">
+          <input type="number" id="newPackageSessions" placeholder="Sessions" style="padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);max-width:110px;">
+          <input type="number" id="newPackagePrice" placeholder="Total price (&#8377;)" style="padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);">
         </div>
         <button type="button" class="btn-xs ghost" id="addPackageBtn" style="margin-top:10px;">+ Add package</button>
       </div>
@@ -510,38 +467,13 @@
   <div class="dcard">
     <div class="dcard-head"><h2>Your ratings</h2><p>Visible on your public Teacher Profile page.</p></div>
     <div style="display:flex;align-items:center;gap:18px;margin-bottom:14px;flex-wrap:wrap;">
-      <div style="font-family:'Fraunces',serif;font-size:42px;font-weight:500;color:var(--ink);">4.9</div>
+      <div style="font-family:'Fraunces',serif;font-size:42px;font-weight:500;color:var(--ink);" id="ratingAvg">&ndash;</div>
       <div>
-        <div style="color:var(--marigold-deep);font-size:18px;letter-spacing:2px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div style="font-size:12.5px;color:var(--ink-soft);">Your public rating &middot; blended score</div>
+        <div style="color:var(--marigold-deep);font-size:18px;letter-spacing:2px;" id="ratingStars"></div>
+        <div style="font-size:12.5px;color:var(--ink-soft);" id="ratingCountLabel">No ratings yet</div>
       </div>
     </div>
-    <div class="rating-breakdown">
-      <div class="rb-item"><div class="rb-num">4.8</div><div class="rb-lbl">Student rating &middot; 128 reviews</div></div>
-      <div class="rb-item"><div class="rb-num">5.0</div><div class="rb-lbl">YogSetu team rating &middot; quality assessment</div></div>
-    </div>
-    <p class="rating-note">Your public rating blends student reviews (70%) with YogSetu's internal quality assessment (30%) &mdash; covering things like response time, verification upkeep, and profile completeness.</p>
-    <div class="list-row">
-      <span class="avatar">MJ</span>
-      <div class="body">
-        <div class="top-line"><h4>Meera Joshi</h4><span style="color:var(--marigold-deep);font-size:13px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="time">3 days ago</span></div>
-        <p>Calm, patient, and actually explains the why behind each pose.</p>
-      </div>
-    </div>
-    <div class="list-row">
-      <span class="avatar">RV</span>
-      <div class="body">
-        <div class="top-line"><h4>Rohan Verma</h4><span style="color:var(--marigold-deep);font-size:13px;">&#9733;&#9733;&#9733;&#9733;&#9734;</span><span class="time">2 weeks ago</span></div>
-        <p>Solid sessions, sometimes runs a few minutes late.</p>
-      </div>
-    </div>
-    <div class="list-row">
-      <span class="avatar">KS</span>
-      <div class="body">
-        <div class="top-line"><h4>Kavita Singh</h4><span style="color:var(--marigold-deep);font-size:13px;">&#9733;&#9733;&#9733;&#9733;&#9733;</span><span class="time">1 month ago</span></div>
-        <p>Best yoga teacher I've had &mdash; highly recommend for beginners.</p>
-      </div>
-    </div>
+    <div id="ratingsList"><p class="empty-note">Loading&hellip;</p></div>
   </div>
 </section>
 
@@ -554,16 +486,14 @@
           <span class="ico"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 11h6M9 15h6"/></svg></span>
           <span class="wallet-label">Job application credits</span>
         </div>
-        <div class="wallet-meter"><div class="wallet-meter-fill" style="width:33%"></div></div>
-        <p class="wallet-meta">1 of 3 used &middot; 2 remaining this month</p>
+        <p class="wallet-meta" id="walletJobCredits">&ndash;</p>
       </div>
       <div class="wallet-card">
         <div class="wallet-card-top">
           <span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></span>
-          <span class="wallet-label">Bonus credits earned</span>
+          <span class="wallet-label">Profile completion bonus</span>
         </div>
-        <div class="wallet-meter"><div class="wallet-meter-fill used" style="width:0%"></div></div>
-        <p class="wallet-meta" id="bonusMeta">0 earned so far &middot; complete your profile to earn 2</p>
+        <p class="wallet-meta" id="walletBonus">&ndash;</p>
       </div>
     </div>
     <div class="alert info"><svg viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h13a1 1 0 0 1 1 1v2M3 7v11a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1H5a2 2 0 0 1-2-2z"/><circle cx="16" cy="14" r="1.4"/></svg> Platform commission is currently switched OFF site-wide &mdash; you keep 100% of what you charge students.</div>
@@ -578,72 +508,17 @@
 
   <div data-subsection-panel="requests">
     <div class="dcard">
-      <div class="dcard-head"><h2>Incoming connection requests</h2><p>Accept to open an email thread, or decline with an optional reason.</p></div>
-
-      <div class="list-row" data-row>
-        <span class="avatar">RK</span>
-        <div class="body">
-          <div class="top-line"><h4>Client in Lucknow</h4><span class="status-pill pending">Pending</span><span class="time">2 hours ago</span></div>
-          <p>Interested in morning Hatha sessions for a family of 3, one senior.</p>
-          <div class="actions">
-            <button class="btn-xs accept" data-demo-action="accept">Accept</button>
-            <button class="btn-xs decline" data-modal-open="declineModal">Decline</button>
-          </div>
-        </div>
-      </div>
-      <div class="list-row" data-row>
-        <span class="avatar">PT</span>
-        <div class="body">
-          <div class="top-line"><h4>Client in Kanpur</h4><span class="status-pill pending">Pending</span><span class="time">1 day ago</span></div>
-          <p>Found you via Browse Teachers. Wants a trial Hatha class this weekend, beginner level.</p>
-          <div class="actions">
-            <button class="btn-xs accept" data-demo-action="accept">Accept</button>
-            <button class="btn-xs decline" data-modal-open="declineModal">Decline</button>
-          </div>
-        </div>
-      </div>
-      <div class="list-row" data-row>
-        <span class="avatar">MJ</span>
-        <div class="body">
-          <div class="top-line"><h4>Meera Joshi</h4><span class="status-pill approved">Approved</span><span class="time">5 days ago</span></div>
-          <p>Approved &mdash; conversation moved to email, then WhatsApp.</p>
-          <div class="contact-reveal">
-            <a class="contact-chip" href="mailto:meera.joshi@example.com"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>meera.joshi@example.com</a>
-            <a class="contact-chip" href="tel:+919812345612"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.4 2.1L8 10.3a16 16 0 0 0 6 6l1.5-1.4a2 2 0 0 1 2.1-.4c1 .3 2 .5 3 .7a2 2 0 0 1 1.7 2z"/></svg>+91 98123 45612</a>
-            <a class="contact-chip whatsapp" href="https://wa.me/919812345612" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l2-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.5c.3 3 2.5 5.2 5.5 5.5"/></svg>WhatsApp</a>
-          </div>
-        </div>
-      </div>
-      <div class="list-row" data-row>
-        <span class="avatar">SN</span>
-        <div class="body">
-          <div class="top-line"><h4>Client in Barabanki</h4><span class="status-pill declined">Declined</span><span class="time">1 week ago</span></div>
-          <p>Declined &mdash; reason shared: "Fully booked for evening slots this month."</p>
-        </div>
-      </div>
+      <div class="dcard-head"><h2>Incoming connection requests</h2><p>Accept to open a conversation, or decline with an optional reason.</p></div>
+      <div id="requestsList"><p class="empty-note">Loading&hellip;</p></div>
     </div>
   </div>
 
   <div data-subsection-panel="messages" hidden>
     <div class="dcard">
-      <div class="dcard-head"><h2>Conversations</h2><p>Post-approval, email-based threads. Once you both confirm, a WhatsApp link is surfaced.</p></div>
+      <div class="dcard-head"><h2>Conversations</h2><p>Open to approved connections. Once you both confirm, a WhatsApp link is surfaced.</p></div>
       <div class="inbox">
-        <div class="inbox-list">
-          <div class="inbox-item active">
-            <h5>Client in Lucknow (Meera J.)</h5>
-            <p>Sounds great, Tuesday 7am works for us!</p>
-          </div>
-          <div class="inbox-item">
-            <h5>Client in Gorakhpur (Sanjay N.)</h5>
-            <p>Thank you for the trial class yesterday.</p>
-          </div>
-        </div>
-        <div class="inbox-thread">
-          <div class="inbox-msg in"><div class="bub">Hi Shikhar, thanks for accepting! We're 3 people including my mother, mornings work best.</div><div class="meta">Meera J. &middot; 3 days ago</div></div>
-          <div class="inbox-msg out"><div class="bub">Happy to have you. Tuesday and Thursday 7 AM both have room &mdash; would that work weekly?</div><div class="meta">You &middot; 3 days ago</div></div>
-          <div class="inbox-msg in"><div class="bub">Sounds great, Tuesday 7am works for us!</div><div class="meta">Meera J. &middot; 1 day ago</div></div>
-          <div class="alert info" style="margin-top:6px;"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l2-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.5c.3 3 2.5 5.2 5.5 5.5"/></svg> Both sides confirmed &mdash; a WhatsApp handoff link has been shared to continue coordination.</div>
-        </div>
+        <div class="inbox-list" id="inboxList"><p class="empty-note">Loading&hellip;</p></div>
+        <div class="inbox-thread" id="inboxThread"><p class="empty-note">Pick a conversation on the left.</p></div>
       </div>
     </div>
   </div>
@@ -653,7 +528,7 @@
   <div class="modal-box">
     <h3>Decline this request?</h3>
     <p class="desc">The client is notified automatically. A reason is optional but helps them understand.</p>
-    <div class="field"><textarea placeholder="e.g. Fully booked for mornings this month"></textarea></div>
+    <div class="field"><textarea id="declineReasonInput" placeholder="e.g. Fully booked for mornings this month"></textarea></div>
     <div class="modal-actions">
       <button class="btn-xs ghost" data-modal-close>Cancel</button>
       <button class="btn-xs decline" data-modal-close data-demo-action="decline">Confirm decline</button>
@@ -664,30 +539,7 @@
 <section class="dash-section" data-section-panel="jobs" hidden>
   <div class="dcard">
     <div class="dcard-head"><h2>Job applications</h2><p>Requirements you've applied to from the job board, and where each stands.</p></div>
-
-    <div class="list-row" data-row>
-      <div class="body">
-        <div class="top-line"><h4>Online Ashtanga teacher for daily 6 AM practice</h4><span class="status-pill approved">Selected</span><span class="time">Applied 5 days ago</span></div>
-        <p>&#8377;500 &ndash; 700 / session &middot; Online &middot; Client: Ananya Bhatt &mdash; conversation moved to email.</p>
-        <div class="contact-reveal">
-          <a class="contact-chip" href="mailto:ananya.bhatt@example.com"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>ananya.bhatt@example.com</a>
-          <a class="contact-chip" href="tel:+919988776655"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.4 2.1L8 10.3a16 16 0 0 0 6 6l1.5-1.4a2 2 0 0 1 2.1-.4c1 .3 2 .5 3 .7a2 2 0 0 1 1.7 2z"/></svg>+91 99887 76655</a>
-          <a class="contact-chip whatsapp" href="https://wa.me/919988776655" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l2-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.5c.3 3 2.5 5.2 5.5 5.5"/></svg>WhatsApp</a>
-        </div>
-      </div>
-    </div>
-    <div class="list-row" data-row>
-      <div class="body">
-        <div class="top-line"><h4>Hatha yoga for seniors, twice weekly, Gomti Nagar</h4><span class="status-pill pending">Pending</span><span class="time">Applied 2 days ago</span></div>
-        <p>&#8377;600 &ndash; 800 / session &middot; Lucknow (in-studio) &middot; Awaiting client response.</p>
-      </div>
-    </div>
-    <div class="list-row" data-row>
-      <div class="body">
-        <div class="top-line"><h4>Corporate wellness sessions for a 20-person team</h4><span class="status-pill declined">Rejected</span><span class="time">Applied 1 week ago</span></div>
-        <p>Package pricing preferred &middot; Gurugram (on-site) &middot; Client selected another teacher.</p>
-      </div>
-    </div>
+    <div id="jobsList"><p class="empty-note">Loading&hellip;</p></div>
   </div>
 </section>
 
@@ -855,69 +707,264 @@
     if(actions){ actions.remove(); }
   }
 
-  const clientDirectory = {
-    RK: { name: 'Rohan Kapoor', email: 'rohan.kapoor@example.com', phone: '+91 91234 56780' },
-    PT: { name: 'Priya Tandon', email: 'priya.tandon@example.com', phone: '+91 91234 56781' }
-  };
+  // ============================================================
+  // Live data: everything below replaces the old static/demo content.
+  // ============================================================
+  const DAY_NAMES = ['','Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const TIME_SLOTS = ['7:00 AM','9:00 AM','6:00 PM','8:00 PM'];
+  const STATUS_PILL = { pending:'pending', approved:'approved', declined:'declined', rejected:'declined', verified:'approved' };
+  let ME = null;
+  let DATA = { dashboard:null, full:null, wallet:null, ratings:null, connections:[] };
+  let activeConnectionId = null;
 
-  function contactRevealHTML(email, phone){
-    const waNumber = phone.replace(/[^0-9]/g, '');
-    const telHref = 'tel:' + phone.replace(/\s/g, '');
-    return '<div class="contact-reveal">' +
-      '<a class="contact-chip" href="mailto:' + email + '"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>' + email + '</a>' +
-      '<a class="contact-chip" href="' + telHref + '"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.4 2.1L8 10.3a16 16 0 0 0 6 6l1.5-1.4a2 2 0 0 1 2.1-.4c1 .3 2 .5 3 .7a2 2 0 0 1 1.7 2z"/></svg>' + phone + '</a>' +
-      '<a class="contact-chip whatsapp" href="https://wa.me/' + waNumber + '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l2-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.5c.3 3 2.5 5.2 5.5 5.5"/></svg>WhatsApp</a>' +
-      '</div>';
+  function initials(name){
+    if(!name) return '?';
+    return name.trim().split(/\s+/).slice(0,2).map(function(w){ return w[0].toUpperCase(); }).join('');
+  }
+  function timeAgo(iso){
+    if(!iso) return '';
+    const diff = Date.now() - new Date(iso).getTime();
+    const mins = Math.round(diff / 60000);
+    if(mins < 60) return mins <= 1 ? 'Just now' : mins + ' minutes ago';
+    const hrs = Math.round(mins / 60);
+    if(hrs < 24) return hrs === 1 ? '1 hour ago' : hrs + ' hours ago';
+    const days = Math.round(hrs / 24);
+    if(days < 7) return days === 1 ? '1 day ago' : days + ' days ago';
+    const weeks = Math.round(days / 7);
+    return weeks === 1 ? '1 week ago' : weeks + ' weeks ago';
+  }
+  function money(n){ return n == null ? '' : '₹' + Number(n).toLocaleString('en-IN'); }
+  function esc(s){ const d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+
+  async function api(path, opts){
+    opts = opts || {};
+    const res = await fetch(path, Object.assign({ credentials: 'same-origin' }, opts, {
+      headers: opts.body instanceof FormData ? opts.headers : Object.assign({ 'Content-Type': 'application/json' }, opts.headers || {})
+    }));
+    let data = {};
+    try { data = await res.json(); } catch(e) {}
+    if(!res.ok) throw new Error(data.error || 'Request failed.');
+    return data;
+  }
+  function toast(msg, isError){
+    let t = document.getElementById('dashToast');
+    if(!t){
+      t = document.createElement('div');
+      t.id = 'dashToast';
+      t.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#1A1A18;color:#fff;padding:10px 16px;border-radius:10px;font-size:13.5px;font-weight:600;z-index:200;box-shadow:0 14px 34px rgba(23,22,20,.25);';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    t.style.background = isError ? '#B3261E' : '#1A1A18';
+    t.style.display = 'block';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function(){ t.style.display = 'none'; }, 3200);
   }
 
-  document.querySelectorAll('[data-demo-action="accept"]').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      const row = btn.closest('[data-row]');
-      if(!row) return;
-      setRowStatus(row, 'approved', 'Approved', 'Approved — conversation moved to email, then WhatsApp.');
-      const avatarEl = row.querySelector('.avatar');
-      const initials = avatarEl ? avatarEl.textContent.trim() : '';
-      const info = clientDirectory[initials];
-      if(info){
-        const h4 = row.querySelector('h4');
-        if(h4){ h4.textContent = info.name; }
-        const body = row.querySelector('.body');
-        if(body){ body.insertAdjacentHTML('beforeend', contactRevealHTML(info.email, info.phone)); }
+  // ---- bootstrap ----
+  (async function bootstrap(){
+    try {
+      const me = await api('/api/auth/me');
+      if(!me.user || me.user.role !== 'teacher'){
+        window.location.href = 'login.html';
+        return;
       }
-    });
-  });
-
-  // Demo forms
-  document.querySelectorAll('form[data-demo-form]').forEach(function(form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      const note = form.querySelector('[data-form-note]');
-      if(note){ note.hidden = false; }
-    });
-  });
-
-  // --- Tag groups (Expertise / Certifications / Online locations) ---
-  function initTagGroup(container){
-    if(!container) return;
-    const addTrigger = container.querySelector('.tag-add');
-
-    function wrap(span){
-      if(span.classList.contains('tag-item')) return;
-      span.classList.add('tag-item');
-      const label = document.createTextNode(span.textContent);
-      const remove = document.createElement('span');
-      remove.className = 'tag-remove';
-      remove.textContent = '\u00D7';
-      remove.addEventListener('click', function(){ span.remove(); });
-      span.textContent = '';
-      span.appendChild(label);
-      span.appendChild(remove);
+      ME = me.user;
+    } catch(e){
+      window.location.href = 'login.html';
+      return;
     }
-    Array.from(container.querySelectorAll('span')).forEach(function(span){
-      if(span !== addTrigger){ wrap(span); }
-    });
+    await loadAll();
+    showSection('overview');
+  })();
 
-    if(!addTrigger) return;
+  async function loadAll(){
+    try {
+      const [dashboard, full, wallet, ratings, connections] = await Promise.all([
+        api('/api/teacher/dashboard'),
+        api('/api/teachers/me/full'),
+        api('/api/teachers/me/wallet'),
+        api('/api/teachers/me/ratings'),
+        api('/api/connections')
+      ]);
+      DATA = { dashboard: dashboard, full: full, wallet: wallet, ratings: ratings, connections: connections.connections || [] };
+      renderAll();
+    } catch(e){
+      toast('Could not load your dashboard — ' + e.message, true);
+    }
+  }
+
+  function renderAll(){
+    renderHeader();
+    renderOverview();
+    renderProfileForm();
+    renderRatings();
+    renderWallet();
+    renderRequests();
+    renderJobs();
+  }
+
+  // ---- header ----
+  function renderHeader(){
+    const t = DATA.full && DATA.full.teacher;
+    const name = t ? t.full_name : (ME && ME.email) || '';
+    const nameEl = document.getElementById('headerName');
+    if(nameEl) nameEl.textContent = name;
+    const chip = document.getElementById('headerAvatarChip');
+    if(chip){
+      chip.innerHTML = (t && t.profile_photo_url)
+        ? '<img src="' + esc(t.profile_photo_url) + '" alt="" style="width:100%;height:100%;object-fit:cover;">'
+        : esc(initials(name));
+    }
+  }
+
+  const logoutLink = document.getElementById('logoutLink');
+  if(logoutLink){
+    logoutLink.addEventListener('click', function(e){
+      e.preventDefault();
+      api('/api/auth/logout', { method: 'POST' }).finally(function(){ window.location.href = 'login.html'; });
+    });
+  }
+
+  // ---- overview ----
+  function profileCompletionPct(){
+    const t = (DATA.full && DATA.full.teacher) || {};
+    const steps = [
+      !!(t.full_name),
+      (DATA.full && DATA.full.expertise && DATA.full.expertise.length > 0),
+      (DATA.full && DATA.full.certifications && DATA.full.certifications.length > 0),
+      !!(t.city && t.bio),
+      (DATA.full && DATA.full.availability && DATA.full.availability.some(function(a){ return a.is_available; })),
+      !!(t.per_session_price)
+    ];
+    return Math.round(steps.filter(Boolean).length / steps.length * 100);
+  }
+
+  function renderOverview(){
+    if(!DATA.dashboard) return;
+    const t = DATA.dashboard.profile || {};
+    const verifEl = document.getElementById('ovVerification');
+    if(verifEl){
+      verifEl.textContent = t.verification_status ? t.verification_status[0].toUpperCase() + t.verification_status.slice(1) : '–';
+    }
+    const pending = DATA.connections.filter(function(c){ return c.status === 'pending'; }).length;
+    setText('ovPending', String(pending));
+    const rating = DATA.dashboard.rating || {};
+    setText('ovRating', rating.avg_rating != null ? String(rating.avg_rating) : 'No ratings yet');
+    setText('ovPct', profileCompletionPct() + '%');
+
+    const reqList = document.getElementById('ovRequestsList');
+    const pendingConns = DATA.connections.filter(function(c){ return c.status === 'pending'; }).slice(0, 3);
+    reqList.innerHTML = pendingConns.length
+      ? pendingConns.map(connectionRowHTML).join('')
+      : '<p class="empty-note">No pending requests right now.</p>';
+
+    const jobsList = document.getElementById('ovJobsList');
+    const apps = (DATA.dashboard.applications || []).slice(0, 3);
+    jobsList.innerHTML = apps.length
+      ? apps.map(function(a){
+          return '<div class="list-row"><div class="body"><div class="top-line"><h4>' + esc(a.title) + '</h4><span class="status-pill ' + (STATUS_PILL[a.status]||'pending') + '">' + esc(a.status) + '</span></div><p>Applied ' + timeAgo(a.applied_at) + '</p></div></div>';
+        }).join('')
+      : '<p class="empty-note">No job applications yet.</p>';
+  }
+  function setText(id, text){ const el = document.getElementById(id); if(el) el.textContent = text; }
+
+  function connectionRowHTML(c){
+    return '<div class="list-row" data-row data-id="' + c.id + '">' +
+      '<span class="avatar">' + esc(initials(c.client_name)) + '</span>' +
+      '<div class="body"><div class="top-line"><h4>' + esc(c.client_name || 'Client') + '</h4>' +
+        '<span class="status-pill ' + (STATUS_PILL[c.status]||'pending') + '">' + esc(c.status) + '</span>' +
+        '<span class="time">' + timeAgo(c.requested_at) + '</span></div>' +
+      '<p>' + esc(c.first_message || 'No message from the client.') + '</p></div></div>';
+  }
+
+  // ---- profile wizard: populate fields ----
+  function renderProfileForm(){
+    const t = DATA.full && DATA.full.teacher;
+    if(!t) return;
+    setVal('wFullName', t.full_name);
+    setVal('wPhone', t.phone);
+    setVal('wEmail', t.email);
+    setVal('wExperience', t.years_experience);
+    setVal('wMode', t.teaching_mode);
+    setVal('wQualifications', t.qualifications || '');
+    setVal('wCity', t.city || '');
+    setVal('wPincode', t.pincode || '');
+    setVal('wBio', t.bio || '');
+    setVal('wPerSession', t.per_session_price != null ? Number(t.per_session_price) : '');
+    setVal('wTrialPrice', t.trial_price != null ? Number(t.trial_price) : '');
+
+    const photoZone = document.getElementById('photoZone');
+    if(photoZone && t.profile_photo_url){
+      let thumb = photoZone.querySelector('.upload-thumb');
+      if(!thumb){ thumb = document.createElement('img'); thumb.className = 'upload-thumb'; photoZone.appendChild(thumb); }
+      thumb.src = t.profile_photo_url;
+    }
+
+    renderExpertiseTags();
+    renderCertTypeSelect();
+    renderCertifications();
+    renderDocuments();
+    renderLocationTags();
+    renderAvailabilityGrid();
+    renderPackages();
+    updateCompletionUI();
+  }
+  function setVal(id, v){ const el = document.getElementById(id); if(el) el.value = (v == null ? '' : v); }
+
+  function updateCompletionUI(){
+    const pct = profileCompletionPct();
+    const pcFill = document.getElementById('pcFill');
+    const pcPct = document.getElementById('pcPct');
+    const pcNote = document.getElementById('pcNote');
+    if(pcFill){ pcFill.style.width = pct + '%'; pcFill.classList.toggle('complete', pct === 100); }
+    if(pcPct){ pcPct.textContent = pct + '%'; }
+    if(pcNote){ pcNote.hidden = pct !== 100; }
+    setText('ovPct', pct + '%');
+    if(pct === 100) claimCompletionBonus();
+  }
+  let bonusClaimAttempted = false;
+  async function claimCompletionBonus(){
+    if(bonusClaimAttempted) return;
+    bonusClaimAttempted = true;
+    try {
+      const r = await api('/api/teachers/me/wallet/claim-completion-bonus', { method: 'POST' });
+      if(r.granted){
+        const wallet = await api('/api/teachers/me/wallet');
+        DATA.wallet = wallet;
+        renderWallet();
+        toast('Profile complete — 2 bonus credits added to your wallet.');
+      }
+    } catch(e){ /* non-critical */ }
+  }
+
+  // ---- expertise tags ----
+  function renderExpertiseTags(){
+    const box = document.getElementById('expertiseTags');
+    const addTrigger = box.querySelector('.tag-add');
+    Array.from(box.querySelectorAll('.tag-item')).forEach(function(n){ n.remove(); });
+    (DATA.full.expertise || []).forEach(function(s){
+      const span = tagSpan(s.name, async function(){
+        try { await api('/api/teachers/me/expertise/' + s.id, { method: 'DELETE' }); DATA.full.expertise = DATA.full.expertise.filter(function(x){ return x.id !== s.id; }); renderExpertiseTags(); updateCompletionUI(); }
+        catch(e){ toast(e.message, true); }
+      });
+      box.insertBefore(span, addTrigger);
+    });
+  }
+  function tagSpan(label, onRemove){
+    const span = document.createElement('span');
+    span.className = 'tag-item';
+    span.appendChild(document.createTextNode(label));
+    const rm = document.createElement('span');
+    rm.className = 'tag-remove';
+    rm.textContent = '×';
+    rm.addEventListener('click', onRemove);
+    span.appendChild(rm);
+    return span;
+  }
+  function initAddableTagGroup(containerId, onAdd){
+    const container = document.getElementById(containerId);
+    const addTrigger = container.querySelector('.tag-add');
     addTrigger.addEventListener('click', function(){
       if(container.querySelector('.tag-input')) return;
       const input = document.createElement('input');
@@ -927,17 +974,11 @@
       addTrigger.hidden = true;
       container.insertBefore(input, addTrigger);
       input.focus();
-
       function commit(){
         const val = input.value.trim();
-        if(val){
-          const span = document.createElement('span');
-          span.textContent = val;
-          container.insertBefore(span, input);
-          wrap(span);
-        }
         input.remove();
         addTrigger.hidden = false;
+        if(val) onAdd(val);
       }
       input.addEventListener('keydown', function(e){
         if(e.key === 'Enter'){ e.preventDefault(); commit(); }
@@ -946,100 +987,225 @@
       input.addEventListener('blur', commit);
     });
   }
-  initTagGroup(document.getElementById('expertiseTags'));
-  initTagGroup(document.getElementById('certTags'));
-  initTagGroup(document.getElementById('locationTags'));
+  initAddableTagGroup('expertiseTags', async function(val){
+    try { const r = await api('/api/teachers/me/expertise', { method:'POST', body: JSON.stringify({ style: val }) }); DATA.full.expertise.push(r); renderExpertiseTags(); updateCompletionUI(); }
+    catch(e){ toast(e.message, true); }
+  });
+  initAddableTagGroup('locationTags', async function(val){
+    try { const r = await api('/api/teachers/me/locations', { method:'POST', body: JSON.stringify({ location_label: val }) }); DATA.full.locations.push(r); renderLocationTags(); }
+    catch(e){ toast(e.message, true); }
+  });
 
-  // --- Upload zones ---
-  function initUploadZone(zone, opts){
+  function renderLocationTags(){
+    const box = document.getElementById('locationTags');
+    const addTrigger = box.querySelector('.tag-add');
+    Array.from(box.querySelectorAll('.tag-item')).forEach(function(n){ n.remove(); });
+    (DATA.full.locations || []).forEach(function(l){
+      const span = tagSpan(l.location_label, async function(){
+        try { await api('/api/teachers/me/locations/' + l.id, { method: 'DELETE' }); DATA.full.locations = DATA.full.locations.filter(function(x){ return x.id !== l.id; }); renderLocationTags(); }
+        catch(e){ toast(e.message, true); }
+      });
+      box.insertBefore(span, addTrigger);
+    });
+  }
+
+  // ---- certifications ----
+  function renderCertTypeSelect(){
+    const sel = document.getElementById('certTypeSelect');
+    if(!sel || sel.options.length) return;
+    (DATA.full.certTypes || []).forEach(function(ct){
+      const opt = document.createElement('option');
+      opt.value = ct.id; opt.textContent = ct.name;
+      sel.appendChild(opt);
+    });
+  }
+  function renderCertifications(){
+    const list = document.getElementById('certDocList');
+    list.innerHTML = '';
+    (DATA.full.certifications || []).forEach(function(c){
+      const row = document.createElement('div');
+      row.className = 'doc-item';
+      const label = c.certification_type || c.certification_name_other || 'Certification';
+      row.innerHTML = '<span class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span>' +
+        '<div class="meta"><h5>' + esc(label) + '</h5><span class="sub">' + esc(c.issuing_body || '') + '</span></div>' +
+        '<span class="status-pill ' + (STATUS_PILL[c.status]||'pending') + '">' + (c.status === 'pending' ? 'Pending review' : esc(c.status)) + '</span>' +
+        '<button type="button" class="btn-xs ghost" style="margin-left:8px;">Remove</button>';
+      row.querySelector('button').addEventListener('click', async function(){
+        try { await api('/api/teachers/me/certifications/' + c.id, { method: 'DELETE' }); DATA.full.certifications = DATA.full.certifications.filter(function(x){ return x.id !== c.id; }); renderCertifications(); updateCompletionUI(); }
+        catch(e){ toast(e.message, true); }
+      });
+      list.appendChild(row);
+    });
+  }
+  function renderDocuments(){
+    const list = document.getElementById('idDocList');
+    list.innerHTML = '';
+    (DATA.full.documents || []).forEach(function(d){
+      const row = document.createElement('div');
+      row.className = 'doc-item';
+      const label = d.doc_type.replace('_', ' ').replace(/^\w/, function(c){ return c.toUpperCase(); });
+      row.innerHTML = '<span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/></svg></span>' +
+        '<div class="meta"><h5>' + esc(label) + '</h5><span class="sub">Uploaded ' + timeAgo(d.uploaded_at) + '</span></div>' +
+        '<span class="status-pill ' + (STATUS_PILL[d.status]||'pending') + '">' + (d.status === 'pending' ? 'Pending review' : esc(d.status)) + '</span>';
+      list.appendChild(row);
+    });
+  }
+
+  function initUploadZone(zone, onFile){
     if(!zone) return;
-    opts = opts || {};
     const input = document.createElement('input');
     input.type = 'file';
     input.hidden = true;
-    input.accept = opts.accept || 'image/*,application/pdf';
-    if(opts.multiple){ input.multiple = true; }
+    input.accept = 'image/*,application/pdf';
     zone.appendChild(input);
-    zone.addEventListener('click', function(e){
-      if(e.target === input) return;
-      input.click();
-    });
+    zone.addEventListener('click', function(e){ if(e.target !== input) input.click(); });
     input.addEventListener('change', function(){
-      Array.from(input.files).forEach(function(file){
-        if(opts.onFile){ opts.onFile(file, zone); }
-      });
+      if(input.files[0]) onFile(input.files[0]);
       input.value = '';
     });
   }
+  initUploadZone(document.getElementById('certZone'), async function(file){
+    const typeSel = document.getElementById('certTypeSelect');
+    const fd = new FormData();
+    fd.append('file', file);
+    if(typeSel && typeSel.value) fd.append('certification_type_id', typeSel.value);
+    const issuing = document.getElementById('certIssuingBody');
+    if(issuing && issuing.value.trim()) fd.append('issuing_body', issuing.value.trim());
+    try {
+      const r = await api('/api/teachers/me/certifications', { method: 'POST', body: fd });
+      const typeName = typeSel && typeSel.options[typeSel.selectedIndex] ? typeSel.options[typeSel.selectedIndex].textContent : null;
+      DATA.full.certifications.unshift({ id: r.id, status: r.status, certification_type: typeName, issuing_body: issuing ? issuing.value.trim() : null, has_file: 1 });
+      renderCertifications();
+      updateCompletionUI();
+      toast('Certification submitted for review.');
+    } catch(e){ toast(e.message, true); }
+  });
+  initUploadZone(document.getElementById('aadhaarFrontZone'), function(file){ uploadDocument('aadhaar_front', file); });
+  initUploadZone(document.getElementById('aadhaarBackZone'), function(file){ uploadDocument('aadhaar_back', file); });
+  async function uploadDocument(docType, file){
+    const fd = new FormData();
+    fd.append('doc_type', docType);
+    fd.append('file', file);
+    try {
+      const r = await api('/api/teachers/me/documents', { method: 'POST', body: fd });
+      DATA.full.documents = DATA.full.documents.filter(function(d){ return d.doc_type !== docType; });
+      DATA.full.documents.unshift({ id: r.id, doc_type: docType, status: r.status, uploaded_at: new Date().toISOString(), has_file: 1 });
+      renderDocuments();
+      toast('Document uploaded — pending review.');
+    } catch(e){ toast(e.message, true); }
+  }
+  initUploadZone(document.getElementById('photoZone'), async function(file){
+    const fd = new FormData();
+    fd.append('photo', file);
+    try {
+      const r = await api('/api/teachers/me/photo', { method: 'POST', body: fd });
+      DATA.full.teacher.profile_photo_url = r.profile_photo_url;
+      renderProfileForm();
+      renderHeader();
+      toast('Photo updated.');
+    } catch(e){ toast(e.message, true); }
+  });
 
-  function addDocItem(listEl, filename, sublabel){
-    if(!listEl) return;
-    const row = document.createElement('div');
-    row.className = 'doc-item';
-    row.innerHTML = '<span class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15l2 2 4-4"/></svg></span>' +
-      '<div class="meta"><h5></h5><span class="sub"></span></div>' +
-      '<span class="status-pill pending">Pending review</span>' +
-      '<button type="button" class="btn-xs ghost" style="margin-left:8px;">Remove</button>';
-    row.querySelector('h5').textContent = filename;
-    row.querySelector('.sub').textContent = sublabel;
-    row.querySelector('button').addEventListener('click', function(e){ e.stopPropagation(); row.remove(); });
-    listEl.appendChild(row);
+  // ---- weekly availability ----
+  function renderAvailabilityGrid(){
+    const body = document.getElementById('availabilityBody');
+    body.innerHTML = '';
+    const byKey = {};
+    (DATA.full.availability || []).forEach(function(a){ byKey[a.day_of_week + '|' + a.time_slot] = a; });
+    TIME_SLOTS.forEach(function(slot){
+      const tr = document.createElement('tr');
+      let rowHTML = '<td class="name">' + slot + '</td>';
+      for(let day = 1; day <= 7; day++){
+        const rec = byKey[day + '|' + slot];
+        const checked = rec && rec.is_available ? 'checked' : '';
+        rowHTML += '<td><label class="tswitch" style="justify-content:center;"><input type="checkbox" data-day="' + day + '" data-slot="' + slot + '" ' + checked + '><span class="track"></span></label></td>';
+      }
+      tr.innerHTML = rowHTML;
+      body.appendChild(tr);
+    });
+    Array.from(body.querySelectorAll('input[type="checkbox"]')).forEach(function(box){
+      box.addEventListener('change', async function(){
+        const day = Number(box.getAttribute('data-day'));
+        const slot = box.getAttribute('data-slot');
+        const wasChecked = box.checked;
+        try {
+          await api('/api/teachers/me/availability', { method: 'PUT', body: JSON.stringify({ day_of_week: day, time_slot: slot, is_available: wasChecked }) });
+          const existing = (DATA.full.availability || []).find(function(a){ return a.day_of_week === day && a.time_slot === slot; });
+          if(existing) existing.is_available = wasChecked;
+          else DATA.full.availability.push({ day_of_week: day, time_slot: slot, is_available: wasChecked });
+          updateCompletionUI();
+        } catch(e){
+          box.checked = !wasChecked;
+          toast(e.message, true);
+        }
+      });
+    });
+    const booked = (DATA.full.availability || []).filter(function(a){ return a.booked_connection_id; }).length;
+    const noteEl = document.getElementById('availabilityNote');
+    if(noteEl) noteEl.textContent = booked ? booked + ' slot(s) currently have a class booked.' : 'Toggle the slots you’re free to teach.';
   }
 
-  initUploadZone(document.getElementById('certZone'), {
-    multiple: true,
-    onFile: function(file){ addDocItem(document.getElementById('certDocList'), file.name, 'Uploaded just now &middot; awaiting review'.replace('&middot;','\u00B7')); }
-  });
-  initUploadZone(document.getElementById('aadhaarFrontZone'), {
-    accept: 'image/*',
-    onFile: function(file){ addDocItem(document.getElementById('idDocList'), file.name, 'Aadhaar \u2014 front \u00B7 awaiting review'); }
-  });
-  initUploadZone(document.getElementById('aadhaarBackZone'), {
-    accept: 'image/*',
-    onFile: function(file){ addDocItem(document.getElementById('idDocList'), file.name, 'Aadhaar \u2014 back \u00B7 awaiting review'); }
-  });
-
-  // Photo zone: preview thumbnail + sync header avatar
-  (function(){
-    const zone = document.getElementById('photoZone');
-    const headerChip = document.getElementById('headerAvatarChip');
-    if(!zone) return;
-    initUploadZone(zone, {
-      accept: 'image/*',
-      onFile: function(file){
-        const reader = new FileReader();
-        reader.onload = function(e){
-          let thumb = zone.querySelector('.upload-thumb');
-          if(!thumb){
-            thumb = document.createElement('img');
-            thumb.className = 'upload-thumb';
-            zone.appendChild(thumb);
-          }
-          thumb.src = e.target.result;
-          if(headerChip){ headerChip.innerHTML = '<img src="' + e.target.result + '" alt="" style="width:100%;height:100%;object-fit:cover;">'; }
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  })();
-
-  // --- Package pricing rows ---
-  document.querySelectorAll('[data-remove-package]').forEach(function(btn){
-    btn.addEventListener('click', function(){ btn.closest('.field-row').remove(); });
-  });
-  const addPackageBtn = document.getElementById('addPackageBtn');
-  if(addPackageBtn){
-    addPackageBtn.addEventListener('click', function(){
+  // ---- pricing packages ----
+  function renderPackages(){
+    const box = document.getElementById('packageRows');
+    box.innerHTML = '';
+    (DATA.full.packages || []).forEach(function(p){
       const row = document.createElement('div');
       row.className = 'field-row';
       row.style.marginTop = '8px';
-      row.innerHTML = '<input type="text" placeholder="e.g. 8 sessions for &#8377;5,200" style="padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);"><button type="button" class="btn-xs ghost" data-remove-package>Remove</button>';
-      row.querySelector('[data-remove-package]').addEventListener('click', function(){ row.remove(); });
-      document.getElementById('packageRows').appendChild(row);
+      row.innerHTML = '<span style="flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);display:inline-block;">' + p.session_count + ' sessions for ' + money(p.total_price) + '</span><button type="button" class="btn-xs ghost">Remove</button>';
+      row.querySelector('button').addEventListener('click', async function(){
+        try { await api('/api/teachers/me/packages/' + p.id, { method: 'DELETE' }); DATA.full.packages = DATA.full.packages.filter(function(x){ return x.id !== p.id; }); renderPackages(); }
+        catch(e){ toast(e.message, true); }
+      });
+      box.appendChild(row);
+    });
+  }
+  const addPackageBtn = document.getElementById('addPackageBtn');
+  if(addPackageBtn){
+    addPackageBtn.addEventListener('click', async function(){
+      const sessions = document.getElementById('newPackageSessions');
+      const price = document.getElementById('newPackagePrice');
+      if(!sessions.value || !price.value){ toast('Enter sessions and a price.', true); return; }
+      try {
+        const r = await api('/api/teachers/me/packages', { method:'POST', body: JSON.stringify({ session_count: Number(sessions.value), total_price: Number(price.value) }) });
+        DATA.full.packages.push(r);
+        sessions.value = ''; price.value = '';
+        renderPackages();
+      } catch(e){ toast(e.message, true); }
     });
   }
 
-  // --- Profile wizard: step navigation + completion tracking ---
+  // ---- wizard: save core profile fields ----
+  const profileForm = document.getElementById('profileWizardForm');
+  if(profileForm){
+    profileForm.addEventListener('submit', async function(e){
+      e.preventDefault();
+      const note = profileForm.querySelector('[data-form-note]');
+      const payload = {
+        full_name: document.getElementById('wFullName').value.trim(),
+        years_experience: Number(document.getElementById('wExperience').value) || 0,
+        teaching_mode: document.getElementById('wMode').value,
+        qualifications: document.getElementById('wQualifications').value.trim(),
+        bio: document.getElementById('wBio').value.trim(),
+        city: document.getElementById('wCity').value.trim(),
+        pincode: document.getElementById('wPincode').value.trim(),
+        per_session_price: document.getElementById('wPerSession').value || null,
+        trial_price: document.getElementById('wTrialPrice').value || null
+      };
+      try {
+        await api('/api/teachers/me/update', { method: 'PUT', body: JSON.stringify(payload) });
+        Object.assign(DATA.full.teacher, payload);
+        if(note){ note.hidden = false; note.style.color = 'var(--pine)'; note.textContent = 'Saved — changes are reflected on your public profile.'; }
+        renderHeader();
+        updateCompletionUI();
+      } catch(err){
+        if(note){ note.hidden = false; note.style.color = '#B4472F'; note.textContent = err.message; }
+      }
+    });
+  }
+
+  // ---- profile wizard: step navigation (unchanged UX, real completion data) ----
   (function(){
     const form = document.getElementById('profileWizardForm');
     if(!form) return;
@@ -1049,78 +1215,189 @@
     const nextBtn = form.querySelector('[data-wizard-next]');
     const submitBtn = form.querySelector('[data-wizard-submit]');
     const totalSteps = panels.length;
-    const doneSteps = new Set();
     let step = 1;
-    let celebrated = false;
-
-    const pcFill = document.getElementById('pcFill');
-    const pcPct = document.getElementById('pcPct');
-    const pcNote = document.getElementById('pcNote');
-    const ovPct = document.getElementById('ovPct');
-    const bonusMeta = document.getElementById('bonusMeta');
-
-    function updateCompletion(){
-      const pct = Math.round((doneSteps.size / totalSteps) * 100);
-      pcFill.style.width = pct + '%';
-      pcFill.classList.toggle('complete', pct === 100);
-      pcPct.textContent = pct + '%';
-      if(ovPct){ ovPct.textContent = pct + '%'; }
-      if(pct === 100 && !celebrated){
-        celebrated = true;
-        pcNote.hidden = false;
-        if(bonusMeta){ bonusMeta.textContent = '2 earned so far \u00B7 profile 100% complete'; }
-        const meter = bonusMeta ? bonusMeta.previousElementSibling : null;
-        if(meter){ meter.querySelector('.wallet-meter-fill').style.width = '100%'; }
-      }
-    }
 
     function render(){
       panels.forEach(function(p){ p.hidden = Number(p.getAttribute('data-wizard-step')) !== step; });
-      dots.forEach(function(d){
-        const n = Number(d.getAttribute('data-dot'));
-        d.classList.toggle('is-active', n === step);
-        d.classList.toggle('is-done', doneSteps.has(n));
-      });
+      dots.forEach(function(d){ d.classList.toggle('is-active', Number(d.getAttribute('data-dot')) === step); });
       backBtn.hidden = step === 1;
       nextBtn.hidden = step === totalSteps;
       submitBtn.hidden = step !== totalSteps;
     }
-
     function currentPanelValid(){
-      const panel = panels[step - 1];
-      const required = panel.querySelectorAll('[required]');
-      for(let i = 0; i < required.length; i++){
-        if(!required[i].reportValidity()){ return false; }
-      }
+      const required = panels[step - 1].querySelectorAll('[required]');
+      for(let i = 0; i < required.length; i++){ if(!required[i].reportValidity()) return false; }
       return true;
     }
-
-    nextBtn.addEventListener('click', function(){
-      if(!currentPanelValid()) return;
-      doneSteps.add(step);
-      updateCompletion();
-      step = Math.min(totalSteps, step + 1);
-      render();
-    });
-    backBtn.addEventListener('click', function(){
-      step = Math.max(1, step - 1);
-      render();
-    });
-    dots.forEach(function(d){
-      d.addEventListener('click', function(){
-        const n = Number(d.getAttribute('data-dot'));
-        if(doneSteps.has(n) || n === step){ step = n; render(); }
-      });
-    });
-
-    form.addEventListener('submit', function(){
-      doneSteps.add(totalSteps);
-      updateCompletion();
-    });
-
+    nextBtn.addEventListener('click', function(){ if(!currentPanelValid()) return; step = Math.min(totalSteps, step + 1); render(); });
+    backBtn.addEventListener('click', function(){ step = Math.max(1, step - 1); render(); });
+    dots.forEach(function(d){ d.addEventListener('click', function(){ step = Number(d.getAttribute('data-dot')); render(); }); });
     render();
-    updateCompletion();
   })();
+
+  // ---- ratings ----
+  function renderRatings(){
+    if(!DATA.ratings) return;
+    const s = DATA.ratings.summary || {};
+    setText('ratingAvg', s.avg_rating != null ? String(s.avg_rating) : '–');
+    const starsEl = document.getElementById('ratingStars');
+    if(starsEl) starsEl.textContent = s.avg_rating ? '★'.repeat(Math.round(s.avg_rating)) + '☆'.repeat(5 - Math.round(s.avg_rating)) : '';
+    setText('ratingCountLabel', s.rating_count ? s.rating_count + ' review' + (s.rating_count === 1 ? '' : 's') : 'No ratings yet');
+
+    const list = document.getElementById('ratingsList');
+    const reviews = DATA.ratings.reviews || [];
+    list.innerHTML = reviews.length ? reviews.map(function(r){
+      return '<div class="list-row"><span class="avatar">' + esc(initials(r.client_name)) + '</span><div class="body">' +
+        '<div class="top-line"><h4>' + esc(r.client_name) + '</h4><span style="color:var(--marigold-deep);font-size:13px;">' + '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars) + '</span><span class="time">' + timeAgo(r.created_at) + '</span></div>' +
+        (r.review_text ? '<p>' + esc(r.review_text) + '</p>' : '') + '</div></div>';
+    }).join('') : '<p class="empty-note">No reviews yet — they’ll show up here once a client rates you after a connection.</p>';
+  }
+
+  // ---- wallet ----
+  function renderWallet(){
+    if(!DATA.wallet) return;
+    const b = DATA.wallet.balances || {};
+    setText('walletJobCredits', (b.job_application_credit || 0) + ' credit' + ((b.job_application_credit||0) === 1 ? '' : 's') + ' available');
+    setText('walletBonus', (b.profile_completion_bonus || 0) + ' earned' + (profileCompletionPct() === 100 ? '' : ' — complete your profile to earn more'));
+  }
+
+  // ---- connection requests + messages ----
+  function renderRequests(){
+    setText('tabRequestsCount', String(DATA.connections.filter(function(c){ return c.status === 'pending'; }).length));
+    const list = document.getElementById('requestsList');
+    if(!DATA.connections.length){
+      list.innerHTML = '<p class="empty-note">No connection requests yet.</p>';
+    } else {
+      list.innerHTML = DATA.connections.map(function(c){
+        let html = '<div class="list-row" data-row data-id="' + c.id + '">' +
+          '<span class="avatar">' + esc(initials(c.client_name)) + '</span>' +
+          '<div class="body"><div class="top-line"><h4>' + esc(c.client_name || 'Client') + '</h4>' +
+          '<span class="status-pill ' + (STATUS_PILL[c.status]||'pending') + '">' + esc(c.status) + '</span>' +
+          '<span class="time">' + timeAgo(c.requested_at) + '</span></div>';
+        if(c.status === 'pending'){
+          html += '<p>' + esc(c.first_message || 'No message from the client.') + '</p>' +
+            '<div class="actions"><button class="btn-xs accept" data-accept="' + c.id + '">Accept</button><button class="btn-xs decline" data-decline="' + c.id + '">Decline</button></div>';
+        } else if(c.status === 'approved'){
+          html += '<p>Approved — conversation open below.</p>' + contactRevealHTML(c.client_email, c.client_phone);
+        } else if(c.status === 'declined' && c.decline_reason){
+          html += '<p>Declined — reason shared: &ldquo;' + esc(c.decline_reason) + '&rdquo;</p>';
+        }
+        html += '</div></div>';
+        return html;
+      }).join('');
+      Array.from(list.querySelectorAll('[data-accept]')).forEach(function(btn){
+        btn.addEventListener('click', function(){ decideConnection(btn.getAttribute('data-accept'), 'approve'); });
+      });
+      Array.from(list.querySelectorAll('[data-decline]')).forEach(function(btn){
+        btn.addEventListener('click', function(){ openDeclineModal(btn.getAttribute('data-decline')); });
+      });
+    }
+    renderInbox();
+  }
+
+  function contactRevealHTML(email, phone){
+    if(!email && !phone) return '';
+    const waNumber = (phone || '').replace(/[^0-9]/g, '');
+    let html = '<div class="contact-reveal">';
+    if(email) html += '<a class="contact-chip" href="mailto:' + esc(email) + '"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>' + esc(email) + '</a>';
+    if(phone) html += '<a class="contact-chip" href="tel:' + esc(phone) + '"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 3a2 2 0 0 1-.4 2.1L8 10.3a16 16 0 0 0 6 6l1.5-1.4a2 2 0 0 1 2.1-.4c1 .3 2 .5 3 .7a2 2 0 0 1 1.7 2z"/></svg>' + esc(phone) + '</a>';
+    if(waNumber) html += '<a class="contact-chip whatsapp" href="https://wa.me/91' + waNumber + '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l2-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.5c.3 3 2.5 5.2 5.5 5.5"/></svg>WhatsApp</a>';
+    html += '</div>';
+    return html;
+  }
+
+  async function decideConnection(id, action, reason){
+    try {
+      await api('/api/connections/' + id, { method: 'PATCH', body: JSON.stringify({ action: action, decline_reason: reason }) });
+      await loadAll();
+      toast(action === 'approve' ? 'Request approved.' : 'Request declined.');
+    } catch(e){ toast(e.message, true); }
+  }
+
+  let pendingDeclineId = null;
+  function openDeclineModal(id){
+    pendingDeclineId = id;
+    const modal = document.getElementById('declineModal');
+    const ta = document.getElementById('declineReasonInput');
+    if(ta) ta.value = '';
+    if(modal) modal.classList.add('open');
+  }
+  document.addEventListener('click', function(e){
+    const closeBtn = e.target.closest('[data-modal-close]');
+    if(closeBtn){
+      const modal = closeBtn.closest('.modal-backdrop');
+      if(modal) modal.classList.remove('open');
+      if(closeBtn.getAttribute('data-demo-action') === 'decline' && pendingDeclineId){
+        const reason = (document.getElementById('declineReasonInput') || {}).value || '';
+        decideConnection(pendingDeclineId, 'decline', reason.trim());
+        pendingDeclineId = null;
+      }
+    }
+  });
+
+  function renderInbox(){
+    const listEl = document.getElementById('inboxList');
+    if(!listEl) return;
+    const approved = DATA.connections.filter(function(c){ return c.status === 'approved'; });
+    listEl.innerHTML = approved.length ? '' : '<p class="empty-note">No open conversations yet.</p>';
+    approved.forEach(function(c){
+      const item = document.createElement('div');
+      item.className = 'inbox-item' + (activeConnectionId === c.id ? ' active' : '');
+      item.innerHTML = '<h5>' + esc(c.client_name || 'Client') + '</h5><p>' + esc(c.first_message || 'Tap to open') + '</p>';
+      item.addEventListener('click', function(){ activeConnectionId = c.id; renderInbox(); openThread(c.id); });
+      listEl.appendChild(item);
+    });
+    if(!activeConnectionId && approved.length){ activeConnectionId = approved[0].id; openThread(activeConnectionId); }
+  }
+
+  async function openThread(connectionId){
+    const threadEl = document.getElementById('inboxThread');
+    threadEl.innerHTML = '<p class="empty-note">Loading&hellip;</p>';
+    try {
+      const data = await api('/api/connections/' + connectionId + '/messages');
+      threadEl.innerHTML = (data.messages || []).map(function(m){
+        return '<div class="inbox-msg ' + (m.direction === 'me' ? 'out' : 'in') + '"><div class="bub">' + esc(m.body) + '</div><div class="meta">' + (m.direction === 'me' ? 'You' : 'Them') + ' · ' + timeAgo(m.sent_at) + '</div></div>';
+      }).join('') || '<p class="empty-note">No messages yet — say hello.</p>';
+      const conn = DATA.connections.find(function(c){ return c.id === connectionId; });
+      if(conn && conn.whatsapp_shared_at){
+        threadEl.insertAdjacentHTML('beforeend', '<div class="alert info" style="margin-top:6px;"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.6L3 21l2-5.4A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 9.5c.3 3 2.5 5.2 5.5 5.5"/></svg> Approved — WhatsApp handoff is available above.</div>');
+      }
+      const composer = document.createElement('div');
+      composer.className = 'field-row';
+      composer.style.marginTop = '10px';
+      composer.innerHTML = '<input type="text" placeholder="Write a message&hellip;" style="flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);"><button type="button" class="btn-xs accept">Send</button>';
+      const input = composer.querySelector('input');
+      composer.querySelector('button').addEventListener('click', async function(){
+        const body = input.value.trim();
+        if(!body) return;
+        try {
+          await api('/api/connections/' + connectionId + '/messages', { method: 'POST', body: JSON.stringify({ body: body }) });
+          input.value = '';
+          openThread(connectionId);
+        } catch(e){ toast(e.message, true); }
+      });
+      threadEl.appendChild(composer);
+    } catch(e){
+      threadEl.innerHTML = '<p class="empty-note">Could not load this conversation.</p>';
+    }
+  }
+
+  // ---- job applications ----
+  function renderJobs(){
+    const list = document.getElementById('jobsList');
+    if(!DATA.dashboard) return;
+    const apps = DATA.dashboard.applications || [];
+    setText('tabJobsCount', String(apps.length));
+    list.innerHTML = apps.length ? apps.map(function(a){
+      const budget = (a.budget_min || a.budget_max) ? money(a.budget_min) + ' – ' + money(a.budget_max) + ' / session' : 'Budget not specified';
+      let html = '<div class="list-row" data-row><div class="body">' +
+        '<div class="top-line"><h4>' + esc(a.title) + '</h4><span class="status-pill ' + (STATUS_PILL[a.status]||'pending') + '">' + esc(a.status) + '</span><span class="time">Applied ' + timeAgo(a.applied_at) + '</span></div>' +
+        '<p>' + budget + ' · ' + esc(a.mode || '') + (a.city ? ' · ' + esc(a.city) : '') + '</p>';
+      if(a.client_name){ html += contactRevealHTML(a.client_email, a.client_phone); }
+      html += '</div></div>';
+      return html;
+    }).join('') : '<p class="empty-note">No job applications yet — browse the job board to apply.</p>';
+  }
 
   showSection('overview');
 })();

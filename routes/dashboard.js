@@ -30,12 +30,22 @@ router.get('/teacher/dashboard', requireRole('teacher'), async (req, res, next) 
   try {
     const userId = req.session.user.id;
     const [profile] = await db.query(
-      'SELECT verification_status, per_session_price, trial_price FROM teachers WHERE user_id = ?',
+      'SELECT full_name, verification_status, per_session_price, trial_price, profile_photo_url FROM teachers WHERE user_id = ?',
       [userId]
     );
     const [applications] = await db.query(
-      `SELECT ra.id, ra.status, ra.applied_at, r.title, r.id AS requirement_id
-       FROM requirement_applications ra JOIN requirements r ON r.id = ra.requirement_id
+      `SELECT ra.id, ra.status, ra.applied_at, r.title, r.id AS requirement_id,
+              r.budget_min, r.budget_max, r.mode, c.name AS city,
+              conn.id AS connection_id,
+              CASE WHEN conn.status = 'approved' THEN cu.full_name END AS client_name,
+              CASE WHEN conn.status = 'approved' THEN u.email END AS client_email,
+              CASE WHEN conn.status = 'approved' THEN u.phone END AS client_phone
+       FROM requirement_applications ra
+       JOIN requirements r ON r.id = ra.requirement_id
+       LEFT JOIN cities c ON c.id = r.city_id
+       LEFT JOIN connections conn ON conn.source_application_id = ra.id
+       LEFT JOIN clients cu ON cu.user_id = conn.client_user_id
+       LEFT JOIN users u ON u.id = conn.client_user_id
        WHERE ra.teacher_user_id = ? ORDER BY ra.applied_at DESC`,
       [userId]
     );
@@ -72,6 +82,15 @@ router.get('/admin/dashboard', requireRole('admin'), async (req, res, next) => {
     const [[userCounts]] = await db.query(
       `SELECT SUM(role = 'client') AS clients, SUM(role = 'teacher') AS teachers FROM users`
     );
+    const [[connectionCounts]] = await db.query(
+      `SELECT SUM(status = 'approved') AS approved, SUM(status = 'pending') AS pending, SUM(status = 'declined') AS declined, COUNT(*) AS total FROM connections`
+    );
+    const [[ratingCounts]] = await db.query(
+      `SELECT SUM(status = 'flagged') AS flagged, COUNT(*) AS total FROM ratings`
+    );
+    const [[{ feeRevenue }]] = await db.query(
+      `SELECT COALESCE(SUM(fee_charged), 0) AS feeRevenue FROM connections WHERE fee_charged IS NOT NULL`
+    );
     const [pendingCertifications] = await db.query(
       `SELECT tc.id, tc.certification_name_other, ct.name AS certification_type, t.full_name AS teacher_name
        FROM teacher_certifications tc
@@ -80,7 +99,12 @@ router.get('/admin/dashboard', requireRole('admin'), async (req, res, next) => {
        WHERE tc.status = 'pending'
        ORDER BY tc.id DESC LIMIT 20`
     );
-    res.json({ teacherCounts, requirementCounts, userCounts, pendingCertifications });
+    const [recentConnections] = await db.query(
+      `SELECT conn.id, conn.status, conn.requested_at, cl.full_name AS client_name, t.full_name AS teacher_name
+       FROM connections conn JOIN clients cl ON cl.user_id = conn.client_user_id JOIN teachers t ON t.user_id = conn.teacher_user_id
+       ORDER BY conn.requested_at DESC LIMIT 5`
+    );
+    res.json({ teacherCounts, requirementCounts, userCounts, connectionCounts, ratingCounts, feeRevenue, pendingCertifications, recentConnections });
   } catch (err) {
     next(err);
   }
