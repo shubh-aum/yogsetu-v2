@@ -253,7 +253,7 @@
   .idx-book-visual-img{width:100%;height:100%;object-fit:contain;object-position:right center;display:block;}
   .idx-book-visual-copy{
     position:absolute;inset:0;z-index:1;
-    display:flex;align-items:center;
+    display:flex;align-items:center;gap:clamp(14px,2.6vw,34px);
     padding-left:clamp(24px,6vw,88px);
     pointer-events:none;
   }
@@ -263,6 +263,19 @@
     color:var(--ink);max-width:10ch;
   }
   .idx-book-visual-copy h2 em{font-style:italic;color:var(--marigold-deep);}
+  /* Big hand-drawn saffron arrow pointing at the heading — desktop only
+     (see the max-width:900px block below, where this section drops the
+     sticky side-by-side layout for a stacked one with no room for it). */
+  .idx-book-arrow{
+    flex-shrink:0;
+    width:clamp(100px,10.5vw,190px);height:auto;
+    filter:drop-shadow(0 10px 18px rgba(166,80,50,.35));
+    animation:idxBookArrowPoint 1.7s ease-in-out infinite;
+  }
+  @keyframes idxBookArrowPoint{
+    0%,100%{transform:translateX(0) rotate(-3deg);}
+    50%{transform:translateX(12px) rotate(2deg);}
+  }
 
   .idx-scroll-reveal{
     position:relative;z-index:1;
@@ -284,6 +297,7 @@
       padding:clamp(28px,6vh,48px) 20px clamp(16px,3vh,24px);pointer-events:auto;
     }
     .idx-book-visual-copy h2{max-width:none;text-align:center;margin:0 auto;}
+    .idx-book-arrow{display:none;}
     /* contain+center just shows the image's own built-in empty left half
        as-is, which reads as "off-center" since the woman/phone only occupy
        the right side of the source graphic. Crop instead, anchored right,
@@ -854,6 +868,10 @@
 <section class="idx-book-visual">
   <img src="assets/images/bookclass.png" alt="Student booking a live yoga class through the YogSetu app" class="idx-book-visual-img">
   <div class="idx-book-visual-copy">
+    <svg class="idx-book-arrow" viewBox="0 0 150 100" fill="none" aria-hidden="true">
+      <path d="M12 76 C 36 20, 96 6, 130 42" stroke="var(--marigold)" stroke-width="9" stroke-linecap="round"/>
+      <path d="M106 22 L132 42 L110 64" stroke="var(--marigold)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
     <h2>Book Slot <em>as per Availability</em></h2>
   </div>
 </section>
