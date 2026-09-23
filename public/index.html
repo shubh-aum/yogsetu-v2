@@ -261,7 +261,13 @@
      landscape 100vh box was cutting through her head. Contain shows the whole
      graphic; anchoring right keeps the phone mockup prominent and leaves the
      image's own built-in empty space on the left for the headline. */
-  .idx-book-visual-img{width:100%;height:100%;object-fit:contain;object-position:right center;display:block;}
+  /* The whole banner is a single link to Browse Teachers — img and copy
+     used to be direct children of .idx-book-visual (position:sticky), so
+     the link wrapper takes over that exact inset:0 sizing instead. */
+  .idx-book-visual-link{position:absolute;inset:0;display:block;color:inherit;text-decoration:none;}
+  .idx-book-visual-img{width:100%;height:100%;object-fit:contain;object-position:right center;display:block;transition:transform .5s ease;}
+  .idx-book-visual-link:hover .idx-book-visual-img{transform:scale(1.02);}
+  .idx-book-visual-link:focus-visible{outline:3px solid var(--marigold);outline-offset:-3px;}
   .idx-book-visual-copy{
     position:absolute;inset:0;z-index:1;
     display:flex;align-items:center;gap:clamp(14px,2.6vw,34px);
@@ -302,6 +308,9 @@
     .idx-book-visual{
       position:relative;top:auto;height:auto;
       display:flex;flex-direction:column;
+    }
+    .idx-book-visual-link{
+      position:static;display:flex;flex-direction:column;width:100%;
     }
     .idx-book-visual-copy{
       position:relative;inset:auto;flex:0 0 auto;justify-content:center;
@@ -879,14 +888,16 @@
 <div class="idx-reveal-scope">
 
 <section class="idx-book-visual">
-  <img src="assets/images/bookclass.png" alt="Student booking a live yoga class through the YogSetu app" class="idx-book-visual-img">
-  <div class="idx-book-visual-copy">
-    <svg class="idx-book-arrow" viewBox="0 0 150 100" fill="none" aria-hidden="true">
-      <path d="M12 76 C 36 20, 96 6, 130 42" stroke="var(--marigold)" stroke-width="9" stroke-linecap="round"/>
-      <path d="M106 22 L132 42 L110 64" stroke="var(--marigold)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <h2>Book Slot <em>as per Availability</em></h2>
-  </div>
+  <a class="idx-book-visual-link" href="teachers.html" aria-label="Browse verified teachers and book a slot as per their availability">
+    <img src="assets/images/bookclass.png" alt="Student booking a live yoga class through the YogSetu app" class="idx-book-visual-img">
+    <div class="idx-book-visual-copy">
+      <svg class="idx-book-arrow" viewBox="0 0 150 100" fill="none" aria-hidden="true">
+        <path d="M12 76 C 36 20, 96 6, 130 42" stroke="var(--marigold)" stroke-width="9" stroke-linecap="round"/>
+        <path d="M106 22 L132 42 L110 64" stroke="var(--marigold)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h2>Book Slot <em>as per Availability</em></h2>
+    </div>
+  </a>
 </section>
 
 <section class="verified idx-scroll-reveal" id="verification" aria-labelledby="verified-title">
