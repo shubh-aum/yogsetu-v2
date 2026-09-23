@@ -54,12 +54,13 @@
      header still sits on a matching dark background, not a hard edge. */
   .idx-hero-banner .hero-media,
   .idx-hero-banner .hero-scrim{top:72px;}
-  /* Hero media is a looping video (bannervideo_4K_realistic.mp4, 3840x2160,
-     ~5s) — same subject/framing as before. contain guarantees the full
-     frame is always visible at any window size (no cropping/zoom); the
-     video's baked-in black band across its bottom just blends into the
-     card's own near-black background. Mirrored so she sits on the right
-     and the left-aligned text doesn't overlap her. */
+  /* Hero media is a looping cinemagraph, served at one of three render
+     tiers depending on viewport width (see the <source> list below) — same
+     subject/framing in all three. contain guarantees the full frame is
+     always visible at any window size (no cropping/zoom); each tier's
+     baked-in black band across its bottom just blends into the card's own
+     near-black background. Mirrored so she sits on the right and the
+     left-aligned text doesn't overlap her. */
   .idx-hero-banner .hero-media{
     object-fit:contain;object-position:left center;
     opacity:1;transform:scaleX(-1);
@@ -374,8 +375,15 @@
     <div class="hero-card idx-hero-banner">
 
       <div class="hero-media-fallback"></div>
+      <!-- Three render tiers of the same cinemagraph, picked by the browser at
+           load time based on viewport width (source[media], evaluated once —
+           same technique as <picture>, but video doesn't re-pick on resize).
+           Order matters: first matching source wins, so largest/most-specific
+           comes first and the no-media source at the end is the catch-all. -->
       <video class="hero-media" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-        <source src="assets/videos/bannervideo_4K_realistic.mp4" type="video/mp4">
+        <source src="assets/videos/cinemagraph_4K.mp4" type="video/mp4" media="(min-width: 1920px)">
+        <source src="assets/videos/cinemagraph_desktop_1440p.mp4" type="video/mp4" media="(min-width: 1024px)">
+        <source src="assets/videos/cinemagraph_laptop_1080p.mp4" type="video/mp4">
       </video>
       <div class="hero-scrim"></div>
 
