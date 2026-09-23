@@ -181,15 +181,21 @@
   }
 
   /* ---- Sunlight CTA banner: sits directly below the hero, full-bleed the
-     same way (align with top banner) via the same wrap-full technique.
+     same way (align with top banner). Unlike the hero, this section sits
+     *outside* .page (whose 16px padding is what the hero's negative
+     margin cancels) — .page's own closing tag falls right after the
+     hero-wrap, so everything below it, including this section, is
+     already flush with the viewport with no margin trick needed. Giving
+     it the same -16px the hero uses (as this block first did) double-
+     counts that offset and pushes the video 16px further right than the
+     hero above it, breaking the vertical alignment between the two.
      The sunlight_*.mp4 cinemagraph already has its own bright empty space
      on the left of frame with the subject on the right, so — like the
      hero — text overlays straight on top of the video instead of sitting
      in a separate column. No mirroring needed this time since the subject
      is already on the right side in the source. */
-  .idx-sunlight-wrap-full{max-width:none;margin:-16px;}
+  .idx-sunlight-wrap-full{max-width:none;margin:0;}
   .idx-sunlight-wrap-full .idx-sunlight-card{border-radius:0;}
-  @media (max-width:640px){ .idx-sunlight-wrap-full{margin:-10px;} }
 
   .idx-sunlight-card{
     position:relative;overflow:hidden;isolation:isolate;
@@ -270,65 +276,6 @@
     .idx-sunlight-copy{max-width:none;align-items:center;}
     .idx-sunlight-copy p{max-width:38ch;margin:0 auto;}
     .idx-clock-cta{align-self:center;}
-  }
-
-  /* ---- "01 Why YogSetu" — banner 2: a light, photo-plus-facts band
-     directly below the dark hero (assets/images/banner2.png), mirroring
-     the reference's "dark hero, then a light section with a photo on one
-     side" structure. Text column left, photo column right — unlike the
-     hero, the text isn't overlaid on the photo, so the photo can just be
-     a plain cover-fit column. */
-  .idx-banner2{background:var(--paper);}
-  .idx-banner2-inner{
-    max-width:1560px;margin:0 auto;
-    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    align-items:stretch;
-    min-height:clamp(420px,58vh,560px);
-  }
-  .idx-banner2-content{
-    display:flex;flex-direction:column;justify-content:center;
-    padding:clamp(32px,5vh,56px) clamp(20px,4vw,64px);
-  }
-  .idx-banner2-content .sec-kicker{justify-content:flex-start;color:var(--sage);margin-bottom:12px;}
-  .idx-banner2-content h2{
-    font-family:'Fraunces',serif;font-weight:500;
-    font-size:clamp(28px,3.2vw,42px);line-height:1.15;letter-spacing:-.02em;
-    color:var(--ink);margin:0 0 clamp(24px,3.4vh,34px);max-width:14ch;
-  }
-  .idx-banner2-content h2.idx-why-title-accent{color:var(--marigold-deep);font-style:italic;}
-  .idx-banner2-photo{position:relative;min-height:280px;overflow:hidden;}
-  .idx-banner2-photo img{
-    position:absolute;inset:0;width:100%;height:100%;
-    object-fit:cover;object-position:68% center;display:block;
-  }
-  .idx-why-facts{
-    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:clamp(12px,1.6vw,18px);
-  }
-  .idx-why-fact{
-    background:var(--sand);border:1px solid var(--line);border-radius:14px;
-    padding:clamp(14px,1.6vw,18px);
-    text-align:left;
-  }
-  .idx-why-fact .label{
-    font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
-    color:var(--ink-faint);margin-bottom:8px;
-  }
-  .idx-why-fact .value{
-    display:flex;align-items:center;gap:8px;
-    font-size:15px;font-weight:600;color:var(--ink);line-height:1.25;
-  }
-  .idx-why-fact .value svg{width:17px;height:17px;flex-shrink:0;stroke:var(--marigold-deep);}
-  @media (max-width:900px){
-    .idx-banner2-inner{grid-template-columns:1fr;min-height:auto;}
-    .idx-banner2-photo{order:-1;min-height:320px;}
-    .idx-banner2-photo img{object-position:right center;}
-    .idx-banner2-content{align-items:center;text-align:center;}
-    .idx-banner2-content .sec-kicker{justify-content:center;}
-    .idx-banner2-content h2{margin-left:auto;margin-right:auto;}
-  }
-  @media (max-width:420px){
-    .idx-why-facts{grid-template-columns:1fr;}
   }
 
   /* ---- "Book Slot as per Availability" sticky image, just above The
@@ -566,48 +513,6 @@
     </div>
   </section>
 </div>
-
-<section class="idx-banner2" id="why" aria-labelledby="why-title">
-  <div class="idx-banner2-inner">
-    <div class="idx-banner2-content">
-      <div class="sec-kicker mono"><span class="num">01</span><span class="rule" aria-hidden="true"></span><span>Why YogSetu</span></div>
-      <h2 id="why-title" class="idx-why-title-accent">Book a Free Demo Class.</h2>
-      <div class="idx-why-facts">
-        <div class="idx-why-fact">
-          <div class="label">Verification</div>
-          <div class="value">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
-            Credentials checked
-          </div>
-        </div>
-        <div class="idx-why-fact">
-          <div class="label">Styles</div>
-          <div class="value">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M7 21c1.5-4 3-6 5-6s3.5 2 5 6"/></svg>
-            Hatha to Ashtanga
-          </div>
-        </div>
-        <div class="idx-why-fact">
-          <div class="label">Mode</div>
-          <div class="value">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8"/></svg>
-            Online or in-studio
-          </div>
-        </div>
-        <div class="idx-why-fact">
-          <div class="label">Trial class</div>
-          <div class="value">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            Booked in 24 hrs
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="idx-banner2-photo">
-      <img src="assets/images/banner2.png" alt="A YogSetu-verified teacher in warrior pose" loading="lazy">
-    </div>
-  </div>
-</section>
 
 <section class="section" id="problem" aria-labelledby="problem-title">
 
