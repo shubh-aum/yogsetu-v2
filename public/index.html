@@ -54,8 +54,15 @@
      header still sits on a matching dark background, not a hard edge. */
   .idx-hero-banner .hero-media,
   .idx-hero-banner .hero-scrim{top:72px;}
+  /* Hero media is now a looping video (yogkulam_echoes_of_teachers.mp4,
+     1920x1080, ~9s) — same subject/framing as the old banner.png but with
+     a baked-in black band across the bottom ~43% of the frame. cover +
+     object-position:center top scales up to fill the tall card and crops
+     that dead band away instead of showing it. Mirrored for the same
+     reason as before: she faces/sits left in the source, and the design
+     wants her on the right so the text on the left doesn't overlap her. */
   .idx-hero-banner .hero-media{
-    object-fit:contain;object-position:left center;
+    object-fit:cover;object-position:center top;
     opacity:1;transform:scaleX(-1);
   }
   /* Richer, directional scrim: a warm marigold glow behind the subject
@@ -359,7 +366,9 @@
     <div class="hero-card idx-hero-banner">
 
       <div class="hero-media-fallback"></div>
-      <img class="hero-media" src="assets/images/banner.png" alt="A YogSetu-verified yoga teacher, mat in hand" aria-hidden="true">
+      <video class="hero-media" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+        <source src="assets/videos/yogkulam_echoes_of_teachers.mp4" type="video/mp4">
+      </video>
       <div class="hero-scrim"></div>
 
       <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
