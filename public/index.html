@@ -55,14 +55,18 @@
   .idx-hero-banner .hero-media,
   .idx-hero-banner .hero-scrim{top:72px;}
   /* Hero media is now a looping video (yogkulam_echoes_of_teachers.mp4,
-     1920x1080, ~9s) — same subject/framing as the old banner.png but with
-     a baked-in black band across the bottom ~43% of the frame. cover +
-     object-position:center top scales up to fill the tall card and crops
-     that dead band away instead of showing it. Mirrored for the same
-     reason as before: she faces/sits left in the source, and the design
-     wants her on the right so the text on the left doesn't overlap her. */
+     1920x1080, ~9s) — same subject/framing as the old banner.png. Using
+     cover here zoomed in by a different amount on every screen's aspect
+     ratio (badly on wide/short desktop windows, cropping her down to just
+     face-and-shoulders) — contain guarantees the full frame is always
+     visible, at any window size, same as the original photo treatment.
+     The video's baked-in black band across its bottom ~43% just blends
+     into the card's own near-black background, so there's no need to
+     crop it out. Mirrored for the same reason as before: she faces/sits
+     left in the source, and the design wants her on the right so the
+     text on the left doesn't overlap her. */
   .idx-hero-banner .hero-media{
-    object-fit:cover;object-position:center top;
+    object-fit:contain;object-position:left center;
     opacity:1;transform:scaleX(-1);
   }
   /* Richer, directional scrim: a warm marigold glow behind the subject
