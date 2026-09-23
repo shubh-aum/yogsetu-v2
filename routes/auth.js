@@ -152,4 +152,68 @@ router.get('/me', (req, res) => {
   res.json({ user: req.session.user || null });
 });
 
+// ---- Forgot password: email -> OTP (stub) -> reset ----
+// Same stub pattern as /otp/send and /otp/verify above: nothing is really
+// sent yet, and any 6-digit code is accepted until a real email/SMS
+// provider is wired in. A session flag set by verify-otp is what actually
+// authorizes the reset step, so a request to /reset without a matching,
+// freshly-verified session is rejected even if it guesses the right email.
+
+// POST /api/auth/forgot-password/send-otp
+router.post('/forgot-password/send-otp', async (req, res, next) => {
+  try {
+    const email = (req.body.email || '').trim().toLowerCase();
+    if (!email) return res.status(400).json({ error: 'Enter your email address.' });
+
+    const [rows] = await db.query('SELECT id FROM users WHERE email = ?', [email]);
+    if (!rows.length) return res.status(404).json({ error: 'No account found with that email.' });
+
+    res.json({ sent: true, email });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /api/auth/forgot-password/verify-otp
+router.post('/forgot-password/verify-otp', async (req, res, next) => {
+  try {
+    const email = (req.body.email || '').trim().toLowerCase();
+    const code = (req.body.code || '').trim();
+    if (!email) return res.status(400).json({ error: 'Enter your email address.' });
+    if (!/^\d{6}$/.test(code)) return res.status(400).json({ error: 'Enter the 6-digit code.' });
+
+    const [rows] = await db.query('SELECT id FROM users WHERE email = ?', [email]);
+    if (!rows.length) return res.status(404).json({ error: 'No account found with that email.' });
+
+    req.session.resetEmail = email;
+    res.json({ verified: true, email });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /api/auth/forgot-password/reset — only allowed right after verify-otp on this same session
+router.post('/forgot-password/reset', async (req, res, next) => {
+  try {
+    const email = (req.body.email || '').trim().toLowerCase();
+    const newPassword = req.body.new_password || '';
+
+    if (!req.session.resetEmail || req.session.resetEmail !== email) {
+      return res.status(401).json({ error: 'Please verify the code again before setting a new password.' });
+    }
+    if (newPassword.length < 6) {
+      return res.status(400).json({ error: 'Password must be at least 6 characters.' });
+    }
+
+    const hash = await bcrypt.hash(newPassword, 10);
+    const [result] = await db.query('UPDATE users SET password_hash = ? WHERE email = ?', [hash, email]);
+    if (!result.affectedRows) return res.status(404).json({ error: 'No account found with that email.' });
+
+    delete req.session.resetEmail;
+    res.json({ message: 'Password updated. You can log in now.' });
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
