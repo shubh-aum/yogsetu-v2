@@ -54,17 +54,12 @@
      header still sits on a matching dark background, not a hard edge. */
   .idx-hero-banner .hero-media,
   .idx-hero-banner .hero-scrim{top:72px;}
-  /* Hero media is now a looping video (yogkulam_echoes_of_teachers.mp4,
-     1920x1080, ~9s) — same subject/framing as the old banner.png. Using
-     cover here zoomed in by a different amount on every screen's aspect
-     ratio (badly on wide/short desktop windows, cropping her down to just
-     face-and-shoulders) — contain guarantees the full frame is always
-     visible, at any window size, same as the original photo treatment.
-     The video's baked-in black band across its bottom ~43% just blends
-     into the card's own near-black background, so there's no need to
-     crop it out. Mirrored for the same reason as before: she faces/sits
-     left in the source, and the design wants her on the right so the
-     text on the left doesn't overlap her. */
+  /* Hero media is a looping video (bannervideo_4K_realistic.mp4, 3840x2160,
+     ~5s) — same subject/framing as before. contain guarantees the full
+     frame is always visible at any window size (no cropping/zoom); the
+     video's baked-in black band across its bottom just blends into the
+     card's own near-black background. Mirrored so she sits on the right
+     and the left-aligned text doesn't overlap her. */
   .idx-hero-banner .hero-media{
     object-fit:contain;object-position:left center;
     opacity:1;transform:scaleX(-1);
@@ -380,7 +375,7 @@
 
       <div class="hero-media-fallback"></div>
       <video class="hero-media" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-        <source src="assets/videos/yogkulam_echoes_of_teachers.mp4" type="video/mp4">
+        <source src="assets/videos/bannervideo_4K_realistic.mp4" type="video/mp4">
       </video>
       <div class="hero-scrim"></div>
 
