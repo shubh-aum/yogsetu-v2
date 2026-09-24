@@ -1,0 +1,149 @@
+{
+  "meta": {
+    "title": "About YogSetu — The Bridge Between You and the Right Yoga Teacher",
+    "description": "YogSetu helps individuals, families and organisations discover and connect with verified yoga teachers across India. An initiative by YogKulam."
+  },
+  "hero": {
+    "kicker": "About YogSetu",
+    "title": "The Bridge Between You and the Right *Yoga Teacher*",
+    "description": "YogSetu helps individuals, families and organisations discover and connect with yoga teachers across India. Explore teacher profiles, understand their experience and expertise, and connect directly with someone who fits your needs.",
+    "primary_cta": { "label": "Find a Teacher", "url": "teachers.html" },
+    "secondary_cta": { "label": "Join as a Teacher", "url": "signup.html?role=teacher" },
+    "image": {
+      "url": "https://storage.googleapis.com/yogkulam/landing-page/founder/DSC_8145.jpg",
+      "alt": "Founder of YogKulam at his desk"
+    }
+  },
+  "story": {
+    "eyebrow": "Our story",
+    "title": "Why We Built *YogSetu*",
+    "lead": "“Setu” means bridge. And that is exactly what was missing.",
+    "body": "India has a large and growing community of yoga teachers and millions of people who want to learn yoga. Yet finding the right teacher still often depends on word of mouth, social media or a random online search.",
+    "boxes": [
+      {
+        "title": "For Yoga Seekers, the gap is trust",
+        "text": "Who is this teacher? What have they studied? What do they teach? Are they right for my needs?"
+      },
+      {
+        "title": "For Yoga Teachers, the gap is visibility",
+        "text": "Many capable teachers have the knowledge and training, but struggle to reach people beyond their own network."
+      }
+    ],
+    "closing": "YogSetu brings both sides together.",
+    "image": {
+      "url": "https://yogkulam.com/assets/frontend/img/Landing%20Page/banner%20pic%202.png",
+      "alt": "YogKulam founder and students practising yoga together"
+    }
+  },
+  "how": {
+    "eyebrow": "How YogSetu helps",
+    "title": "Two Journeys. *One Platform*",
+    "tabs": [
+      {
+        "label": "For Yoga Seekers",
+        "steps": [
+          { "title": "Search", "text": "Find teachers by location, language, expertise, experience and online or offline mode." },
+          { "title": "Compare", "text": "Explore qualifications, experience, pricing and reviews before you decide." },
+          { "title": "Request", "text": "Send a connection request to the teacher you prefer. Your first connection is free." },
+          { "title": "Connect", "text": "Once the teacher accepts, talk directly and decide if they are right for you." }
+        ]
+      },
+      {
+        "label": "For Yoga Teachers",
+        "steps": [
+          { "title": "Create", "text": "Build your professional profile with your qualifications, experience and expertise." },
+          { "title": "Verify", "text": "Our team checks your details before your profile is marked verified." },
+          { "title": "Get Discovered", "text": "Become visible to people actively looking for yoga guidance." },
+          { "title": "Choose", "text": "Accept the requests that suit you, set your own pricing, and teach your way." }
+        ]
+      }
+    ]
+  },
+  "why": {
+    "eyebrow": "Why YogSetu",
+    "title": "More Clarity. More Trust. *Better Connections.*",
+    "items": [
+      { "title": "Verified Profiles", "text": "Information checked by our team." },
+      { "title": "Honest Ratings", "text": "Feedback from connected learners." },
+      { "title": "Transparent Pricing", "text": "Know the fees before connecting." },
+      { "title": "Mutual Choice", "text": "Both sides choose to connect." },
+      { "title": "Direct Connection", "text": "Communicate directly after connecting." }
+    ],
+    "disclaimer": "Verification confirms checked profile information only; it does not guarantee outcomes or individual suitability."
+  },
+  "mission": {
+    "eyebrow": "Our mission & vision",
+    "mission_title": "Our Mission",
+    "mission_text": "To make finding the right yoga teacher simpler and more trustworthy, while helping trained yoga professionals become visible and grow their practice.",
+    "vision_title": "Our Vision",
+    "vision_text": "To build a trusted network of yoga teachers across India and, over time, create a global bridge connecting yoga seekers with yoga professionals.",
+    "values_title": "Our Values",
+    "values": [
+      { "name": "Shuddhata", "meaning": "Integrity", "text": "Honest information and transparent profiles." },
+      { "name": "Yogyata", "meaning": "Competence", "text": "Respect for training and professional capability." },
+      { "name": "Swatantrata", "meaning": "Freedom", "text": "Seekers choose and teachers decide." },
+      { "name": "Seva", "meaning": "Service", "text": "Making good yoga guidance easier to access." }
+    ]
+  },
+  "backed": {
+    "eyebrow": "Backed by YogKulam",
+    "title": "Built on Years of Experience in *Yoga Education*",
+    "paragraphs": [
+      "YogSetu is an initiative by YogKulam, India's Yoga Career Launch Platform. Since 2012, YogKulam has trained 40,000+ yoga learners and aspiring professionals across India.",
+      "That experience shapes how we build trust and transparency into YogSetu. And YogSetu is open to every qualified yoga professional, whether they trained with YogKulam or elsewhere."
+    ],
+    "stats": [
+      { "number": "40,000+", "label": "Yoga learners trained" },
+      { "number": "Since 2012", "label": "Running yoga education" }
+    ],
+    "badges": ["Yoga Alliance USA", "YCB", "IYA", "ISO"],
+    "founder": {
+      "eyebrow": "A note from our founder",
+      "quote": "For years, I have seen good yoga teachers struggle to reach the people who need them, while students struggle to know whom they can trust.\n\nYoga is a complete vidya: science, art and dharma. It deserves to be taught with knowledge, responsibility and respect for its roots.\n\nYogSetu is our attempt to build that bridge. Our aim is simple: help the right teacher and the right seeker find each other, while creating a stronger and more organised ecosystem for Yoga.",
+      "name": "Dr. Maneesh Pratap Singh",
+      "role": "Founder, YogKulam & YogSetu",
+      "image": {
+        "url": "https://storage.googleapis.com/yogkulam/landing-page/founder/DSC_8252.png",
+        "alt": "Dr. Maneesh Pratap Singh, founder of YogKulam, in meditation"
+      }
+    }
+  },
+  "gallery": {
+    "eyebrow": "Gallery",
+    "title": "Life at *YogKulam*",
+    "subtitle": "Moments from our teachers, trainings and ceremonies.",
+    "images": [
+      {
+        "url": "https://storage.googleapis.com/yogkulam/landing-page/img/Landing%20Page/team-yogkulam-yogguru-jwalaji.jpg",
+        "alt": "The YogKulam team with Yogguru Jwalaji",
+        "caption": "The YogKulam team with Yogguru Jwalaji"
+      },
+      {
+        "url": "https://storage.googleapis.com/yogkulam/landing-page/img/Landing%20Page/ytt%20sales%20team%20yogkulam.jpg",
+        "alt": "The YogKulam teacher training team",
+        "caption": "The YogKulam teacher training team"
+      },
+      {
+        "url": "https://storage.googleapis.com/yogkulam/landing-page/img/Landing%20Page/ceremony-at-yogkulam.jpg",
+        "alt": "A certification ceremony at YogKulam",
+        "caption": "A ceremony at YogKulam"
+      },
+      {
+        "url": "https://storage.googleapis.com/yogkulam/destination/path/app/public/event_pictures/YNA10WlSDoExKkcFXNMpBY0Z3Vt6ygTVJ9qdYEPF_9%20(1).jpg",
+        "alt": "A YogKulam event",
+        "caption": "A YogKulam event"
+      }
+    ]
+  },
+  "cta": {
+    "kicker": "Free to join",
+    "title": "Ready to Find Your *Yoga Connection?*",
+    "text": "Find the teacher who fits your needs, or create your profile and let the right seekers discover you.",
+    "primary_cta": { "label": "Find a Teacher", "url": "teachers.html" },
+    "secondary_cta": { "label": "Join as a Teacher", "url": "signup.html?role=teacher" },
+    "image": {
+      "url": "https://yogkulam.com/assets/frontend/img/Landing%20Page/banner%20pic%202.png",
+      "alt": ""
+    }
+  }
+}

@@ -13,6 +13,7 @@ const connectionsRouter = require('./routes/connections');
 const dashboardRouter = require('./routes/dashboard');
 const lookupsRouter = require('./routes/lookups');
 const adminRouter = require('./routes/admin');
+const contentRouter = require('./routes/content');
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use('/api/connections', connectionsRouter);
 app.use('/api', dashboardRouter);
 app.use('/api/lookups', lookupsRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/content', contentRouter);
 
 // Static site (index.html, dashboards, requirement pages, css, js, assets)
 // extensions:['html'] lets /teacher-dashboard resolve to teacher-dashboard.html

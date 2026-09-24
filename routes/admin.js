@@ -1,9 +1,29 @@
 const express = require('express');
 const router = express.Router();
+const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
+const multer = require('multer');
 const bcrypt = require('bcryptjs');
 const db = require('../config/db');
 const { requireRole } = require('../middleware/auth');
 const { logAudit } = require('../utils/audit');
+const { loadAboutContent } = require('./content');
+const { BLOCK_KEY, MAX_JSON_BYTES, getDefaults, sanitize } = require('../utils/aboutContent');
+
+// Images uploaded from the CMS editors are public site content.
+const CMS_IMAGE_DIR = path.join(__dirname, '..', 'public', 'uploads', 'cms');
+fs.mkdirSync(CMS_IMAGE_DIR, { recursive: true });
+const IMAGE_TYPES = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp', 'image/gif': '.gif' };
+const uploadCmsImage = multer({
+  storage: multer.diskStorage({
+    destination: CMS_IMAGE_DIR,
+    filename: (req, file, cb) => cb(null, `${Date.now()}-${crypto.randomBytes(6).toString('hex')}${IMAGE_TYPES[file.mimetype]}`),
+  }),
+  // SVG is deliberately excluded — it can carry script.
+  fileFilter: (req, file, cb) => (IMAGE_TYPES[file.mimetype] ? cb(null, true) : cb(new Error('Only JPG, PNG, WebP or GIF images are allowed.'))),
+  limits: { fileSize: 8 * 1024 * 1024 },
+}).single('image');
 
 router.use(requireRole('admin'));
 
@@ -276,6 +296,52 @@ router.put('/cms/:blockKey', async (req, res, next) => {
   } catch (err) {
     next(err);
   }
+});
+
+// ---- About page (one structured JSON document in cms_content_blocks) ----
+
+// GET /api/admin/content/about — effective content (saved values over defaults)
+router.get('/content/about', async (req, res, next) => {
+  try {
+    res.json(await loadAboutContent());
+  } catch (err) {
+    next(err);
+  }
+});
+
+// PUT /api/admin/content/about — body: { content: {...} }; unknown keys are dropped
+router.put('/content/about', async (req, res, next) => {
+  try {
+    if (!req.body.content || typeof req.body.content !== 'object') {
+      return res.status(400).json({ error: 'content is required.' });
+    }
+    const clean = JSON.stringify(sanitize(getDefaults(), req.body.content));
+    if (Buffer.byteLength(clean) > MAX_JSON_BYTES) {
+      return res.status(400).json({ error: 'That is too much content for one page — shorten some text or remove a few items.' });
+    }
+    await db.query(
+      `INSERT INTO cms_content_blocks (block_key, label, content, last_edited_by) VALUES (?, 'About page', ?, ?)
+       ON DUPLICATE KEY UPDATE content = VALUES(content), last_edited_by = VALUES(last_edited_by)`,
+      [BLOCK_KEY, clean, req.session.user.id]
+    );
+    logAudit(req.session.user.id, 'Edited the About page', 'cms_content_block', null);
+    res.json({ message: 'About page saved.', ...(await loadAboutContent()) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// POST /api/admin/uploads/image — multipart field "image"; returns the public URL
+router.post('/uploads/image', (req, res) => {
+  uploadCmsImage(req, res, (err) => {
+    if (err) {
+      const msg = err.code === 'LIMIT_FILE_SIZE' ? 'Image is larger than 8 MB.' : err.message;
+      return res.status(400).json({ error: msg });
+    }
+    if (!req.file) return res.status(400).json({ error: 'No image uploaded.' });
+    logAudit(req.session.user.id, 'Uploaded a site image', 'cms_content_block', null);
+    res.status(201).json({ url: `/uploads/cms/${req.file.filename}` });
+  });
 });
 
 // ---- subadmins & permissions ----
