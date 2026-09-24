@@ -395,50 +395,6 @@
       object-fit:cover;object-position:right center;
     }
   }
-
-  /* ---- "A note from our founder": white band, copy left / large image right
-     (same headline scale + saffron-italic emphasis as the Book Slot banner
-     above). Text is kept in sync with the admin-managed About page by the
-     small script beside the markup; the HTML here is the fallback. ---- */
-  .idx-note{background:#fff;}
-  .idx-note-inner{
-    max-width:1680px;margin:0 auto;
-    min-height:min(100vh,860px);
-    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;
-    gap:clamp(20px,4vw,64px);
-    padding:clamp(56px,9vh,110px) clamp(24px,6vw,88px);
-  }
-  .idx-note-mark{display:block;width:clamp(44px,5vw,72px);height:auto;margin-bottom:clamp(14px,2vh,22px);filter:drop-shadow(0 10px 18px rgba(166,80,50,.3));}
-  .idx-note-copy h2{
-    font-family:'Fraunces',serif;font-weight:500;
-    font-size:clamp(30px,5vw,62px);line-height:1.1;letter-spacing:-.02em;
-    color:var(--ink);max-width:12ch;margin:0 0 clamp(20px,3.2vh,32px);
-  }
-  .idx-note-copy h2 em{font-style:italic;color:var(--marigold-deep);}
-  .idx-note-quote{margin:0;padding:0;border:0;}
-  .idx-note-quote p{
-    font-family:'Fraunces',serif;font-weight:400;font-size:clamp(17px,1.5vw,21px);line-height:1.65;
-    color:var(--ink-soft);max-width:46ch;margin:0 0 14px;
-  }
-  .idx-note-quote p:first-child{color:var(--ink);font-weight:500;}
-  .idx-note-by{display:flex;flex-direction:column;gap:5px;margin-top:clamp(20px,3vh,30px);padding-top:clamp(16px,2.4vh,22px);border-top:1px solid var(--line);max-width:340px;}
-  .idx-note-by strong{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(19px,1.6vw,23px);color:var(--ink);}
-  .idx-note-by span{font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--marigold-deep);}
-  .idx-note-link{
-    display:inline-flex;align-items:center;gap:8px;margin-top:clamp(20px,3vh,28px);
-    font-weight:600;font-size:15px;color:var(--ink);text-decoration:none;border-bottom:2px solid var(--marigold);padding-bottom:3px;
-    transition:gap .25s ease,color .25s ease;
-  }
-  .idx-note-link:hover{gap:14px;color:var(--marigold-deep);}
-  .idx-note-link:focus-visible{outline:3px solid var(--marigold);outline-offset:4px;}
-  .idx-note-media{margin:0;display:flex;justify-content:flex-end;align-items:center;}
-  .idx-note-media img{display:block;width:min(100%,880px);height:auto;filter:drop-shadow(0 30px 40px rgba(26,25,23,.16));}
-  @media (max-width:900px){
-    .idx-note-inner{grid-template-columns:1fr;min-height:0;gap:28px;padding:clamp(44px,8vh,64px) 20px;}
-    .idx-note-copy{text-align:left;}
-    .idx-note-media{justify-content:center;}
-    .idx-note-media img{width:min(100%,520px);}
-  }
 </style>
 </head>
 <body>
@@ -1488,58 +1444,6 @@
       frame.classList.add('is-playing');
     });
   }
-})();
-</script>
-
-<section class="idx-note" id="founder-note" aria-labelledby="idx-note-title">
-  <div class="idx-note-inner">
-    <div class="idx-note-copy">
-      <svg class="idx-note-mark" viewBox="0 0 64 48" fill="var(--marigold)" aria-hidden="true">
-        <path d="M0 48V27C0 11 9 2 25 0v9C17 11 13 16 13 23h12v25H0zm39 0V27C39 11 48 2 64 0v9c-8 2-12 7-12 14h12v25H39z"/>
-      </svg>
-      <h2 id="idx-note-title">A note from<br><em>our founder</em></h2>
-      <blockquote class="idx-note-quote" id="idxNoteQuote">
-        <p>For years, I have seen good yoga teachers struggle to reach the people who need them, while students struggle to know whom they can trust.</p>
-        <p>Yoga is a complete vidya: science, art and dharma. It deserves to be taught with knowledge, responsibility and respect for its roots.</p>
-        <p>YogSetu is our attempt to build that bridge. Our aim is simple: help the right teacher and the right seeker find each other, while creating a stronger and more organised ecosystem for Yoga.</p>
-      </blockquote>
-      <div class="idx-note-by">
-        <strong id="idxNoteName">Dr. Maneesh Pratap Singh</strong>
-        <span id="idxNoteRole">Founder, YogKulam &amp; YogSetu</span>
-      </div>
-      <a class="idx-note-link" href="about.html">Read our story <span aria-hidden="true">&rarr;</span></a>
-    </div>
-    <figure class="idx-note-media">
-      <img id="idxNoteImg" src="https://storage.googleapis.com/yogkulam/landing-page/founder/DSC_8252.png" alt="Dr. Maneesh Pratap Singh, founder of YogKulam, in meditation with students behind him" loading="lazy" decoding="async" width="1200" height="900">
-    </figure>
-  </div>
-</section>
-<script>
-/* Keep the founder note in step with Admin -> About page. Falls back silently
-   to the markup above when the API isn't reachable (e.g. static hosting). */
-(function(){
-  if(!window.fetch) return;
-  fetch('/api/content/about', { credentials: 'same-origin' })
-    .then(function(r){ if(!r.ok) throw 0; return r.json(); })
-    .then(function(j){
-      var f = j && j.content && j.content.backed && j.content.backed.founder;
-      if(!f) return;
-      function set(id, text){ var el = document.getElementById(id); if(el && text && text.trim()) el.textContent = text; }
-      set('idxNoteName', f.name);
-      set('idxNoteRole', f.role);
-      var paras = String(f.quote || '').split(/\n{2,}/).map(function(p){ return p.trim(); }).filter(Boolean);
-      var q = document.getElementById('idxNoteQuote');
-      if(q && paras.length){
-        q.textContent = '';
-        paras.forEach(function(t){ var p = document.createElement('p'); p.textContent = t; q.appendChild(p); });
-      }
-      var img = document.getElementById('idxNoteImg');
-      if(img && f.image && f.image.url && !/^\s*(javascript|data|vbscript):/i.test(f.image.url)){
-        img.src = f.image.url;
-        if(f.image.alt) img.alt = f.image.alt;
-      }
-    })
-    .catch(function(){});
 })();
 </script>
 
