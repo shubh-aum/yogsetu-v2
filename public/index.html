@@ -161,7 +161,19 @@
     .idx-hero-banner .hero-scrim{
       background:linear-gradient(180deg, rgba(23,22,20,0) 55%, rgba(23,22,20,.95) 100%);
     }
-    .idx-hero-banner .hero-media{object-fit:cover;object-position:8% top;transform:none;}
+    /* Stacked-layout crop: instead of a fixed % (which lands the subject in a
+       different spot at every width), compute the crop offset so her centre
+       (~35% across the source frame) always sits on the strip's centre line.
+       --s is the scaled video width under cover (height-bound at 44vh, or
+       width-bound on wider screens); the clamp keeps the video covering the
+       whole strip. The sunlight strip below uses the same maths so the two
+       subjects stay vertically in line at every width. */
+    .idx-hero-banner .hero-media{
+      --s:max(140vw, 78.2vh);
+      width:var(--s);right:auto;
+      left:clamp(calc(100vw - var(--s)), calc(50vw - .35 * var(--s)), 0px);
+      object-fit:cover;object-position:left top;transform:none;
+    }
     .idx-hero-banner .hero-body{
       position:relative;margin-top:calc(64px + 44vh);padding-top:clamp(24px,4vh,44px);
       background:var(--pine-deep);
@@ -207,6 +219,21 @@
   .idx-sunlight-media{
     position:absolute;inset:0;width:100%;height:100%;z-index:0;
     object-fit:contain;object-position:right center;display:block;
+  }
+  /* Desktop: line him up vertically with the hero woman above and scale him
+     to a matching presence. Her centre sits ~0.668 x (hero height - 72px)
+     from the right edge; his head sits ~0.521 x video height from the
+     right edge of a right-anchored 16:9 frame. Solving for the video height
+     that puts the two on the same vertical line gives 1.282 x (hero - 72px)
+     (~1.48x the old contained size). The frame stays right-anchored so it
+     still bleeds off the right edge, and overflow:hidden crops the excess. */
+  @media (min-width:901px){
+    .idx-sunlight-media{
+      inset:auto;top:0;right:0;left:auto;
+      height:calc(1.282 * (clamp(480px,70vh,680px) - 58px));
+      width:auto;aspect-ratio:16/9;
+      object-fit:cover;object-position:right top;
+    }
   }
   .idx-sunlight-scrim{
     position:absolute;inset:0;z-index:1;
@@ -267,7 +294,13 @@
     .idx-sunlight-fallback,
     .idx-sunlight-media,
     .idx-sunlight-scrim{position:absolute;top:0;left:0;right:0;bottom:auto;height:42vh;}
-    .idx-sunlight-media{object-fit:cover;object-position:75% top;}
+    /* His centre sits ~70% across the source frame; strip is 42vh tall. */
+    .idx-sunlight-media{
+      --s:max(140vw, 74.67vh);
+      width:var(--s);right:auto;
+      left:clamp(calc(100vw - var(--s)), calc(50vw - .70 * var(--s)), 0px);
+      object-fit:cover;object-position:left top;
+    }
     .idx-sunlight-scrim{background:linear-gradient(180deg, rgba(250,250,248,0) 55%, rgba(250,250,248,.98) 100%);}
     .idx-sunlight-body{
       position:relative;margin-top:42vh;padding:clamp(24px,5vh,36px) 20px;
@@ -538,10 +571,10 @@
   <div class="diptych">
 
     <article class="panel panel-story">
-      <div class="photo photo-illus">
-        <!-- SLOT 1 — illustration. Keep Questions-bro.svg in this folder. -->
-        <img class="illus" src="assets/images/Questions-bro.svg" alt="A student surrounded by unanswered questions about which teacher to choose"
-             onerror="this.closest('.photo').classList.add('missing')">
+      <div class="photo">
+        <video class="slot" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
+          <source src="assets/videos/yoga_teacher_brokers.mp4" type="video/mp4">
+        </video>
         <span class="stamp mono">Before YogSetu</span>
       </div>
       <div class="panel-body">
