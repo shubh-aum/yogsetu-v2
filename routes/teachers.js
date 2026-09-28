@@ -7,7 +7,6 @@ const multer = require('multer');
 const db = require('../config/db');
 const { requireRole } = require('../middleware/auth');
 const { logAudit } = require('../utils/audit');
-const { findOrCreateLocality } = require('../services/slugs');
 
 const PUBLIC_TEACHER_FIELDS = `
   t.user_id, t.full_name, t.gender, t.years_experience, t.teaching_mode, t.qualifications,
@@ -125,15 +124,8 @@ router.get('/me/full', requireRole('teacher'), async (req, res, next) => {
       [userId]
     );
     const [certTypes] = await db.query('SELECT id, name FROM certification_types ORDER BY name');
-    const [tags] = await db.query('SELECT id, kind, label FROM teacher_tags WHERE teacher_user_id = ? ORDER BY sort_order, id', [userId]);
-    const [formats] = await db.query('SELECT id, kind, title, price, description, is_popular FROM teacher_formats WHERE teacher_user_id = ?', [userId]);
-    const [locRows] = await db.query('SELECT name FROM localities WHERE id = ?', [teacher.locality_id || 0]);
-    const [cityRows] = await db.query('SELECT slug FROM cities WHERE id = ?', [teacher.city_id || 0]);
-    teacher.locality = locRows.length ? locRows[0].name : null;
-    teacher.public_url = teacher.verification_status === 'verified'
-      ? `/yoga-teachers/${cityRows.length ? cityRows[0].slug : 'all'}/${teacher.slug}` : null;
 
-    res.json({ teacher, expertise, certifications, documents, locations, packages, availability, certTypes, tags, formats });
+    res.json({ teacher, expertise, certifications, documents, locations, packages, availability, certTypes });
   } catch (err) {
     next(err);
   }
@@ -142,17 +134,8 @@ router.get('/me/full', requireRole('teacher'), async (req, res, next) => {
 // PUT /api/teachers/me/update — update own profile
 router.put('/me/update', requireRole('teacher'), async (req, res, next) => {
   try {
-    const { full_name, gender, years_experience, teaching_mode, qualifications, bio, per_session_price, trial_price, city, pincode, headline, tagline, locality } = req.body;
+    const { full_name, gender, years_experience, teaching_mode, qualifications, bio, per_session_price, trial_price, city, pincode } = req.body;
     const cityId = city !== undefined ? await findCityId(city) : undefined;
-    let localityId;
-    if (locality !== undefined && String(locality).trim()) {
-      let effectiveCity = cityId;
-      if (effectiveCity === undefined || effectiveCity === null) {
-        const [[current]] = await db.query('SELECT city_id FROM teachers WHERE user_id = ?', [req.session.user.id]);
-        effectiveCity = current ? current.city_id : null;
-      }
-      localityId = await findOrCreateLocality(db, effectiveCity, locality);
-    }
 
     await db.query(
       `UPDATE teachers SET
@@ -165,12 +148,9 @@ router.put('/me/update', requireRole('teacher'), async (req, res, next) => {
         per_session_price = COALESCE(?, per_session_price),
         trial_price = COALESCE(?, trial_price),
         city_id = COALESCE(?, city_id),
-        pincode = COALESCE(?, pincode),
-        headline = COALESCE(?, headline),
-        tagline = COALESCE(?, tagline),
-        locality_id = COALESCE(?, locality_id)
+        pincode = COALESCE(?, pincode)
        WHERE user_id = ?`,
-      [full_name, gender, years_experience, teaching_mode, qualifications, bio, per_session_price, trial_price, cityId, pincode, headline, tagline, localityId, req.session.user.id]
+      [full_name, gender, years_experience, teaching_mode, qualifications, bio, per_session_price, trial_price, cityId, pincode, req.session.user.id]
     );
 
     logAudit(req.session.user.id, 'Updated profile', 'teacher', req.session.user.id);

@@ -8,8 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/base.css">
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/site.css">
 <style>
   /* landing-page-only tweaks: give the fixed header real nav actions */
   .site-header-fixed .header-actions{display:flex;align-items:center;gap:14px;}
@@ -294,17 +294,12 @@
     .idx-sunlight-fallback,
     .idx-sunlight-media,
     .idx-sunlight-scrim{position:absolute;top:0;left:0;right:0;bottom:auto;height:42vh;}
-    /* Full-width strip; object-position keeps the subject (~70% across
-       the source frame) in view. Previously this used a hand-tuned
-       width/left calc(140vw / 74.67vh) meant to shift a 16:9 frame so the
-       subject stayed centred, but it only balanced out for one assumed
-       viewport aspect ratio — on taller/shorter phones the video's box
-       fell short of the right edge, leaving the fallback background
-       showing through as a blank gap. Filling 100% of the strip (inherited
-       from the shared left:0/right:0 rule above) and letting object-fit
-       cover handle the crop is robust across every device. */
+    /* His centre sits ~70% across the source frame; strip is 42vh tall. */
     .idx-sunlight-media{
-      object-fit:cover;object-position:70% top;
+      --s:max(140vw, 74.67vh);
+      width:var(--s);right:auto;
+      left:clamp(calc(100vw - var(--s)), calc(50vw - .70 * var(--s)), 0px);
+      object-fit:cover;object-position:left top;
     }
     .idx-sunlight-scrim{background:linear-gradient(180deg, rgba(250,250,248,0) 55%, rgba(250,250,248,.98) 100%);}
     .idx-sunlight-body{
@@ -405,22 +400,22 @@
 <body>
 
 <header class="site-header-fixed is-visible force-visible" id="siteHeaderFixed">
-  <a href="/" class="logo" aria-label="YogSetu home">
+  <a href="index.html" class="logo" aria-label="YogSetu home">
     <span class="mark" aria-hidden="true"></span>
     <span>
       <span class="word">Yog<em>Setu</em></span>
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="/" class="active">Homepage</a>
-    <a href="/about">About</a>
-    <a href="/yoga-jobs">Job board</a>
-    <a href="/teacher-benefits">For teachers</a>
-    <a href="/yoga-teachers">Browse teachers</a>
+    <a href="index.html" class="active">Homepage</a>
+    <a href="about.html">About</a>
+    <a href="requirements.html">Job board</a>
+    <a href="teacher-benefits.html">For teachers</a>
+    <a href="teachers.html">Browse teachers</a>
   </nav>
   <div class="header-actions">
-    <a href="/login" class="hdr-link">Log in</a>
-    <a href="/signup" class="btn btn-primary btn-small">Sign up</a>
+    <a href="login.html" class="hdr-link">Log in</a>
+    <a href="signup.html" class="btn btn-primary btn-small">Sign up</a>
   </div>
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
@@ -458,20 +453,20 @@
            Order matters: first matching source wins, so largest/most-specific
            comes first and the no-media source at the end is the catch-all. -->
       <video class="hero-media" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-        <source src="/assets/videos/cinemagraph_4K.mp4" type="video/mp4" media="(min-width: 1920px)">
-        <source src="/assets/videos/cinemagraph_desktop_1440p.mp4" type="video/mp4" media="(min-width: 1024px)">
-        <source src="/assets/videos/cinemagraph_laptop_1080p.mp4" type="video/mp4">
+        <source src="assets/videos/cinemagraph_4K.mp4" type="video/mp4" media="(min-width: 1920px)">
+        <source src="assets/videos/cinemagraph_desktop_1440p.mp4" type="video/mp4" media="(min-width: 1024px)">
+        <source src="assets/videos/cinemagraph_laptop_1080p.mp4" type="video/mp4">
       </video>
       <div class="hero-scrim"></div>
 
       <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="/">Homepage</a>
-    <a href="/about">About</a>
-    <a href="/yoga-jobs">Job board</a>
-    <a href="/teacher-benefits">For teachers</a>
-    <a href="/yoga-teachers">Browse teachers</a>
-  <a href="/login">Log in</a>
-  <a href="/signup">Sign up</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
+    <a href="requirements.html">Job board</a>
+    <a href="teacher-benefits.html">For teachers</a>
+    <a href="teachers.html">Browse teachers</a>
+  <a href="login.html">Log in</a>
+  <a href="signup.html">Sign up</a>
 </nav>
 
       <div class="hero-body">
@@ -502,7 +497,7 @@
           </div>
 
           <div class="cta-shell">
-            <a href="/yoga-teachers" class="btn btn-primary">
+            <a href="teachers.html" class="btn btn-primary">
               Browse verified teachers
               <span class="arrow" aria-hidden="true">→</span>
             </a>
@@ -527,9 +522,9 @@
   <section class="idx-sunlight-card" aria-labelledby="sunlight-title">
     <div class="idx-sunlight-fallback"></div>
     <video class="idx-sunlight-media" autoplay muted loop playsinline preload="auto" aria-hidden="true">
-      <source src="/assets/videos/sunlight_cinemagraph_4K.mp4" type="video/mp4" media="(min-width: 1920px)">
-      <source src="/assets/videos/sunlight_desktop_1440p.mp4" type="video/mp4" media="(min-width: 1024px)">
-      <source src="/assets/videos/sunlight_laptop_1080p.mp4" type="video/mp4">
+      <source src="assets/videos/sunlight_cinemagraph_4K.mp4" type="video/mp4" media="(min-width: 1920px)">
+      <source src="assets/videos/sunlight_desktop_1440p.mp4" type="video/mp4" media="(min-width: 1024px)">
+      <source src="assets/videos/sunlight_laptop_1080p.mp4" type="video/mp4">
     </video>
     <div class="idx-sunlight-scrim"></div>
 
@@ -537,7 +532,7 @@
       <div class="idx-sunlight-copy">
         <h2 id="sunlight-title">Book a Demo Class <em>in Just 1 Minute.</em></h2>
         <p>No paperwork, no waiting on hold &mdash; pick a verified teacher and lock in your first session right now.</p>
-        <a href="/yoga-teachers" class="idx-clock-cta" aria-label="Start now — book a demo class">
+        <a href="teachers.html" class="idx-clock-cta" aria-label="Start now — book a demo class">
           <span class="clock-face">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="9"/>
@@ -578,7 +573,7 @@
     <article class="panel panel-story">
       <div class="photo">
         <video class="slot" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-          <source src="/assets/videos/yoga_teacher_brokers.mp4" type="video/mp4">
+          <source src="assets/videos/yoga_teacher_brokers.mp4" type="video/mp4">
         </video>
         <span class="stamp mono">Before YogSetu</span>
       </div>
@@ -613,7 +608,7 @@
       <div class="photo">
         <!-- SLOT 2 — swap src for photo-truth.jpg once you have a still. -->
         <video class="slot" data-rate="1" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-          <source src="/assets/videos/1.mp4" type="video/mp4">
+          <source src="assets/videos/1.mp4" type="video/mp4">
         </video>
         <span class="seal" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>
@@ -738,7 +733,7 @@
 
     <div class="how-foot">
       <p>You will know more about your teacher than you did about your last five.</p>
-      <a href="/yoga-teachers">
+      <a href="teachers.html">
         Start with step one
         <span aria-hidden="true">→</span>
       </a>
@@ -947,7 +942,7 @@
         <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
       </button>
     </div>
-    <a class="btn-seeall" href="/yoga-teachers">See all teachers <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn-seeall" href="teachers.html">See all teachers <span class="arrow" aria-hidden="true">→</span></a>
   </div>
 
 </section>
@@ -955,8 +950,8 @@
 <div class="idx-reveal-scope">
 
 <section class="idx-book-visual">
-  <a class="idx-book-visual-link" href="/yoga-teachers" aria-label="Browse verified teachers and book a slot as per their availability">
-    <img src="/assets/images/bookclass.png" alt="Student booking a live yoga class through the YogSetu app" class="idx-book-visual-img">
+  <a class="idx-book-visual-link" href="teachers.html" aria-label="Browse verified teachers and book a slot as per their availability">
+    <img src="assets/images/bookclass.png" alt="Student booking a live yoga class through the YogSetu app" class="idx-book-visual-img">
     <div class="idx-book-visual-copy">
       <svg class="idx-book-arrow" viewBox="0 0 150 100" fill="none" aria-hidden="true">
         <path d="M12 76 C 36 20, 96 6, 130 42" stroke="var(--marigold)" stroke-width="9" stroke-linecap="round"/>
@@ -1466,7 +1461,7 @@
 
     <div class="global-presence-frame">
       <video class="global-presence-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-        <source src="/assets/images/global%20presence.mp4" type="video/mp4">
+        <source src="assets/images/global%20presence.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -1523,7 +1518,7 @@
                   <p class="a-text" style="display:block;">Ready to see who's teaching near you?</p>
                 </div>
               </div>
-              <a href="/yoga-teachers" class="followup-cta">Browse teachers now<span class="arrow" aria-hidden="true">→</span></a>
+              <a href="teachers.html" class="followup-cta">Browse teachers now<span class="arrow" aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
@@ -1604,7 +1599,7 @@
                   <p class="a-text" style="display:block;">Want to browse the online-only teachers?</p>
                 </div>
               </div>
-              <a href="/yoga-teachers" class="followup-cta">Browse online teachers<span class="arrow" aria-hidden="true">→</span></a>
+              <a href="teachers.html" class="followup-cta">Browse online teachers<span class="arrow" aria-hidden="true">→</span></a>
             </div>
           </div>
         </div>
@@ -1775,11 +1770,11 @@
       </div>
 
       <div class="final-ctas">
-        <a href="/yoga-teachers" class="btn btn-primary">
+        <a href="teachers.html" class="btn btn-primary">
           Browse teachers now
           <span class="arrow" aria-hidden="true">→</span>
         </a>
-        <a href="/signup?role=teacher" class="btn btn-secondary">
+        <a href="signup.html?role=teacher" class="btn btn-secondary">
           Are you a yoga teacher? Create your profile
         </a>
       </div>
@@ -1832,32 +1827,32 @@
       <div class="footer-col">
         <h4 class="mono">For students</h4>
         <ul>
-          <li><a href="/yoga-teachers">Browse teachers</a></li>
-          <li><a href="/yoga-jobs">Post a requirement</a></li>
-          <li><a href="/#verification">Verification process</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="teachers.html">Browse teachers</a></li>
+          <li><a href="requirements.html">Post a requirement</a></li>
+          <li><a href="index.html#verification">Verification process</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">For teachers</h4>
         <ul>
-          <li><a href="/signup?role=teacher">Create your profile</a></li>
-          <li><a href="/teacher-benefits">Become verified</a></li>
-          <li><a href="/yoga-jobs">Browse requirements</a></li>
-          <li><a href="/login">Teacher login</a></li>
+          <li><a href="signup.html?role=teacher">Create your profile</a></li>
+          <li><a href="teacher-benefits.html">Become verified</a></li>
+          <li><a href="requirements.html">Browse requirements</a></li>
+          <li><a href="login.html">Teacher login</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">Company</h4>
         <ul>
-          <li><a href="/about">About</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/terms">Terms &amp; conditions</a></li>
-          <li><a href="/privacy">Privacy policy</a></li>
-          <li><a href="/refund">Refund policy</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="terms.html">Terms &amp; conditions</a></li>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="refund.html">Refund policy</a></li>
         </ul>
       </div>
 
@@ -1972,7 +1967,7 @@
 
 
 <div class="sticky-cta" id="stickyCta" aria-hidden="true">
-  <a href="/yoga-teachers" class="btn btn-secondary" tabindex="-1">
+  <a href="teachers.html" class="btn btn-secondary" tabindex="-1">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4.2-4.2"/></svg>
     Browse teachers
   </a>

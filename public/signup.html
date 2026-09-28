@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/base.css">
-<link rel="stylesheet" href="/assets/css/site.css">
-<link rel="stylesheet" href="/assets/css/auth.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/auth.css">
 <style>
   /* --- Phone OTP verification (signup only) --- */
   .phone-verify-row{ display:flex; gap:8px; align-items:stretch; }
@@ -102,22 +102,22 @@
 <body class="inner-page">
 
 <header class="site-header-fixed is-visible force-visible" id="siteHeaderFixed">
-  <a href="/" class="logo" aria-label="YogSetu home">
+  <a href="index.html" class="logo" aria-label="YogSetu home">
     <span class="mark" aria-hidden="true"></span>
     <span>
       <span class="word">Yog<em>Setu</em></span>
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="/">Homepage</a>
-    <a href="/about">About</a>
-    <a href="/yoga-jobs">Job board</a>
-    <a href="/teacher-benefits">For teachers</a>
-    <a href="/yoga-teachers">Browse teachers</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
+    <a href="requirements.html">Job board</a>
+    <a href="teacher-benefits.html">For teachers</a>
+    <a href="teachers.html">Browse teachers</a>
   </nav>
   <div class="header-actions">
-    <a href="/login" class="hdr-link">Log in</a>
-    <a href="/signup" class="btn btn-primary btn-small">Sign up</a>
+    <a href="login.html" class="hdr-link">Log in</a>
+    <a href="signup.html" class="btn btn-primary btn-small">Sign up</a>
   </div>
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
@@ -125,13 +125,13 @@
 </header>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="/">Homepage</a>
-    <a href="/about">About</a>
-    <a href="/yoga-jobs">Job board</a>
-    <a href="/teacher-benefits">For teachers</a>
-    <a href="/yoga-teachers">Browse teachers</a>
-  <a href="/login">Log in</a>
-  <a href="/signup">Sign up</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
+    <a href="requirements.html">Job board</a>
+    <a href="teacher-benefits.html">For teachers</a>
+    <a href="teachers.html">Browse teachers</a>
+  <a href="login.html">Log in</a>
+  <a href="signup.html">Sign up</a>
 </nav>
 
 <main>
@@ -139,7 +139,7 @@
 <div class="auth-split">
   <div class="auth-split-media">
     <video class="auth-split-video" autoplay muted loop playsinline aria-hidden="true" tabindex="-1">
-      <source src="/assets/images/global%20presence.mp4" type="video/mp4">
+      <source src="assets/images/global%20presence.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -219,14 +219,14 @@
         <div class="field"><label for="s-need">What are you looking for? (optional)</label><input type="text" id="s-need" placeholder="e.g. Hatha teacher, mornings, Lucknow"></div>
       </div>
 
-      <label class="checkbox-row"><input type="checkbox" required><span>I agree to the <a href="/terms" style="color:var(--marigold-deep);">Terms &amp; Conditions</a> and <a href="/privacy" style="color:var(--marigold-deep);">Privacy Policy</a>.</span></label>
+      <label class="checkbox-row"><input type="checkbox" required><span>I agree to the <a href="terms.html" style="color:var(--marigold-deep);">Terms &amp; Conditions</a> and <a href="privacy.html" style="color:var(--marigold-deep);">Privacy Policy</a>.</span></label>
 
       <button type="submit" id="signupSubmitBtn" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:18px;">Create account</button>
       <p data-form-note hidden style="margin-top:14px;text-align:center;font-weight:600;font-size:14px;"></p>
     </form>
 
         <div class="auth-divider">or</div>
-        <p class="auth-foot">Already have an account? <a href="/login">Log in</a></p>
+        <p class="auth-foot">Already have an account? <a href="login.html">Log in</a></p>
       </div>
     </div>
   </div>
@@ -246,32 +246,32 @@
       <div class="footer-col">
         <h4 class="mono">For students</h4>
         <ul>
-          <li><a href="/yoga-teachers">Browse teachers</a></li>
-          <li><a href="/yoga-jobs">Post a requirement</a></li>
-          <li><a href="/#verification">Verification process</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="teachers.html">Browse teachers</a></li>
+          <li><a href="requirements.html">Post a requirement</a></li>
+          <li><a href="index.html#verification">Verification process</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">For teachers</h4>
         <ul>
-          <li><a href="/signup?role=teacher">Create your profile</a></li>
-          <li><a href="/teacher-benefits">Become verified</a></li>
-          <li><a href="/yoga-jobs">Browse requirements</a></li>
-          <li><a href="/login">Teacher login</a></li>
+          <li><a href="signup.html?role=teacher">Create your profile</a></li>
+          <li><a href="teacher-benefits.html">Become verified</a></li>
+          <li><a href="requirements.html">Browse requirements</a></li>
+          <li><a href="login.html">Teacher login</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">Company</h4>
         <ul>
-          <li><a href="/about">About</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/terms">Terms &amp; conditions</a></li>
-          <li><a href="/privacy">Privacy policy</a></li>
-          <li><a href="/refund">Refund policy</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="terms.html">Terms &amp; conditions</a></li>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="refund.html">Refund policy</a></li>
         </ul>
       </div>
 
@@ -284,7 +284,7 @@
   </div>
 </footer>
 
-<script src="/assets/js/site.js"></script>
+<script src="assets/js/site.js"></script>
 <script>
 (function(){
   const phoneInput   = document.getElementById('s-phone');

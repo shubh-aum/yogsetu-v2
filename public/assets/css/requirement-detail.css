@@ -76,11 +76,6 @@
 }
 .rd-hero-icon svg{width:34%;height:34%;stroke:#FFFDF7;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;opacity:.92;}
 .rd-icon--hatha{background:linear-gradient(150deg,#D97757,#A65032);}
-.rd-icon--ashtanga{background:linear-gradient(150deg,#3A3935,#1A1A18);}
-.rd-icon--prenatal{background:linear-gradient(150deg,#8C887D,#55534C);}
-.rd-icon--corporate{background:linear-gradient(150deg,#55534C,#1A1A18);}
-.rd-icon--therapeutic{background:linear-gradient(150deg,#A65032,#3A3935);}
-.rd-icon--generic{background:linear-gradient(150deg,#55534C,#A65032);}
 
 .rd-float-badge{
   position:absolute;left:-18px;bottom:16%;z-index:4;

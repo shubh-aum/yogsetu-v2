@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/base.css">
-<link rel="stylesheet" href="/assets/css/site.css">
-<link rel="stylesheet" href="/assets/css/dashboard.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/dashboard.css">
 <style>
   /* --- Account area: lives inside the normal site header/page frame, not a separate shell --- */
 
@@ -241,18 +241,18 @@
 <body class="inner-page">
 
 <header class="site-header-fixed is-visible force-visible" id="siteHeaderFixed">
-  <a href="/" class="logo" aria-label="YogSetu home">
+  <a href="index.html" class="logo" aria-label="YogSetu home">
     <span class="mark" aria-hidden="true"></span>
     <span>
       <span class="word">Yog<em>Setu</em></span>
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="/">Homepage</a>
-    <a href="/about">About</a>
-    <a href="/yoga-jobs">Job board</a>
-    <a href="/teacher-benefits">For teachers</a>
-    <a href="/yoga-teachers">Browse teachers</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
+    <a href="requirements.html">Job board</a>
+    <a href="teacher-benefits.html">For teachers</a>
+    <a href="teachers.html">Browse teachers</a>
   </nav>
   <div class="header-actions">
     <div class="profile-menu" id="profileMenu">
@@ -269,7 +269,7 @@
         <button class="profile-dropdown-item" data-section="requests"><svg viewBox="0 0 24 24"><path d="M21 12h-6l-2 3h-2l-2-3H3"/><path d="M5.5 5h13l2.5 7v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-7z"/></svg>Connection Requests</button>
         <button class="profile-dropdown-item" data-section="jobs"><svg viewBox="0 0 24 24"><rect x="6" y="4" width="12" height="16" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 11h6M9 15h6"/></svg>Job Applied</button>
         <div class="profile-dropdown-divider"></div>
-        <a href="/login" id="logoutLink" class="profile-dropdown-item logout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>Logout</a>
+        <a href="login.html" id="logoutLink" class="profile-dropdown-item logout"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg>Logout</a>
       </div>
     </div>
   </div>
@@ -279,13 +279,13 @@
 </header>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="/">Homepage</a>
-    <a href="/about">About</a>
-    <a href="/yoga-jobs">Job board</a>
-    <a href="/teacher-benefits">For teachers</a>
-    <a href="/yoga-teachers">Browse teachers</a>
-  <a href="/login">Log in</a>
-  <a href="/signup">Sign up</a>
+    <a href="index.html">Homepage</a>
+    <a href="about.html">About</a>
+    <a href="requirements.html">Job board</a>
+    <a href="teacher-benefits.html">For teachers</a>
+    <a href="teachers.html">Browse teachers</a>
+  <a href="login.html">Log in</a>
+  <a href="signup.html">Sign up</a>
 </nav>
 
 <main>
@@ -300,7 +300,6 @@
     <button class="dash-tab" data-section="overview" aria-selected="true">Overview</button>
     <button class="dash-tab" data-section="profile" aria-selected="false">My Profile</button>
     <button class="dash-tab" data-section="ratings" aria-selected="false">Ratings</button>
-    <button class="dash-tab" data-section="engagement" aria-selected="false">Questions &amp; Comments <span class="count" id="tabEngagementCount">0</span></button>
     <button class="dash-tab" data-section="wallet" aria-selected="false">My Wallet</button>
     <button class="dash-tab" data-section="requests" aria-selected="false">Connection Requests <span class="count" id="tabRequestsCount">0</span></button>
     <button class="dash-tab" data-section="jobs" aria-selected="false">Job Applied <span class="count" id="tabJobsCount">0</span></button>
@@ -331,7 +330,7 @@
 
 <section class="dash-section" data-section-panel="profile" hidden>
   <div class="dcard">
-    <div class="dcard-head"><h2>Complete your public profile</h2><a id="viewPublicLink" class="btn-xs ghost" href="#" target="_blank" rel="noopener" hidden>View public profile &nearr;</a><p>This is what students see on your Teacher Profile page. Finish every step to unlock a completion bonus.</p></div>
+    <div class="dcard-head"><h2>Complete your public profile</h2><p>This is what students see on your Teacher Profile page. Finish every step to unlock a completion bonus.</p></div>
 
     <div class="profile-completion">
       <div class="pc-head"><span class="pc-title">Profile completion</span><span class="pc-pct" id="pcPct">0%</span></div>
@@ -361,8 +360,6 @@
             <div class="field"><label>Full name</label><input type="text" id="wFullName" required></div>
             <div class="field"><label>Phone</label><input type="tel" id="wPhone" disabled></div>
             <div class="field"><label>Email</label><input type="email" id="wEmail" disabled></div>
-            <div class="field"><label>Specialty headline</label><input type="text" id="wHeadline" maxlength="160" placeholder="e.g. Hatha &amp; Ashtanga"></div>
-            <div class="field"><label>Profile summary</label><textarea id="wTagline" maxlength="500" placeholder="One short paragraph shown under your name on your public profile."></textarea></div>
           </div>
           <div>
             <div class="field"><label>Profile photo</label>
@@ -386,10 +383,6 @@
           <div class="tags" id="expertiseTags"><span class="tag-add" style="cursor:pointer;border-style:dashed;">+ Add</span></div>
         </div>
         <div class="field"><label>Qualifications</label><textarea id="wQualifications"></textarea></div>
-        <div class="two-col">
-          <div class="field"><label>Focus tags (comma separated)</label><input type="text" id="wFocusTags" placeholder="e.g. Hatha, Ashtanga, Beginners"></div>
-          <div class="field"><label>Languages you teach in</label><input type="text" id="wLanguages" placeholder="e.g. English, Hindi"></div>
-        </div>
       </div>
 
       <div class="wizard-panel" data-wizard-step="3" hidden>
@@ -425,9 +418,7 @@
           <div class="field"><label>City</label><input type="text" id="wCity" placeholder="e.g. Lucknow"></div>
           <div class="field"><label>Pin code</label><input type="text" maxlength="6" id="wPincode"></div>
         </div>
-        <div class="field"><label>Locality / area</label><input type="text" id="wLocality" list="localityList" maxlength="100" placeholder="e.g. Gomti Nagar"><datalist id="localityList"></datalist>
-          <p style="font-size:12px;color:var(--ink-faint);margin-top:6px;">Used for your local page, e.g. /yoga-teachers/<span id="cityHint">your-city</span>/<span id="localityHint">your-area</span>.</p></div>
-        <div class="field"><label>Bio</label><textarea id="wBio" placeholder="Separate paragraphs with a blank line."></textarea></div>
+        <div class="field"><label>Bio</label><textarea id="wBio"></textarea></div>
       </div>
 
       <div class="wizard-panel" data-wizard-step="5" hidden>
@@ -452,20 +443,7 @@
           <div class="field"><label>Per-session price (&#8377;)</label><input type="number" id="wPerSession"></div>
           <div class="field"><label>Trial class price (&#8377;, optional)</label><input type="number" id="wTrialPrice" placeholder="0 = free trial"></div>
         </div>
-        <div class="dcard-head" style="margin-top:6px;"><h2 style="font-size:15px;">Session formats on your public profile</h2><p>Leave a price empty to hide that format.</p></div>
-        <div class="two-col">
-          <div>
-            <div class="field"><label>1:1 Online &mdash; price per session (&#8377;)</label><input type="number" id="wFmtOnlinePrice" min="0"></div>
-            <div class="field"><label>Online description</label><textarea id="wFmtOnlineDesc" rows="2" maxlength="400" placeholder="e.g. One-on-one over video call, scheduled around your week."></textarea></div>
-            <label class="tswitch"><input type="checkbox" id="wFmtOnlinePopular"><span class="track"></span><span class="lbl">Mark as most booked</span></label>
-          </div>
-          <div>
-            <div class="field"><label>1:1 In-studio &mdash; price per session (&#8377;)</label><input type="number" id="wFmtOfflinePrice" min="0"></div>
-            <div class="field"><label>In-studio description</label><textarea id="wFmtOfflineDesc" rows="2" maxlength="400" placeholder="e.g. In-person at my studio, props included."></textarea></div>
-            <label class="tswitch"><input type="checkbox" id="wFmtOfflinePopular"><span class="track"></span><span class="lbl">Mark as most booked</span></label>
-          </div>
-        </div>
-        <div class="dcard-head" style="margin-top:18px;"><h2 style="font-size:15px;">Package pricing (optional)</h2></div>
+        <div class="dcard-head" style="margin-top:6px;"><h2 style="font-size:15px;">Package pricing (optional)</h2></div>
         <div id="packageRows"></div>
         <div class="field-row" style="margin-top:8px;">
           <input type="number" id="newPackageSessions" placeholder="Sessions" style="padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--paper);max-width:110px;">
@@ -496,17 +474,6 @@
       </div>
     </div>
     <div id="ratingsList"><p class="empty-note">Loading&hellip;</p></div>
-  </div>
-</section>
-
-<section class="dash-section" data-section-panel="engagement" hidden>
-  <div class="dcard">
-    <div class="dcard-head"><h2>Questions from students</h2><p>Answer a question to publish it on your public profile. Unanswered questions stay private.</p></div>
-    <div id="questionsList"><p class="empty-note">Loading&hellip;</p></div>
-  </div>
-  <div class="dcard">
-    <div class="dcard-head"><h2>Comments on your profile</h2><p>Public comments from visitors. Hide anything that is spam or off-topic.</p></div>
-    <div id="commentsList"><p class="empty-note">Loading&hellip;</p></div>
   </div>
 </section>
 
@@ -592,32 +559,32 @@
       <div class="footer-col">
         <h4 class="mono">For students</h4>
         <ul>
-          <li><a href="/yoga-teachers">Browse teachers</a></li>
-          <li><a href="/yoga-jobs">Post a requirement</a></li>
-          <li><a href="/#verification">Verification process</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><a href="teachers.html">Browse teachers</a></li>
+          <li><a href="requirements.html">Post a requirement</a></li>
+          <li><a href="index.html#verification">Verification process</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">For teachers</h4>
         <ul>
-          <li><a href="/signup?role=teacher">Create your profile</a></li>
-          <li><a href="/teacher-benefits">Become verified</a></li>
-          <li><a href="/yoga-jobs">Browse requirements</a></li>
-          <li><a href="/login">Teacher login</a></li>
+          <li><a href="signup.html?role=teacher">Create your profile</a></li>
+          <li><a href="teacher-benefits.html">Become verified</a></li>
+          <li><a href="requirements.html">Browse requirements</a></li>
+          <li><a href="login.html">Teacher login</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">Company</h4>
         <ul>
-          <li><a href="/about">About</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a></li>
-          <li><a href="/contact">Contact</a></li>
-          <li><a href="/terms">Terms &amp; conditions</a></li>
-          <li><a href="/privacy">Privacy policy</a></li>
-          <li><a href="/refund">Refund policy</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="terms.html">Terms &amp; conditions</a></li>
+          <li><a href="privacy.html">Privacy policy</a></li>
+          <li><a href="refund.html">Refund policy</a></li>
         </ul>
       </div>
 
@@ -630,14 +597,13 @@
   </div>
 </footer>
 
-<script src="/assets/js/site.js"></script>
+<script src="assets/js/site.js"></script>
 <script>
 (function(){
   const titles = {
     overview: ['Overview', 'Your activity at a glance'],
     profile:  ['My Profile', 'Complete your public profile'],
     ratings:  ['Ratings', 'What students are saying'],
-    engagement: ['Questions & Comments', 'What visitors are asking and saying on your public profile'],
     wallet:   ['My Wallet', 'Your credits and platform fee status'],
     requests: ['Connection Requests', 'Accept or decline incoming requests'],
     jobs:     ['Job Applied', 'Track responses to requirements you applied to']
@@ -668,7 +634,6 @@
     });
     dashTitle.textContent = titles[name][0];
     dashSub.textContent = titles[name][1];
-    if(name === 'engagement') loadEngagement();
     closeProfileMenu();
     document.querySelector('.dash-page-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
@@ -898,7 +863,7 @@
     const apps = (DATA.dashboard.applications || []).slice(0, 3);
     jobsList.innerHTML = apps.length
       ? apps.map(function(a){
-          return '<div class="list-row"><div class="body"><div class="top-line"><h4><a href="' + esc(a.public_url || '/yoga-jobs') + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + esc(a.title) + '</a></h4><span class="status-pill ' + (STATUS_PILL[a.status]||'pending') + '">' + esc(a.status) + '</span></div><p>Applied ' + timeAgo(a.applied_at) + '</p></div></div>';
+          return '<div class="list-row"><div class="body"><div class="top-line"><h4>' + esc(a.title) + '</h4><span class="status-pill ' + (STATUS_PILL[a.status]||'pending') + '">' + esc(a.status) + '</span></div><p>Applied ' + timeAgo(a.applied_at) + '</p></div></div>';
         }).join('')
       : '<p class="empty-note">No job applications yet.</p>';
   }
@@ -926,23 +891,6 @@
     setVal('wCity', t.city || '');
     setVal('wPincode', t.pincode || '');
     setVal('wBio', t.bio || '');
-    setVal('wHeadline', t.headline || '');
-    setVal('wTagline', t.tagline || '');
-    setVal('wLocality', t.locality || '');
-    const tagsOf = function(kind){ return (DATA.full.tags || []).filter(function(x){ return x.kind === kind; }).map(function(x){ return x.label; }).join(', '); };
-    setVal('wFocusTags', tagsOf('focus'));
-    setVal('wLanguages', tagsOf('language'));
-    ['online','offline'].forEach(function(kind){
-      const f = (DATA.full.formats || []).find(function(x){ return x.kind === kind; });
-      const cap = kind === 'online' ? 'Online' : 'Offline';
-      setVal('wFmt' + cap + 'Price', f ? Number(f.price) : '');
-      setVal('wFmt' + cap + 'Desc', f && f.description ? f.description : '');
-      const pop = document.getElementById('wFmt' + cap + 'Popular'); if(pop) pop.checked = !!(f && f.is_popular);
-    });
-    const pub = document.getElementById('viewPublicLink');
-    if(pub){ if(t.public_url){ pub.href = t.public_url; pub.hidden = false; } else { pub.hidden = true; } }
-    const ch = document.getElementById('cityHint'); if(ch) ch.textContent = (t.city || 'your-city').toLowerCase().replace(/[^a-z0-9]+/g,'-');
-    loadLocalities(t.city);
     setVal('wPerSession', t.per_session_price != null ? Number(t.per_session_price) : '');
     setVal('wTrialPrice', t.trial_price != null ? Number(t.trial_price) : '');
 
@@ -1228,76 +1176,6 @@
     });
   }
 
-  // ---- locality suggestions for the city typed above ----
-  async function loadLocalities(city){
-    const list = document.getElementById('localityList');
-    if(!list || !city) return;
-    try {
-      const r = await api('/api/lookups/localities?city=' + encodeURIComponent(city));
-      list.innerHTML = (r.localities || []).map(function(l){ return '<option value="' + esc(l.name) + '"></option>'; }).join('');
-    } catch(e){ /* suggestions are optional */ }
-  }
-  const cityInput = document.getElementById('wCity');
-  if(cityInput){
-    cityInput.addEventListener('change', function(){
-      loadLocalities(cityInput.value.trim());
-      const ch = document.getElementById('cityHint'); if(ch) ch.textContent = (cityInput.value || 'your-city').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-');
-    });
-  }
-  const localityInput = document.getElementById('wLocality');
-  if(localityInput){
-    localityInput.addEventListener('input', function(){
-      const lh = document.getElementById('localityHint'); if(lh) lh.textContent = (localityInput.value || 'your-area').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-');
-    });
-  }
-
-  // ---- questions & comments from the public profile ----
-  async function loadEngagement(){
-    try {
-      const r = await api('/api/teachers/me/engagement');
-      const unanswered = (r.questions || []).filter(function(q){ return !q.answer; }).length;
-      setText('tabEngagementCount', String(unanswered));
-      const qBox = document.getElementById('questionsList');
-      qBox.innerHTML = (r.questions || []).length ? r.questions.map(function(q){
-        const answered = !!q.answer;
-        return '<div class="list-row" data-qid="' + q.id + '"><div class="body">' +
-          '<div class="top-line"><h4>' + esc(q.question) + '</h4><span class="status-pill ' + (answered ? (q.status === 'hidden' ? 'declined' : 'approved') : 'pending') + '">' + (answered ? (q.status === 'hidden' ? 'hidden' : 'published') : 'needs answer') + '</span><span class="time">' + esc(q.asker_name || 'Student') + ' &middot; ' + timeAgo(q.asked_at) + '</span></div>' +
-          (answered ? '<p>' + esc(q.answer) + '</p><div class="actions"><button class="btn-xs ghost" data-q-toggle="' + (q.status === 'hidden' ? 'published' : 'hidden') + '">' + (q.status === 'hidden' ? 'Show on profile' : 'Hide from profile') + '</button></div>'
-            : '<div class="field" style="margin-top:8px;"><textarea rows="2" maxlength="1200" placeholder="Write your answer&hellip;" data-q-answer></textarea></div><div class="actions"><button class="btn-xs dark" data-q-publish>Publish answer</button></div>') +
-          '</div></div>';
-      }).join('') : '<p class="empty-note">No questions yet. When a student asks something on your profile, it shows up here.</p>';
-      qBox.querySelectorAll('[data-q-publish]').forEach(function(btn){
-        btn.addEventListener('click', async function(){
-          const row = btn.closest('[data-qid]');
-          const answer = row.querySelector('[data-q-answer]').value.trim();
-          try { await api('/api/teachers/me/questions/' + row.getAttribute('data-qid') + '/answer', { method: 'POST', body: JSON.stringify({ answer: answer }) }); toast('Answer published on your profile.'); loadEngagement(); }
-          catch(e){ toast(e.message, true); }
-        });
-      });
-      qBox.querySelectorAll('[data-q-toggle]').forEach(function(btn){
-        btn.addEventListener('click', async function(){
-          const row = btn.closest('[data-qid]');
-          try { await api('/api/teachers/me/questions/' + row.getAttribute('data-qid'), { method: 'PATCH', body: JSON.stringify({ status: btn.getAttribute('data-q-toggle') }) }); loadEngagement(); }
-          catch(e){ toast(e.message, true); }
-        });
-      });
-      const cBox = document.getElementById('commentsList');
-      cBox.innerHTML = (r.comments || []).length ? r.comments.map(function(c){
-        const hidden = c.status === 'hidden';
-        return '<div class="list-row" data-cid="' + c.id + '"><span class="avatar">' + esc(initials(c.author_name)) + '</span><div class="body">' +
-          '<div class="top-line"><h4>' + esc(c.author_name) + '</h4><span class="status-pill ' + (hidden ? 'declined' : 'approved') + '">' + (hidden ? 'hidden' : 'visible') + '</span><span class="time">' + timeAgo(c.created_at) + '</span></div>' +
-          '<p>' + esc(c.body) + '</p><div class="actions"><button class="btn-xs ghost" data-c-toggle="' + (hidden ? 'published' : 'hidden') + '">' + (hidden ? 'Restore' : 'Hide') + '</button></div></div></div>';
-      }).join('') : '<p class="empty-note">No comments yet.</p>';
-      cBox.querySelectorAll('[data-c-toggle]').forEach(function(btn){
-        btn.addEventListener('click', async function(){
-          const row = btn.closest('[data-cid]');
-          try { await api('/api/teachers/me/comments/' + row.getAttribute('data-cid'), { method: 'PATCH', body: JSON.stringify({ status: btn.getAttribute('data-c-toggle') }) }); loadEngagement(); }
-          catch(e){ toast(e.message, true); }
-        });
-      });
-    } catch(e){ toast('Could not load questions & comments — ' + e.message, true); }
-  }
-
   // ---- wizard: save core profile fields ----
   const profileForm = document.getElementById('profileWizardForm');
   if(profileForm){
@@ -1313,23 +1191,11 @@
         city: document.getElementById('wCity').value.trim(),
         pincode: document.getElementById('wPincode').value.trim(),
         per_session_price: document.getElementById('wPerSession').value || null,
-        trial_price: document.getElementById('wTrialPrice').value || null,
-        headline: document.getElementById('wHeadline').value.trim(),
-        tagline: document.getElementById('wTagline').value.trim(),
-        locality: document.getElementById('wLocality').value.trim()
-      };
-      const splitList = function(id){ return document.getElementById(id).value.split(',').map(function(x){ return x.trim(); }).filter(Boolean); };
-      const fmt = function(cap){
-        const price = document.getElementById('wFmt' + cap + 'Price').value;
-        return price ? { price: Number(price), description: document.getElementById('wFmt' + cap + 'Desc').value.trim(), is_popular: document.getElementById('wFmt' + cap + 'Popular').checked } : null;
+        trial_price: document.getElementById('wTrialPrice').value || null
       };
       try {
         await api('/api/teachers/me/update', { method: 'PUT', body: JSON.stringify(payload) });
-        await api('/api/teachers/me/tags', { method: 'PUT', body: JSON.stringify({ focus: splitList('wFocusTags'), languages: splitList('wLanguages') }) });
-        await api('/api/teachers/me/formats', { method: 'PUT', body: JSON.stringify({ online: fmt('Online'), offline: fmt('Offline') }) });
-        DATA.full = await api('/api/teachers/me/full');
-        const pub = document.getElementById('viewPublicLink');
-        if(pub && DATA.full.teacher.public_url){ pub.href = DATA.full.teacher.public_url; pub.hidden = false; }
+        Object.assign(DATA.full.teacher, payload);
         if(note){ note.hidden = false; note.style.color = 'var(--pine)'; note.textContent = 'Saved — changes are reflected on your public profile.'; }
         renderHeader();
         updateCompletionUI();
@@ -1525,7 +1391,7 @@
     list.innerHTML = apps.length ? apps.map(function(a){
       const budget = (a.budget_min || a.budget_max) ? money(a.budget_min) + ' – ' + money(a.budget_max) + ' / session' : 'Budget not specified';
       let html = '<div class="list-row" data-row><div class="body">' +
-        '<div class="top-line"><h4><a href="' + esc(a.public_url || '/yoga-jobs') + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + esc(a.title) + '</a></h4><span class="status-pill ' + (STATUS_PILL[a.status]||'pending') + '">' + esc(a.status) + '</span><span class="time">Applied ' + timeAgo(a.applied_at) + '</span></div>' +
+        '<div class="top-line"><h4>' + esc(a.title) + '</h4><span class="status-pill ' + (STATUS_PILL[a.status]||'pending') + '">' + esc(a.status) + '</span><span class="time">Applied ' + timeAgo(a.applied_at) + '</span></div>' +
         '<p>' + budget + ' · ' + esc(a.mode || '') + (a.city ? ' · ' + esc(a.city) : '') + '</p>';
       if(a.client_name){ html += contactRevealHTML(a.client_email, a.client_phone); }
       html += '</div></div>';

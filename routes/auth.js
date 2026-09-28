@@ -3,7 +3,6 @@ const bcrypt = require('bcryptjs');
 const router = express.Router();
 const db = require('../config/db');
 const { logAudit } = require('../utils/audit');
-const { teacherSlug } = require('../services/slugs');
 
 async function findCityId(cityName) {
   if (!cityName) return null;
@@ -83,10 +82,9 @@ router.post('/signup', async (req, res, next) => {
         [userId, userId]
       );
     } else {
-      const slug = await teacherSlug(conn, name.trim(), cityId);
       await conn.query(
-        'INSERT INTO teachers (user_id, full_name, slug, city_id, bio) VALUES (?, ?, ?, ?, ?)',
-        [userId, name.trim(), slug, cityId, need ? need.trim() : null]
+        'INSERT INTO teachers (user_id, full_name, city_id, bio) VALUES (?, ?, ?, ?)',
+        [userId, name.trim(), cityId, need ? need.trim() : null]
       );
       const styleId = await findStyleId(style);
       if (styleId) {

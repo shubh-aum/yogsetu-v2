@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="YogSetu">
-  <circle cx="32" cy="32" r="32" fill="#1A1A18"/>
-  <path d="M12 42c0-11.6 8.9-20 20-20s20 8.4 20 20" fill="none" stroke="#D97757" stroke-width="5" stroke-linecap="round"/>
-  <path d="M22 42c0-6.6 4.2-11 10-11s10 4.4 10 11" fill="none" stroke="#F7F3EC" stroke-width="4" stroke-linecap="round"/>
-  <circle cx="32" cy="46" r="3.4" fill="#D97757"/>
-</svg>
