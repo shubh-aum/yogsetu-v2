@@ -78,3 +78,17 @@
   .ae-savebar .ae-view{display:none;}
   .ae-savebar .btn-xs{flex:1;justify-content:center;}
 }
+
+/* ---- Legal & contact pages editor: page tabs ---- */
+.pg-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px;padding:5px;background:var(--paper,#fff);border:1px solid var(--line,#E3E1DB);border-radius:14px;}
+.pg-tabs button{flex:1 1 auto;padding:10px 16px;border:0;border-radius:10px;background:transparent;font:inherit;font-size:13.5px;font-weight:600;color:var(--ink-soft,#55524A);cursor:pointer;}
+.pg-tabs button:hover{background:var(--sand,#FAFAF8);color:var(--ink,#1C1B18);}
+.pg-tabs button.is-active{background:var(--pine-deep,#171614);color:#FFFDF7;}
+.pg-tabs button:focus-visible{outline:3px solid var(--marigold,#D97757);outline-offset:1px;}
+
+/* ---- Contact inbox filters ---- */
+.cm-filters{display:flex;flex-wrap:wrap;gap:6px;}
+.cm-filters button{padding:6px 12px;border:1px solid var(--line,#E3E1DB);border-radius:999px;background:var(--paper,#fff);font:inherit;font-size:12.5px;font-weight:600;color:var(--ink-soft,#55524A);cursor:pointer;}
+.cm-filters button span{margin-left:4px;color:var(--ink-faint,#8C887D);font-weight:500;}
+.cm-filters button.is-active{background:var(--pine-deep,#171614);border-color:var(--pine-deep,#171614);color:#fff;}
+.cm-filters button.is-active span{color:rgba(255,255,255,.7);}

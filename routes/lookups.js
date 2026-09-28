@@ -5,7 +5,7 @@ const db = require('../config/db');
 // GET /api/lookups/styles
 router.get('/styles', async (req, res, next) => {
   try {
-    const [rows] = await db.query('SELECT id, name FROM yoga_styles ORDER BY name');
+    const [rows] = await db.query('SELECT id, name, slug FROM yoga_styles ORDER BY name');
     res.json({ styles: rows });
   } catch (err) {
     next(err);
@@ -15,8 +15,24 @@ router.get('/styles', async (req, res, next) => {
 // GET /api/lookups/cities
 router.get('/cities', async (req, res, next) => {
   try {
-    const [rows] = await db.query('SELECT id, name FROM cities ORDER BY name');
+    const [rows] = await db.query('SELECT id, name, slug FROM cities ORDER BY name');
     res.json({ cities: rows });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// GET /api/lookups/localities?city=Lucknow — area suggestions for a city (by name or slug)
+router.get('/localities', async (req, res, next) => {
+  try {
+    const city = String(req.query.city || '').trim();
+    if (!city) return res.json({ localities: [] });
+    const [rows] = await db.query(
+      `SELECT l.id, l.name, l.slug FROM localities l JOIN cities c ON c.id = l.city_id
+        WHERE c.name = ? OR c.slug = ? ORDER BY l.name`,
+      [city, city.toLowerCase()]
+    );
+    res.json({ localities: rows });
   } catch (err) {
     next(err);
   }

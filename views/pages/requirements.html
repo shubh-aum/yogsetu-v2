@@ -3,38 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Client Requirements &amp; Yoga Jobs | YogSetu</title>
-<meta name="description" content="Browse open yoga teaching requirements posted by clients on YogSetu and apply directly. Every requirement is OTP-verified and reviewed before it goes live.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/site.css">
-<link rel="stylesheet" href="assets/css/teachers.css">
-<link rel="stylesheet" href="assets/css/requirements.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/teachers.css">
+<link rel="stylesheet" href="/assets/css/requirements.css">
+<link rel="stylesheet" href="/assets/css/listing-seo.css">
 </head>
 <body class="inner-page">
 
 <header class="site-header-fixed is-visible force-visible" id="siteHeaderFixed">
-  <a href="index.html" class="logo" aria-label="YogSetu home">
+  <a href="/" class="logo" aria-label="YogSetu home">
     <span class="mark" aria-hidden="true"></span>
     <span>
       <span class="word">Yog<em>Setu</em></span>
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="index.html">Homepage</a>
-    <a href="about.html">About</a>
-    <a href="requirements.html" class="active">Job board</a>
-    <a href="teacher-benefits.html">For teachers</a>
-    <a href="teachers.html">Browse teachers</a>
+    <a href="/">Homepage</a>
+    <a href="/about">About</a>
+    <a href="/yoga-jobs" class="active">Job board</a>
+    <a href="/teacher-benefits">For teachers</a>
+    <a href="/yoga-teachers">Browse teachers</a>
   </nav>
   <div class="header-actions">
     <button type="button" class="profile-btn hdr-search-btn" id="headerSearchBtn" aria-label="Search requirements" aria-expanded="false" aria-controls="headerSearchPanel">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
     </button>
-    <a href="login.html" class="hdr-link">Log in</a>
-    <a href="signup.html" class="btn btn-primary btn-small">Sign up</a>
+    <a href="/login" class="hdr-link">Log in</a>
+    <a href="/signup" class="btn btn-primary btn-small">Sign up</a>
   </div>
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
@@ -48,16 +47,14 @@
         <label for="heroCity">City</label>
         <select id="heroCity">
           <option value="">Any city</option>
-          <option>Lucknow</option><option>Delhi</option><option>Mumbai</option>
-          <option>Bengaluru</option><option>Gurugram</option>
+          <!--@city-options-->
         </select>
       </div>
       <div class="tsearch-field">
         <label for="heroStyle">Style needed</label>
         <select id="heroStyle">
           <option value="">Any style</option>
-          <option>Hatha</option><option>Ashtanga</option><option>Prenatal</option>
-          <option>Corporate Wellness</option><option>Therapeutic</option>
+          <!--@style-options-->
         </select>
       </div>
       <div class="tsearch-field">
@@ -82,13 +79,13 @@
 </div>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="index.html">Homepage</a>
-    <a href="about.html">About</a>
-    <a href="requirements.html">Job board</a>
-    <a href="teacher-benefits.html">For teachers</a>
-    <a href="teachers.html">Browse teachers</a>
-  <a href="login.html">Log in</a>
-  <a href="signup.html">Sign up</a>
+    <a href="/">Homepage</a>
+    <a href="/about">About</a>
+    <a href="/yoga-jobs">Job board</a>
+    <a href="/teacher-benefits">For teachers</a>
+    <a href="/yoga-teachers">Browse teachers</a>
+  <a href="/login">Log in</a>
+  <a href="/signup">Sign up</a>
 </nav>
 
 <main>
@@ -101,7 +98,7 @@
            autoplay muted loop playsinline
            preload="auto"
            aria-hidden="true" tabindex="-1">
-      <source src="assets/videos/1.mp4" type="video/mp4">
+      <source src="/assets/videos/1.mp4" type="video/mp4">
     </video>
     <div class="hero-scrim"></div>
 
@@ -157,14 +154,14 @@
         <div class="trust">
           <span class="shield">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-4z"/></svg>
-            Trusted by 480+ teachers
+            Trusted by <!--@trust-teachers-->+ teachers
           </span>
           <span class="divider" aria-hidden="true"></span>
-          <span><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4.8/5 across matched requirements</span>
+          <span><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span> <!--@trust-rating-->/5 across matched requirements</span>
         </div>
 
         <div class="cta-shell">
-          <a href="about.html#verification" class="btn btn-secondary">
+          <a href="/about#verification" class="btn btn-secondary">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
             How it works
           </a>
@@ -198,16 +195,12 @@
 
     <div class="filter-group">
       <h4>Style needed</h4>
-      <label class="filter-opt"><input type="checkbox" class="style-filter" value="Hatha"> Hatha</label>
-      <label class="filter-opt"><input type="checkbox" class="style-filter" value="Ashtanga"> Ashtanga</label>
-      <label class="filter-opt"><input type="checkbox" class="style-filter" value="Prenatal"> Prenatal</label>
-      <label class="filter-opt"><input type="checkbox" class="style-filter" value="Therapeutic"> Therapeutic</label>
-      <label class="filter-opt"><input type="checkbox" class="style-filter" value="Corporate Wellness"> Corporate Wellness</label>
+<!--@style-filters-->
     </div>
 
     <div class="filter-group">
       <h4>City</h4>
-      <select id="filterCity"><option>All cities</option><option>Lucknow</option><option>Online</option><option>Delhi</option><option>Gurugram</option><option>Bengaluru</option></select>
+      <select id="filterCity"><option value="" data-url="/yoga-jobs">All cities</option><!--@city-options--></select>
     </div>
 
     <div class="filter-group">
@@ -225,7 +218,7 @@
   <div>
     <div class="results-bar" id="resultsBar">
       <button class="filters-toggle" data-filters-toggle><svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2"><path d="M4 6h16M7 12h10M10 18h4"/></svg> Filters</button>
-      <span class="count"><strong id="resultCount">5</strong> requirements found</span>
+      <span class="count"><strong id="resultCount"><!--@count--></strong> requirements found</span>
       <select class="sort-select" id="sortSelect">
         <option value="recommended">Sort: Recommended</option>
         <option value="newest">Newest first</option>
@@ -237,172 +230,7 @@
     <div class="active-filters is-empty" id="activeFilters"></div>
 
     <div class="category-rows" id="reqGrid">
-
-      <section class="category-row is-left" data-category="Hatha">
-        <div class="category-row-head"><h3>Hatha</h3></div>
-        <div class="category-slider-wrap">
-          <button type="button" class="cat-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button type="button" class="cat-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-          <div class="category-slider">
-            <article class="req-card req-card--editorial" data-rid="1" data-status="open" data-city="Lucknow" data-styles="Hatha,Beginners" data-mode="offline" data-budget="750" data-posted="2">
-              <div class="req-band req-band--hatha" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg>
-                <span>Hatha</span>
-              </div>
-              <div class="info">
-                <div class="req-card-top">
-                  <h3><a href="requirement-detail.html?id=1">Looking for a Hatha yoga teacher for morning sessions</a></h3>
-                  <span class="req-budget">&#8377;600 &ndash; 900 / session</span>
-                </div>
-                <div class="req-meta">
-                  <span>&#128205; Lucknow (in-studio)</span>
-                  <span>&#128337; Mornings, 3x per week</span>
-                  <span class="status-pill open">Open</span>
-                </div>
-                <p class="desc">Family of 3 (including one senior) looking for a patient Hatha teacher for home sessions, 3 mornings a week. Prefer someone experienced with beginners and joint mobility.</p>
-                <div class="req-tags"><span>Hatha</span><span>Beginners</span></div>
-                <div class="req-foot">
-                  <span class="posted">Posted 2 days ago</span>
-                  <a href="requirement-detail.html?id=1" class="btn btn-secondary btn-small" style="border:1px solid var(--line);">View details &rarr;</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="category-row is-right" data-category="Ashtanga">
-        <div class="category-row-head"><h3>Ashtanga</h3></div>
-        <div class="category-slider-wrap">
-          <button type="button" class="cat-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button type="button" class="cat-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-          <div class="category-slider">
-            <article class="req-card req-card--editorial" data-rid="2" data-status="open" data-city="Online" data-styles="Ashtanga,Advanced" data-mode="online" data-budget="600" data-posted="4">
-              <div class="req-band req-band--ashtanga" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 2v6"/><path d="M5 22c0-5 3-7 7-7s7 2 7 7"/><circle cx="12" cy="12" r="3"/></svg>
-                <span>Ashtanga</span>
-              </div>
-              <div class="info">
-                <div class="req-card-top">
-                  <h3><a href="requirement-detail.html?id=2">Online Ashtanga teacher for daily 6 AM practice</a></h3>
-                  <span class="req-budget">&#8377;500 &ndash; 700 / session</span>
-                </div>
-                <div class="req-meta">
-                  <span>&#128205; Online</span>
-                  <span>&#128337; Daily, 6:00 AM IST</span>
-                  <span class="status-pill open">Open</span>
-                </div>
-                <p class="desc">Intermediate practitioner (2 years Ashtanga) looking for a teacher for guided daily practice over video call. Consistency matters more than fancy scheduling.</p>
-                <div class="req-tags"><span>Ashtanga</span><span>Advanced</span></div>
-                <div class="req-foot">
-                  <span class="posted">Posted 4 days ago</span>
-                  <a href="requirement-detail.html?id=2" class="btn btn-secondary btn-small" style="border:1px solid var(--line);">View details &rarr;</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="category-row is-left" data-category="Prenatal">
-        <div class="category-row-head"><h3>Prenatal</h3></div>
-        <div class="category-slider-wrap">
-          <button type="button" class="cat-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button type="button" class="cat-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-          <div class="category-slider">
-            <article class="req-card req-card--editorial" data-rid="3" data-status="matched" data-city="Delhi" data-styles="Prenatal" data-mode="hybrid" data-budget="1000" data-posted="7">
-              <div class="req-band req-band--prenatal" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>Prenatal</span>
-              </div>
-              <div class="info">
-                <div class="req-card-top">
-                  <h3><a href="requirement-detail.html?id=3">Prenatal yoga, second trimester, twice a week</a></h3>
-                  <span class="req-budget">&#8377;800 &ndash; 1200 / session</span>
-                </div>
-                <div class="req-meta">
-                  <span>&#128205; Delhi (in-studio preferred, online OK)</span>
-                  <span>&#128337; Flexible, 2x per week</span>
-                  <span class="status-pill matched">Matched</span>
-                </div>
-                <p class="desc">Looking for a certified prenatal instructor for the rest of my second trimester. Comfortable with either in-studio near Saket or online.</p>
-                <div class="req-tags"><span>Prenatal</span></div>
-                <div class="req-foot">
-                  <span class="posted">Posted 1 week ago</span>
-                  <a href="requirement-detail.html?id=3" class="btn btn-secondary btn-small" style="border:1px solid var(--line);">View details &rarr;</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="category-row is-right" data-category="Corporate Wellness">
-        <div class="category-row-head"><h3>Corporate Wellness</h3></div>
-        <div class="category-slider-wrap">
-          <button type="button" class="cat-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button type="button" class="cat-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-          <div class="category-slider">
-            <article class="req-card req-card--editorial" data-rid="4" data-status="open" data-city="Gurugram" data-styles="Corporate Wellness" data-mode="offline" data-budget="1400" data-posted="0">
-              <div class="req-band req-band--corporate" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                <span>Corporate</span>
-              </div>
-              <div class="info">
-                <div class="req-card-top">
-                  <h3><a href="requirement-detail.html?id=4">Corporate wellness sessions for a 20-person team</a></h3>
-                  <span class="req-budget">Package pricing preferred</span>
-                </div>
-                <div class="req-meta">
-                  <span>&#128205; Gurugram (on-site)</span>
-                  <span>&#128337; Weekly, Friday afternoons</span>
-                  <span class="status-pill open">Open</span>
-                </div>
-                <p class="desc">Startup office looking for a weekly 45-minute desk-yoga and stress-relief session for the team. Ongoing engagement, open to a monthly package.</p>
-                <div class="req-tags"><span>Corporate Wellness</span></div>
-                <div class="req-foot">
-                  <span class="posted">Posted today</span>
-                  <a href="requirement-detail.html?id=4" class="btn btn-secondary btn-small" style="border:1px solid var(--line);">View details &rarr;</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="category-row is-left" data-category="Therapeutic">
-        <div class="category-row-head"><h3>Therapeutic</h3></div>
-        <div class="category-slider-wrap">
-          <button type="button" class="cat-prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <button type="button" class="cat-next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-          <div class="category-slider">
-            <article class="req-card req-card--editorial" data-rid="5" data-status="closed" data-city="Bengaluru" data-styles="Therapeutic" data-mode="offline" data-budget="1150" data-posted="14">
-              <div class="req-band req-band--therapeutic" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
-                <span>Therapeutic</span>
-              </div>
-              <div class="info">
-                <div class="req-card-top">
-                  <h3><a href="requirement-detail.html?id=5">Yoga therapy for chronic lower back pain</a></h3>
-                  <span class="req-budget">&#8377;900 &ndash; 1400 / session</span>
-                </div>
-                <div class="req-meta">
-                  <span>&#128205; Bengaluru (in-studio)</span>
-                  <span>&#128337; 2x per week, evenings</span>
-                  <span class="status-pill closed">Closed</span>
-                </div>
-                <p class="desc">Recovering from a back injury, doctor-recommended therapeutic yoga. Need someone experienced with injury rehab, not a general fitness instructor.</p>
-                <div class="req-tags"><span>Therapeutic</span></div>
-                <div class="req-foot">
-                  <span class="posted">Posted 2 weeks ago</span>
-                  <a href="requirement-detail.html?id=5" class="btn btn-secondary btn-small" style="border:1px solid var(--line);">View details &rarr;</a>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
+<!--@grid-->
     </div>
 
     <div class="empty-state" id="emptyState">
@@ -410,13 +238,10 @@
       <p>Try widening your search &mdash; or check back soon, new requirements are posted regularly.</p>
       <div class="btn-row">
         <button type="button" class="btn btn-secondary" id="emptyClearBtn">Clear all filters</button>
-        <a class="btn btn-primary" href="teachers.html">Browse teachers instead</a>
+        <a class="btn btn-primary" href="/yoga-teachers">Browse teachers instead</a>
       </div>
     </div>
 
-    <nav class="pagination" aria-label="Pagination">
-      <span class="is-active">1</span><a href="#">2</a><a href="#">&rarr;</a>
-    </nav>
   </div>
 </div>
 
@@ -425,8 +250,8 @@
   <h2>Not seeing a fit? Create your teacher profile instead</h2>
   <p>Get discovered directly by students who are already searching for your style &mdash; free to list, no commission on your sessions.</p>
   <div class="btn-row">
-    <a href="teacher-benefits.html" class="btn btn-primary">For teachers</a>
-    <a href="signup.html?role=teacher" class="btn btn-secondary" style="border:1.5px solid var(--line);">Create your profile</a>
+    <a href="/teacher-benefits" class="btn btn-primary">For teachers</a>
+    <a href="/signup?role=teacher" class="btn btn-secondary" style="border:1.5px solid var(--line);">Create your profile</a>
   </div>
 </div>
 
@@ -477,7 +302,7 @@
                     <span class="chat-avatar" aria-hidden="true">YS</span>
                     <div class="bubble a-bubble followup-bubble"><p class="a-text" style="display:block;">Don't have a profile yet?</p></div>
                   </div>
-                  <a href="signup.html?role=teacher" class="followup-cta">Create your teacher profile<span class="arrow" aria-hidden="true">&rarr;</span></a>
+                  <a href="/signup?role=teacher" class="followup-cta">Create your teacher profile<span class="arrow" aria-hidden="true">&rarr;</span></a>
                 </div>
               </div>
             </div>
@@ -501,7 +326,7 @@
                     <span class="chat-avatar" aria-hidden="true">YS</span>
                     <div class="bubble a-bubble followup-bubble"><p class="a-text" style="display:block;">Want the full breakdown of how it works?</p></div>
                   </div>
-                  <a href="teacher-benefits.html#tb-standard" class="followup-cta">See the standard<span class="arrow" aria-hidden="true">&rarr;</span></a>
+                  <a href="/teacher-benefits#tb-standard" class="followup-cta">See the standard<span class="arrow" aria-hidden="true">&rarr;</span></a>
                 </div>
               </div>
             </div>
@@ -573,7 +398,7 @@
                     <span class="chat-avatar" aria-hidden="true">YS</span>
                     <div class="bubble a-bubble followup-bubble"><p class="a-text" style="display:block;">Let's get your profile ready</p></div>
                   </div>
-                  <a href="signup.html?role=teacher" class="followup-cta">Create your teacher profile<span class="arrow" aria-hidden="true">&rarr;</span></a>
+                  <a href="/signup?role=teacher" class="followup-cta">Create your teacher profile<span class="arrow" aria-hidden="true">&rarr;</span></a>
                 </div>
               </div>
             </div>
@@ -727,32 +552,32 @@
       <div class="footer-col">
         <h4 class="mono">For students</h4>
         <ul>
-          <li><a href="teachers.html">Browse teachers</a></li>
-          <li><a href="requirements.html">Post a requirement</a></li>
-          <li><a href="index.html#verification">Verification process</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/yoga-teachers">Browse teachers</a></li>
+          <li><a href="/yoga-jobs">Post a requirement</a></li>
+          <li><a href="/#verification">Verification process</a></li>
+          <li><a href="/contact">Contact</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">For teachers</h4>
         <ul>
-          <li><a href="signup.html?role=teacher">Create your profile</a></li>
-          <li><a href="teacher-benefits.html">Become verified</a></li>
-          <li><a href="requirements.html">Browse requirements</a></li>
-          <li><a href="login.html">Teacher login</a></li>
+          <li><a href="/signup?role=teacher">Create your profile</a></li>
+          <li><a href="/teacher-benefits">Become verified</a></li>
+          <li><a href="/yoga-jobs">Browse requirements</a></li>
+          <li><a href="/login">Teacher login</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">Company</h4>
         <ul>
-          <li><a href="about.html">About</a></li>
+          <li><a href="/about">About</a></li>
           <li><a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="terms.html">Terms &amp; conditions</a></li>
-          <li><a href="privacy.html">Privacy policy</a></li>
-          <li><a href="refund.html">Refund policy</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/terms">Terms &amp; conditions</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/refund">Refund policy</a></li>
         </ul>
       </div>
 
@@ -765,7 +590,9 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js"></script>
-<script src="assets/js/requirements.js"></script>
+<!--@links-->
+
+<script src="/assets/js/site.js"></script>
+<script src="/assets/js/requirements.js"></script>
 </body>
 </html>

@@ -2,15 +2,24 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 const { requireRole } = require('../middleware/auth');
+const { URLS } = require('../lib/site');
+
+const withJobUrl = (row) => ({
+  ...row,
+  public_url: URLS.job({ slug: row.slug, citySlug: row.city_slug, localitySlug: row.locality_slug }),
+});
 
 // GET /api/client/dashboard
 router.get('/client/dashboard', requireRole('client'), async (req, res, next) => {
   try {
     const userId = req.session.user.id;
     const [requirements] = await db.query(
-      `SELECT id, title, status, is_visible, created_at,
-              (SELECT COUNT(*) FROM requirement_applications ra WHERE ra.requirement_id = requirements.id) AS applicant_count
-       FROM requirements WHERE client_user_id = ? ORDER BY created_at DESC`,
+      `SELECT r.id, r.title, r.slug, r.status, r.is_visible, r.created_at, c.slug AS city_slug, l.slug AS locality_slug,
+              (SELECT COUNT(*) FROM requirement_applications ra WHERE ra.requirement_id = r.id) AS applicant_count
+       FROM requirements r
+       LEFT JOIN cities c ON c.id = r.city_id
+       LEFT JOIN localities l ON l.id = r.locality_id
+       WHERE r.client_user_id = ? ORDER BY r.created_at DESC`,
       [userId]
     );
     const [connections] = await db.query(
@@ -19,7 +28,7 @@ router.get('/client/dashboard', requireRole('client'), async (req, res, next) =>
        WHERE conn.client_user_id = ? ORDER BY conn.requested_at DESC`,
       [userId]
     );
-    res.json({ requirements, connections });
+    res.json({ requirements: requirements.map(withJobUrl), connections });
   } catch (err) {
     next(err);
   }
@@ -34,8 +43,8 @@ router.get('/teacher/dashboard', requireRole('teacher'), async (req, res, next) 
       [userId]
     );
     const [applications] = await db.query(
-      `SELECT ra.id, ra.status, ra.applied_at, r.title, r.id AS requirement_id,
-              r.budget_min, r.budget_max, r.mode, c.name AS city,
+      `SELECT ra.id, ra.status, ra.applied_at, r.title, r.slug, r.id AS requirement_id,
+              r.budget_min, r.budget_max, r.mode, c.name AS city, c.slug AS city_slug, l.slug AS locality_slug,
               conn.id AS connection_id,
               CASE WHEN conn.status = 'approved' THEN cu.full_name END AS client_name,
               CASE WHEN conn.status = 'approved' THEN u.email END AS client_email,
@@ -43,6 +52,7 @@ router.get('/teacher/dashboard', requireRole('teacher'), async (req, res, next) 
        FROM requirement_applications ra
        JOIN requirements r ON r.id = ra.requirement_id
        LEFT JOIN cities c ON c.id = r.city_id
+       LEFT JOIN localities l ON l.id = r.locality_id
        LEFT JOIN connections conn ON conn.source_application_id = ra.id
        LEFT JOIN clients cu ON cu.user_id = conn.client_user_id
        LEFT JOIN users u ON u.id = conn.client_user_id
@@ -60,7 +70,7 @@ router.get('/teacher/dashboard', requireRole('teacher'), async (req, res, next) 
        FROM ratings WHERE teacher_user_id = ? AND status = 'published'`,
       [userId]
     );
-    res.json({ profile: profile[0] || null, applications, connections, rating: ratingRow[0] });
+    res.json({ profile: profile[0] || null, applications: applications.map(withJobUrl), connections, rating: ratingRow[0] });
   } catch (err) {
     next(err);
   }

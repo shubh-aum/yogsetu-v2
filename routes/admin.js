@@ -8,7 +8,8 @@ const bcrypt = require('bcryptjs');
 const db = require('../config/db');
 const { requireRole } = require('../middleware/auth');
 const { logAudit } = require('../utils/audit');
-const { loadAboutContent } = require('./content');
+const { loadAboutContent, loadPageContent } = require('./content');
+const pageContent = require('../utils/pageContent');
 const { BLOCK_KEY, MAX_JSON_BYTES, getDefaults, sanitize } = require('../utils/aboutContent');
 
 // Images uploaded from the CMS editors are public site content.
@@ -298,6 +299,67 @@ router.put('/cms/:blockKey', async (req, res, next) => {
   }
 });
 
+// ---- public profile comments / Q&A moderation ----
+
+// GET /api/admin/teacher-comments?status=published|hidden
+router.get('/teacher-comments', async (req, res, next) => {
+  try {
+    const { status } = req.query;
+    const [rows] = await db.query(
+      `SELECT c.id, c.author_name, c.body, c.status, c.created_at, t.full_name AS teacher_name, t.slug AS teacher_slug
+         FROM teacher_comments c JOIN teachers t ON t.user_id = c.teacher_user_id
+        ${status ? 'WHERE c.status = ?' : ''} ORDER BY c.created_at DESC LIMIT 200`,
+      status ? [status] : []
+    );
+    res.json({ comments: rows });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// PATCH /api/admin/teacher-comments/:id  { status: 'published' | 'hidden' }
+router.patch('/teacher-comments/:id', async (req, res, next) => {
+  try {
+    const { status } = req.body;
+    if (!['published', 'hidden'].includes(status)) return res.status(400).json({ error: 'status must be published or hidden.' });
+    const [r] = await db.query('UPDATE teacher_comments SET status = ? WHERE id = ?', [status, req.params.id]);
+    if (!r.affectedRows) return res.status(404).json({ error: 'Comment not found.' });
+    logAudit(req.session.user.id, `Set a profile comment to ${status}`, 'teacher_comment', req.params.id);
+    res.json({ message: 'Updated.' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// GET /api/admin/teacher-questions
+router.get('/teacher-questions', async (req, res, next) => {
+  try {
+    const [rows] = await db.query(
+      `SELECT q.id, q.question, q.answer, q.status, q.asked_at, t.full_name AS teacher_name, cl.full_name AS asker_name
+         FROM teacher_questions q JOIN teachers t ON t.user_id = q.teacher_user_id
+         LEFT JOIN clients cl ON cl.user_id = q.asker_user_id
+        ORDER BY q.asked_at DESC LIMIT 200`
+    );
+    res.json({ questions: rows });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// PATCH /api/admin/teacher-questions/:id  { status: 'published' | 'hidden' }
+router.patch('/teacher-questions/:id', async (req, res, next) => {
+  try {
+    const { status } = req.body;
+    if (!['published', 'hidden'].includes(status)) return res.status(400).json({ error: 'status must be published or hidden.' });
+    const [r] = await db.query('UPDATE teacher_questions SET status = ? WHERE id = ? AND answer IS NOT NULL', [status, req.params.id]);
+    if (!r.affectedRows) return res.status(404).json({ error: 'Answered question not found.' });
+    logAudit(req.session.user.id, `Set a profile question to ${status}`, 'teacher_question', req.params.id);
+    res.json({ message: 'Updated.' });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // ---- About page (one structured JSON document in cms_content_blocks) ----
 
 // GET /api/admin/content/about — effective content (saved values over defaults)
@@ -326,6 +388,101 @@ router.put('/content/about', async (req, res, next) => {
     );
     logAudit(req.session.user.id, 'Edited the About page', 'cms_content_block', null);
     res.json({ message: 'About page saved.', ...(await loadAboutContent()) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ---- Terms / Privacy / Refund / Contact page copy (one JSON document per page) ----
+
+// GET /api/admin/content/pages/:slug — effective content (saved values over defaults)
+router.get('/content/pages/:slug', async (req, res, next) => {
+  try {
+    if (!pageContent.isSlug(req.params.slug)) return res.status(404).json({ error: 'Unknown page.' });
+    res.json(await loadPageContent(req.params.slug));
+  } catch (err) {
+    next(err);
+  }
+});
+
+// PUT /api/admin/content/pages/:slug — body: { content: {...} }; unknown keys are dropped
+router.put('/content/pages/:slug', async (req, res, next) => {
+  try {
+    const slug = req.params.slug;
+    if (!pageContent.isSlug(slug)) return res.status(404).json({ error: 'Unknown page.' });
+    if (!req.body.content || typeof req.body.content !== 'object') {
+      return res.status(400).json({ error: 'content is required.' });
+    }
+    const clean = JSON.stringify(pageContent.clean(slug, req.body.content));
+    if (Buffer.byteLength(clean) > pageContent.MAX_JSON_BYTES) {
+      return res.status(400).json({ error: 'That is too much content for one page — shorten some text or remove a few sections.' });
+    }
+    const label = pageContent.LABELS[slug];
+    await db.query(
+      `INSERT INTO cms_content_blocks (block_key, label, content, last_edited_by) VALUES (?, ?, ?, ?)
+       ON DUPLICATE KEY UPDATE content = VALUES(content), last_edited_by = VALUES(last_edited_by)`,
+      [pageContent.blockKey(slug), label, clean, req.session.user.id]
+    );
+    logAudit(req.session.user.id, `Edited the ${label}`, 'cms_content_block', null);
+    res.json({ message: `${label} saved.`, ...(await loadPageContent(slug)) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// DELETE /api/admin/content/pages/:slug — back to the built-in copy
+router.delete('/content/pages/:slug', async (req, res, next) => {
+  try {
+    if (!pageContent.isSlug(req.params.slug)) return res.status(404).json({ error: 'Unknown page.' });
+    await db.query('DELETE FROM cms_content_blocks WHERE block_key = ?', [pageContent.blockKey(req.params.slug)]);
+    logAudit(req.session.user.id, `Reset the ${pageContent.LABELS[req.params.slug]} to its original copy`, 'cms_content_block', null);
+    res.json({ message: 'Reset to the original copy.', ...(await loadPageContent(req.params.slug)) });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// ---- Contact-form inbox ----
+const CONTACT_STATUSES = ['new', 'read', 'resolved'];
+
+// GET /api/admin/contact-messages?status=new|read|resolved
+router.get('/contact-messages', async (req, res, next) => {
+  try {
+    const where = CONTACT_STATUSES.includes(req.query.status) ? 'WHERE m.status = ?' : '';
+    const [messages] = await db.query(
+      `SELECT m.id, m.name, m.email, m.topic, m.message, m.status, m.created_at, m.user_id
+       FROM contact_messages m ${where} ORDER BY m.created_at DESC, m.id DESC LIMIT 300`,
+      where ? [req.query.status] : []
+    );
+    const [counts] = await db.query('SELECT status, COUNT(*) AS n FROM contact_messages GROUP BY status');
+    const byStatus = { new: 0, read: 0, resolved: 0 };
+    counts.forEach((c) => { byStatus[c.status] = c.n; });
+    res.json({ messages, counts: byStatus });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// PATCH /api/admin/contact-messages/:id — body: { status }
+router.patch('/contact-messages/:id', async (req, res, next) => {
+  try {
+    if (!CONTACT_STATUSES.includes(req.body.status)) return res.status(400).json({ error: 'Invalid status.' });
+    const [r] = await db.query('UPDATE contact_messages SET status = ? WHERE id = ?', [req.body.status, req.params.id]);
+    if (!r.affectedRows) return res.status(404).json({ error: 'Message not found.' });
+    logAudit(req.session.user.id, `Marked a contact message as ${req.body.status}`, 'contact_message', req.params.id);
+    res.json({ message: 'Updated.' });
+  } catch (err) {
+    next(err);
+  }
+});
+
+// DELETE /api/admin/contact-messages/:id
+router.delete('/contact-messages/:id', async (req, res, next) => {
+  try {
+    const [r] = await db.query('DELETE FROM contact_messages WHERE id = ?', [req.params.id]);
+    if (!r.affectedRows) return res.status(404).json({ error: 'Message not found.' });
+    logAudit(req.session.user.id, 'Deleted a contact message', 'contact_message', req.params.id);
+    res.json({ message: 'Deleted.' });
   } catch (err) {
     next(err);
   }

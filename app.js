@@ -7,6 +7,7 @@ const session = require('express-session');
 
 const authRouter = require('./routes/auth');
 const teachersRouter = require('./routes/teachers');
+const teacherEngagementRouter = require('./routes/teacherEngagement');
 const clientsRouter = require('./routes/clients');
 const requirementsRouter = require('./routes/requirements');
 const connectionsRouter = require('./routes/connections');
@@ -14,6 +15,8 @@ const dashboardRouter = require('./routes/dashboard');
 const lookupsRouter = require('./routes/lookups');
 const adminRouter = require('./routes/admin');
 const contentRouter = require('./routes/content');
+const contactRouter = require('./routes/contact');
+const pagesRouter = require('./routes/pages');
 
 const app = express();
 
@@ -30,6 +33,7 @@ app.use(session({
 
 // JSON API — mounted before static so /api/* never falls through to a file lookup
 app.use('/api/auth', authRouter);
+app.use('/api/teachers', teacherEngagementRouter); // /me/* extras + public comments/questions (before /:id)
 app.use('/api/teachers', teachersRouter);
 app.use('/api/clients', clientsRouter);
 app.use('/api/requirements', requirementsRouter);
@@ -38,15 +42,21 @@ app.use('/api', dashboardRouter);
 app.use('/api/lookups', lookupsRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/content', contentRouter);
+app.use('/api/contact', contactRouter);
 
-// Static site (index.html, dashboards, requirement pages, css, js, assets)
-// extensions:['html'] lets /teacher-dashboard resolve to teacher-dashboard.html
-// (the .html URL keeps working too — this only adds the fallback).
-app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'] }));
+// Public pages: clean static URLs, SEO-friendly /yoga-teachers and /yoga-jobs
+// routes, legacy .html redirects, robots.txt and sitemap.xml — all sent through
+// the SEO head injector. Must come before express.static.
+app.use(pagesRouter);
 
-// 404 for anything not matched by static files or the API
+// Static assets (css, js, images, uploads). index:false so "/" is always the
+// SEO-rendered homepage from the pages router.
+app.use(express.static(path.join(__dirname, 'public'), { index: false }));
+
+// 404 for anything not matched by a page, static file or the API
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
+  if (req.path.startsWith('/api/')) return res.status(404).json({ error: 'Not found.' });
+  return pagesRouter.notFound(req, res);
 });
 
 // Error handler

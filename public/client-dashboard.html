@@ -8,9 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/site.css">
-<link rel="stylesheet" href="assets/css/dashboard.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/dashboard.css">
 <style>
   /* --- Account area: lives inside the normal site header/page frame, not a separate shell --- */
 
@@ -238,18 +238,18 @@
 <body class="inner-page">
 
 <header class="site-header-fixed is-visible force-visible" id="siteHeaderFixed">
-  <a href="index.html" class="logo" aria-label="YogSetu home">
+  <a href="/" class="logo" aria-label="YogSetu home">
     <span class="mark" aria-hidden="true"></span>
     <span>
       <span class="word">Yog<em>Setu</em></span>
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="index.html">Homepage</a>
-    <a href="about.html">About</a>
-    <a href="requirements.html">Job board</a>
-    <a href="teacher-benefits.html">For teachers</a>
-    <a href="teachers.html">Browse teachers</a>
+    <a href="/">Homepage</a>
+    <a href="/about">About</a>
+    <a href="/yoga-jobs">Job board</a>
+    <a href="/teacher-benefits">For teachers</a>
+    <a href="/yoga-teachers">Browse teachers</a>
   </nav>
   <div class="header-actions">
     <div class="profile-menu" id="profileMenu">
@@ -276,13 +276,13 @@
 </header>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="index.html">Homepage</a>
-    <a href="about.html">About</a>
-    <a href="requirements.html">Job board</a>
-    <a href="teacher-benefits.html">For teachers</a>
-    <a href="teachers.html">Browse teachers</a>
-  <a href="login.html">Log in</a>
-  <a href="signup.html">Sign up</a>
+    <a href="/">Homepage</a>
+    <a href="/about">About</a>
+    <a href="/yoga-jobs">Job board</a>
+    <a href="/teacher-benefits">For teachers</a>
+    <a href="/yoga-teachers">Browse teachers</a>
+  <a href="/login">Log in</a>
+  <a href="/signup">Sign up</a>
 </nav>
 
 <main>
@@ -396,6 +396,14 @@
 
       <div class="wizard-panel" data-wizard-step="1">
         <div class="field"><label>Title</label><input type="text" id="rq-title" placeholder="e.g. Hatha yoga teacher for morning sessions" required></div>
+        <div class="field"><label>Your level</label>
+          <select id="rq-level">
+            <option value="any">Any / not sure</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
         <div class="two-col">
           <div class="field"><label>Type of yoga</label>
             <select id="rq-style"><option value="">Not sure yet</option></select>
@@ -447,7 +455,25 @@
             <label class="checkbox-chip"><input type="checkbox" value="Night (8-10pm)">Night (8&ndash;10pm)</label>
           </div>
         </div>
-        <div class="field"><label>Additional scheduling notes (optional)</label><input type="text" id="rq-timing-notes" placeholder="e.g. 3x per week, flexible on weekends"></div>
+        <div class="field"><label>Additional scheduling notes (optional)</label><input type="text" id="rq-timing-notes" placeholder="e.g. Mornings, 3x per week" maxlength="200"></div>
+        <div class="field">
+          <label>Days you need sessions (optional)</label>
+          <div class="checkbox-grid" id="rqDays">
+            <label class="checkbox-chip"><input type="checkbox" data-day="1">Mon</label>
+            <label class="checkbox-chip"><input type="checkbox" data-day="2">Tue</label>
+            <label class="checkbox-chip"><input type="checkbox" data-day="3">Wed</label>
+            <label class="checkbox-chip"><input type="checkbox" data-day="4">Thu</label>
+            <label class="checkbox-chip"><input type="checkbox" data-day="5">Fri</label>
+            <label class="checkbox-chip"><input type="checkbox" data-day="6">Sat</label>
+            <label class="checkbox-chip"><input type="checkbox" data-day="7">Sun</label>
+          </div>
+        </div>
+        <div class="field"><label>Usual start time on those days</label>
+          <select id="rq-day-time">
+            <option>5:30 AM</option><option>6:00 AM</option><option>6:30 AM</option><option selected>7:00 AM</option><option>8:00 AM</option><option>9:00 AM</option>
+            <option>10:00 AM</option><option>12:00 PM</option><option>3:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option>
+          </select>
+        </div>
       </div>
 
       <div class="wizard-panel" data-wizard-step="3" hidden>
@@ -463,7 +489,8 @@
           <div class="field"><label>Budget min (&#8377;/session)</label><input type="number" id="rq-budget-min" placeholder="600"></div>
           <div class="field"><label>Budget max (&#8377;/session)</label><input type="number" id="rq-budget-max" placeholder="900"></div>
         </div>
-        <div class="field"><label>Description</label><textarea id="rq-details" placeholder="Experience level, group size, what a good fit looks like&hellip;"></textarea></div>
+        <div class="field"><label>Description</label><textarea id="rq-details" placeholder="Group size, what a good fit looks like&hellip;"></textarea></div>
+        <div class="field"><label>What are you looking for? (one point per line, optional)</label><textarea id="rq-needs" rows="4" placeholder="Patient teaching style for a beginner&#10;Experience with senior-friendly modifications"></textarea></div>
 
         <div class="wizard-review">
           <dl id="wizardReviewList"></dl>
@@ -578,32 +605,32 @@
       <div class="footer-col">
         <h4 class="mono">For students</h4>
         <ul>
-          <li><a href="teachers.html">Browse teachers</a></li>
-          <li><a href="requirements.html">Post a requirement</a></li>
-          <li><a href="index.html#verification">Verification process</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/yoga-teachers">Browse teachers</a></li>
+          <li><a href="/yoga-jobs">Post a requirement</a></li>
+          <li><a href="/#verification">Verification process</a></li>
+          <li><a href="/contact">Contact</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">For teachers</h4>
         <ul>
-          <li><a href="signup.html?role=teacher">Create your profile</a></li>
-          <li><a href="teacher-benefits.html">Become verified</a></li>
-          <li><a href="requirements.html">Browse requirements</a></li>
-          <li><a href="login.html">Teacher login</a></li>
+          <li><a href="/signup?role=teacher">Create your profile</a></li>
+          <li><a href="/teacher-benefits">Become verified</a></li>
+          <li><a href="/yoga-jobs">Browse requirements</a></li>
+          <li><a href="/login">Teacher login</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">Company</h4>
         <ul>
-          <li><a href="about.html">About</a></li>
+          <li><a href="/about">About</a></li>
           <li><a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="terms.html">Terms &amp; conditions</a></li>
-          <li><a href="privacy.html">Privacy policy</a></li>
-          <li><a href="refund.html">Refund policy</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/terms">Terms &amp; conditions</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/refund">Refund policy</a></li>
         </ul>
       </div>
 
@@ -616,7 +643,7 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js"></script>
+<script src="/assets/js/site.js"></script>
 <script>
 (function(){
   const titles = {
@@ -813,7 +840,7 @@
     const reqList = document.getElementById('ovReqList');
     const openReqs = reqs.filter(function(r){ return r.status !== 'closed'; }).slice(0, 3);
     reqList.innerHTML = openReqs.length ? openReqs.map(function(r){
-      return '<div class="list-row"><div class="body"><div class="top-line"><h4>' + esc(r.title) + '</h4><span class="status-pill ' + (STATUS_PILL[r.status]||'open') + '">' + esc(r.status) + '</span></div><p>' + Number(r.applicant_count||0) + ' teacher(s) applied &middot; posted ' + timeAgo(r.created_at) + '</p></div></div>';
+      return '<div class="list-row"><div class="body"><div class="top-line"><h4><a href="' + esc(r.public_url || '/yoga-jobs') + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + esc(r.title) + '</a></h4><span class="status-pill ' + (STATUS_PILL[r.status]||'open') + '">' + esc(r.status) + '</span></div><p>' + Number(r.applicant_count||0) + ' teacher(s) applied &middot; posted ' + timeAgo(r.created_at) + '</p></div></div>';
     }).join('') : '<p class="tl-empty">No requirements posted yet.</p>';
 
     document.getElementById('tabRequirementsCount').textContent = reqs.length;
@@ -907,7 +934,7 @@
     if(!reqs.length){ list.innerHTML = '<p class="tl-empty">No requirements posted yet.</p>'; return; }
     list.innerHTML = reqs.map(function(r){
       return '<div class="req-item" data-req data-req-id="' + r.id + '">' +
-        '<div class="req-item-head" data-req-toggle><div class="body"><div class="top-line"><h4>' + esc(r.title) + '</h4><span class="status-pill ' + (STATUS_PILL[r.status]||'open') + '">' + esc(r.status) + '</span></div><p>Posted ' + timeAgo(r.created_at) + ' &middot; ' + Number(r.applicant_count||0) + ' teacher(s) applied</p></div>' +
+        '<div class="req-item-head" data-req-toggle><div class="body"><div class="top-line"><h4><a href="' + esc(r.public_url || '/yoga-jobs') + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">' + esc(r.title) + '</a></h4><span class="status-pill ' + (STATUS_PILL[r.status]||'open') + '">' + esc(r.status) + '</span></div><p>Posted ' + timeAgo(r.created_at) + ' &middot; ' + Number(r.applicant_count||0) + ' teacher(s) applied</p></div>' +
         '<svg class="chev" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>' +
         '<div class="req-timeline" hidden><p class="tl-empty">Loading applicants&hellip;</p></div></div>';
     }).join('');
@@ -1133,7 +1160,7 @@
     function labelOf(selectId){ const el = document.getElementById(selectId); return el && el.selectedOptions[0] ? el.selectedOptions[0].textContent : ''; }
 
     function buildReview(){
-      const slots = Array.from(form.querySelectorAll('.checkbox-grid input:checked')).map(function(c){ return c.value; }).join(', ') || 'None selected';
+      const slots = Array.from(form.querySelectorAll('.checkbox-grid input:checked:not([data-day])')).map(function(c){ return c.value; }).join(', ') || 'None selected';
       const location = [val('rq-location'), val('rq-city'), val('rq-pin')].filter(Boolean).join(', ');
       const rows = [
         ['Title', esc(val('rq-title')) || '&mdash;'],
@@ -1154,7 +1181,7 @@
 
     form.addEventListener('submit', async function(e){
       e.preventDefault();
-      const slots = Array.from(form.querySelectorAll('.checkbox-grid input:checked')).map(function(c){ return c.value; });
+      const slots = Array.from(form.querySelectorAll('.checkbox-grid input:checked:not([data-day])')).map(function(c){ return c.value; });
       const demo = val('rq-demo');
       try {
         await api('/api/requirements', {
@@ -1169,7 +1196,11 @@
             demo_class_time: demo ? demo.replace('T', ' ') + ':00' : null,
             city: val('rq-city'),
             pincode: val('rq-pin'),
-            timing: val('rq-location'),
+            locality: val('rq-location'),
+            schedule: val('rq-timing-notes'),
+            level: val('rq-level'),
+            needs: val('rq-needs'),
+            schedule_days: Array.from(form.querySelectorAll('#rqDays input:checked')).map(function(c){ return { day: Number(c.getAttribute('data-day')), time: val('rq-day-time') }; }),
             budget_min: val('rq-budget-min') || null,
             budget_max: val('rq-budget-max') || null,
             description: val('rq-details'),

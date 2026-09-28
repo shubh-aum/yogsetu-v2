@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../config/db');
 const { requireRole } = require('../middleware/auth');
 const { logAudit } = require('../utils/audit');
+const { jobSlug, findOrCreateLocality } = require('../services/slugs');
 
 async function findCityId(cityName) {
   if (!cityName) return null;
@@ -27,8 +28,8 @@ router.post('/', requireRole('client', 'admin'), async (req, res, next) => {
   try {
     const {
       title, style, purpose, certification_required, preferred_gender, mode,
-      demo_class_time, location, city, pincode, timing, budget_min, budget_max, description,
-      slots, client_user_id, source,
+      demo_class_time, location, locality, city, pincode, timing, schedule, level, budget_min, budget_max, budget_note,
+      description, needs, schedule_days, slots, client_user_id, source,
     } = req.body;
 
     if (!title) return res.status(400).json({ error: 'title is required.' });
@@ -47,26 +48,44 @@ router.post('/', requireRole('client', 'admin'), async (req, res, next) => {
 
     const styleId = await findStyleId(style);
     const certId = await findCertTypeId(certification_required);
-    const cityId = await findCityId(city || location);
+    const cityId = await findCityId(city);
+    const areaName = String(locality || location || '').trim();
+    const localityId = await findOrCreateLocality(db, cityId, areaName);
+    const slotList = Array.isArray(slots) ? slots.filter(Boolean).map((s) => String(s).slice(0, 50)) : [];
+    const scheduleText = String(schedule || timing || slotList.join(', ') || '').trim().slice(0, 200) || null;
+    const slug = await jobSlug(db, title, cityId, localityId);
+    const experienceLevel = ['any', 'beginner', 'intermediate', 'advanced'].includes(level) ? level : 'any';
 
     const [result] = await db.query(
       `INSERT INTO requirements
-        (client_user_id, title, style_id, purpose, certification_required_id, preferred_gender, mode,
-         demo_class_time, city_id, pincode, area, budget_min, budget_max, description, source, posted_by_admin_id)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        (client_user_id, title, slug, style_id, purpose, certification_required_id, preferred_gender, mode,
+         demo_class_time, city_id, locality_id, pincode, area, budget_min, budget_max, budget_note, description,
+         schedule_text, experience_level, source, posted_by_admin_id)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
-        clientUserId, title.trim(), styleId, purpose || 'personal_practice', certId,
-        preferred_gender || 'no_preference', mode || 'either', demo_class_time || null, cityId,
-        pincode || null, timing ? timing.trim() : null, budget_min || null, budget_max || null,
-        description ? description.trim() : null, src, postedByAdminId,
+        clientUserId, title.trim(), slug, styleId, purpose || 'personal_practice', certId,
+        preferred_gender || 'no_preference', mode || 'either', demo_class_time || null, cityId, localityId,
+        pincode || null, areaName || null, budget_min || null, budget_max || null,
+        budget_note ? String(budget_note).trim().slice(0, 120) : null,
+        description ? description.trim() : null, scheduleText, experienceLevel, src, postedByAdminId,
       ]
     );
 
-    if (Array.isArray(slots) && slots.length) {
-      const values = slots.filter(Boolean).map((s) => [result.insertId, String(s).slice(0, 50)]);
-      if (values.length) {
-        await db.query('INSERT IGNORE INTO requirement_availability_slots (requirement_id, slot_label) VALUES ?', [values]);
-      }
+    if (slotList.length) {
+      await db.query('INSERT IGNORE INTO requirement_availability_slots (requirement_id, slot_label) VALUES ?', [slotList.map((s) => [result.insertId, s])]);
+    }
+    // "what they're looking for" checklist: array, or one item per line
+    const needList = (Array.isArray(needs) ? needs : String(needs || '').split('\n'))
+      .map((n) => String(n).trim().slice(0, 255)).filter(Boolean).slice(0, 10);
+    if (needList.length) {
+      await db.query('INSERT INTO requirement_needs (requirement_id, item_text, sort_order) VALUES ?', [needList.map((n, i) => [result.insertId, n, i])]);
+    }
+    // weekly schedule needed: [{ day: 1..7, time: "7:00 AM" }]
+    const days = Array.isArray(schedule_days)
+      ? schedule_days.filter((d) => d && Number(d.day) >= 1 && Number(d.day) <= 7 && d.time).map((d) => [result.insertId, Number(d.day), String(d.time).slice(0, 20)])
+      : [];
+    if (days.length) {
+      await db.query('INSERT IGNORE INTO requirement_schedule (requirement_id, day_of_week, time_slot) VALUES ?', [days]);
     }
 
     logAudit(req.session.user.id, req.session.user.role === 'admin' ? 'Posted a requirement for a client' : 'Posted a requirement', 'requirement', result.insertId);

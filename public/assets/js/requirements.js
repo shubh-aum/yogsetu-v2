@@ -26,6 +26,15 @@
   var emptyClearBtn = document.getElementById("emptyClearBtn");
 
   var heroCity = document.getElementById("heroCity");
+
+  // City choices are real, indexable pages (/yoga-teachers/lucknow ...): picking
+  // one navigates there; the list you land on is already filtered server-side.
+  function cityUrlOf(select) {
+    var o = select && select.options[select.selectedIndex];
+    return o ? o.getAttribute("data-url") : null;
+  }
+  var ALL_URL = citySelect && citySelect.options[0] ? citySelect.options[0].getAttribute("data-url") : null;
+  function goAll() { if (ALL_URL) window.location.href = ALL_URL; }
   var heroStyle = document.getElementById("heroStyle");
   var heroMode = document.getElementById("heroMode");
   var heroSearchBtn = document.getElementById("heroSearchBtn");
@@ -61,7 +70,7 @@
     activeFiltersEl.innerHTML = "";
     var pills = [];
 
-    if (f.city && f.city !== "All cities") pills.push({ label: f.city, clear: function () { citySelect.value = "All cities"; } });
+    if (f.city && f.city !== "All cities") pills.push({ label: f.city, clear: function () { goAll(); } });
     f.styles.forEach(function (s) {
       pills.push({ label: s, clear: function () {
         styleChecks.forEach(function (c) { if (c.value === s) c.checked = false; });
@@ -146,7 +155,7 @@
   }
 
   function clearAllFilters() {
-    if (citySelect) citySelect.value = "All cities";
+    if (citySelect && citySelect.value && ALL_URL) { window.location.href = ALL_URL; return; }
     styleChecks.forEach(function (c) { c.checked = false; });
     statusChecks.forEach(function (c) { c.checked = c.value === "open"; });
     modeChecks.forEach(function (c) { c.checked = false; });
@@ -162,6 +171,7 @@
   styleChecks.concat(statusChecks).concat(modeChecks).forEach(function (el) {
     el.addEventListener("change", applyFilters);
   });
+  if (citySelect) citySelect.addEventListener("change", function () { var u = cityUrlOf(citySelect); if (u) window.location.href = u; });
   if (clearBtn) clearBtn.addEventListener("click", clearAllFilters);
   if (emptyClearBtn) emptyClearBtn.addEventListener("click", clearAllFilters);
 
@@ -195,7 +205,13 @@
   // Hero search bar — copies its selections into the real filter controls
   if (heroSearchBtn) {
     heroSearchBtn.addEventListener("click", function () {
-      if (citySelect && heroCity && heroCity.value) citySelect.value = heroCity.value;
+      if (heroCity && heroCity.value && (!citySelect || heroCity.value !== citySelect.value)) {
+        var heroUrl = cityUrlOf(heroCity);
+        if (heroUrl) {
+          window.location.href = heroUrl + (heroMode && heroMode.value ? "?mode=" + encodeURIComponent(heroMode.value) : "");
+          return;
+        }
+      }
       if (heroStyle && heroStyle.value) {
         styleChecks.forEach(function (c) { c.checked = false; });
         checkStyleValue(heroStyle.value, true);
@@ -248,6 +264,8 @@
   });
 
   // Initial render
+  var presetMode = new URLSearchParams(window.location.search).get("mode");
+  if (presetMode) modeChecks.forEach(function (c) { c.checked = c.value === presetMode; });
   applyFilters();
 
   // ---- Per-category slider (rows with more than one requirement get nav buttons) ----

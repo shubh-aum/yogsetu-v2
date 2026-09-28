@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/teachers.css">
+<link rel="stylesheet" href="/assets/css/teacher-profile.css">
+<link rel="stylesheet" href="/assets/css/listing-seo.css">
+</head>
+<body class="inner-page">
+
+<header class="site-header-fixed is-visible force-visible" id="siteHeaderFixed">
+  <a href="/" class="logo" aria-label="YogSetu home">
+    <span class="mark" aria-hidden="true"></span>
+    <span>
+      <span class="word">Yog<em>Setu</em></span>
+    </span>
+  </a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="/">Homepage</a>
+    <a href="/about">About</a>
+    <a href="/yoga-jobs">Job board</a>
+    <a href="/teacher-benefits">For teachers</a>
+    <a href="/yoga-teachers" class="active">Browse teachers</a>
+  </nav>
+  <div class="header-actions">
+    <a href="/login" class="hdr-link">Log in</a>
+    <a href="/signup" class="btn btn-primary btn-small">Sign up</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <a href="/">Homepage</a>
+    <a href="/about">About</a>
+    <a href="/yoga-jobs">Job board</a>
+    <a href="/teacher-benefits">For teachers</a>
+    <a href="/yoga-teachers">Browse teachers</a>
+  <a href="/login">Log in</a>
+  <a href="/signup">Sign up</a>
+</nav>
+
+<main>
+<!--@main-->
+</main>
+
+<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+  <a href="#reviews" class="btn btn-secondary" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z"/></svg>
+    Reviews
+  </a>
+  <a href="/signup?role=client" class="btn btn-primary" tabindex="-1">
+    Send connection request
+    <span class="arrow" aria-hidden="true">&rarr;</span>
+  </a>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <span class="logo"><span class="dot" aria-hidden="true"></span>YogSetu</span>
+        <p>A verified yoga teacher directory &mdash; powered by YogKulam's credentialing infrastructure.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="mono">For students</h4>
+        <ul>
+          <li><a href="/yoga-teachers">Browse teachers</a></li>
+          <li><a href="/yoga-jobs">Post a requirement</a></li>
+          <li><a href="/#verification">Verification process</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="mono">For teachers</h4>
+        <ul>
+          <li><a href="/signup?role=teacher">Create your profile</a></li>
+          <li><a href="/teacher-benefits">Become verified</a></li>
+          <li><a href="/yoga-jobs">Browse requirements</a></li>
+          <li><a href="/login">Teacher login</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="mono">Company</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/terms">Terms &amp; conditions</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/refund">Refund policy</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>YogSetu is a <a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a> initiative</span>
+      <span><span class="dot" aria-hidden="true">&middot;</span>yogsetu.com</span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
+<script>
+(function(){
+  var sticky = document.getElementById('stickyCta');
+  var origin = document.querySelector('.tp-hero-cta .btn-primary');
+  if (!sticky || !origin) return;
+
+  var links = sticky.querySelectorAll('a');
+
+  function setShown(on){
+    if (sticky.classList.contains('show') === on) return;
+    sticky.classList.toggle('show', on);
+    sticky.setAttribute('aria-hidden', on ? 'false' : 'true');
+    Array.prototype.forEach.call(links, function(a){
+      if (on) { a.removeAttribute('tabindex'); } else { a.setAttribute('tabindex','-1'); }
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      setShown(!entries[0].isIntersecting);
+    }, { threshold: 0, rootMargin: '-10px 0px 0px 0px' });
+    io.observe(origin);
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* -- 3D tilt on the hero photo, following the pointer -- */
+  var hero = document.getElementById('tpHero');
+  var figure = document.getElementById('tpHeroFigure');
+  if (hero && figure && !reduceMotion && window.matchMedia('(min-width:901px)').matches) {
+    hero.addEventListener('pointermove', function(e){
+      var r = hero.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      figure.style.transform = 'rotateY(' + (px * 10) + 'deg) rotateX(' + (py * -8) + 'deg)';
+    });
+    hero.addEventListener('pointerleave', function(){
+      figure.style.transform = '';
+    });
+  }
+
+  /* -- related-teachers rail inside the hero -- */
+  var track = document.getElementById('tpHeroRail');
+  var prev = document.querySelector('.tp-hero-rail-prev');
+  var next = document.querySelector('.tp-hero-rail-next');
+  if (track && prev && next) {
+    var scrollBy = function(dir){
+      var thumb = track.querySelector('.tp-hero-thumb');
+      var step = thumb ? thumb.getBoundingClientRect().width + 10 : 120;
+      track.scrollBy({ left: dir * step * 2, behavior: 'smooth' });
+    };
+    prev.addEventListener('click', function(){ scrollBy(-1); });
+    next.addEventListener('click', function(){ scrollBy(1); });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var stage = document.querySelector('.tp-laptop-stage');
+  var laptop = document.querySelector('.tp-laptop');
+  var feed = document.getElementById('tpLapFeed');
+  var track = document.getElementById('tpLapTrack');
+  if (!feed || !track) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function pause(){ track.classList.add('is-paused'); }
+  function resume(){ track.classList.remove('is-paused'); }
+  feed.addEventListener('mouseenter', pause);
+  feed.addEventListener('mouseleave', resume);
+
+  /* -- subtle interactive tilt on the laptop lid, following the pointer -- */
+  if (stage && laptop && !reduceMotion && window.matchMedia('(min-width:769px)').matches) {
+    stage.addEventListener('pointermove', function(e){
+      var r = stage.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      laptop.style.transform = 'rotateY(' + (px * 6) + 'deg) rotateX(' + (py * -3) + 'deg)';
+    });
+    stage.addEventListener('pointerleave', function(){
+      laptop.style.transform = '';
+    });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var panel = document.getElementById('tpStatPanel');
+  if (!panel) return;
+
+  function countUp(el, target, suffix, decimals){
+    var duration = 1200;
+    var start = null;
+    function step(ts){
+      if (start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var value = target * eased;
+      el.textContent = (decimals ? value.toFixed(decimals) : Math.round(value)) + (suffix || '');
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function runCounters(){
+    panel.querySelectorAll('.count').forEach(function(el){
+      var target = parseFloat(el.getAttribute('data-target')) || 0;
+      var suffix = el.getAttribute('data-suffix') || '';
+      var decimals = parseInt(el.getAttribute('data-decimals'), 10) || 0;
+      countUp(el, target, suffix, decimals);
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (!entry.isIntersecting) return;
+        panel.classList.add('is-in');
+        runCounters();
+        io.unobserve(panel);
+      });
+    }, { threshold: 0.4 });
+    io.observe(panel);
+  } else {
+    panel.classList.add('is-in');
+    runCounters();
+  }
+})();
+</script>
+
+<script src="/assets/js/live-actions.js"></script>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion || !window.matchMedia('(min-width:769px)').matches || !('PointerEvent' in window)) return;
+
+  var maxTilt = 7;
+  var lift = 4;
+
+  document.querySelectorAll('.tp-tilt').forEach(function(el){
+    el.addEventListener('pointermove', function(e){
+      var r = el.getBoundingClientRect();
+      var px = (e.clientX - r.left) / r.width - 0.5;
+      var py = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform =
+        'perspective(900px) rotateX(' + (py * -maxTilt) + 'deg) rotateY(' + (px * maxTilt) + 'deg) translateY(-' + lift + 'px)';
+    });
+    el.addEventListener('pointerleave', function(){
+      el.style.transform = '';
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var btn = document.getElementById('tpAboutMoreBtn');
+  var drawer = document.getElementById('tpAboutMore');
+  var label = btn ? btn.querySelector('.tp-about-more-label') : null;
+  var certsLink = document.getElementById('tpViewCertsLink');
+  if (!btn || !drawer) return;
+
+  function setOpen(open){
+    drawer.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (label) label.textContent = open ? 'Show less' : 'See certifications & pricing';
+  }
+
+  btn.addEventListener('click', function(){
+    setOpen(!drawer.classList.contains('is-open'));
+  });
+
+  if (certsLink) {
+    certsLink.addEventListener('click', function(){
+      setOpen(true);
+    });
+  }
+})();
+</script>
+</body>
+</html>

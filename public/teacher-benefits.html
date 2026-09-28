@@ -8,29 +8,29 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/site.css">
-<link rel="stylesheet" href="assets/css/teacher-benefits.css">
+<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/teacher-benefits.css">
 </head>
 <body class="inner-page">
 
 <header class="site-header-fixed is-visible force-visible" id="siteHeaderFixed">
-  <a href="index.html" class="logo" aria-label="YogSetu home">
+  <a href="/" class="logo" aria-label="YogSetu home">
     <span class="mark" aria-hidden="true"></span>
     <span>
       <span class="word">Yog<em>Setu</em></span>
     </span>
   </a>
   <nav class="nav-links" aria-label="Main">
-    <a href="index.html">Homepage</a>
-    <a href="about.html">About</a>
-    <a href="requirements.html">Job board</a>
-    <a href="teacher-benefits.html" class="active">For teachers</a>
-    <a href="teachers.html">Browse teachers</a>
+    <a href="/">Homepage</a>
+    <a href="/about">About</a>
+    <a href="/yoga-jobs">Job board</a>
+    <a href="/teacher-benefits" class="active">For teachers</a>
+    <a href="/yoga-teachers">Browse teachers</a>
   </nav>
   <div class="header-actions">
-    <a href="login.html" class="hdr-link">Log in</a>
-    <a href="signup.html" class="btn btn-primary btn-small">Sign up</a>
+    <a href="/login" class="hdr-link">Log in</a>
+    <a href="/signup" class="btn btn-primary btn-small">Sign up</a>
   </div>
   <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
@@ -38,13 +38,13 @@
 </header>
 
 <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
-    <a href="index.html">Homepage</a>
-    <a href="about.html">About</a>
-    <a href="requirements.html">Job board</a>
-    <a href="teacher-benefits.html">For teachers</a>
-    <a href="teachers.html">Browse teachers</a>
-  <a href="login.html">Log in</a>
-  <a href="signup.html">Sign up</a>
+    <a href="/">Homepage</a>
+    <a href="/about">About</a>
+    <a href="/yoga-jobs">Job board</a>
+    <a href="/teacher-benefits">For teachers</a>
+    <a href="/yoga-teachers">Browse teachers</a>
+  <a href="/login">Log in</a>
+  <a href="/signup">Sign up</a>
 </nav>
 
 <main>
@@ -52,7 +52,7 @@
   <div class="hero-card tb-hero-card">
     <div class="hero-media-fallback"></div>
     <video class="hero-media" id="benefitsHeroVideo" autoplay muted loop playsinline preload="auto" aria-hidden="true" tabindex="-1">
-      <source src="assets/videos/yogsetu-money-rain.mp4" type="video/mp4">
+      <source src="/assets/videos/yogsetu-money-rain.mp4" type="video/mp4">
     </video>
     <div class="hero-scrim"></div>
 
@@ -68,11 +68,11 @@
 
       <div class="closing">
         <div class="cta-shell">
-          <a href="about.html#verification" class="btn btn-secondary">
+          <a href="/about#verification" class="btn btn-secondary">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
             How verification works
           </a>
-          <a href="signup.html?role=teacher" class="btn btn-primary">
+          <a href="/signup?role=teacher" class="btn btn-primary">
             Create your teacher profile
             <span class="arrow" aria-hidden="true">&rarr;</span>
           </a>
@@ -120,73 +120,36 @@
     <p class="lede">Skill was never the problem. Paying someone else a cut just to be introduced to the people you already know how to teach &mdash; that's the problem.</p>
   </div>
 
-  <p class="swipe-hint mono" aria-hidden="true">&larr; Swipe to compare &rarr;</p>
+  <div class="rv" id="rvStage">
 
-  <div class="diptych">
-
-    <article class="panel panel-story">
-      <div class="photo">
-        <video class="slot" id="tbBrokerVideo" data-rate="1" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-          <source src="assets/videos/yoga_teacher_brokers.mp4" type="video/mp4">
-        </video>
-        <span class="stamp mono">Booking through a broker</span>
-      </div>
-      <div class="panel-body">
-        <span class="label mono">Commission on every single session</span>
-        <h3 class="panel-title">The broker owns the relationship. You just show up and teach.</h3>
-        <ul class="failures">
-          <li>
-            <span class="x" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-            A cut taken out of every session, indefinitely
-          </li>
-          <li>
-            <span class="x" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-            No say in which students you're assigned
-          </li>
-          <li>
-            <span class="x" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-            Your certifications never actually reach the client
-          </li>
-          <li>
-            <span class="x" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
-            Walk away from the broker, and the students go too
-          </li>
+    <article class="rv-card rv-broker" data-side="left">
+      <div class="rv-inner">
+        <span class="rv-tag mono">Through a broker</span>
+        <h3 class="rv-big">Their<br>client.</h3>
+        <ul class="rv-list">
+          <li><span class="rv-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span><b>A cut</b> of every session. Forever.</span></li>
+          <li><span class="rv-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span><b>They pick</b> your students.</span></li>
+          <li><span class="rv-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span>Leave, and <b>the students stay.</b></span></li>
         </ul>
-        <p class="outcome">Result: you did the work, someone else kept the relationship</p>
+        <p class="rv-result">You teach. They keep the relationship.</p>
       </div>
     </article>
 
-    <div class="diptych-vs" aria-hidden="true">VS</div>
+    <div class="rv-vs" aria-hidden="true">
+      <span class="rv-vs-ring"></span>
+      <span class="rv-vs-core">VS</span>
+    </div>
 
-    <article class="panel panel-truth">
-      <div class="photo">
-        <video class="slot" id="tbRealityVideo" data-rate="1" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-          <source src="assets/videos/yoga_teacher_11s_v4_right_space.mp4" type="video/mp4">
-        </video>
-        <span class="stamp mono" style="color:rgba(26,25,23,.55);">Booking through YogSetu</span>
-      </div>
-      <div class="panel-body">
-        <span class="label mono">Direct connection, zero commission</span>
-        <h3 class="panel-title">Students find you directly &mdash; and stay your students.</h3>
-        <ul class="checks">
-          <li>
-            <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            Verified badge does the trust-building for you
-          </li>
-          <li>
-            <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            You choose who to connect with, not a middleman
-          </li>
-          <li>
-            <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            You set your own price and availability
-          </li>
-          <li>
-            <span class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
-            Free to list &mdash; no commission on your sessions, ever
-          </li>
+    <article class="rv-card rv-direct" data-side="right">
+      <div class="rv-inner">
+        <span class="rv-tag mono">Through YogSetu</span>
+        <h3 class="rv-big">Your<br><em>student.</em></h3>
+        <ul class="rv-list">
+          <li><span class="rv-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span><b>0% commission.</b> Ever.</span></li>
+          <li><span class="rv-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span><b>You choose</b> who to teach.</span></li>
+          <li><span class="rv-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span>Your badge builds the trust. <b>Your price.</b></span></li>
         </ul>
-        <p class="outcome">Result: the relationship &mdash; and the income &mdash; stays yours</p>
+        <p class="rv-result">The relationship &mdash; and the income &mdash; stays yours.</p>
       </div>
     </article>
 
@@ -194,7 +157,7 @@
 
   <div class="verdict">
     <p>&ldquo;You already did the hard part &mdash; the training. Stop paying someone else to introduce you to your own students.&rdquo;</p>
-    <a href="signup.html?role=teacher">Create your teacher profile<span aria-hidden="true">&rarr;</span></a>
+    <a href="/signup?role=teacher">Create your teacher profile<span aria-hidden="true">&rarr;</span></a>
   </div>
 </section>
 
@@ -267,7 +230,7 @@
 
     <div class="how-foot">
       <p>Your first verified student could be one profile away.</p>
-      <a href="signup.html?role=teacher">
+      <a href="/signup?role=teacher">
         Create your teacher profile
         <span aria-hidden="true">&rarr;</span>
       </a>
@@ -404,7 +367,7 @@
         <div class="req-tags"><span>Ashtanga</span><span>Advanced</span></div>
         <div class="req-foot">
           <span class="posted">Posted 4 days ago</span>
-          <a href="requirements.html" class="btn btn-secondary btn-small" style="border:1px solid var(--line);">View details &rarr;</a>
+          <a href="/yoga-jobs" class="btn btn-secondary btn-small" style="border:1px solid var(--line);">View details &rarr;</a>
         </div>
       </article>
     </div>
@@ -415,7 +378,7 @@
   </div>
 
   <div class="tb-jobs-foot">
-    <a href="requirements.html" class="btn btn-primary">Browse all requirements<span class="arrow" aria-hidden="true">&rarr;</span></a>
+    <a href="/yoga-jobs" class="btn btn-primary">Browse all requirements<span class="arrow" aria-hidden="true">&rarr;</span></a>
   </div>
 </section>
 
@@ -425,7 +388,7 @@
 <div class="tb-reveal-scope">
 
 <section class="tb-final-visual">
-  <img src="assets/images/manage-timings.png" alt="Teacher meditating beside a phone showing her weekly class schedule" class="tb-final-visual-img">
+  <img src="/assets/images/manage-timings.png" alt="Teacher meditating beside a phone showing her weekly class schedule" class="tb-final-visual-img">
   <div class="tb-final-visual-copy">
     <h2>Manage Your <em>Availability</em></h2>
   </div>
@@ -570,7 +533,7 @@
 
     <div class="global-presence-frame">
       <video class="global-presence-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-        <source src="assets/videos/yogsetu-global-hiring-dark.mp4" type="video/mp4">
+        <source src="/assets/videos/yogsetu-global-hiring-dark.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -782,7 +745,7 @@
                     <span class="chat-avatar" aria-hidden="true">YS</span>
                     <div class="bubble a-bubble followup-bubble"><p class="a-text" style="display:block;">Ready to create your profile?</p></div>
                   </div>
-                  <a href="signup.html?role=teacher" class="followup-cta">Create your teacher profile<span class="arrow" aria-hidden="true">&rarr;</span></a>
+                  <a href="/signup?role=teacher" class="followup-cta">Create your teacher profile<span class="arrow" aria-hidden="true">&rarr;</span></a>
                 </div>
               </div>
             </div>
@@ -830,7 +793,7 @@
                     <span class="chat-avatar" aria-hidden="true">YS</span>
                     <div class="bubble a-bubble followup-bubble"><p class="a-text" style="display:block;">See who's hiring for which format?</p></div>
                   </div>
-                  <a href="requirements.html" class="followup-cta">Browse open requirements<span class="arrow" aria-hidden="true">&rarr;</span></a>
+                  <a href="/yoga-jobs" class="followup-cta">Browse open requirements<span class="arrow" aria-hidden="true">&rarr;</span></a>
                 </div>
               </div>
             </div>
@@ -854,7 +817,7 @@
                     <span class="chat-avatar" aria-hidden="true">YS</span>
                     <div class="bubble a-bubble followup-bubble"><p class="a-text" style="display:block;">Ready to get started?</p></div>
                   </div>
-                  <a href="signup.html?role=teacher" class="followup-cta">Create your teacher profile<span class="arrow" aria-hidden="true">&rarr;</span></a>
+                  <a href="/signup?role=teacher" class="followup-cta">Create your teacher profile<span class="arrow" aria-hidden="true">&rarr;</span></a>
                 </div>
               </div>
             </div>
@@ -997,11 +960,11 @@
       </div>
 
       <div class="final-ctas">
-        <a href="signup.html?role=teacher" class="btn btn-primary">
+        <a href="/signup?role=teacher" class="btn btn-primary">
           Create your teacher profile
           <span class="arrow" aria-hidden="true">&rarr;</span>
         </a>
-        <a href="requirements.html" class="btn btn-secondary">
+        <a href="/yoga-jobs" class="btn btn-secondary">
           Browse open requirements first
         </a>
       </div>
@@ -1054,32 +1017,32 @@
       <div class="footer-col">
         <h4 class="mono">For students</h4>
         <ul>
-          <li><a href="teachers.html">Browse teachers</a></li>
-          <li><a href="requirements.html">Post a requirement</a></li>
-          <li><a href="index.html#verification">Verification process</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="/yoga-teachers">Browse teachers</a></li>
+          <li><a href="/yoga-jobs">Post a requirement</a></li>
+          <li><a href="/#verification">Verification process</a></li>
+          <li><a href="/contact">Contact</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">For teachers</h4>
         <ul>
-          <li><a href="signup.html?role=teacher">Create your profile</a></li>
-          <li><a href="teacher-benefits.html">Become verified</a></li>
-          <li><a href="requirements.html">Browse requirements</a></li>
-          <li><a href="login.html">Teacher login</a></li>
+          <li><a href="/signup?role=teacher">Create your profile</a></li>
+          <li><a href="/teacher-benefits">Become verified</a></li>
+          <li><a href="/yoga-jobs">Browse requirements</a></li>
+          <li><a href="/login">Teacher login</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4 class="mono">Company</h4>
         <ul>
-          <li><a href="about.html">About</a></li>
+          <li><a href="/about">About</a></li>
           <li><a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="terms.html">Terms &amp; conditions</a></li>
-          <li><a href="privacy.html">Privacy policy</a></li>
-          <li><a href="refund.html">Refund policy</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/terms">Terms &amp; conditions</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/refund">Refund policy</a></li>
         </ul>
       </div>
 
@@ -1092,7 +1055,7 @@
   </div>
 </footer>
 
-<script src="assets/js/site.js"></script>
+<script src="/assets/js/site.js"></script>
 <script>
 (function(){
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1118,6 +1081,31 @@
     brokerVideo.removeAttribute('autoplay');
     brokerVideo.pause();
   }
+})();
+</script>
+
+<script>
+(function(){
+  var stage = document.getElementById('rvStage');
+  if (!stage) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) { stage.classList.add('is-in'); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting) { stage.classList.add('is-in'); io.disconnect(); } });
+  }, { threshold: 0.25 });
+  io.observe(stage);
+
+  // pointer-driven tilt (desktop only)
+  if (!window.matchMedia('(hover:hover) and (min-width:861px)').matches) return;
+  stage.addEventListener('mousemove', function(ev){
+    var r = stage.getBoundingClientRect();
+    var x = (ev.clientX - r.left) / r.width - .5, y = (ev.clientY - r.top) / r.height - .5;
+    stage.style.setProperty('--ry', (x * 8).toFixed(2) + 'deg');
+    stage.style.setProperty('--rx', (-y * 6).toFixed(2) + 'deg');
+  });
+  stage.addEventListener('mouseleave', function(){
+    stage.style.setProperty('--ry', '0deg'); stage.style.setProperty('--rx', '0deg');
+  });
 })();
 </script>
 

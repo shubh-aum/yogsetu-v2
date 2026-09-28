@@ -33,6 +33,7 @@
 .req-band--prenatal{background:linear-gradient(150deg,#8C887D,#55534C);}
 .req-band--corporate{background:linear-gradient(150deg,#55534C,#1A1A18);}
 .req-band--therapeutic{background:linear-gradient(150deg,#A65032,#3A3935);}
+.req-band--generic{background:linear-gradient(150deg,#55534C,#A65032);}
 
 .req-card--editorial .req-card-top h3 a{font-size:clamp(19px,1.8vw,23px);}
 
