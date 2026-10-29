@@ -298,7 +298,7 @@
     /* His centre sits ~70% across the source frame; strip is 42vh tall. */
     .idx-sunlight-media{
       --s:max(140vw, 74.67vh);
-      width:var(--s);right:auto;
+      width:var(--s);right:auto;max-width:none;
       left:clamp(calc(100vw - var(--s)), calc(50vw - .70 * var(--s)), 0px);
       object-fit:cover;object-position:left top;
     }
