@@ -61,9 +61,18 @@
      baked-in black band across its bottom just blends into the card's own
      near-black background. Mirrored so she sits on the right and the
      left-aligned text doesn't overlap her. */
+  /* hero-banner.png is a wide 16:9 group shot with people across the whole
+     frame, so it cannot sit behind the text. Instead it is sized to the
+     right ~60% of the card (bottom-anchored, never cropped), its left edge
+     feathered into the dark card so the headline keeps clean space. */
   .idx-hero-banner .hero-media{
-    object-fit:contain;object-position:left center;
-    opacity:1;transform:scaleX(-1);
+    top:auto;bottom:0;left:auto;right:0;
+    width:min(60%, 1100px);height:auto;aspect-ratio:16/9;
+    object-fit:contain;object-position:right bottom;
+    opacity:1;transform:none;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%),linear-gradient(180deg,transparent 0,#000 18%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 22%),linear-gradient(180deg,transparent 0,#000 18%);
+    -webkit-mask-composite:source-in;mask-composite:intersect;
   }
   /* Richer, directional scrim: a warm marigold glow behind the subject
      (on-brand "backlit" feel instead of a flat dark overlay), a stronger
@@ -164,7 +173,7 @@
     /* hero-banner.png is a wide group shot (16:9) spanning the full frame,
        so show it whole: full width, height = width * 9/16, no crop/mirror. */
     .idx-hero-banner .hero-media{
-      width:100%;left:0;right:0;object-fit:cover;object-position:center;transform:none;
+      width:100%;left:0;right:0;aspect-ratio:auto;object-fit:cover;object-position:center;transform:none;-webkit-mask-image:none;mask-image:none;-webkit-mask-composite:source-over;mask-composite:add;
     }
     .idx-hero-banner .hero-body{
       position:relative;margin-top:calc(64px + 56.25vw);padding-top:clamp(24px,4vh,44px);
