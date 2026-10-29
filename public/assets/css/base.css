@@ -1801,7 +1801,7 @@
   .vstep.is-stamped .ico-check{opacity:1;transform:scale(1);color:var(--pine-deep);}
   .vstep h3{
     font-family:'Fraunces',serif;
-    font-size:clamp(20.5px,1.6vw,22px);
+    font-size:clamp(25px,2.3vw,32px);
     font-weight:500;
     letter-spacing:-.022em;
     line-height:1.2;
@@ -1810,10 +1810,16 @@
     transition:color .3s ease;
   }
   .vstep p{
-    font-size:clamp(16px,1vw,15px);
-    line-height:1.6;
-    color:rgba(237,231,216,.72);
-    max-width:44ch;
+    font-size:clamp(18px,1.5vw,21px);
+    line-height:1.5;
+    color:rgba(237,231,216,.9);
+    max-width:none;
+  }
+  .vstep p .hl{
+    font-weight:600;color:#FFFDF7;
+    background:linear-gradient(transparent 58%,rgba(217,119,87,.55) 58%,rgba(217,119,87,.55) 92%,transparent 92%);
+    padding:0 3px;margin:0 -3px;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone;
   }
   .vstep .flag{
     display:inline-block;margin-top:9px;
@@ -1963,8 +1969,8 @@
     .vstep{grid-template-columns:32px minmax(0,1fr);gap:13px;padding:22px 0;}
     .vstep .ico{width:32px;height:32px;}
     .vstep .ico svg{width:15px;height:15px;}
-    .vstep h3{font-size:20px;}
-    .vstep p{font-size:16px;}
+    .vstep h3{font-size:24px;}
+    .vstep p{font-size:18px;}
   }
   @media (max-width:400px){
     .vstats{grid-template-columns:minmax(0,1fr);gap:16px;}
