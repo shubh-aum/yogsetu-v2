@@ -2764,3 +2764,36 @@
     .site-footer{padding:44px 18px 24px;}
     .footer-bottom{flex-direction:column;align-items:flex-start;}
   }
+
+
+  /* ---- Homepage teacher rail: only rating, name, city and the verified
+     badge. The rating is the first thing the eye should land on, so it is
+     a solid marigold pill with big dark type; the whole card is the link. ---- */
+  #teacherRail .tcard{position:relative;}
+  #teacherRail .tcard-hit{position:absolute;inset:0;z-index:3;border-radius:inherit;}
+  #teacherRail .tcard-hit:focus-visible{outline:3px solid var(--marigold);outline-offset:-3px;}
+  #teacherRail .tcard .rating{
+    top:12px;right:12px;gap:6px;
+    padding:8px 13px 8px 11px;
+    background:linear-gradient(180deg,#FFC24D 0%,var(--marigold) 100%);
+    border:0;
+    -webkit-backdrop-filter:none;backdrop-filter:none;
+    color:#2A1608;
+    font-size:19px;font-weight:800;letter-spacing:-.01em;
+    box-shadow:0 10px 22px -8px rgba(20,10,0,.6),0 0 0 3px rgba(255,255,255,.85);
+  }
+  #teacherRail .tcard .rating svg{width:18px;height:18px;fill:#2A1608;}
+  #teacherRail .tcard .vbadge{font-size:10px;padding:6px 12px;}
+  #teacherRail .tcard .vbadge svg{width:12px;height:12px;}
+  #teacherRail .tcard .info{padding:16px 16px 18px;gap:7px;}
+  #teacherRail .tcard h3{font-size:clamp(22px,1.7vw,25px);}
+  #teacherRail .tcard .meta{
+    margin-top:0;display:flex;align-items:center;gap:6px;
+    font-size:15px;font-weight:500;color:var(--ink-soft);
+  }
+  #teacherRail .tcard .meta .pin{width:15px;height:15px;flex-shrink:0;fill:none;stroke:var(--marigold-deep);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  @media (max-width:640px){
+    #teacherRail .tcard .rating{top:9px;right:9px;padding:6px 11px 6px 9px;font-size:17px;}
+    #teacherRail .tcard .rating svg{width:16px;height:16px;}
+    #teacherRail .tcard h3{font-size:21px;}
+  }
