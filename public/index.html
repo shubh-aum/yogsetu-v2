@@ -352,6 +352,7 @@
   /* Big hand-drawn saffron arrow pointing at the heading — desktop only
      (see the max-width:900px block below, where this section drops the
      sticky side-by-side layout for a stacked one with no room for it). */
+  .idx-book-cta{display:none;}
   .idx-book-arrow{
     flex-shrink:0;
     width:clamp(100px,10.5vw,190px);height:auto;
@@ -383,9 +384,25 @@
     }
     .idx-book-visual-copy{
       position:relative;inset:auto;flex:0 0 auto;justify-content:center;
-      padding:clamp(28px,6vh,48px) 20px clamp(16px,3vh,24px);pointer-events:auto;
+      padding:clamp(28px,6vh,48px) 20px clamp(36px,6vh,52px);pointer-events:auto;
     }
     .idx-book-visual-copy h2{max-width:none;text-align:center;margin:0 auto;}
+    /* Make the whole banner read as tappable: a pill button under the
+       heading (the surrounding <a> already links to teachers.html). */
+    .idx-book-visual-copy{flex-direction:column;gap:18px;}
+    .idx-book-cta{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:13px 22px;border-radius:999px;
+      background:var(--ink);color:#fff;
+      font-family:inherit;font-weight:600;font-size:15px;letter-spacing:.01em;
+      box-shadow:0 12px 24px -12px rgba(20,19,17,.55);
+      transition:transform .15s ease,box-shadow .15s ease;
+    }
+    .idx-book-cta .cta-arrow{display:inline-block;animation:idxCtaNudge 1.6s ease-in-out infinite;}
+    @keyframes idxCtaNudge{0%,100%{transform:translateX(0);}50%{transform:translateX(5px);}}
+    .idx-book-visual-link:active .idx-book-cta{transform:scale(.97);box-shadow:0 6px 14px -8px rgba(20,19,17,.55);}
+    .idx-book-visual-copy h2 em{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px;text-decoration-color:var(--marigold);}
+    @media (prefers-reduced-motion:reduce){.idx-book-cta .cta-arrow{animation:none;}}
     .idx-book-arrow{display:none;}
     /* contain+center just shows the image's own built-in empty left half
        as-is, which reads as "off-center" since the woman/phone only occupy
@@ -947,6 +964,7 @@
         <path d="M106 22 L132 42 L110 64" stroke="var(--marigold)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
       <h2>Book Slot <em>as per Availability</em></h2>
+      <span class="idx-book-cta" aria-hidden="true">Browse teachers <span class="cta-arrow">→</span></span>
     </div>
   </a>
 </section>
