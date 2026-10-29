@@ -598,6 +598,7 @@
     transition:transform .4s cubic-bezier(.22,.9,.3,1),box-shadow .4s ease;
     will-change:transform;
   }
+  .diptych-vs .vs-arrow{display:none;}
   .diptych-vs{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
     z-index:5;
@@ -923,6 +924,19 @@
       scroll-snap-align:center;
       box-shadow:0 10px 22px -8px rgba(0,0,0,.4),0 0 0 5px var(--sand);
     }
+    /* On the swipe carousel the VS badge becomes a nudging arrow so it is
+       obvious the next panel is one swipe away. */
+    .diptych-vs .vs-text{display:none;}
+    .diptych-vs .vs-arrow{
+      display:block;width:22px;height:22px;
+      stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
+      animation:vsNudge 1.6s ease-in-out infinite;
+    }
+    @keyframes vsNudge{
+      0%,100%{transform:translateX(-2px);}
+      50%{transform:translateX(4px);}
+    }
+    @media (prefers-reduced-motion:reduce){.diptych-vs .vs-arrow{animation:none;}}
     .panel-story .photo,.panel-truth .photo{aspect-ratio:16/9;}
     .panel-truth .photo .seal{bottom:-26px;width:70px;height:70px;}
     .panel-truth .panel-body{padding-top:36px;}
