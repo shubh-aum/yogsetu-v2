@@ -1841,6 +1841,7 @@
     box-shadow:0 46px 90px -46px rgba(0,0,0,.6);
     color:var(--ink);
     overflow:hidden;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .28  0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E"),radial-gradient(120% 90% at 50% 0%,#FBFAF6 0%,#F1EEE5 100%);
   }
   .vcert::before{
     content:'';
@@ -1872,47 +1873,50 @@
   .vcert-name .rl{font-size:11.5px;color:var(--ink-soft);margin-top:2px;display:block;}
   .vcert-line{height:1px;background:rgba(26,26,24,.16);margin:18px 0;position:relative;z-index:1;}
 
+  .vcert-meta{
+    position:relative;z-index:1;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:10px;
+    font-family:'IBM Plex Mono',monospace;font-size:9.5px;line-height:1.4;color:var(--ink-soft);
+  }
+  .vcert-meta b{display:block;font-weight:600;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:2px;}
   .vcert-stamps{
-    position:relative;
-    height:clamp(150px,20vw,190px);
-    z-index:1;
+    position:relative;z-index:1;
+    width:100%;aspect-ratio:1/.8;margin-top:10px;
   }
-  .stamp{
-    position:absolute;
-    width:clamp(78px,9vw,96px);height:clamp(78px,9vw,96px);
-    border-radius:50%;
-    border:3px double var(--pine);
-    display:flex;align-items:center;justify-content:center;
-    text-align:center;padding:6px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:8px;letter-spacing:.04em;text-transform:uppercase;font-weight:700;
-    color:var(--pine);
+  /* Rubber-stamp ink: SVG with a rough-edge + speckle filter (inkRough),
+     multiply-blended so the paper grain shows through like real ink. */
+  .vstamp{
+    position:absolute;display:block;
     opacity:0;
-    transform:scale(2.4) rotate(var(--rot,-12deg));
-    transition:opacity .2s ease,transform .5s cubic-bezier(.32,1.6,.5,1);
+    transform:scale(2.2) rotate(var(--rot,-12deg));
+    transition:opacity .15s ease,transform .45s cubic-bezier(.3,1.7,.5,1);
     mix-blend-mode:multiply;
+    filter:url(#inkRough);
+    will-change:transform;
   }
-  .stamp.is-stamped{opacity:.85;transform:scale(1) rotate(var(--rot,-12deg));}
-  .stamp-1{top:2px;left:0;--rot:-11deg;}
-  .stamp-2{top:22px;left:36%;--rot:7deg;}
-  .stamp-3{top:6px;right:0;--rot:-5deg;}
+  .vstamp svg{display:block;width:100%;height:auto;overflow:visible;}
+  .vstamp.is-stamped{opacity:.88;transform:scale(1) rotate(var(--rot,-12deg));}
+  .vstamp-1{top:1%;left:0;width:40%;--rot:-11deg;}
+  .vstamp-3{top:3%;right:0;width:39%;--rot:6deg;}
+  .vstamp-2{top:45%;left:2%;width:50%;--rot:-5deg;}
 
   .vcert-seal{
-    position:absolute;left:50%;bottom:-4px;z-index:2;
-    width:clamp(96px,11vw,116px);height:clamp(96px,11vw,116px);
-    transform:translate(-50%,14px) scale(.5) rotate(-16deg);
+    position:absolute;right:2%;bottom:-2%;z-index:2;
+    width:46%;
+    transform:scale(.45) rotate(-24deg);
     opacity:0;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 30%,#E2916D,#A65032 72%);
-    border:3px solid #7A4028;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
-    color:#3A2016;
-    font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-    box-shadow:0 20px 40px -14px rgba(0,0,0,.55);
-    transition:opacity .5s cubic-bezier(.25,1.6,.4,1),transform .5s cubic-bezier(.25,1.6,.4,1);
+    filter:drop-shadow(0 14px 14px rgba(40,15,5,.38)) drop-shadow(0 2px 2px rgba(40,15,5,.4));
+    transition:opacity .45s cubic-bezier(.25,1.6,.4,1),transform .55s cubic-bezier(.25,1.6,.4,1);
   }
-  .vcert-seal.is-shown{opacity:1;transform:translate(-50%,14px) scale(1) rotate(-9deg);}
-  .vcert-seal svg{width:20px;height:20px;stroke:#3A2016;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;}
+  .vcert-seal svg{display:block;width:100%;height:auto;}
+  .vcert-seal.is-shown{opacity:1;transform:scale(1) rotate(-8deg);}
+
+  .vcert-foot{
+    position:relative;z-index:1;margin-top:14px;padding-top:10px;
+    border-top:1px solid rgba(26,26,24,.16);
+    display:flex;flex-direction:column;gap:2px;
+  }
+  .vcert-foot .sig{font-family:'Fraunces',serif;font-style:italic;font-size:19px;color:#2A3A5E;letter-spacing:.01em;transform:rotate(-2deg);transform-origin:left;}
+  .vcert-foot .cap{font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);}
 
   /* -- the provenance strip -- */
   .vstats{
