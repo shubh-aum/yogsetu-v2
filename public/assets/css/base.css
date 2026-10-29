@@ -2930,3 +2930,49 @@
     .footer-bottom{padding:18px 0;}
   }
   .teachers-foot{justify-content:center;}
+
+  /* -- sticky CTA bar: black capsule, saffron ring, white + saffron buttons -- */
+  .sticky-cta{
+    background:rgba(14,13,11,.94);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border:1.5px solid rgba(255,153,51,.75);
+    padding:8px;gap:8px;
+    box-shadow:0 22px 50px -16px rgba(0,0,0,.7),0 0 0 4px rgba(255,153,51,.14),0 0 34px -6px rgba(255,153,51,.45);
+  }
+  .sticky-cta .btn{
+    font-size:clamp(16px,1.1vw,17px);font-weight:700;letter-spacing:.005em;
+    padding:14px clamp(18px,1.8vw,28px);border-radius:999px;
+    transition:transform .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease;
+  }
+  .sticky-cta .btn-secondary{
+    background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.55);box-shadow:none;
+  }
+  .sticky-cta .btn-secondary svg{stroke:#fff;}
+  .sticky-cta .btn-secondary:hover{background:#fff;color:#0E0D0B;border-color:#fff;}
+  .sticky-cta .btn-secondary:hover svg{stroke:#0E0D0B;}
+  .sticky-cta .btn-primary{
+    background:var(--saffron);color:#17120C;border:0;
+    box-shadow:0 8px 22px -8px rgba(255,153,51,.9);
+    animation:stickyPulse 2.4s ease-in-out infinite;
+  }
+  .sticky-cta .btn-primary .arrow{display:inline-block;transition:transform .2s ease;}
+  .sticky-cta .btn-primary:hover{background:#fff;color:#0E0D0B;transform:translateY(-1px);}
+  .sticky-cta .btn-primary:hover .arrow{transform:translateX(4px);}
+  .sticky-cta .btn:focus-visible{outline:3px solid #fff;outline-offset:2px;}
+  @keyframes stickyPulse{
+    0%,100%{box-shadow:0 8px 22px -8px rgba(255,153,51,.9),0 0 0 0 rgba(255,153,51,.5);}
+    50%{box-shadow:0 8px 22px -8px rgba(255,153,51,.9),0 0 0 9px rgba(255,153,51,0);}
+  }
+  @media (prefers-reduced-motion:reduce){.sticky-cta .btn-primary{animation:none;}}
+  @media (max-width:640px){
+    .sticky-cta{padding:7px;gap:7px;}
+    .sticky-cta .btn{padding:13px 10px;font-size:16px;}
+  }
+  @media (max-width:640px){
+    .sticky-cta .btn{padding:13px 8px;font-size:15px;min-width:0;white-space:nowrap;justify-content:center;}
+    .sticky-cta .btn-primary{flex:1.25;}
+  }
+  @media (max-width:420px){
+    .sticky-cta .btn-primary .arrow{display:none;}
+    .sticky-cta .btn{font-size:14.5px;}
+  }
