@@ -152,30 +152,22 @@
        cover part of it. Start the strip below the header instead — the
        fallback gradient still fills top:0 so the header sits on a matching
        dark background, not a hard color break. */
-    .idx-hero-banner .hero-media-fallback{position:absolute;top:0;left:0;right:0;bottom:auto;height:calc(64px + 44vh);}
+    .idx-hero-banner .hero-media-fallback{position:absolute;top:0;left:0;right:0;bottom:auto;height:calc(64px + 56.25vw);}
     .idx-hero-banner .hero-media,
     .idx-hero-banner .hero-scrim{
       position:absolute;top:64px;left:0;right:0;bottom:auto;
-      height:44vh;
+      height:56.25vw;
     }
     .idx-hero-banner .hero-scrim{
       background:linear-gradient(180deg, rgba(23,22,20,0) 55%, rgba(23,22,20,.95) 100%);
     }
-    /* Stacked-layout crop: instead of a fixed % (which lands the subject in a
-       different spot at every width), compute the crop offset so her centre
-       (~35% across the source frame) always sits on the strip's centre line.
-       --s is the scaled video width under cover (height-bound at 44vh, or
-       width-bound on wider screens); the clamp keeps the video covering the
-       whole strip. The sunlight strip below uses the same maths so the two
-       subjects stay vertically in line at every width. */
+    /* hero-banner.png is a wide group shot (16:9) spanning the full frame,
+       so show it whole: full width, height = width * 9/16, no crop/mirror. */
     .idx-hero-banner .hero-media{
-      --s:max(140vw, 78.2vh);
-      width:var(--s);right:auto;
-      left:clamp(calc(100vw - var(--s)), calc(50vw - .35 * var(--s)), 0px);
-      object-fit:cover;object-position:left top;transform:none;
+      width:100%;left:0;right:0;object-fit:cover;object-position:center;transform:none;
     }
     .idx-hero-banner .hero-body{
-      position:relative;margin-top:calc(64px + 44vh);padding-top:clamp(24px,4vh,44px);
+      position:relative;margin-top:calc(64px + 56.25vw);padding-top:clamp(24px,4vh,44px);
       background:var(--pine-deep);
       align-items:center;text-align:center;
     }
