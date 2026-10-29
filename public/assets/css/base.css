@@ -3002,3 +3002,48 @@
     0%,100%{box-shadow:0 10px 22px -8px rgba(226,121,26,.9),0 0 0 0 rgba(255,153,51,.55);}
     50%{box-shadow:0 10px 22px -8px rgba(226,121,26,.9),0 0 0 10px rgba(255,153,51,0);}
   }
+
+  /* -- sticky CTA bar, round 3: solid saffron capsule -- */
+  .sticky-cta{
+    background:linear-gradient(180deg,#FFA640 0%,#FF8F1F 100%);
+    border:2px solid #fff;
+    box-shadow:0 20px 44px -14px rgba(226,121,26,.8),0 0 0 5px rgba(255,153,51,.28);
+  }
+  .sticky-cta .btn-secondary{
+    background:transparent;color:#fff;border:2px solid #fff;text-shadow:0 1px 0 rgba(120,50,0,.3);
+  }
+  .sticky-cta .btn-secondary svg{stroke:#fff;}
+  .sticky-cta .btn-secondary:hover{background:rgba(255,255,255,.22);color:#fff;border-color:#fff;}
+  .sticky-cta .btn-secondary:hover svg{stroke:#fff;}
+  .sticky-cta .btn-primary{
+    background:#fff;color:#B85200;text-shadow:none;font-weight:800;
+    box-shadow:0 8px 20px -8px rgba(90,40,0,.6);
+    animation:stickyPulse3 2.4s ease-in-out infinite;
+  }
+  .sticky-cta .btn-primary:hover{background:#FFF3E3;color:#8F3F00;}
+  .sticky-cta .btn:focus-visible{outline:3px solid #fff;outline-offset:2px;}
+  @keyframes stickyPulse3{
+    0%,100%{box-shadow:0 8px 20px -8px rgba(90,40,0,.6),0 0 0 0 rgba(255,255,255,.7);}
+    50%{box-shadow:0 8px 20px -8px rgba(90,40,0,.6),0 0 0 10px rgba(255,255,255,0);}
+  }
+
+  /* -- footer: black + white only (orange removed) -- */
+  .site-footer{
+    background:#0B0B0B;background-image:none;
+    border-top:1px solid rgba(255,255,255,.22);
+    color:rgba(255,255,255,.78);
+  }
+  .footer-top{border-bottom:1px solid rgba(255,255,255,.2);}
+  .footer-brand .logo{color:#fff;}
+  .footer-brand .logo .dot{background:#fff;box-shadow:0 0 0 5px rgba(255,255,255,.18);}
+  .footer-brand p{color:rgba(255,255,255,.72);}
+  .footer-col h4{color:#fff;border-bottom:2px solid rgba(255,255,255,.35);}
+  .footer-col a{color:rgba(255,255,255,.9);}
+  .footer-col a::after{background:#fff;}
+  .footer-col a:hover{color:#fff;}
+  .footer-bottom{
+    background:#fff;color:#0B0B0B;
+    box-shadow:0 0 0 100vmax #fff;clip-path:inset(0 -100vmax);
+  }
+  .footer-bottom a{color:#0B0B0B;}
+  .footer-bottom a:hover{color:#444;}
