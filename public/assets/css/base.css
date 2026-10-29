@@ -1970,7 +1970,7 @@
     .vstep .ico{width:32px;height:32px;}
     .vstep .ico svg{width:15px;height:15px;}
     .vstep h3{font-size:24px;}
-    .vstep p{font-size:18px;}
+    .vstep p{font-size:17px;}
   }
   @media (max-width:400px){
     .vstats{grid-template-columns:minmax(0,1fr);gap:16px;}
