@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css?v=12">
+<link rel="stylesheet" href="assets/css/base.css?v=14">
 <link rel="stylesheet" href="assets/css/site.css">
 <style>
   /* landing-page-only tweaks: give the fixed header real nav actions */
@@ -518,7 +518,7 @@
         <div class="closing">
           <div class="cta-shell">
             <a href="teachers.html" class="btn btn-primary">
-              Browse verified teachers
+              Book a Free Demo Class
               <span class="arrow" aria-hidden="true">→</span>
             </a>
           </div>
@@ -828,6 +828,13 @@
       </div>
   </div>
 
+  <div class="rail-wrap">
+  <button type="button" class="rail-arrow prev" id="railPrev" aria-label="Previous teachers">
+    <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+  </button>
+  <button type="button" class="rail-arrow next" id="railNext" aria-label="More teachers">
+    <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
   <div class="rail" id="teacherRail" role="list">
         <article class="tcard">
           <div class="shot">
@@ -935,16 +942,9 @@
           <a class="tcard-hit" href="teacher-profile.html?t=disha-nehra" aria-label="View Disha Nehra's profile"></a>
         </article>
   </div>
+  </div>
 
   <div class="teachers-foot">
-    <div class="rail-nav">
-      <button type="button" id="railPrev" aria-label="Previous teachers">
-        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
-      </button>
-      <button type="button" id="railNext" aria-label="More teachers">
-        <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      </button>
-    </div>
     <a class="btn-seeall" href="teachers.html">See all teachers <span class="arrow" aria-hidden="true">→</span></a>
   </div>
 
@@ -1190,8 +1190,6 @@
           </div>
           <h2 id="voices-title">What changed once they found <em>the right teacher</em></h2>
         </div>
-        <p class="voices-lede">Real students, tapping through their own reviews — touch one to read it in full, or tap play to hear it in their own words.</p>
-
         <div class="voices-foot">
           <span class="voices-faces" aria-hidden="true">
           <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Varsha-Singh-Rajput.jpg" alt="" loading="lazy" decoding="async">
@@ -1384,6 +1382,70 @@
 })();
 </script>
 
+<script>
+(function(){
+  var track = document.getElementById('reviewTrack');
+  var feed = document.getElementById('reviewFeed');
+  var stage = document.getElementById('videoStage');
+  if(!track || !feed) return;
+  var all = Array.prototype.slice.call(track.querySelectorAll('.review-item'));
+  var items = all;
+  /* the old infinite scroll repeated the list twice; keep one copy */
+  if(all.length % 2 === 0){
+    var half = all.length / 2, same = true;
+    for(var i = 0; i < half; i++){
+      if(all[i].getAttribute('data-name') !== all[i + half].getAttribute('data-name')){ same = false; break; }
+    }
+    if(same){ items = all.slice(0, half); all.slice(half).forEach(function(n){ n.parentNode.removeChild(n); }); }
+  }
+  track.classList.add('is-slider');
+
+  var dotsBox = document.createElement('div');
+  dotsBox.className = 'review-dots';
+  items.forEach(function(it, k){
+    var b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('aria-label', 'Show review ' + (k + 1));
+    b.addEventListener('click', function(){ show(k); restart(); });
+    dotsBox.appendChild(b);
+  });
+  feed.appendChild(dotsBox);
+  var dots = dotsBox.querySelectorAll('button');
+
+  var cur = 0, timer = null, hold = false;
+  function show(k){
+    cur = k;
+    items.forEach(function(it, j){ it.classList.toggle('is-current', j === k); });
+    dots.forEach(function(d, j){ d.classList.toggle('is-active', j === k); });
+  }
+  function tick(){
+    if(hold) return;
+    if(stage && !stage.hasAttribute('hidden')) return;
+    show((cur + 1) % items.length);
+  }
+  function restart(){
+    if(timer) clearInterval(timer);
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(tick, 7000);
+  }
+  feed.addEventListener('mouseenter', function(){ hold = true; });
+  feed.addEventListener('mouseleave', function(){ hold = false; });
+  feed.addEventListener('focusin', function(){ hold = true; });
+  feed.addEventListener('focusout', function(){ hold = false; });
+  show(0); restart();
+})();
+(function(){
+  var prev = document.getElementById('faqPrev'), next = document.getElementById('faqNext');
+  var dots = document.querySelectorAll('#faqDots .faq-dot');
+  if(!prev || !next || !dots.length) return;
+  function idx(){
+    for(var i = 0; i < dots.length; i++) if(dots[i].classList.contains('is-active')) return i;
+    return 0;
+  }
+  prev.addEventListener('click', function(){ dots[(idx() - 1 + dots.length) % dots.length].click(); });
+  next.addEventListener('click', function(){ dots[(idx() + 1) % dots.length].click(); });
+})();
+</script>
+
 <section class="proof" id="proof" aria-labelledby="proof-title">
   <div class="proof-inner">
 
@@ -1394,7 +1456,6 @@
         <span>What's on YogSetu right now</span>
       </div>
       <h2 id="proof-title">See it for yourself — <em>then look at the numbers</em></h2>
-      <p class="sub">A 2-minute look inside YogKulam, and where the platform stands today.</p>
     </div>
 
     <div class="cinema">
@@ -1550,6 +1611,12 @@
     <p class="faq-swipe-hint"><svg viewBox="0 0 24 24"><path d="M13 5l7 7-7 7M20 12H4"/></svg>Swipe to browse categories</p>
 
     <div class="faq-slider" id="faqSlider">
+      <button type="button" class="faq-arrow prev" id="faqPrev" aria-label="Previous category">
+        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button type="button" class="faq-arrow next" id="faqNext" aria-label="Next category">
+        <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
       <div class="faq-track-wrap">
         <div class="faq-track" id="faqTrack">
       <div class="faq-slide" data-i="0">

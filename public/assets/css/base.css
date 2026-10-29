@@ -2806,3 +2806,127 @@
     -webkit-box-decoration-break:clone;box-decoration-break:clone;
   }
   .how-copy p{font-size:clamp(18px,1.5vw,20px);max-width:none;}
+
+
+  /* ================= Homepage round: rail arrows, review slider, FAQ, footer ================= */
+  :root{--saffron:#FF9933;--saffron-deep:#E2791A;}
+
+  /* -- teacher rail: big side arrows (desktop) -- */
+  .rail-wrap{position:relative;max-width:1240px;margin:0 auto;}
+  .rail-arrow{
+    position:absolute;top:150px;transform:translateY(-50%);z-index:6;
+    width:60px;height:60px;border-radius:50%;
+    background:var(--saffron);color:#17120C;
+    border:3px solid #fff;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 14px 28px -8px rgba(20,12,0,.55);
+    transition:transform .18s ease,background .18s ease,opacity .18s ease;
+  }
+  .rail-arrow.prev{left:10px;}
+  .rail-arrow.next{right:10px;}
+  .rail-arrow svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;}
+  .rail-arrow:hover{background:#17120C;color:var(--saffron);transform:translateY(-50%) scale(1.08);}
+  .rail-arrow:focus-visible{outline:3px solid #17120C;outline-offset:3px;}
+  .rail-arrow:disabled{opacity:.35;cursor:default;transform:translateY(-50%);}
+  @media (max-width:900px){.rail-arrow{display:none;}}
+
+  /* -- student voices: one review at a time, slow crossfade -- */
+  .tablet{width:min(100%,400px);}
+  .review-feed::before,.review-feed::after{display:none;}
+  .review-track.is-slider{display:block;animation:none;position:relative;height:100%;}
+  .review-track.is-slider .review-item{
+    position:absolute;inset:0;justify-content:center;gap:18px;
+    padding:30px 28px 56px;border-bottom:0;border-left:0;
+    opacity:0;transform:translateY(22px);pointer-events:none;
+    transition:opacity 1.3s ease,transform 1.3s ease;
+  }
+  .review-track.is-slider .review-item.is-current{opacity:1;transform:none;pointer-events:auto;}
+  .review-track.is-slider .review-item:hover,.review-track.is-slider .review-item.is-active{background:transparent;}
+  .review-top{gap:13px;}
+  .review-top img{width:50px;height:50px;}
+  .review-top .nm{font-size:20px;}
+  .review-top .rl{font-size:13.5px;margin-top:2px;}
+  .review-top .stars svg{width:15px;height:15px;}
+  .review-quote{font-size:clamp(18px,1.6vw,21px);line-height:1.5;color:var(--ink);font-weight:500;}
+  .review-play{font-size:12px;letter-spacing:.08em;font-weight:600;}
+  .review-play svg{width:22px;height:22px;}
+  .review-dots{position:absolute;left:0;right:0;bottom:18px;z-index:4;display:flex;justify-content:center;gap:8px;}
+  .review-dots button{width:9px;height:9px;padding:0;border:0;border-radius:50%;background:rgba(26,26,24,.2);cursor:pointer;transition:background .3s ease,transform .3s ease;}
+  .review-dots button.is-active{background:var(--saffron-deep);transform:scale(1.35);}
+  @media (max-width:640px){
+    .tablet{width:min(100%,330px);}
+    .review-track.is-slider .review-item{padding:26px 22px 52px;}
+    .review-quote{font-size:18px;}
+  }
+
+  /* -- FAQ: bigger type, big side arrows -- */
+  .faq-inner{max-width:780px;}
+  .faq-slider{position:relative;}
+  .bubble{font-size:18px;line-height:1.55;max-width:84%;padding:15px 20px;}
+  .chat-avatar{width:40px;height:40px;font-size:13px;}
+  .faq-cat{font-size:13px;padding:9px 18px;}
+  .chat-tag{font-size:11px;margin-left:50px;}
+  .chat-tag svg{width:12px;height:12px;}
+  .followup-cta{font-size:16px;padding:13px 24px;margin-left:50px;}
+  .faq-swipe-hint{font-size:12px;}
+  .faq-dot{width:11px;height:11px;}
+  .faq-arrow{
+    position:absolute;z-index:6;width:58px;height:58px;border-radius:50%;
+    background:var(--saffron);color:#17120C;border:3px solid #fff;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 14px 28px -8px rgba(20,12,0,.5);
+    transition:transform .18s ease,background .18s ease,color .18s ease;
+  }
+  .faq-arrow svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;}
+  .faq-arrow:hover{background:#17120C;color:var(--saffron);}
+  .faq-arrow:focus-visible{outline:3px solid #17120C;outline-offset:3px;}
+  @media (min-width:1000px){
+    .faq-arrow{top:42%;transform:translateY(-50%);}
+    .faq-arrow:hover{transform:translateY(-50%) scale(1.08);}
+    .faq-arrow.prev{left:-86px;}
+    .faq-arrow.next{right:-86px;}
+  }
+  @media (max-width:999px){
+    .faq-slider{padding-bottom:84px;}
+    .faq-arrow{bottom:6px;}
+    .faq-arrow.prev{left:calc(50% - 72px);}
+    .faq-arrow.next{left:calc(50% + 14px);}
+  }
+  @media (max-width:640px){
+    .bubble{font-size:17px;max-width:88%;padding:13px 16px;}
+    .followup-cta{margin-left:0;}
+  }
+
+  /* -- footer: saffron + black -- */
+  .site-footer{
+    position:relative;background:#0E0D0B;color:rgba(255,244,225,.78);
+    padding:clamp(64px,9vh,96px) clamp(20px,4vw,64px) 0;
+    border-top:8px solid var(--saffron);
+    background-image:radial-gradient(60% 80% at 100% 0%,rgba(255,153,51,.18),transparent 65%),radial-gradient(50% 60% at 0% 100%,rgba(255,153,51,.08),transparent 70%);
+  }
+  .footer-top{gap:clamp(32px,4vw,64px);border-bottom:1px solid rgba(255,153,51,.28);padding-bottom:clamp(40px,6vh,60px);}
+  .footer-brand .logo{font-size:clamp(34px,3.4vw,44px);color:#FFF4E1;gap:12px;}
+  .footer-brand .logo .dot{width:13px;height:13px;background:var(--saffron);box-shadow:0 0 0 5px rgba(255,153,51,.25);}
+  .footer-brand p{font-size:clamp(16px,1.2vw,18px);line-height:1.6;color:rgba(255,244,225,.75);max-width:30ch;margin-top:16px;}
+  .footer-col h4{
+    font-size:clamp(14px,1vw,15px);letter-spacing:.14em;font-weight:700;color:var(--saffron);
+    margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid rgba(255,153,51,.35);display:inline-block;
+  }
+  .footer-col ul{gap:15px;}
+  .footer-col a{font-size:clamp(16px,1.2vw,18px);color:#FFF4E1;font-weight:500;}
+  .footer-col a::after{height:2px;background:var(--saffron);}
+  .footer-col a:hover{color:var(--saffron);}
+  .footer-bottom{
+    margin-top:0;padding:22px 0;
+    background:var(--saffron);color:#17120C;
+    font-size:clamp(14px,1.1vw,16px);font-weight:600;letter-spacing:.01em;
+    box-shadow:0 0 0 100vmax var(--saffron);clip-path:inset(0 -100vmax);
+  }
+  .footer-bottom a{color:#17120C;text-decoration:underline;text-underline-offset:3px;}
+  .footer-bottom a:hover{color:#fff;}
+  .footer-bottom .dot{opacity:.6;}
+  @media (max-width:480px){
+    .site-footer{padding:52px 20px 0;}
+    .footer-bottom{padding:18px 0;}
+  }
+  .teachers-foot{justify-content:center;}
