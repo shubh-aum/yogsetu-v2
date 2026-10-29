@@ -2797,3 +2797,12 @@
     #teacherRail .tcard .rating svg{width:16px;height:16px;}
     #teacherRail .tcard h3{font-size:21px;}
   }
+
+  /* highlighted key phrase on light backgrounds */
+  .hl-l{
+    font-weight:600;color:var(--ink);
+    background:linear-gradient(transparent 58%,rgba(217,119,87,.4) 58%,rgba(217,119,87,.4) 92%,transparent 92%);
+    padding:0 3px;margin:0 -3px;
+    -webkit-box-decoration-break:clone;box-decoration-break:clone;
+  }
+  .how-copy p{font-size:clamp(18px,1.5vw,20px);max-width:none;}

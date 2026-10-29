@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/base.css?v=10">
+<link rel="stylesheet" href="assets/css/base.css?v=12">
 <link rel="stylesheet" href="assets/css/site.css">
 <style>
   /* landing-page-only tweaks: give the fixed header real nav actions */
@@ -280,6 +280,33 @@
   .idx-clock-cta .cta-text{display:flex;flex-direction:column;line-height:1.2;}
   .idx-clock-cta .cta-text b{font-size:15.5px;font-weight:700;}
   .idx-clock-cta .cta-text span{font-size:11px;font-weight:500;color:rgba(244,239,225,.78);}
+  /* Bigger, always-moving CTA: floats, glows and sweeps a shine so it
+     reads as the thing to tap. */
+  .idx-sunlight-copy .idx-clock-cta{
+    padding:12px 38px 12px 12px;gap:18px;position:relative;overflow:hidden;
+    animation:idxCtaFloat 2.4s ease-in-out infinite,idxCtaGlow 2.4s ease-in-out infinite;
+  }
+  .idx-sunlight-copy .idx-clock-cta .clock-face{width:66px;height:66px;}
+  .idx-sunlight-copy .idx-clock-cta svg{width:32px;height:32px;}
+  .idx-sunlight-copy .idx-clock-cta .cta-text b{font-size:24px;letter-spacing:-.01em;}
+  .idx-sunlight-copy .idx-clock-cta .cta-text span{font-size:13px;}
+  .idx-sunlight-copy .idx-clock-cta::after{
+    content:"";position:absolute;top:0;bottom:0;width:60px;left:-90px;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);
+    transform:skewX(-20deg);animation:idxCtaShine 3.2s ease-in-out infinite;
+  }
+  @keyframes idxCtaFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+  @keyframes idxCtaGlow{
+    0%,100%{box-shadow:0 4px 0 0 var(--pine-deep),0 0 0 0 rgba(217,119,87,.55);}
+    50%{box-shadow:0 4px 0 0 var(--pine-deep),0 0 0 14px rgba(217,119,87,0);}
+  }
+  @keyframes idxCtaShine{0%,55%{left:-90px;}100%{left:130%;}}
+  @media (prefers-reduced-motion:reduce){.idx-sunlight-copy .idx-clock-cta,.idx-sunlight-copy .idx-clock-cta::after{animation:none;}}
+  .idx-hero-banner h1 .hl-word{
+    color:var(--marigold);font-style:italic;
+    background:linear-gradient(transparent 86%,rgba(217,119,87,.55) 86%);
+    padding:0 .06em;
+  }
   @keyframes idxClockRipple{
     0%{transform:scale(.9);opacity:.9;}
     70%{transform:scale(1.35);opacity:0;}
@@ -483,28 +510,12 @@
         <div class="hero-head">
           <span class="eyebrow"><span class="dot"></span>Every teacher credential-checked</span>
           <h1>
-            Get a Verified Yoga Teacher
+            Get a <span class="hl-word">Verified</span> Yoga Teacher
             <span class="dim">in 24 Hours.</span>
           </h1>
-          <p class="idx-hero-tagline">Discover &middot; Connect &middot; Practice with YogSetu</p>
         </div>
 
         <div class="closing">
-          <div class="idx-hero-features">
-            <div class="idx-hero-feature">
-              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
-              <span>Verified credentials</span>
-            </div>
-            <div class="idx-hero-feature">
-              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M7 21c1.5-4 3-6 5-6s3.5 2 5 6"/></svg></span>
-              <span>Every style</span>
-            </div>
-            <div class="idx-hero-feature">
-              <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-              <span>Free trial class</span>
-            </div>
-          </div>
-
           <div class="cta-shell">
             <a href="teachers.html" class="btn btn-primary">
               Browse verified teachers
@@ -540,7 +551,6 @@
     <div class="idx-sunlight-body">
       <div class="idx-sunlight-copy">
         <h2 id="sunlight-title">Book a Demo Class <em>in Just 1 Minute.</em></h2>
-        <p>No paperwork, no waiting on hold &mdash; pick a verified teacher and lock in your first session right now.</p>
         <a href="teachers.html" class="idx-clock-cta" aria-label="Start now — book a demo class">
           <span class="clock-face">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -570,9 +580,6 @@
         <span class="not">Not you.</span>
       </h2>
     </div>
-    <p class="lede">
-      Yoga works. What fails is finding a teacher who is <strong>qualified, consistent, and the right fit</strong> for where you are.
-    </p>
   </div>
 
   <p class="swipe-hint mono" aria-hidden="true">← Swipe to compare →</p>
@@ -709,27 +716,24 @@
           <li class="how-step" data-wp>
             <span class="how-waypoint" aria-hidden="true"><span class="how-digit">01</span></span>
             <div class="how-copy">
-              <h3>Filter for exactly what you need</h3>
-              <p>Style, city or online, timing, language.</p>
-              <span class="how-chip"><span class="dot" aria-hidden="true"></span>12+ styles · 40+ cities</span>
+              <h3>Pick what you need</h3>
+              <p>Choose your <strong class="hl-l">style, city and time</strong>.</p>
             </div>
           </li>
 
           <li class="how-step" data-wp>
             <span class="how-waypoint" aria-hidden="true"><span class="how-digit">02</span></span>
             <div class="how-copy">
-              <h3>See the proof before you call</h3>
-              <p>Certificates, accrediting body, years taught, intro video.</p>
-              <span class="how-chip"><span class="dot" aria-hidden="true"></span>Checked with the issuer</span>
+              <h3>See the proof first</h3>
+              <p>Check their <strong class="hl-l">certificates</strong> and intro video.</p>
             </div>
           </li>
 
           <li class="how-step" data-wp>
             <span class="how-waypoint" aria-hidden="true"><span class="how-digit">03</span></span>
             <div class="how-copy">
-              <h3>Book a trial. Straight to them.</h3>
-              <p>Message through the profile. Attend your first class.</p>
-              <span class="how-chip"><span class="dot" aria-hidden="true"></span>0% platform fee</span>
+              <h3>Book a trial class</h3>
+              <p>Message them and <strong class="hl-l">join your first class</strong>.</p>
             </div>
           </li>
 
@@ -838,7 +842,7 @@
             <h3>Shikhar Mehrotra</h3>
             <p class="meta"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Lucknow</p>
           </div>
-          <a class="tcard-hit" href="#book" aria-label="Book a slot with this teacher"></a>
+          <a class="tcard-hit" href="teacher-profile.html?t=shikhar-mehrotra" aria-label="View Shikhar Mehrotra's profile"></a>
         </article>
         <article class="tcard">
           <div class="shot">
@@ -853,7 +857,7 @@
             <h3>Amrita Gupta</h3>
             <p class="meta"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Delhi</p>
           </div>
-          <a class="tcard-hit" href="#book" aria-label="Book a slot with this teacher"></a>
+          <a class="tcard-hit" href="teacher-profile.html?t=amrita-gupta" aria-label="View Amrita Gupta's profile"></a>
         </article>
         <article class="tcard">
           <div class="shot">
@@ -868,7 +872,7 @@
             <h3>Vikas Singh Rajput</h3>
             <p class="meta"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Mumbai</p>
           </div>
-          <a class="tcard-hit" href="#book" aria-label="Book a slot with this teacher"></a>
+          <a class="tcard-hit" href="teacher-profile.html?t=vikas-singh-rajput" aria-label="View Vikas Singh Rajput's profile"></a>
         </article>
         <article class="tcard">
           <div class="shot">
@@ -883,7 +887,7 @@
             <h3>Shamli Joshi</h3>
             <p class="meta"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Pune</p>
           </div>
-          <a class="tcard-hit" href="#book" aria-label="Book a slot with this teacher"></a>
+          <a class="tcard-hit" href="teacher-profile.html?t=shamli-joshi" aria-label="View Shamli Joshi's profile"></a>
         </article>
         <article class="tcard">
           <div class="shot">
@@ -898,7 +902,7 @@
             <h3>Shachi Khemuka</h3>
             <p class="meta"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Bengaluru</p>
           </div>
-          <a class="tcard-hit" href="#book" aria-label="Book a slot with this teacher"></a>
+          <a class="tcard-hit" href="teacher-profile.html?t=shachi-khemuka" aria-label="View Shachi Khemuka's profile"></a>
         </article>
         <article class="tcard">
           <div class="shot">
@@ -913,7 +917,7 @@
             <h3>Shweta Shukla</h3>
             <p class="meta"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Jaipur</p>
           </div>
-          <a class="tcard-hit" href="#book" aria-label="Book a slot with this teacher"></a>
+          <a class="tcard-hit" href="teacher-profile.html?t=shweta-shukla" aria-label="View Shweta Shukla's profile"></a>
         </article>
         <article class="tcard">
           <div class="shot">
@@ -928,7 +932,7 @@
             <h3>Disha Nehra</h3>
             <p class="meta"><svg class="pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>Gurugram</p>
           </div>
-          <a class="tcard-hit" href="#book" aria-label="Book a slot with this teacher"></a>
+          <a class="tcard-hit" href="teacher-profile.html?t=disha-nehra" aria-label="View Disha Nehra's profile"></a>
         </article>
   </div>
 
