@@ -598,7 +598,7 @@
     transition:transform .4s cubic-bezier(.22,.9,.3,1),box-shadow .4s ease;
     will-change:transform;
   }
-  .diptych-vs .vs-arrow{display:none;}
+  .diptych-vs .vs-arrow,.diptych-vs .vs-label{display:none;}
   .diptych-vs{
     position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
     z-index:5;
@@ -926,7 +926,16 @@
     }
     /* On the swipe carousel the VS badge becomes a nudging arrow so it is
        obvious the next panel is one swipe away. */
+    .diptych-vs{
+      flex-direction:column;gap:6px;
+      width:68px;height:auto;padding:14px 6px;border-radius:34px;
+    }
     .diptych-vs .vs-text{display:none;}
+    .diptych-vs .vs-label{
+      display:block;text-align:center;
+      font-family:'IBM Plex Mono',monospace;font-weight:700;
+      font-size:9px;line-height:1.25;letter-spacing:.06em;text-transform:uppercase;
+    }
     .diptych-vs .vs-arrow{
       display:block;width:22px;height:22px;
       stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
