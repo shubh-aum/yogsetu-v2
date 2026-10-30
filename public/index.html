@@ -479,6 +479,29 @@
     .page-map-toggle{width:48px;height:48px;}
     .page-map-list{max-width:min(78vw,230px);}
   }
+
+  /* ============================================================
+     Desktop only: hero stays pinned while the "Book a Demo Class" band rises over it
+     (same mechanic as "04 The standard"); the seam is a soft glowing edge, not a hard cut.
+     ============================================================ */
+  @media (min-width:901px){
+    .idx-hero-scope{--ih:clamp(480px,70vh,680px);position:relative;isolation:isolate;}
+    .idx-hero-scope .page{display:contents;}
+    .idx-hero-scope .margin-art{display:none;}
+    .idx-hero-scope .idx-hero-wrap-full{margin:0;position:sticky;top:0;z-index:0;}
+    .idx-hero-scope .idx-hero-banner{min-height:var(--ih);height:var(--ih);}
+    .idx-hero-scope .idx-sunlight-wrap-full{position:relative;z-index:1;}
+    .idx-hero-scope .idx-sunlight-card{
+      min-height:var(--ih);height:var(--ih);
+      border-radius:34px 34px 0 0;
+      box-shadow:0 -46px 90px -28px rgba(0,0,0,.55);
+    }
+    .idx-hero-scope .idx-sunlight-card::before{
+      content:"";position:absolute;top:0;left:8%;right:8%;height:3px;z-index:4;border-radius:3px;
+      background:linear-gradient(90deg,transparent,rgba(217,119,87,.95) 30%,rgba(255,200,150,.95) 50%,rgba(217,119,87,.95) 70%,transparent);
+      box-shadow:0 0 22px 2px rgba(217,119,87,.55);
+    }
+  }
 </style>
 </head>
 <body>
@@ -517,6 +540,7 @@
 </nav>
 
 
+<div class="idx-hero-scope">
 <div class="page idx-page-compact">
 
   <svg class="margin-art left" viewBox="0 0 180 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -606,6 +630,8 @@
     </div>
   </section>
 </div>
+</div>
+<!-- /.idx-hero-scope -->
 
 <section class="section" id="problem" aria-labelledby="problem-title">
 
