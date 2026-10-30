@@ -3117,3 +3117,7 @@
     .footer-col a::before{display:none;}
     .footer-bottom{flex-direction:column;align-items:flex-start;padding:18px 0;}
   }
+
+  /* footer: no hairline between the link columns and the saffron bar */
+  .footer-top{border-bottom:0 !important;}
+  .footer-inner{border:0;}

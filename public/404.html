@@ -3,19 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <title>Page not found — YogSetu</title>
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/base.css?v=23">
+<link rel="stylesheet" href="/assets/css/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   .not-found { min-height: 60vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 1rem; padding: 2rem; }
   .not-found h1 { font-size: 2.5rem; margin: 0; }
   .not-found a { text-decoration: underline; }
 </style>
 </head>
-<body>
-  <div class="not-found">
+<body class="inner-page" style="display:flex;flex-direction:column;min-height:100vh">
+  <div class="not-found" style="flex:1">
     <h1>404</h1>
     <p>We couldn't find the page you were looking for.</p>
     <a href="/">Back to YogSetu home</a>
   </div>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <div class="footer-brand">
+        <span class="logo"><span class="dot" aria-hidden="true"></span>YogSetu</span>
+        <p>A verified yoga teacher directory &mdash; powered by YogKulam's credentialing infrastructure.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="mono">For students</h4>
+        <ul>
+          <li><a href="/yoga-teachers">Browse teachers</a></li>
+          <li><a href="/yoga-jobs">Post a requirement</a></li>
+          <li><a href="/#verification">Verification process</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="mono">For teachers</h4>
+        <ul>
+          <li><a href="/signup?role=teacher">Create your profile</a></li>
+          <li><a href="/teacher-benefits">Become verified</a></li>
+          <li><a href="/yoga-jobs">Browse requirements</a></li>
+          <li><a href="/login">Teacher login</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="mono">Company</h4>
+        <ul>
+          <li><a href="/about">About</a></li>
+          <li><a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/terms">Terms &amp; conditions</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+          <li><a href="/refund">Refund policy</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>YogSetu is a <a href="https://www.yogkulam.com" target="_blank" rel="noopener">YogKulam</a> initiative</span>
+      <span><span class="dot" aria-hidden="true">&middot;</span>yogsetu.com</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
