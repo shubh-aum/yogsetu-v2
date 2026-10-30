@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/base.css">
+<link rel="stylesheet" href="/assets/css/base.css?v=20">
 <link rel="stylesheet" href="/assets/css/site.css">
 <link rel="stylesheet" href="/assets/css/teachers.css">
 <link rel="stylesheet" href="/assets/css/requirements.css?v=20261030">
@@ -176,16 +176,6 @@
   </div>
 </div>
 
-<!-- ============ CROSS-SELL ============ -->
-<div class="cta-band">
-  <h2>Not seeing a fit? Create your teacher profile instead</h2>
-  <p>Get discovered directly by students who are already searching for your style &mdash; free to list, no commission on your sessions.</p>
-  <div class="btn-row">
-    <a href="/teacher-benefits" class="btn btn-primary">For teachers</a>
-    <a href="/signup?role=teacher" class="btn btn-secondary" style="border:1.5px solid var(--line);">Create your profile</a>
-  </div>
-</div>
-
 <!-- ============ FAQ ============ -->
 <section class="faq" id="faq" aria-labelledby="faq-title">
   <div class="faq-inner">
@@ -212,6 +202,12 @@
     <p class="faq-swipe-hint"><svg viewBox="0 0 24 24"><path d="M13 5l7 7-7 7M20 12H4"/></svg>Swipe to browse categories</p>
 
     <div class="faq-slider" id="faqSlider">
+      <button type="button" class="faq-arrow prev" id="faqPrev" aria-label="Previous category">
+        <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <button type="button" class="faq-arrow next" id="faqNext" aria-label="Next category">
+        <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+      </button>
       <div class="faq-track-wrap">
         <div class="faq-track" id="faqTrack">
 
@@ -469,6 +465,23 @@
 })();
 </script>
 
+<script>
+(function(){
+  var prev = document.getElementById('faqPrev'), next = document.getElementById('faqNext');
+  var dots = document.querySelectorAll('#faqDots .faq-dot');
+  if(!prev || !next || !dots.length) return;
+  function idx(){
+    for(var i = 0; i < dots.length; i++) if(dots[i].classList.contains('is-active')) return i;
+    return 0;
+  }
+  [prev, next].forEach(function(b){
+    ['mousedown','touchstart'].forEach(function(ev){ b.addEventListener(ev, function(e){ e.stopPropagation(); }, { passive: true }); });
+  });
+  prev.addEventListener('click', function(){ dots[(idx() - 1 + dots.length) % dots.length].click(); });
+  next.addEventListener('click', function(){ dots[(idx() + 1) % dots.length].click(); });
+})();
+</script>
+
 </main>
 
 <footer class="site-footer">
@@ -520,8 +533,6 @@
     </div>
   </div>
 </footer>
-
-<!--@links-->
 
 <script src="/assets/js/site.js"></script>
 <script src="/assets/js/requirements.js"></script>
