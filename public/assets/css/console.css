@@ -455,3 +455,6 @@ html[data-theme] .wsn-burger span::before,
 html[data-theme] .wsn-burger span::after{content:"";position:absolute;left:0;width:16px;height:2px;border-radius:2px;}
 html[data-theme] .wsn-burger span::before{top:-5px;}
 html[data-theme] .wsn-burger span::after{top:5px;}
+html[data-theme] .wsn-brand{justify-content:space-between;gap:10px;}
+html[data-theme] .wsn-brand-logo{display:block;height:36px;width:auto;max-width:150px;}
+html[data-theme] .wsn-brand-sub{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6A5A4A;text-align:right;line-height:1.3;}

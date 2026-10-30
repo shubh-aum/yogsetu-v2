@@ -3139,3 +3139,14 @@
     html body .mobile-menu a:focus-visible{color:var(--marigold-deep);}
   }
   @media (max-width:900px){ html body .mobile-menu.open{max-height:420px;} }
+
+  /* ---- brand logo image (header, footer) ---- */
+  .logo .logo-img{display:block;height:34px;width:auto;max-width:none;}
+  .site-header-fixed .logo{padding:4px 12px 4px 4px;}
+  .site-header-fixed .logo .logo-img{height:42px;}
+  .logo.logo-card,.footer-brand .logo.logo-card{
+    display:inline-flex;background:#FFFCF7;border-radius:16px;padding:12px 20px;
+    box-shadow:0 14px 30px -16px rgba(0,0,0,.7);
+  }
+  .logo.logo-card .logo-img{height:clamp(44px,4vw,56px);}
+  @media (max-width:640px){ .site-header-fixed .logo .logo-img{height:32px;} }
