@@ -14,6 +14,23 @@
   var heroMode = document.getElementById("heroMode");
   var goBtn = document.getElementById("heroSearchBtn");
   if (!agent || !form || !input || !msg || !heroCity || !goBtn) return;
+  var aiMode = document.getElementById("aiMode"), aiStyle = document.getElementById("aiStyle");
+  var aiLoc = document.getElementById("aiLoc");
+  if (aiStyle) {
+    Array.prototype.forEach.call(heroStyle.options, function (o) {
+      if (!o.value) return;
+      var n = document.createElement("option"); n.value = o.value; n.textContent = o.textContent; aiStyle.appendChild(n);
+    });
+  }
+  [["aiMode", "aiModeTxt", "aiModeWrap", "Online / In-studio"], ["aiStyle", "aiStyleTxt", "aiStyleWrap", "Yoga Style"]].forEach(function (a) {
+    var sel = document.getElementById(a[0]); if (!sel) return;
+    sel.addEventListener("change", function () {
+      var o = sel.options[sel.selectedIndex];
+      document.getElementById(a[1]).textContent = sel.value ? o.textContent : a[3];
+      document.getElementById(a[2]).classList.toggle("is-set", !!sel.value);
+      setMsg(sel.value ? "Got it \u2014 <b>" + esc(o.textContent) + "</b>. Add a city or PIN and press send." : "Filter cleared.", true);
+    });
+  });
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var KEY = "ysAiSearch";
 
@@ -117,9 +134,11 @@
     if (p.pin && !p.city && !p.online) {
       p.note = p.unknownCity ? "No open requirements near PIN " + p.pin + " (" + p.unknownCity.charAt(0).toUpperCase() + p.unknownCity.slice(1) + ") yet." : "I don't recognise PIN " + p.pin + " yet.";
     }
-    if (!p.pin && !p.city && !p.unknownCity && !p.style && !p.styleWord && !p.online && !p.budget) {
+    if (!p.pin && !p.city && !p.unknownCity && !p.style && !p.styleWord && !p.online && !p.budget && !(aiStyle && aiStyle.value) && !(aiMode && aiMode.value)) {
       setMsg("I couldn't spot a city, PIN or style in \u201c" + esc(q) + "\u201d. Try <b>Lucknow</b>, <b>110001</b> or <b>Prenatal in Delhi</b>.", true); return;
     }
+    if (aiStyle && aiStyle.value && !p.style) p.style = aiStyle.value;
+    if (aiMode && aiMode.value === "online") p.online = true;
     agent.classList.add("is-busy");
     var steps = ["Reading your search\u2026", p.pin ? "Locating PIN " + p.pin + "\u2026" : (p.city ? "Locating " + p.city + "\u2026" : "Checking all locations\u2026"), "Matching verified requirements\u2026"];
     think(steps, function () {
@@ -144,6 +163,14 @@
     });
   }
 
+  if (aiLoc) aiLoc.addEventListener("click", function () {
+    if (!navigator.geolocation) { setMsg("Your browser can\u2019t share a location. Type a <b>city</b> or <b>PIN</b> instead.", true); return; }
+    setMsg("Asking your browser for your location\u2026", true);
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      input.value = pos.coords.latitude.toFixed(3) + ", " + pos.coords.longitude.toFixed(3);
+      setMsg("Found you! Matching coordinates to a city isn\u2019t live yet \u2014 type your <b>city</b> or <b>PIN</b> and I\u2019ll search.", true);
+    }, function () { setMsg("No problem \u2014 type a <b>city</b> or <b>PIN code</b> instead.", true); }, { timeout: 8000 });
+  });
   form.addEventListener("submit", function (e) { e.preventDefault(); run(input.value); });
   Array.prototype.forEach.call(document.querySelectorAll("#aiChips .ai-chip"), function (c) {
     c.addEventListener("click", function () { input.value = c.getAttribute("data-q"); run(input.value); });
@@ -164,7 +191,7 @@
 
   // rotating placeholder
   if (!reduce) {
-    var ph = ["Enter city or PIN code\u2026", "Try \u201cLucknow\u201d", "Try \u201c226001\u201d", "Try \u201cHatha in Pune\u201d"], pi = 0;
+    var ph = ["Enter city, area or PIN code\u2026", "Try \u201cLucknow\u201d", "Try \u201c226001\u201d", "Try \u201cHatha in Pune\u201d"], pi = 0;
     setInterval(function () { if (document.activeElement !== input && !input.value) { pi = (pi + 1) % ph.length; input.placeholder = ph[pi]; } }, 2600);
   }
 })();
