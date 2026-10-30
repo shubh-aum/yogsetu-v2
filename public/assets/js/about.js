@@ -41,9 +41,18 @@
     });
     return frag;
   }
+  // "Plain ==important== text" -> <mark> around the marked part (plain text otherwise).
+  function marked(text) {
+    var frag = document.createDocumentFragment();
+    String(text || '').split(/==([^=]+)==/).forEach(function (part, i) {
+      if (!part) return;
+      frag.appendChild(i % 2 ? h('mark', { class: 'ab-mark', text: part }) : document.createTextNode(part));
+    });
+    return frag;
+  }
   function paras(text, cls) {
     return String(text || '').split(/\n{2,}/).map(function (p) { return p.trim(); }).filter(Boolean)
-      .map(function (p) { return h('p', { class: cls, text: p }); });
+      .map(function (p) { return h('p', { class: cls }, marked(p)); });
   }
   function safeUrl(u) {
     u = String(u || '').trim();
@@ -140,7 +149,7 @@
       h('span', { class: 'ab-layer ab-layer-tag', 'aria-hidden': 'true' }, h('b', { text: 'सेतु' }), h('i', { text: 'Setu' }))), 'left') : null;
     return h('section', { class: 'ab-sec ab-story', id: 'ab-story', 'aria-labelledby': 'ab-story-title' },
       h('div', { class: 'ab-wrap' },
-        head(d.eyebrow, d.title, has(d.lead) ? h('p', { class: 'ab-lead', text: d.lead }) : null, 'ab-story-title'),
+        head(d.eyebrow, d.title, has(d.lead) ? h('p', { class: 'ab-lead' }, marked(d.lead)) : null, 'ab-story-title'),
         h('div', { class: 'ab-story-grid' + (media ? '' : ' no-media') },
           media,
           h('div', { class: 'ab-story-copy' },
@@ -149,9 +158,9 @@
               return reveal(h('div', { class: 'ab-box ab-tilt ab-spot', 'data-tilt': '7' },
                 h('span', { class: 'ab-box-n', text: pad2(i + 1), 'aria-hidden': 'true' }),
                 h('h3', { text: b.title }),
-                has(b.text) && h('p', { text: b.text })), 'up', i + 1);
+                has(b.text) && h('p', null, marked(b.text))), 'up', i + 1);
             })) : null,
-            has(d.closing) && reveal(h('p', { class: 'ab-statement', text: d.closing }), 'up', 3)))));
+            has(d.closing) && reveal(h('p', { class: 'ab-statement' }, marked(d.closing)), 'up', 3)))));
   }
 
   // ---------- 2. how it helps ----------
@@ -200,7 +209,7 @@
           return reveal(h('li', { class: 'ab-step ab-tilt ab-spot', 'data-tilt': '8' },
             h('span', { class: 'ab-step-n', text: pad2(n + 1), 'aria-hidden': 'true' }),
             h('h3', { text: s.title }),
-            has(s.text) && h('p', { text: s.text })), 'up', n);
+            has(s.text) && h('p', null, marked(s.text))), 'up', n);
         }))));
     });
     // initial state without triggering the replay (the observer reveals on scroll)
@@ -227,7 +236,7 @@
           tick.innerHTML = TICK; // constant markup
           return reveal(h('li', { class: 'ab-glass ab-tilt ab-spot b' + (i + 1), 'data-tilt': '6' },
             h('span', { class: 'ab-glass-n', text: pad2(i + 1), 'aria-hidden': 'true' }),
-            tick, h('h3', { text: it.title }), has(it.text) && h('p', { text: it.text })), 'up', i);
+            tick, h('h3', { text: it.title }), has(it.text) && h('p', null, marked(it.text))), 'up', i);
         })) : null,
         has(d.disclaimer) && reveal(h('p', { class: 'ab-disclaimer', text: d.disclaimer }), 'up')));
   }
@@ -285,7 +294,7 @@
         head(d.eyebrow, d.title, null, 'ab-backed-title'),
         h('div', { class: 'ab-backed-grid' },
           h('div', { class: 'ab-backed-copy' },
-            (d.paragraphs || []).filter(has).map(function (p, i) { return reveal(h('p', { class: 'ab-body ab-body-lg', text: p }), 'up', i); }),
+            (d.paragraphs || []).filter(has).map(function (p, i) { return reveal(h('p', { class: 'ab-body ab-body-lg' }, marked(p)), 'up', i); }),
             badges.length ? reveal(h('ul', { class: 'ab-badges', 'aria-label': 'Accreditations' },
               badges.map(function (b) { return h('li', { text: b }); })), 'up', 2) : null),
           stats.length ? h('div', { class: 'ab-stats' }, stats.map(function (s, i) {
@@ -329,7 +338,7 @@
       h('div', { class: 'ab-wrap ab-cta-inner' },
         has(d.kicker) && reveal(h('div', { class: 'ab-idx on-dark' }, h('span', { class: 'rule', 'aria-hidden': 'true' }), h('span', { class: 'lbl', text: d.kicker })), 'up'),
         has(d.title) && reveal(h('h2', { id: 'ab-cta-title', class: 'ab-cta-title' }, rich(d.title)), 'up', 1),
-        has(d.text) && reveal(h('p', { class: 'ab-cta-text', text: d.text }), 'up', 2),
+        has(d.text) && reveal(h('p', { class: 'ab-cta-text' }, marked(d.text)), 'up', 2),
         btns.length && reveal(h('div', { class: 'ab-btn-row' }, btns), 'up', 3)));
   }
 
@@ -359,9 +368,19 @@
     });
   }
 
+  // /assets/data/about-override.json (if present) replaces whole sections of the CMS content.
+  function withOverride(c) {
+    return getJson('/assets/data/about-override.json').then(function (o) {
+      var out = {};
+      Object.keys(c || {}).forEach(function (k) { out[k] = c[k]; });
+      Object.keys(o || {}).forEach(function (k) { out[k] = o[k]; });
+      return out;
+    }).catch(function () { return c; });
+  }
   getJson('/api/content/about')
     .then(function (j) { return j.content; })
     .catch(function () { return getJson('assets/data/about-default.json'); })
+    .then(withOverride)
     .then(render)
     .catch(function (e) {
       if (window.console) console.error(e);

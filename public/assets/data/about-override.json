@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "title": "About YogSetu — The Bridge Between You and the Right Yoga Teacher",
+    "description": "YogSetu connects you with verified yoga teachers across India. An initiative by YogKulam."
+  },
+  "hero": {
+    "kicker": "About YogSetu",
+    "title": "The bridge between you and the right *yoga teacher.*",
+    "description": "Verified yoga teachers across India. ==Find the one who fits== — and connect directly.",
+    "primary_cta": {
+      "label": "Find a Teacher",
+      "url": "/yoga-teachers"
+    },
+    "secondary_cta": {
+      "label": "Join as a Teacher",
+      "url": "/signup?role=teacher"
+    },
+    "image": {
+      "url": "/assets/images/Group.png",
+      "alt": "A group of YogSetu yoga teachers smiling in a studio"
+    }
+  },
+  "story": {
+    "eyebrow": "Our story",
+    "title": "Why we built *YogSetu*",
+    "lead": "“Setu” means bridge.",
+    "body": "Good teachers are hard to find. Good students are hard to reach. ==We bring them together, with trust.==",
+    "boxes": [
+      {
+        "title": "Seekers need trust",
+        "text": "Is this teacher qualified? Is the training real?"
+      },
+      {
+        "title": "Teachers need visibility",
+        "text": "Skilled teachers shouldn't depend on word of mouth."
+      }
+    ],
+    "closing": "YogSetu brings both sides together.",
+    "image": {
+      "url": "https://yogkulam.com/assets/frontend/img/Landing%20Page/banner%20pic%202.png",
+      "alt": "Yoga teachers and students practising together"
+    }
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "Two journeys. *One platform.*",
+    "tabs": [
+      {
+        "label": "For Yoga Seekers",
+        "steps": [
+          {
+            "title": "Search",
+            "text": "Filter by city, style and mode."
+          },
+          {
+            "title": "Compare",
+            "text": "See ==credentials and reviews==."
+          },
+          {
+            "title": "Request",
+            "text": "Send a request. ==Your first is free.=="
+          },
+          {
+            "title": "Connect",
+            "text": "Talk directly once accepted."
+          }
+        ]
+      },
+      {
+        "label": "For Yoga Teachers",
+        "steps": [
+          {
+            "title": "Create",
+            "text": "Add your qualifications."
+          },
+          {
+            "title": "Verify",
+            "text": "We ==check every detail==."
+          },
+          {
+            "title": "Get discovered",
+            "text": "Be seen by people searching."
+          },
+          {
+            "title": "Choose",
+            "text": "Accept requests. ==Set your own price.=="
+          }
+        ]
+      }
+    ]
+  },
+  "why": {
+    "eyebrow": "Why YogSetu",
+    "title": "Clarity. Trust. *Better connections.*",
+    "items": [
+      {
+        "title": "Verified profiles",
+        "text": "==Checked== by our team."
+      },
+      {
+        "title": "Honest ratings",
+        "text": "From ==real learners==."
+      },
+      {
+        "title": "Clear pricing",
+        "text": "Know the fee ==upfront==."
+      },
+      {
+        "title": "Mutual choice",
+        "text": "==Both sides== agree."
+      },
+      {
+        "title": "Direct contact",
+        "text": "No middlemen."
+      }
+    ],
+    "disclaimer": "Verification confirms checked profile details only — not outcomes."
+  },
+  "mission": {
+    "eyebrow": "Mission & vision",
+    "mission_title": "Our Mission",
+    "mission_text": "Make finding the right yoga teacher simple and trustworthy — and help trained teachers grow.",
+    "vision_title": "Our Vision",
+    "vision_text": "A trusted network of yoga teachers across India — and one day, the world.",
+    "values_title": "Our Values",
+    "values": [
+      {
+        "name": "Shuddhata",
+        "meaning": "Integrity",
+        "text": "Honest, transparent profiles."
+      },
+      {
+        "name": "Yogyata",
+        "meaning": "Competence",
+        "text": "Respect for real training."
+      },
+      {
+        "name": "Swatantrata",
+        "meaning": "Freedom",
+        "text": "Seekers choose. Teachers decide."
+      },
+      {
+        "name": "Seva",
+        "meaning": "Service",
+        "text": "Good guidance, easy to reach."
+      }
+    ]
+  },
+  "backed": {
+    "eyebrow": "Backed by YogKulam",
+    "title": "Built on real *yoga education*",
+    "paragraphs": [
+      "YogSetu is an initiative by ==YogKulam==, India's Yoga Career Launch Platform.",
+      "Open to ==every qualified teacher== — trained with YogKulam or elsewhere."
+    ],
+    "stats": [],
+    "badges": [],
+    "founder": {
+      "eyebrow": "A note from our founder",
+      "quote": "Good yoga teachers struggle to reach the people who need them. Students struggle to know ==whom to trust==.\n\nYogSetu is our bridge — so the right teacher and the right seeker can ==find each other==.",
+      "name": "Dr. Maneesh Pratap Singh",
+      "role": "Founder, YogKulam & YogSetu",
+      "image": {
+        "url": "https://storage.googleapis.com/yogkulam/landing-page/founder/DSC_8145.jpg",
+        "alt": "Dr. Maneesh Pratap Singh, founder of YogKulam"
+      }
+    }
+  },
+  "cta": {
+    "kicker": "Free to join",
+    "title": "Ready to find your *yoga connection?*",
+    "text": "Find a teacher — or let the right students ==find you==.",
+    "primary_cta": {
+      "label": "Find a Teacher",
+      "url": "/yoga-teachers"
+    },
+    "secondary_cta": {
+      "label": "Join as a Teacher",
+      "url": "/signup?role=teacher"
+    },
+    "image": {
+      "url": "https://yogkulam.com/assets/frontend/img/Landing%20Page/banner%20pic%202.png",
+      "alt": ""
+    }
+  }
+}
