@@ -102,12 +102,31 @@
 .thero-cta{margin:8px 0 0;}
 
 @media (max-width:1024px){
-  /* Tablet and below: no video at all — the .hero-media-fallback gradient
-     (already defined in base.css) becomes the visible background. */
+  /* Tablet and below: video becomes a strip at the top (subject centered)
+     instead of a full-bleed overlay, with the heading + search sitting
+     below it on a solid panel — same "strip on top, content below" shape
+     used on the other pages' mobile heroes, so text and video never
+     compete for the same space. */
   .thero-card{min-height:auto;}
+  .thero-card .hero-media-fallback,
   .thero-card .hero-media,
-  .thero-card .hero-scrim{display:none;}
-  .thero-body{padding:36px 24px 28px;}
+  .thero-card .hero-scrim{
+    position:absolute;top:0;left:0;right:0;bottom:auto;
+    height:42vh;
+  }
+  .thero-card .hero-media{width:100%;object-fit:cover;object-position:75% center;}
+  .thero-card .hero-scrim{
+    background:linear-gradient(180deg, rgba(23,22,20,0) 55%, rgba(23,22,20,.97) 100%);
+  }
+  .thero-body{
+    position:relative;margin-top:42vh;
+    background:var(--pine-deep);
+    align-items:center;text-align:center;
+    padding:28px 24px 28px;
+  }
+  .thero-head{max-width:none;}
+  .thero-kicker{display:none;}
+  .thero-search{margin:0 auto;text-align:center;}
   .thero-featured{
     position:static;
     background:var(--pine-deep);
@@ -340,3 +359,84 @@
 .crosssell-hit:hover,.crosssell-hit:focus-visible{background:rgba(255,255,255,.1);outline-color:rgba(255,255,255,.5);}
 .crosssell-hit--primary{left:11.6%;width:15.8%;}
 .crosssell-hit--secondary{left:28.2%;width:15.8%;}
+
+/* ---- Hero search: moved from the header dropdown panel into the hero
+   itself, right under the H1. Consistent field/button sizing at every
+   width -- 3 fields in a row, 'Find teachers' as its own full-width row
+   below, same treatment already proven out on the yoga-jobs page. ---- */
+.thero-search{width:100%;max-width:640px;margin:0;text-align:left;}
+.thero-search .tsearch-bar{grid-template-columns:1fr 1fr 1fr;}
+.thero-search .tsearch-bar .btn-search{
+  grid-column:1 / -1;
+  padding:14px;border-radius:12px;
+  margin-top:8px;
+  font-size:15px;
+}
+@media (max-width:900px){
+  .thero-search{max-width:100%;}
+}
+
+
+/* ============================================================
+   Find-a-teacher hero: warm night banner image + Setu AI agent (dark glass variant)
+   ============================================================ */
+.tai-hero{background:#120C06;min-height:clamp(560px,76vh,740px);}
+.tai-hero .hero-media-fallback{background:#120C06;}
+.tai-hero .hero-media,.tai-hero .hero-scrim{display:none;}
+.tai-hero-media{position:absolute;inset:0;width:100%;height:100%;z-index:0;object-fit:cover;object-position:right center;display:block;}
+.tai-hero .thero-body{padding:clamp(34px,6vh,60px) clamp(22px,5vw,88px) clamp(96px,13vh,124px);gap:clamp(14px,2.2vh,20px);justify-content:center;}
+.tai-hero .thero-head{max-width:620px;}
+.tai-hero .thero-title{font-size:clamp(36px,4.6vw,62px);}
+.tai-hero .thero-title em{color:#FFB35C;}
+
+.tai-agent{position:relative;width:min(100%,560px);padding:16px 16px 14px;border-radius:26px;isolation:isolate;
+  background:rgba(34,22,12,.62);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);
+  box-shadow:0 40px 80px -36px rgba(0,0,0,.8),0 0 0 1px rgba(255,190,100,.25) inset;}
+.tai-agent::before{content:"";position:absolute;inset:-1.5px;border-radius:27.5px;z-index:-1;padding:1.5px;
+  background:conic-gradient(from var(--ai-a,0deg),rgba(255,170,60,.95),rgba(255,210,150,.2),rgba(255,140,40,.55),rgba(255,210,150,.2),rgba(255,170,60,.95));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
+  animation:aiSpin 7s linear infinite;}
+.tai-agent::after{content:"";position:absolute;inset:-26px;z-index:-2;border-radius:50px;background:radial-gradient(60% 60% at 30% 20%,rgba(255,150,40,.25),transparent 70%);filter:blur(10px);pointer-events:none;}
+.tai-agent .ai-agent-top{display:flex;align-items:center;gap:6px;margin-bottom:12px;}
+.tai-agent .ai-bot::after{background:radial-gradient(circle,rgba(255,160,50,.6),transparent 68%);}
+.tai-agent .ai-msg{background:rgba(255,236,205,.1);border:1px solid rgba(255,200,120,.3);color:#FFF1DC;}
+.tai-agent .ai-msg::before{background:#3a2a1a;border-left:1px solid rgba(255,200,120,.3);border-bottom:1px solid rgba(255,200,120,.3);}
+.tai-agent .ai-msg strong,.tai-agent .ai-msg b{color:#FFC15E;}
+.tai-agent .ai-hello{color:#FFE2B0;}
+.tai-agent .ai-msg.is-typing .ai-msg-text::after{background:#FFC15E;}
+.tai-agent .ai-think li{color:#D9C2A0;}
+.tai-agent .ai-think li.on,.tai-agent .ai-think li.done{color:#FFF1DC;}
+.tai-agent .ai-think li .d{border-color:#6b5638;}
+.tai-agent .ai-form{background:linear-gradient(180deg,#FFFDF8,#FFF1DA);border:1.5px solid rgba(255,190,100,.9);box-shadow:0 0 0 5px rgba(255,170,60,.18),0 0 36px rgba(255,150,40,.45);}
+.tai-agent .ai-form-pin svg{stroke:#E58A12;}
+.tai-agent .ai-form input{color:#3B2A17;}
+.tai-agent .ai-go{background:radial-gradient(circle at 35% 28%,#FFC15E,#FF8A1F 70%);box-shadow:0 12px 24px -8px rgba(230,120,10,.9);}
+.tai-agent .ai-pill{background:rgba(255,236,205,.1);border:1px solid rgba(255,200,120,.35);color:#FFF1DC;}
+.tai-agent .ai-pill svg{stroke:#FFB35C;}
+.tai-agent .ai-pill:first-child svg{fill:#FFB35C;}
+.tai-agent .ai-pill:hover,.tai-agent .ai-pill.is-set{background:rgba(255,190,100,.22);border-color:#FFB35C;color:#fff;}
+.tai-agent .ai-pill select option{color:#222;}
+.tai-agent .ai-chip{background:rgba(255,236,205,.08);border:1px solid rgba(255,200,120,.3);color:#FFE8C6;}
+.tai-agent .ai-chip:hover{background:rgba(255,190,100,.22);border-color:#FFB35C;color:#fff;}
+.tai-hero .thero-featured-label,.tai-hero .hero-avatar-cap{color:rgba(255,241,220,.85);}
+
+@media (max-width:900px){
+  .tai-hero{min-height:auto;}
+  .tai-hero-media{position:absolute;top:64px;left:0;right:0;bottom:auto;height:38vh;object-position:78% center;}
+  .tai-hero .thero-body{position:relative;margin-top:calc(64px + 38vh);background:#120C06;padding:20px 16px 20px;align-items:stretch;}
+  .tai-hero .thero-head{text-align:left;max-width:none;}
+  .tai-hero .thero-title{font-size:clamp(30px,8vw,40px);}
+  .tai-agent{width:100%;padding:14px 12px 12px;}
+}
+
+@media (min-width:901px){
+  .tai-hero .hero-media-fallback{background:linear-gradient(90deg,#241508 0,#5a3510 55%,#6a410f 100%);}
+  .tai-hero-media{left:auto;right:-5%;width:105%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%);mask-image:linear-gradient(90deg,transparent 0,#000 9%);}
+}
+
+@media (max-width:900px){.tai-hero-media{top:0;}.tai-hero .thero-body{margin-top:38vh;}}
+@media (max-width:900px){
+  .tai-hero-media{object-position:80% center;}
+  .tai-hero .thero-body{padding-bottom:14px;}
+  .tai-hero .thero-featured{position:static;background:#120C06;padding:6px 16px 20px;}
+}
