@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/base.css?v=20">
 <link rel="stylesheet" href="/assets/css/site.css">
-<link rel="stylesheet" href="/assets/css/teacher-benefits.css?v=11">
+<link rel="stylesheet" href="/assets/css/teacher-benefits.css?v=13">
 </head>
 <body class="inner-page">
 
@@ -308,14 +308,12 @@
       <span>Live demand</span>
     </div>
     <h2 id="tb-jobs-title">Students are posting what they need, right now</h2>
+    <p class="tb-ko-hint"><span class="tb-ko-aim" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></span><span>Target practice: <strong class="hl-l">click a job to knock it down</strong></span></p>
   </div>
 
-  <div class="tb-jobs-scroll-wrap">
-    <button type="button" class="tb-jobs-arrow tb-jobs-prev" aria-label="Previous requirement">
-      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
+  <div class="tb-jobs-scroll-wrap tb-ko" id="tbKo">
 
-    <div class="tb-jobs-grid" id="tbJobsTrack">
+    <div class="tb-ko-lane"><div class="tb-jobs-grid tb-ko-track" id="tbJobsTrack">
       <article class="req-card tb-icon-card">
         <div class="tb-icon-band tb-icon-hatha" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg>
@@ -364,11 +362,9 @@
           <a href="/yoga-jobs" class="btn btn-secondary btn-small" style="border:1px solid var(--line);">View details &rarr;</a>
         </div>
       </article>
-    </div>
+    </div></div>
+    <div class="tb-ko-shelf" aria-hidden="true"></div>
 
-    <button type="button" class="tb-jobs-arrow tb-jobs-next" aria-label="Next requirement">
-      <svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
-    </button>
   </div>
 
   <div class="tb-jobs-foot">
@@ -1133,19 +1129,98 @@
 
 <script>
 (function(){
+  var ko = document.getElementById('tbKo');
   var track = document.getElementById('tbJobsTrack');
-  var prev = document.querySelector('.tb-jobs-prev');
-  var next = document.querySelector('.tb-jobs-next');
-  if (!track || !prev || !next) return;
+  if (!ko || !track) return;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var originals = Array.prototype.slice.call(track.children);
 
-  function scrollByCard(dir){
-    var card = track.querySelector('.req-card');
-    var step = card ? card.getBoundingClientRect().width + 16 : 320;
-    track.scrollBy({ left: dir * step, behavior: 'smooth' });
+  // Build a seamless loop: 4 copies of the set, shifted by exactly one set width.
+  if (!reduce) {
+    for (var c = 0; c < 3; c++) {
+      originals.forEach(function(card){
+        var copy = card.cloneNode(true);
+        copy.setAttribute('aria-hidden', 'true');
+        copy.querySelectorAll('a').forEach(function(a){ a.setAttribute('tabindex', '-1'); });
+        track.appendChild(copy);
+      });
+    }
+    var setWidth = function(){
+      var first = originals[0], last = originals[originals.length - 1];
+      var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap) || 16;
+      var w = last.offsetLeft + last.offsetWidth - first.offsetLeft + gap;
+      ko.style.setProperty('--ko-shift', w + 'px');
+      ko.style.setProperty('--ko-time', Math.max(18, Math.round(w / 48)) + 's');
+    };
+    setWidth();
+    window.addEventListener('resize', setWidth);
+    ko.classList.add('is-moving');
   }
 
-  prev.addEventListener('click', function(){ scrollByCard(-1); });
-  next.addEventListener('click', function(){ scrollByCard(1); });
+  var busy = false;
+  function knock(card, url){
+    if (busy) return;
+    busy = true;
+    ko.classList.add('is-paused');
+    card.classList.add('is-knocked');
+    var boom = document.createElement('span');
+    boom.className = 'tb-ko-boom';
+    boom.textContent = 'Knocked down!';
+    card.appendChild(boom);
+    setTimeout(function(){ window.location.href = url; }, reduce ? 150 : 850);
+    // if the user comes back with the back button, reset the lane
+    window.addEventListener('pageshow', function(){
+      busy = false; ko.classList.remove('is-paused');
+      track.querySelectorAll('.is-knocked').forEach(function(n){ n.classList.remove('is-knocked'); var b = n.querySelector('.tb-ko-boom'); if (b) b.remove(); });
+    });
+  }
+  track.addEventListener('click', function(e){
+    var card = e.target.closest('.req-card');
+    if (!card) return;
+    if (e.ctrlKey || e.metaKey || e.shiftKey || e.button === 1) return;
+    var link = card.querySelector('.req-foot a, h3 a');
+    if (!link) return;
+    e.preventDefault();
+    knock(card, link.getAttribute('href'));
+  });
+  // make the whole card reachable for keyboard users via its existing links (they trigger the click above)
+  ko.addEventListener('touchstart', function(){ if (ko.classList.contains('is-moving')) ko.classList.add('is-touch-paused'); }, { passive: true });
+  ko.addEventListener('touchend', function(){ setTimeout(function(){ ko.classList.remove('is-touch-paused'); }, 1200); });
+})();
+</script>
+<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+  <a href="/signup?role=teacher" class="btn btn-secondary" tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 20c0-3.6 3-6 6.5-6"/><path d="M18 14v6M15 17h6"/></svg>
+    Create Profile
+  </a>
+  <a href="/yoga-jobs" class="btn btn-primary" tabindex="-1">
+    Find Jobs
+    <span class="arrow" aria-hidden="true">&rarr;</span>
+  </a>
+</div>
+
+<script>
+(function(){
+  var sticky = document.getElementById('stickyCta');
+  var origin = document.querySelector('.tb-hero-card .cta-shell');
+  if (!sticky || !origin) return;
+  var links = sticky.querySelectorAll('a');
+  function setShown(on){
+    if (sticky.classList.contains('show') === on) return;
+    sticky.classList.toggle('show', on);
+    sticky.setAttribute('aria-hidden', on ? 'false' : 'true');
+    Array.prototype.forEach.call(links, function(a){
+      if (on) { a.removeAttribute('tabindex'); } else { a.setAttribute('tabindex', '-1'); }
+    });
+  }
+  if ('IntersectionObserver' in window) {
+    // show the bar only once the hero's own buttons have scrolled away
+    new IntersectionObserver(function(entries){ setShown(!entries[0].isIntersecting); }, { threshold: 0, rootMargin: '-10px 0px 0px 0px' }).observe(origin);
+  } else {
+    var onScroll = function(){ setShown(origin.getBoundingClientRect().bottom < 0); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 })();
 </script>
 <script src="/assets/js/session-header.js" defer></script>
