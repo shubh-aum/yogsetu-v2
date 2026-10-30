@@ -803,3 +803,41 @@
   .tb-ko-track .req-card{flex-basis:78vw;}
   .tb-ko-hint{font-size:15px;padding:0 16px;text-align:center;}
 }
+
+
+/* ============================================================
+   Desktop only: the hero stays pinned while the supporting banner rises over it
+   (same mechanic as "04 The standard"), the seam is a soft glowing edge instead of a
+   hard cut, and both women sit on the same vertical axis.
+   ============================================================ */
+@media (min-width:901px){
+  .tb-hero-scope{
+    --tb-h:clamp(480px,70vh,680px);
+    --tb-ws:max(100vw, calc(var(--tb-h) * 2.5));
+    position:relative;isolation:isolate;margin-top:-70px;--tb-nudge:30px;
+  }
+  .tb-hero-scope .tb-hero-wrap{position:sticky;top:0;z-index:0;margin-top:0;}
+  .tb-hero-scope .tb-hero-card{min-height:var(--tb-h);height:var(--tb-h);}
+
+  /* rising panel: rounded top + shadow like the Standard section */
+  .tb-start{
+    position:relative;z-index:1;
+    min-height:var(--tb-h);height:var(--tb-h);
+    border-radius:34px 34px 0 0;
+    box-shadow:0 -46px 90px -28px rgba(0,0,0,.55);
+  }
+  /* the seam: a thin brand-coloured glow that fades out at both ends */
+  .tb-start::before{
+    content:"";position:absolute;top:0;left:8%;right:8%;height:3px;z-index:3;border-radius:3px;
+    background:linear-gradient(90deg,transparent,rgba(217,119,87,.95) 30%,rgba(255,200,150,.95) 50%,rgba(217,119,87,.95) 70%,transparent);
+    box-shadow:0 0 22px 2px rgba(217,119,87,.55);
+  }
+
+  /* vertical alignment of the two women: hero face sits at X = 100vw - 0.375 * hero-video width;
+     the banner image is right-anchored, so shift it until its face lands on the same line. */
+  .tb-start-media{
+    inset:auto;top:0;right:0;bottom:0;left:auto;
+    width:var(--tb-ws);height:100%;
+    transform:translateX(calc(var(--tb-ws) * 0.345 - (var(--tb-h) - 72px) * 0.6667 + var(--tb-nudge, 0px)));
+  }
+}
