@@ -440,3 +440,9 @@
   .tai-hero .thero-body{padding-bottom:14px;}
   .tai-hero .thero-featured{position:static;background:#120C06;padding:6px 16px 20px;}
 }
+
+/* hero: saffron (--marigold-deep) accents */
+.tai-hero .thero-title em{color:var(--marigold-deep);}
+.tai-agent .ai-hello,.tai-agent .ai-msg b.ai-hello{color:var(--marigold-deep);}
+.tai-agent .ai-go,.tai-agent .ai-go-round{background:var(--marigold-deep);box-shadow:0 12px 24px -8px rgba(166,80,50,.9);}
+.tai-agent .ai-form-pin svg{stroke:var(--marigold-deep);}
