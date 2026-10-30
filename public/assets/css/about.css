@@ -529,3 +529,9 @@ html.ab-lb-open{overflow:hidden;}
 .ab-backed .ab-backed-copy{grid-column:1 / -1;max-width:none;}
 .ab-backed .ab-body-lg{font-family:var(--ab-serif);font-weight:500;font-size:clamp(26px,3vw,44px);line-height:1.18;letter-spacing:-.025em;color:var(--ab-ink);max-width:26ch;margin:0 0 22px;}
 .ab-backed .ab-body-lg + .ab-body-lg{font-size:clamp(20px,2vw,28px);color:var(--ab-soft);max-width:36ch;}
+/* group photo ships with its own arch + dark corners: crop to the arch so it sits in the page frame */
+.ab-hero-photo:has(img[src*="Group.png"]){aspect-ratio:1108 / 1150;}
+.ab-hero-photo img[src*="Group.png"]{
+  position:absolute;left:-6.86%;top:-3.48%;width:114.7%;height:107.6%;max-width:none;
+  object-fit:fill;object-position:center;mix-blend-mode:normal;
+}

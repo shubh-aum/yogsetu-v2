@@ -16,7 +16,7 @@
       "url": "/signup?role=teacher"
     },
     "image": {
-      "url": "/assets/images/Group.png",
+      "url": "/assets/images/Group.png?v=2",
       "alt": "A group of YogSetu yoga teachers smiling in a studio"
     }
   },
