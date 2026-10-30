@@ -583,12 +583,25 @@
 @media (max-width:640px){
   .tb-hero-card .hero-media-fallback,
   .tb-hero-card .hero-media,
-  .tb-hero-card .hero-scrim{height:42vh;}
-  .tb-hero-card .hero-body{margin-top:42vh;padding-top:26px;}
-  .tb-hero-card .hero-head h1{font-size:clamp(30px,8.4vw,38px);}
+  .tb-hero-card .hero-scrim{height:24vh;}
+  .tb-hero-card .hero-body{margin-top:24vh;padding-top:22px;}
+  .tb-hero-card .hero-head h1{font-size:28px;}
 }
 /* main has 70px top padding on inner pages; pull the banner flush to the top like the landing page */
 .tb-hero-wrap{margin-top:-70px;}
 @media (max-width:480px){.tb-hero-wrap{margin-top:-60px;}}
 .tb-hero-card .hero-media-fallback{background:#171614;}
 @media (max-width:640px){.tb-hero-wrap{margin-top:0;}}
+
+/* Desktop: the 16:9 clip must show in full (her whole figure), not a cover-cropped face slice.
+   Sized by height, anchored right, left/top edges feathered into the dark banner. */
+@media (min-width:641px){
+  .tb-hero-card .hero-media{
+    top:72px;bottom:0;left:auto;right:0;
+    height:calc(100% - 72px);width:auto;aspect-ratio:16/9;max-width:100%;
+    object-fit:contain;object-position:right center;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%),linear-gradient(180deg,transparent 0,#000 10%);
+    mask-image:linear-gradient(90deg,transparent 0,#000 24%),linear-gradient(180deg,transparent 0,#000 10%);
+    -webkit-mask-composite:source-in;mask-composite:intersect;
+  }
+}
