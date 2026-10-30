@@ -605,3 +605,74 @@
     -webkit-mask-composite:source-in;mask-composite:intersect;
   }
 }
+
+
+/* ---- Supporting banner: same height as the hero, light band, text left / photo right,
+   big floating "Start Now" pill — the landing page's sunlight-banner idea. ---- */
+.tb-start{
+  position:relative;overflow:hidden;isolation:isolate;background:#FFFFFF;
+  min-height:clamp(480px,70vh,680px);display:flex;flex-direction:column;
+}
+.tb-start-media{
+  position:absolute;inset:0;width:100%;height:100%;z-index:0;
+  object-fit:cover;object-position:right center;display:block;
+}
+.tb-start-body{
+  position:relative;z-index:2;flex:1;display:flex;align-items:center;
+  padding:clamp(28px,5vh,56px) clamp(24px,6vw,88px);
+}
+.tb-start-copy{max-width:560px;display:flex;flex-direction:column;gap:clamp(16px,2.4vh,24px);}
+.tb-start-kicker{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--marigold-deep);
+}
+.tb-start-copy h2{
+  font-family:'Fraunces',serif;font-weight:500;color:var(--ink);margin:0;
+  font-size:clamp(38px,5vw,68px);line-height:1.04;letter-spacing:-.025em;
+}
+.tb-start-copy h2 em{font-style:italic;color:var(--marigold-deep);}
+.tb-start-cta{
+  display:inline-flex;align-items:center;gap:18px;align-self:flex-start;position:relative;overflow:hidden;
+  padding:12px 38px 12px 12px;border-radius:999px;margin-top:4px;
+  background:var(--pine);color:var(--paper);text-decoration:none;
+  box-shadow:0 4px 0 0 var(--pine-deep);
+  animation:tbStartFloat 2.4s ease-in-out infinite;
+  transition:background .18s ease;
+}
+.tb-start-cta:hover{background:var(--pine-mid);}
+.tb-start-cta:focus-visible{outline:3px solid var(--marigold);outline-offset:3px;}
+.tb-start-cta .clock-face{
+  position:relative;width:66px;height:66px;border-radius:50%;flex-shrink:0;
+  background:var(--marigold);display:flex;align-items:center;justify-content:center;
+}
+.tb-start-cta .clock-face::before{
+  content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid rgba(217,119,87,.5);
+  animation:tbStartRipple 2.6s ease-out infinite;
+}
+.tb-start-cta svg{width:30px;height:30px;stroke:var(--pine-deep);animation:tbStartNudge 1.6s ease-in-out infinite;}
+.tb-start-cta .cta-text{display:flex;flex-direction:column;line-height:1.2;}
+.tb-start-cta .cta-text b{font-size:24px;font-weight:700;letter-spacing:-.01em;}
+.tb-start-cta .cta-text span{font-size:13px;font-weight:500;color:rgba(244,239,225,.78);}
+.tb-start-cta::after{
+  content:"";position:absolute;top:0;bottom:0;width:60px;left:-90px;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.3),transparent);
+  transform:skewX(-20deg);animation:tbStartShine 3.2s ease-in-out infinite;
+}
+@keyframes tbStartFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
+@keyframes tbStartRipple{0%{transform:scale(.9);opacity:.9;}70%{transform:scale(1.35);opacity:0;}100%{opacity:0;}}
+@keyframes tbStartNudge{0%,100%{transform:translateX(-2px);}50%{transform:translateX(4px);}}
+@keyframes tbStartShine{0%,55%{left:-90px;}100%{left:130%;}}
+@media (prefers-reduced-motion:reduce){.tb-start-cta,.tb-start-cta::after,.tb-start-cta svg,.tb-start-cta .clock-face::before{animation:none;}}
+
+@media (max-width:900px){
+  .tb-start{min-height:auto;}
+  .tb-start-media{position:relative;inset:auto;height:42vw;min-height:200px;max-height:340px;object-position:right center;}
+  .tb-start-body{padding:26px 20px 40px;justify-content:center;text-align:center;}
+  .tb-start-copy{align-items:center;max-width:none;}
+  .tb-start-copy h2{font-size:clamp(32px,8.4vw,44px);}
+  .tb-start-cta{align-self:center;padding:10px 30px 10px 10px;gap:14px;}
+  .tb-start-cta .clock-face{width:56px;height:56px;}
+  .tb-start-cta .cta-text b{font-size:21px;}
+}
+.tb-start-copy{max-width:min(460px,38vw);}
+.tb-start-copy h2{font-size:clamp(36px,4.4vw,62px);}
+@media (max-width:900px){.tb-start-copy{max-width:none;}}
