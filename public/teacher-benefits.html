@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/base.css?v=20">
 <link rel="stylesheet" href="/assets/css/site.css">
-<link rel="stylesheet" href="/assets/css/teacher-benefits.css?v=9">
+<link rel="stylesheet" href="/assets/css/teacher-benefits.css?v=11">
 </head>
 <body class="inner-page">
 
@@ -418,6 +418,7 @@
           </span>
           <div>
             <h3>Client identity confirmed</h3>
+            <p>We confirm the client's <strong class="hl">phone number with an OTP</strong>.</p>
             <span class="flag mono"><span class="off">Awaiting OTP</span><span class="on">Confirmed &#10003;</span></span>
           </div>
         </li>
@@ -428,6 +429,7 @@
           </span>
           <div>
             <h3>Requirement checked, not just posted</h3>
+            <p>A real person <strong class="hl">reviews every request</strong> first.</p>
             <span class="flag mono"><span class="off">Awaiting review</span><span class="on">Approved &#10003;</span></span>
           </div>
         </li>
@@ -438,32 +440,35 @@
           </span>
           <div>
             <h3>Posting pass issued</h3>
+            <p>Only then does it go live with a <strong class="hl">posting pass</strong>.</p>
             <span class="flag mono"><span class="off">Awaiting pass</span><span class="on">Issued &#10003;</span></span>
           </div>
         </li>
       </ol>
 
-      <div class="vcert-wrap">
-        <div class="vcert">
-          <div class="vcert-head">
-            <span class="vcert-kicker">Requirement Verification</span>
-            <span class="vcert-id">No. YS-REQ-2291</span>
-          </div>
-          <div class="vcert-id2">
-            <span class="vcert-photo">
-              <img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Amrita-Gupta.jpg" alt="" loading="lazy" decoding="async">
-            </span>
-            <span class="vcert-name">
-              <span class="nm">K. Sharma</span>
-              <span class="rl">Hatha teacher needed &middot; Lucknow</span>
-            </span>
-          </div>
-          <div class="vcert-line"></div>
-          <div class="vcert-stamps" id="tbVcertStamps">
-            <span class="stamp stamp-1" id="tbStamp1">OTP<br>Verified</span>
-            <span class="stamp stamp-2" id="tbStamp2">Request<br>Reviewed</span>
-            <span class="stamp stamp-3" id="tbStamp3">Posting Pass<br>Issued</span>
-            <span class="vcert-seal" id="tbVcertSeal"><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>Verified</span>
+      <div class="tb-phone-wrap">
+        <div class="tb-phone" id="tbPhone" role="img" aria-label="Phone showing a client's requirement passing OTP, review and posting-pass checks">
+          <span class="tb-phone-btn tb-phone-btn-a" aria-hidden="true"></span>
+          <span class="tb-phone-btn tb-phone-btn-b" aria-hidden="true"></span>
+          <div class="tb-phone-screen">
+            <span class="tb-phone-notch" aria-hidden="true"></span>
+            <div class="tb-ph-status"><span>9:41</span><span class="tb-ph-sig" aria-hidden="true"><i></i><i></i><i></i></span></div>
+            <div class="tb-ph-head"><span class="tb-ph-kicker">Requirement check</span><span class="tb-ph-id">YS-REQ-2291</span></div>
+            <div class="tb-ph-card">
+              <span class="tb-ph-avatar"><img src="https://storage.googleapis.com/yogkulam/landing-page/teacher/Amrita-Gupta.jpg" alt="" loading="lazy" decoding="async"></span>
+              <span class="tb-ph-who"><b>K. Sharma</b><span>Hatha teacher needed &middot; Lucknow</span></span>
+            </div>
+            <ul class="tb-ph-steps">
+              <li id="tbPh1"><span class="tb-ph-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span class="tb-ph-lbl">Phone OTP</span><span class="tb-ph-chip"><span class="off">Waiting</span><span class="on">Verified</span></span></li>
+              <li id="tbPh2"><span class="tb-ph-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span class="tb-ph-lbl">Team review</span><span class="tb-ph-chip"><span class="off">Waiting</span><span class="on">Approved</span></span></li>
+              <li id="tbPh3"><span class="tb-ph-dot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg></span><span class="tb-ph-lbl">Posting pass</span><span class="tb-ph-chip"><span class="off">Waiting</span><span class="on">Issued</span></span></li>
+            </ul>
+            <div class="tb-ph-result" id="tbPhResult">
+              <span class="tb-ph-seal" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg></span>
+              <b>Verified request</b>
+              <span>Live for teachers</span>
+            </div>
+            <span class="tb-phone-home" aria-hidden="true"></span>
           </div>
         </div>
       </div>
@@ -487,26 +492,24 @@
 <script>
 (function(){
   var steps = document.querySelectorAll('#tbVsteps .vstep');
-  var stampEls = {
-    1: document.getElementById('tbStamp1'),
-    2: document.getElementById('tbStamp2'),
-    3: document.getElementById('tbStamp3')
-  };
-  var seal = document.getElementById('tbVcertSeal');
-  if (!steps.length || !('IntersectionObserver' in window)) return;
-
+  var phone = document.getElementById('tbPhone');
+  if (!steps.length || !phone) return;
+  var rows = { 1: document.getElementById('tbPh1'), 2: document.getElementById('tbPh2'), 3: document.getElementById('tbPh3') };
+  var result = document.getElementById('tbPhResult');
+  function mark(n){
+    for (var i = 1; i <= Number(n); i++) { if (rows[i]) rows[i].classList.add('is-done'); if (steps[i-1]) steps[i-1].classList.add('is-stamped'); }
+    if (n === '3') { phone.classList.add('is-complete'); result.classList.add('is-shown'); }
+  }
+  if (!('IntersectionObserver' in window)) { ['1','2','3'].forEach(function(n){ steps[n-1].classList.add('is-stamped'); mark(n); }); return; }
   var observer = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if (!entry.isIntersecting) return;
-      var el = entry.target;
-      var n = el.getAttribute('data-step');
+      var el = entry.target, n = el.getAttribute('data-step');
       if (el.classList.contains('is-stamped')) return;
       el.classList.add('is-stamped');
-      if (stampEls[n]) stampEls[n].classList.add('is-stamped');
-      if (n === '3') seal.classList.add('is-shown');
+      mark(n);
     });
   }, { root: null, rootMargin: '-42% 0px -42% 0px', threshold: 0 });
-
   steps.forEach(function(el){ observer.observe(el); });
 })();
 </script>
